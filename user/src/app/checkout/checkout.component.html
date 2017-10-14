@@ -1,0 +1,550 @@
+<!-- Header for mobiles and smaller devices -->
+<header class="mob-main-header visible-sm visible-xs">
+  <button type="button" class="mob-menu-trig-btn">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+  <div class="mob-main-logo" routerLink='/home'>
+    <img src="../../assets/logo/logo_black.png">
+  </div>
+</header>
+<header class="main-header visible-md visible-lg">
+  <div class="container">
+    <div class="main-logo pull-left" routerLink='/home'>
+      <img src="../../assets/logo/logo_black.png">
+    </div>
+    <ul class="list-inline det-ul visible-xs visible-sm pull-right">
+      <li>
+        <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp; <i class="fa fa-angle-down" aria-hidden="true"></i> </button>
+      </li>
+    </ul>
+    <ul class="list-inline det-ul pull-left visible-md visible-lg">
+      <li>
+        <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp; <i class="fa fa-angle-down" aria-hidden="true"></i> </button>
+      </li>
+      <li>
+        <a routerLink='/menu' class="dets-div-btns selected" id="our-menu-btn">Our Menu</a>
+      </li>
+      <!-- <li>
+                <a class="dets-div-btns" id="schedule-menu-btn" (click)='schMenuBtn(schTrigBtn)'>Schedule Menu</a>
+            </li> -->
+    </ul>
+    <div class="scroll-login-div pull-right  visible-md visible-lg">
+      <ul class="list-inline sc-ul">
+        <li class="login-trig-div" *ngIf="!authService.loggedIn()">
+          <button type="button" class="login-signup-trig-btn dets-div-btns" (click)="appComponent.loginSignupTrigger()">Log in/Sign up</button>
+        </li>
+        <li class="account-trig-div" *ngIf="authService.loggedIn()">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{userName}}</button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings'>My Profile</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/my-orders'>My Orders</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/address'>Saved Address</a></li>
+              <!-- <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/payments'>Payments</a></li> -->
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/reward-points'>Reward Points</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/change-password'>Change Password</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" (click)="onLogoutClick()">Logout</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</header>
+
+<div class="checkout-main-container">
+  <!-- Header for mobiles and smaller devices -->
+  <header class="mob-main-header visible-sm visible-xs">
+    <button type="button" class="mob-menu-trig-btn">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+    <div class="mob-main-logo">
+      <img src="../assets/logo/logo.png">
+    </div>
+  </header>
+  <div class="container">
+
+    <!-- Left Dets -->
+    <div class="left-dets-section pull-left">
+
+      <!-- Address and instructions section -->
+      <div class="address-section">
+
+        <div class="address-head-div head-divs">
+          <h3 class="section-titles">Delivery Address</h3>
+        </div>
+        <div class="body-div">
+
+          <!-- Warning -->
+          <div class="warning-div">
+            Please make sure address is accurate
+          </div>
+
+          <!-- Address statement -->
+
+          <div class="user-address-div">
+
+            <div *ngFor="let address of addresses;let i = index">
+              
+              <label style="cursor:pointer">
+              <div class="user-address-item">
+                <div class="user-address pull-left">
+                  <div class="pull-left">
+                    <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)">
+                  </div>
+                  <div class="pull-left address-lines">
+                    <h5 class="address-lines-title">Address {{i+1}}</h5>
+                    {{address}}
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="address-edit-div pull-right">
+                  <button type="button" id="edit-address">Edit</button>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              </label>
+              <div class="address-edit-db">
+                <div class="address-edit-div">
+                    <label for="adress-text">
+                      <textarea>
+                        {{address}}
+                      </textarea>
+                    </label>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="instructions-div">
+            <h6>Delivery Instructions</h6>
+            <textarea id="delivery-instructions-input" placeholder="Instructions for your driver (Optional)" [(ngModel)]='deliveryInst'></textarea>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Payment Gateway Section -->
+      <div class="payment-selection-section">
+
+        <div class="address-head-div head-divs">
+          <h3 class="section-titles"> Select Payment Method</h3>
+        </div>
+
+        <div class="payment-options-div body-div">
+          <ul class="payment-options-ul list-unstyled">
+            <li>
+              <label for="credit">
+                  <input type="radio" name="payment" id="credit" value="Wallet" (click)='paymentMethod($event)'> &nbsp; Wallet
+              </label>
+            </li>
+            <li>
+              <label for="paypal">
+                  <input type="radio" name="payment" id="paypal" value="Cash on Delivery" (click)='paymentMethod($event)'> &nbsp; Cash on Delivery
+              </label>
+            </li>
+            <li>
+              <label for="invoice">
+                  <input type="radio" name="payment" id="invoice" value="Online" (click)='paymentMethod($event)'> &nbsp; Pay Online
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Dets -->
+    <div class="right-dets-section pull-right">
+
+      <!-- Order Summary section -->
+      <div class="order-summary-section">
+
+        <div class="address-head-div head-divs">
+          <h3 class="section-titles">Order Summary</h3>
+        </div>
+
+        <div class="body-div order-summary-body">
+          
+      <div class="delivery-items-div">
+
+          <!-- Day today-->
+        <div *ngIf="today_orders !=null">
+          <div *ngIf="tab_one !=null">
+            
+            <h6 class="delivery-on-statement">Delivery today &nbsp; {{tab_one_time_slot}}</h6>
+            <!-- Today exists -->
+              <div class="delivery-item">
+  
+                <div class="delivery-item-left">
+                  <div class="delivery-item-dets">
+                    <span>
+                      <p class="delivery-item-name">{{tab_one_name}}</p>
+                    </span>
+                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_one_base_price}} </span> per portion</h5>
+                  </div>
+                </div>
+  
+                <div class="delivery-dets">
+                  <!-- Number of items -->
+                  <div class="delivery-number-div">
+                    <div class="delivery-number-core">
+                      <button type="button" class="number-minus-btn number-btns"> - </button>
+                      <span class="input-number"> {{tab_one_times}} </span>
+                      <button type="button" class="number-plus-btn number-btns"> + </button>
+                    </div>
+                  </div>
+                  <!-- Delivery item price -->
+                  <div class="price-div">
+                    <div class="price-core">
+                      &#8377; <span class="item-total-cost-number"> {{tab_one_total_price}} </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+          
+          <div *ngIf="tab_two !=null">
+            
+            <h6 class="delivery-on-statement">Delivery today &nbsp; {{tab_two_time_slot}}</h6>
+            <!-- Today exists -->
+              <div class="delivery-item">
+  
+                <div class="delivery-item-left">
+                  <div class="delivery-item-dets">
+                    <span>
+                      <p class="delivery-item-name">{{tab_two_name}}</p>
+                    </span>
+                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_two_base_price}} </span> per portion</h5>
+                  </div>
+                </div>
+  
+                <div class="delivery-dets">
+                  <!-- Number of items -->
+                  <div class="delivery-number-div">
+                    <div class="delivery-number-core">
+                      <button type="button" class="number-minus-btn number-btns"> - </button>
+                      <span class="input-number"> {{tab_two_times}} </span>
+                      <button type="button" class="number-plus-btn number-btns"> + </button>
+                    </div>
+                  </div>
+                  <!-- Delivery item price -->
+                  <div class="price-div">
+                    <div class="price-core">
+                      &#8377; <span class="item-total-cost-number"> {{tab_two_total_price}} </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+          
+          <div *ngIf="tab_three !=null">
+            
+            <h6 class="delivery-on-statement">Delivery today &nbsp; {{tab_three_time_slot}}</h6>
+            <!-- Today exists -->
+              <div class="delivery-item">
+  
+                <div class="delivery-item-left">
+                  <div class="delivery-item-dets">
+                    <span>
+                      <p class="delivery-item-name">{{tab_three_name}}</p>
+                    </span>
+                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_three_base_price}} </span> per portion</h5>
+                  </div>
+                </div>
+  
+                <div class="delivery-dets">
+                  <!-- Number of items -->
+                  <div class="delivery-number-div">
+                    <div class="delivery-number-core">
+                      <button type="button" class="number-minus-btn number-btns"> - </button>
+                      <span class="input-number"> {{tab_three_times}} </span>
+                      <button type="button" class="number-plus-btn number-btns"> + </button>
+                    </div>
+                  </div>
+                  <!-- Delivery item price -->
+                  <div class="price-div">
+                    <div class="price-core">
+                      &#8377; <span class="item-total-cost-number"> {{tab_three_total_price}} </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+
+          
+        </div>
+        <!-- Day one -->
+        <div *ngIf="day_one_date !=null">
+          <h6 class="delivery-on-statement">Delivery on {{day_one_date}} &nbsp; {{day_one_slot}}</h6>
+
+
+            <div class="delivery-item">
+              <div class="delivery-item-left">
+                <div class="delivery-item-dets">
+                  <span *ngFor="let menu of day_one_menu">
+                    <span class="delivery-item-name">{{menu.item_name}}</span>
+                  </span>
+                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_one_per_portion_price}} </span> per portion</h5>
+                </div>
+              </div>
+
+              <div class="delivery-dets">
+                <!-- Number of items -->
+                <div class="delivery-number-div">
+                  <div class="delivery-number-core">
+                    <button type="button" class="number-minus-btn number-btns"> - </button>
+                    <span class="input-number"> {{day_one_num_items}} </span>
+                    <button type="button" class="number-plus-btn number-btns"> + </button>
+                  </div>
+                </div>
+                <!-- Delivery item price -->
+                <div class="price-div">
+                  <div class="price-core">
+                    &#8377; <span class="item-total-cost-number"> {{day_one_total_price}} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+        </div>
+        <!-- Day two -->
+        <div *ngIf="day_two_date !=null">
+          <h6 class="delivery-on-statement">Delivery on {{day_two_date}} &nbsp; {{day_two_slot}}</h6>
+          
+            <div class="delivery-item">
+              <div class="delivery-item-left">
+                <div class="delivery-item-dets">
+                  <span *ngFor="let menu of day_two_menu">
+                    <span class="delivery-item-name">{{menu.item_name}}</span>
+                  </span>
+                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_two_per_portion_price}} </span> per portion</h5>
+                </div>
+              </div>
+
+              <div class="delivery-dets">
+                <!-- Number of items -->
+                <div class="delivery-number-div">
+                  <div class="delivery-number-core">
+                    <button type="button" class="number-minus-btn number-btns"> - </button>
+                    <span class="input-number"> {{day_two_num_items}} </span>
+                    <button type="button" class="number-plus-btn number-btns"> + </button>
+                  </div>
+                </div>
+                <!-- Delivery item price -->
+                <div class="price-div">
+                  <div class="price-core">
+                    &#8377; <span class="item-total-cost-number"> {{day_two_total_price}} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+
+
+        </div>
+        <!-- Day three -->
+        <div *ngIf="day_three_date !=null">
+          <h6 class="delivery-on-statement">Delivery on {{day_three_date}} &nbsp; {{day_three_slot}}</h6>
+
+          
+            <div class="delivery-item">
+              <div class="delivery-item-left">
+                <div class="delivery-item-dets">
+                  <span *ngFor="let menu of day_three_menu">
+                  <span class="delivery-item-name">{{menu.item_name}}</span>
+                  </span>
+                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_three_per_portion_price}} </span> per portion</h5>
+                </div>
+              </div>
+
+              <div class="delivery-dets">
+                <!-- Number of items -->
+                <div class="delivery-number-div">
+                  <div class="delivery-number-core">
+                    <button type="button" class="number-minus-btn number-btns"> - </button>
+                    <span class="input-number"> {{day_three_num_items}} </span>
+                    <button type="button" class="number-plus-btn number-btns"> + </button>
+                  </div>
+                </div>
+                <!-- Delivery item price -->
+                <div class="price-div">
+                  <div class="price-core">
+                    &#8377; <span class="item-total-cost-number"> {{day_three_total_price}} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+        <!-- Day Four -->
+        <div *ngIf="day_four_date !=null">
+          <h6 class="delivery-on-statement">Delivery on {{day_four_date}} &nbsp; {{day_four_slot}}</h6>
+
+            <div class="delivery-item">
+              <div class="delivery-item-left">
+                <div class="delivery-item-dets">
+                  <span *ngFor="let menu of day_four_menu">
+                    <span class="delivery-item-name">{{menu.item_name}}</span>
+                  </span>
+                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_four_per_portion_price}} </span> per portion</h5>
+                </div>
+              </div>
+
+              <div class="delivery-dets">
+                <!-- Number of items -->
+                <div class="delivery-number-div">
+                  <div class="delivery-number-core">
+                    <button type="button" class="number-minus-btn number-btns"> - </button>
+                    <span class="input-number"> {{day_four_num_items}} </span>
+                    <button type="button" class="number-plus-btn number-btns"> + </button>
+                  </div>
+                </div>
+                <!-- Delivery item price -->
+                <div class="price-div">
+                  <div class="price-core">
+                    &#8377; <span class="item-total-cost-number"> {{day_four_total_price}} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <!-- Day five -->
+        <div *ngIf="day_five_date !=null">
+          <h6 class="delivery-on-statement">Delivery on {{day_five_date}} &nbsp; {{day_five_slot}}</h6>
+
+            <div class="delivery-item">
+              <div class="delivery-item-left">
+                <div class="delivery-item-dets">
+                  <span *ngFor="let menu of day_five_menu">
+                    <span class="delivery-item-name">{{menu.item_name}}</span>
+                  </span>
+                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_five_per_portion_price}} </span> per portion</h5>
+                </div>
+              </div>
+
+              <div class="delivery-dets">
+                <!-- Number of items -->
+                <div class="delivery-number-div">
+                  <div class="delivery-number-core">
+                    <button type="button" class="number-minus-btn number-btns"> - </button>
+                    <span class="input-number"> {{day_five_num_items}} </span>
+                    <button type="button" class="number-plus-btn number-btns"> + </button>
+                  </div>
+                </div>
+                <!-- Delivery item price -->
+                <div class="price-div">
+                  <div class="price-core">
+                    &#8377; <span class="item-total-cost-number"> {{day_five_total_price}} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <!-- Day six -->
+        <div *ngIf="day_six_date !=null">
+          <h6 class="delivery-on-statement">Delivery on {{day_six_date}} &nbsp; {{day_six_slot}}</h6>
+
+          
+            <div class="delivery-item">
+              <div class="delivery-item-left">
+                <div class="delivery-item-dets">
+                  <span *ngFor="let menu of day_six_menu">
+                    <!-- <span class="delivery-item-name">{{menu.item_name}}</span> -->
+                     {{menu.item_name}}
+                  </span>
+                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_six_per_portion_price}} </span> per portion</h5>
+                </div>
+              </div>
+
+              <div class="delivery-dets">
+                <!-- Number of items -->
+                <div class="delivery-number-div">
+                  <div class="delivery-number-core">
+                    <button type="button" class="number-minus-btn number-btns"> - </button>
+                    <span class="input-number"> {{day_six_num_items}} </span>
+                    <button type="button" class="number-plus-btn number-btns"> + </button>
+                  </div>
+                </div>
+                <!-- Delivery item price -->
+                <div class="price-div">
+                  <div class="price-core">
+                    &#8377; <span class="item-total-cost-number"> {{day_six_total_price}} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+
+        </div>
+            
+
+
+          </div>
+
+          <div class="charges-div">
+            <div class="delivery-fee">
+              <div class="pull-left">
+                <h6>Delivery Fee</h6>
+              </div>
+              <div class="pull-right cost-core">
+                &#8377; <span class="cost-number"> {{delivery_fee}} </span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="total-fee">
+              <div class="pull-left">
+                <h6>Total</h6>
+              </div>
+              <div class="pull-right cost-core">
+                &#8377;<span class="cost-number"> {{total_price}} </span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="total-pay">
+              <div class="pull-left">
+                <h6>Total to pay</h6>
+              </div>
+              <div class="pull-right cost-core">
+                &#8377;<span class="cost-number"> {{total_price}}</span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <!-- <div class="reward-points">
+              <div class="pull-left">
+                <h6>Reward points</h6>
+              </div>
+              <div class="pull-right cost-core">
+                <span class="cost-number"> 5 </span>
+              </div>
+              <div class="clearfix"></div>
+            </div> -->
+          </div>
+          <!-- <span class="place-order-notif">*Blah blah blah blah</span> -->
+        </div>
+        <!-- <button type="button" id="place-order-button">Place Order</button> -->
+      </div>
+
+    </div>
+    <div class="clearfix"></div>
+    <div class="place-order-btn-div">
+      <p class="err"></p>
+      <button type="button" id="place-order-button" (click)='placeOrder()'>Place Order</button>
+    </div>
+  </div>
+</div>

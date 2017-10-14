@@ -1,0 +1,226 @@
+<div class="scroll-header">
+  <div class="main-logo pull-left">
+    <img src="../../assets/logo/logo_black.png">
+  </div>
+  <div class="location-input-div">
+    <div class="location-enter-div">
+      <input type="search" class="location-search-input" placeholder="Type your location here">
+      <button type="button" class="locate-me-btn" (click)="geoLocate()">Locate me</button>
+    </div>
+    <button type="button" class="see-menu-btn" (click)="seeMenu()">See The Menu</button>
+  </div>
+  <div class="scroll-login-div" *ngIf="!authService.loggedIn()">
+    <button type="button" class="login-signup-trig-btn" (click)="appComponent.loginSignupTrigger()">Log in/Sign up</button>
+
+  </div>
+  <div class="scroll-login-div" *ngIf="authService.loggedIn()">
+    <a (click)="onLogoutClick()" style="cursor:pointer">Logout</a>
+  </div>
+</div>
+<div class="vp fvp">
+
+
+  <!-- Header for mobiles and smaller devices -->
+  <header class="mob-main-header visible-sm visible-xs">
+    <button type="button" class="mob-menu-trig-btn">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <div class="mob-main-logo">
+      <img src="../../assets/logo/logo.png">
+    </div>
+  </header>
+
+
+  <div class="dark-cover">
+    <div class="container">
+
+      <!-- Header for tablets and desktops -->
+      <header class="m-main-header visible-lg visible-md">
+        <div class="main-logo pull-left">
+          <img src="../../assets/logo/logo.png">
+        </div>
+        <div class="pull-right main-nav-div">
+          <nav>
+            <ul class="list list-inline">
+              <li class="how-it-works-trig-btn uline" (click)="gotoHowitWorks()">
+                How It Works
+              </li>
+              <li class="concept-btn-li">
+                <a routerLink="/rewards"><button type="button" class="reward-pts-trig-btn" style="color:#fff">
+                                         <div id="rwd-hover-div"></div>
+                                         <p>Reward Points</p>
+                                </button></a>
+              </li>
+              <li class="login-signup-trig-btn uline" *ngIf="!authService.loggedIn()" (click)="appComponent.loginSignupTrigger()">
+                Log in/Sign up
+              </li>
+              <li class="account-trig-div" *ngIf="authService.loggedIn()">
+                <div class="dropdown home-dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{userName}}</button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings'>My Profile</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/my-orders'>My Orders</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/address'>Saved Address</a></li>
+                    <!-- <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/payments'>Payments</a></li> -->
+                    <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/reward-points'>Reward Points</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/change-password'>Change Password</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" (click)="onLogoutClick()">Logout</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="clearfix"></div>
+      </header>
+      <div class="container in-container">
+        <div class="main-text">
+          <h2>Office Lunch?<br>Sorted.</h2>
+          <div class="typed-container">
+            <h3><span class="typed">
+              <span id="t-one-one" class= "typed-spans" style="display:none">NO MINIMUMS.</span>
+              <span id="t-two-one" class="typed-spans" style="display:none">SIMPLE MENU.</span>
+              <span id="t-three-one" class="typed-spans" style="display:none">OPTIONS FOR SCHEDULED MEALS.</span>
+              </span>
+              <span class="typed-two">
+              <span id="t-one-two" class= "typed-spans" style="display:none">NO DELIVERY CHARGES.</span>
+              <span id="t-two-two" class="typed-spans" style="display:none">MORE REWARD POINTS.</span>
+              <span id="t-three-two" class="typed-spans" style="display:none"></span>
+              </span>
+            </h3>
+            <span class="t-helper"></span>
+          </div>
+
+          <div class="concept-trig-btn-div">
+            <a><button type="button" class="concept-trig-btn" (click)="gotoConcept()">Unique Concept</button></a>
+          </div>
+
+          <div class="location-input-div location-input-scrolltop-helper">
+            <div class="location-enter-div">
+              <input type="search" class="location-search-input" placeholder="Type your location here" [(ngModel)]="locationEntry">
+              <button type="button" class="locate-me-btn" (click)="geoLocate()">Locate me</button>
+            </div>
+            <button type="button" class="see-menu-btn" id="main-see-menu-btn" (click)="seeMenu()">See The Menu</button>
+          </div>
+          <h6 class="cur-serving">We are currently serving in Madhapur</h6>
+          <div class="location-warning-div">
+            <ul class="list-inline">
+              <li>
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+              </li>
+              <li>
+                <p>
+                  We currently do not deliver in your area. We currently deliver in or around Madhapur.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <span class="fvp-down-btn animated infinite bounce" (click)="gotoHowitWorks()"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+    </div>
+  </div>
+</div>
+<div class="svp">
+  <div class="w-cover">
+    <section class="how-it-works-div container">
+      <h3>How it works</h3>
+      <div class="how-it-works-core">
+        <div class="row">
+          <div class="col-md-3 col-one-div">
+            <img src="../../assets/img/cook.png" alt="">
+            <h4>Choose your meal</h4>
+            <!--<i class="fa fa-cutlery" aria-hidden="true"></i>-->
+            <!--<br>-->
+            <p>
+               Choose number of meals from daily rotating menu.
+            </p>
+          </div>
+          <div class="col-md-3 col-two-div">
+            <img src="../../assets/img/time.png" alt="">
+            <h4>Choose your time</h4>
+            <!--<i class="fa fa-clock-o" aria-hidden="true"></i>-->
+            <!--<br>-->
+            <p>
+               Select Delivery Slots. You can also order in advance.
+            </p>
+          </div>
+          <div class="col-md-3 col-three-div">
+            <img src="../../assets/img/gift.png" alt="">
+            <h4>Earn rewards</h4>
+            <!--<i class="fa fa-trophy" aria-hidden="true"></i>-->
+            <!--<br>-->
+            <p>
+               Get reward points with every order Redeem them for future orders.
+            </p>
+          </div>
+          <div class="col-md-3 col-four-div">
+            <img src="../../assets/img/smile.png" alt="">
+            <h4>Enjoy fysu</h4>
+            <!--<i class="fa fa-smile-o" aria-hidden="true"></i>-->
+            <!--<br>-->
+            <p>
+               We’ll call you when it arrives. Ready with spoon and pen.
+            </p>
+            <br><br><br>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="parallax-window p-window-one sub-main"> </div>
+    <section class="concept-div container">
+        <img src="../../assets/img/idea.jpg" alt="" class="pull-left">
+        <div class="concept-exp-div" class="pull-right">
+          <h3>Concept</h3>
+  
+  
+          <p>
+             Are you bored of the monotonous work at your desk? Are you hungry as well? We make your lunch time fun time as well. Order your lunch and be ready with Pen &amp; Paper !!!
+          </p>
+          <p>
+             We are introducing a ground-breaking idea to make your lunch-time fun, useful and creative. Bringing back the lost art of letter writings, reinventing the concept of daily writing habits and sharpen your mind.
+          </p>
+          <h5 class="hv-look-head"><b>Have a look !</b></h5>
+            <ul class="list">
+              <li>
+                <p>
+                   With every order, you get a puzzle, it may be a Sudoku/finding ways/puzzles or even a mere basic math problem. Solve them and return it on the next order.
+                </p>
+              </li>
+              <li>
+                <p>
+                   Share your thoughts and let the world know them. We are providing an excellent platform to reach out to people who are tired of Electronic media and want to go back to good old days of reading and writing.
+                </p>
+              </li>
+              <li>
+                <p>
+                   You can even write a letter to your loved ones. A few things that you cannot tell on phone can seamlessly be explained through personal letters. How cool is that?!
+                </p>
+              </li>
+            </ul>
+            <p><b>
+              Get reward points for every order you place and every letter you write or every thought you share or every puzzle you solve. Redeem them in your future orders.
+            </b></p>
+            <p>
+               Making something creative can always be a boost to your brain and your personality and it makes you happier over the period of time. Doing what we love is all we crave for, so why not crave for food and happiness together?
+            </p>
+            <p>What are you even waiting for? Place lunch order and be ready with spoon and pen.</p>
+            <p style="text-align:center">
+              <b>
+                <em>
+                   Not Just a Lunch. Not Just a Box.<br> It’s an Experience. Live It.
+                </em>
+              </b>
+            </p>
+  
+          <a [routerLink]="['/rewards']" id="concept-rewards-trig">
+            <div>
+              REWARD POINTS
+            </div>
+          </a>
+        </div>
+      <div class="clearfix"></div>
+    </section>
+    <div class="parallax-window p-window-two sub-main"> </div>
+  </div>
+</div>

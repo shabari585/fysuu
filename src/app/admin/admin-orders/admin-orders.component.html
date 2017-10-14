@@ -1,0 +1,536 @@
+<!-- Orders Section -->
+<div class="orders-section">
+  <h3>Orders</h3>
+  <!-- <div class="orders-core">
+    <div class="order-tabs-row-one">
+
+      <div class="order-tab" id="order-tab-one-one">
+        <h4 class="order-tab-number">0</h4>
+        <h4 class="order-tab-name">Total Orders</h4>
+      </div>
+      <div class="order-tab" id="order-tab-one-two">
+        <h4 class="order-tab-number">0</h4>
+        <h4 class="order-tab-name">Pending Orders</h4>
+      </div>
+      <div class="order-tab" id="order-tab-one-three">
+        <h4 class="order-tab-number">0</h4>
+        <h4 class="order-tab-name">In Preparation Orders</h4>
+      </div>
+      <div class="order-tab" id="order-tab-one-four">
+        <h4 class="order-tab-number">0</h4>
+        <h4 class="order-tab-name">Out for Delivery Orders</h4>
+      </div>
+
+    </div>
+    <div class="order-tabs-row-two">
+
+      <div class="order-tab" id="order-tab-two-one">
+        <h4 class="order-tab-number">0</h4>
+        <h4 class="order-tab-name">Delivered Orders</h4>
+      </div>
+      <div class="order-tab" id="order-tab-two-two">
+        <h4 class="order-tab-number">0</h4>
+        <h4 class="order-tab-name">Cancelled Orders</h4>
+      </div>
+      <div class="order-tab" id="order-tab-two-three">
+        <h4 class="order-tab-number">0</h4>
+        <h4 class="order-tab-name">Rejected Orders</h4>
+      </div>
+      <div class="order-tab" id="order-tab-two-four">
+        <h4 class="order-tab-number">0</h4>
+        <h4 class="order-tab-name">Missed Orders</h4>
+      </div>
+
+    </div>
+
+  </div> -->
+</div>
+<!-- Orders Listing -->
+<div class="orders-list-section table-responsive">
+  <!-- <label for="sort-dropdown">Sort By:</label><br>
+  <select id="sort-dropdown">
+      <option value="">Status</option>
+  </select> -->
+
+  
+
+  <!-- Today -->
+  <div class="days-div">
+    <h2>{{disp_today_one}} (Today)</h2>
+    <table class="table table-striped">
+      <tr>
+        <th>
+          Order id
+        </th>
+        <th>
+          Order Time
+        </th>
+        <th>
+          Delivery Address
+        </th>
+        <th>
+          Payment Type
+        </th>
+        <th>
+          User name
+        </th>
+        <th>
+          User Mobile
+        </th>
+        <th>
+          User Email
+        </th>
+        <th>
+          Details
+        </th>
+      </tr>
+      <tr *ngFor='let today of today_orders'>
+        <td>
+           {{today.order_id}}
+        </td>
+        <td>
+          {{today.order_time}}
+        </td>
+        <td>
+           {{today.delivery_address}}
+        </td>
+        <td>
+          {{today.payment_type}}
+        </td>
+        <td>
+           {{today.user_name}}
+        </td>
+        <td>
+           {{today.user_mobile}}
+        </td>
+        <td>
+           {{today.user_email}}
+        </td>
+        <td>
+          <span (click)='ViewDetails("today",today.order_id,p_today_one)'>View</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Day one -->
+  <div class="days-div">
+    <h2>{{p_day_one}}</h2>
+    <table class="table table-striped">
+      <tr>
+        <th>
+          Order id
+        </th>
+        <th>
+          Order Time
+        </th>
+        <th>
+          Delivery Address
+        </th>
+        <th>
+          Payment Type
+        </th>
+        <th>
+          User name
+        </th>
+        <th>
+          User Mobile
+        </th>
+        <th>
+          User Email
+        </th>
+        <th>
+          Details
+        </th>
+      </tr>
+      <tr *ngFor='let order of day_one_total_orders'>
+        <td>
+          {{order.order_id}}
+        </td>
+        <td>
+          {{order.order_time}}
+        </td>
+        <td>
+          {{order.delivery_address}}
+        </td>
+        <td>
+          {{order.payment_type}}
+        </td>
+        <td>
+          {{order.user_name}}
+        </td>
+        <td>
+          {{order.user_mobile}}
+        </td>
+        <td>
+          {{order.user_email}}
+        </td>
+        <td>
+          <span (click)='ViewDetails("day_one",order.order_id)'>View</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  <!-- Day two -->
+    <div class="days-div">
+      <h2>{{p_day_two}}</h2>
+      <table class="table table-striped">
+        <tr>
+          <th>
+            Order id
+          </th>
+          <th>
+            Order Time
+          </th>
+          <th>
+            Delivery Address
+          </th>
+          <th>
+            Payment Type
+          </th>
+          <th>
+            User name
+          </th>
+          <th>
+            User Mobile
+          </th>
+          <th>
+            User Email
+          </th>
+          <th>
+            Details
+          </th>
+        </tr>
+        <tr *ngFor='let order of day_two_total_orders'>
+          <td>
+            {{order.order_id}}
+          </td>
+          <td>
+            {{order.order_time}}
+          </td>
+          <td>
+            {{order.delivery_address}}
+          </td>
+          <td>
+            {{order.payment_type}}
+          </td>
+          <td>
+            {{order.user_name}}
+          </td>
+          <td>
+            {{order.user_mobile}}
+          </td>
+          <td>
+            {{order.user_email}}
+          </td>
+          <td>
+            <span (click)='ViewDetails("day_two",order.order_id)'>View</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  <!-- Day three -->
+    <div class="days-div">
+      <h2>{{p_day_three}}</h2>
+      <table class="table table-striped">
+        <tr>
+          <th>
+            Order id
+          </th>
+          <th>
+            Order Time
+          </th>
+          <th>
+            Delivery Address
+          </th>
+          <th>
+            Payment Type
+          </th>
+          <th>
+            User name
+          </th>
+          <th>
+            User Mobile
+          </th>
+          <th>
+            User Email
+          </th>
+          <th>
+            Details
+          </th>
+        </tr>
+        <tr *ngFor='let order of day_three_total_orders'>
+          <td>
+            {{order.order_id}}
+          </td>
+          <td>
+            {{order.order_time}}
+          </td>
+          <td>
+            {{order.delivery_address}}
+          </td>
+          <td>
+            {{order.payment_type}}
+          </td>
+          <td>
+            {{order.user_name}}
+          </td>
+          <td>
+            {{order.user_mobile}}
+          </td>
+          <td>
+            {{order.user_email}}
+          </td>
+          <td>
+            <span (click)='ViewDetails("day_three",order.order_id)'>View</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  <!-- Day four -->
+    <div class="days-div">
+      <h2>{{p_day_four}}</h2>
+      <table class="table table-striped">
+        <tr>
+          <th>
+            Order id
+          </th>
+          <th>
+            Order Time
+          </th>
+          <th>
+            Delivery Address
+          </th>
+          <th>
+            Payment Type
+          </th>
+          <th>
+            User name
+          </th>
+          <th>
+            User Mobile
+          </th>
+          <th>
+            User Email
+          </th>
+          <th>
+            Details
+          </th>
+        </tr>
+        <tr *ngFor='let order of day_four_total_orders'>
+          <td>
+            {{order.order_id}}
+          </td>
+          <td>
+            {{order.order_time}}
+          </td>
+          <td>
+            {{order.delivery_address}}
+          </td>
+          <td>
+            {{order.payment_type}}
+          </td>
+          <td>
+            {{order.user_name}}
+          </td>
+          <td>
+            {{order.user_mobile}}
+          </td>
+          <td>
+            {{order.user_email}}
+          </td>
+          <td>
+            <span (click)='ViewDetails("day_four",order.order_id)'>View</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  <!-- Day five -->
+    <div class="days-div">
+      <h2>{{p_day_five}}</h2>
+      <table class="table table-striped">
+        <tr>
+          <th>
+            Order id
+          </th>
+          <th>
+            Order Time
+          </th>
+          <th>
+            Delivery Address
+          </th>
+          <th>
+            Payment Type
+          </th>
+          <th>
+            User name
+          </th>
+          <th>
+            User Mobile
+          </th>
+          <th>
+            User Email
+          </th>
+          <th>
+            Details
+          </th>
+        </tr>
+        <tr *ngFor='let order of day_five_total_orders'>
+          <td>
+            {{order.order_id}}
+          </td>
+          <td>
+            {{order.order_time}}
+          </td>
+          <td>
+            {{order.delivery_address}}
+          </td>
+          <td>
+            {{order.payment_type}}
+          </td>
+          <td>
+            {{order.user_name}}
+          </td>
+          <td>
+            {{order.user_mobile}}
+          </td>
+          <td>
+            {{order.user_email}}
+          </td>
+          <td>
+            <span (click)='ViewDetails("day_five",order.order_id)'>View</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  <!-- Day six -->
+    <div class="days-div">
+      <h2>{{p_day_six}}</h2>
+      <table class="table table-striped">
+        <tr>
+          <th>
+            Order id
+          </th>
+          <th>
+            Order Time
+          </th>
+          <th>
+            Delivery Address
+          </th>
+          <th>
+            Payment Type
+          </th>
+          <th>
+            User name
+          </th>
+          <th>
+            User Mobile
+          </th>
+          <th>
+            User Email
+          </th>
+          <th>
+            Details
+          </th>
+        </tr>
+        <tr *ngFor='let order of day_six_total_orders'>
+          <td>
+            {{order.order_id}}
+          </td>
+          <td>
+            {{order.order_time}}
+          </td>
+          <td>
+            {{order.delivery_address}}
+          </td>
+          <td>
+            {{order.payment_type}}
+          </td>
+          <td>
+            {{order.user_name}}
+          </td>
+          <td>
+            {{order.user_mobile}}
+          </td>
+          <td>
+            {{order.user_email}}
+          </td>
+          <td>
+            <span (click)='ViewDetails("day_six",order.order_id)'>View</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
+
+</div>
+
+<div class="db">
+  <span (click)='closedb()' class="det-close">X</span>
+  <div class="dets-div">
+    <table class="table table-striped">
+      <tr>
+        <th>
+          Order Id
+        </th>
+        <th>
+          User Name
+        </th>
+        <th>
+          User Mobile
+        </th>
+        <th>
+          User Email
+        </th>
+        <th>
+          User Address
+        </th>
+        <th>
+          Ordered Items
+        </th>
+        <th>
+          Number of orders
+        </th>
+      </tr>
+      <tr>
+        <td>
+           {{p_h_order_id}}
+        </td>
+        <td>
+           {{p_h_user_name}}
+        </td>
+        <td>
+           {{p_h_user_mobile}}
+        </td>
+        <td>
+           {{p_h_user_email}}
+        </td>
+        <td>
+           {{p_h_address}}
+        </td>
+        <td>
+          <div *ngFor='let order of p_h_order'>
+            {{order.item_name}}
+          </div>
+        </td>
+        <td>
+           {{p_h_num_times}}
+        </td>
+      </tr>
+    </table>
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+</div>

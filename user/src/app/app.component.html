@@ -1,0 +1,106 @@
+<div *ngIf="!authService.loggedIn()">
+
+<div class="fixed-dark-cover" id="login-fixed-dark-cover">
+  <div class="email-input-div">
+    <h4>Please enter your email or mobile number</h4>
+    <label for="email" id="email-label">Email or Mobile</label><br>
+    <input type="text" name="email" id="email" [(ngModel)]='initialLoginInput' placeholder="e.g pavan@fysu.com or +91 9999999999">
+    <p class="err"></p>
+    <div class="ls-btns-div">
+      <div class="ls-btns-core-div">
+        <button type="button" class="ls-btns" id="continue-btn" (click)="firstConClick(initialLoginInput)">Continue</button>
+        <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="fixed-dark-cover" id="next-reg-fixed-dark-cover">
+  <div class="email-input-div">
+    <h4>We just need few more details</h4>
+   
+    <label for="reg-name" id="reg-name-label">Name</label>
+    <input type="text" name="reg-name" class="next-inputs" id="reg-name" [(ngModel)]='regNameInput' placeholder=""><br>
+    
+    <!-- Company name -->
+    
+    <!-- <label for="reg-name" id="reg-com-name-label">Company Name</label>
+    <input type="text" name="reg-com-name" class="next-inputs" id="reg-com-name" [(ngModel)]='regComNameInput' placeholder=""><br> -->
+
+    <label for="reg-email" id="reg-email-label">Email</label>
+    <input type="text" name="reg-email" class="next-inputs" id="reg-email" [(ngModel)]='regEmailInput' placeholder="" value="{{initialLoginInput}}"><br>
+
+    <label for="reg-mobile" id="reg-mobile-label">Mobile Number</label>
+    <!-- <div id="reg-mobile-div"> -->
+      <!-- <button type="" id="country-code">+ 91 </button> -->
+      <input type="text" class="next-inputs" [(ngModel)]='regMobileInput'
+        name="reg-mobile" id="reg-mobile" placeholder="">
+    <!-- </div> -->
+
+    <label for="reg-pwd" id="reg-pwd-label">Choose Password</label>
+    <input type="password" name="reg-pwd" class="next-inputs" [(ngModel)]='regPwdInput' id="reg-pwd" placeholder=""><br>
+
+    <span class="otp-span"><label for="reg-otp" id="reg-otp-label">Enter OTP</label>
+    <input type="text" name="reg-otp" class="next-inputs"  [(ngModel)]='regOTPInput' id="reg-otp" (keyup)="otpKeyUp($event)" placeholder=""><br></span>
+
+    <h5 id="reg-terms-agree">By continuing, you are accepting Fysu Terms and Conditions</h5>
+
+    <p class="err"></p>
+
+    <div class="ls-btns-div">
+      <div class="ls-btns-core-div">
+        <button type="button" class="ls-btns" id="accept-btn" (click)="OtpBtnClick()">Send OTP</button>
+        <button type="button" class="ls-btns" id="signup-btn" (click)="SignUpClick(regNameInput,regEmailInput,regMobileInput,regPwdInput,regOTPInput)"
+          style="display:none">Register</button>
+        <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="fixed-dark-cover" id="next-login-fixed-dark-cover">
+  <div class="email-input-div">
+    <h4>We just need few more details</h4>
+    <label for="login-email" id="login-email-label">Email</label>
+    <input type="text" name="login-email" class="next-inputs" id="login-email" [(ngModel)]='loginEmailInput' placeholder="" value="{{initialLoginInput}}"><br>
+
+    <label for="login-password" id="login-password-label">Password</label>
+    <input type="password" name="login-password" class="next-inputs" [(ngModel)]='loginPasswordInput' id="login-password" placeholder=""><br>
+    <p class="login-err err"></p>
+
+    <div class="ls-btns-div">
+      <div class="ls-btns-core-div">
+        <button type="button" class="ls-btns" id="accept-btn" (click)="LoginSubmit(loginEmailInput,loginPasswordInput)">Login</button>
+        <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="mob-menu visible-sm visible-xs">
+  <ul class="list-unstyled">
+    <li class="reward-pts-trig-btn">
+      REWARDS
+    </li>
+    <li  *ngIf="!authService.loggedIn()" (click)="appComponent.loginSignupTrigger()">
+      LOGIN / SIGNUP
+    </li>
+    <li  *ngIf="authService.loggedIn()" (click)="onLogoutClick()">
+      LOGOUT
+    </li>
+  </ul>
+</div>
+
+<router-outlet>
+
+</router-outlet>
+<footer class="main-footer">
+  <nav class="footer-nav">
+    <ul class="list-inline">
+      <li><a routerLink='/home'>Home</a></li>
+      <li><a routerLink='/about'>About us</a></li>
+      <li><a routerLink='/privacy'>Privacy Policy</a></li>
+      <li><a routerLink='/terms'>Terms and Conditions</a></li>      
+      <li><a routerLink='/contact'>Contact us</a></li>
+    </ul>
+  </nav>
+</footer>
