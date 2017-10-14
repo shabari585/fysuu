@@ -101,6 +101,14 @@ export class AuthService {
         // return this.http.post('users/delete-address', address, { headers: header }).map(res => res.json());
     }
 
+    updateAddress(address){
+        let header = new Headers();
+        header.append('Content-Type', 'application/json');
+
+        return this.http.post('http://localhost:3700/users/update-address', address, { headers: header }).map(res => res.json());
+        // return this.http.post('users/delete-address', address, { headers: header }).map(res => res.json());
+    }
+
     getUserAddressses(user_id){
         return this.http.get('http://localhost:3700/users/get-address/' + user_id).map(res => res.json());
         // return this.http.get('users/get-address/' + user_id).map(res => res.json());

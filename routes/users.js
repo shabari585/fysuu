@@ -66,6 +66,32 @@ router.post('/delete-address',(req,res,next)=>{
     });
     
 });
+// Update address
+router.post('/update-address',(req,res,next)=>{
+
+    user_id = req.body.user_id;
+    address = req.body.original;
+    pl_address = req.body.edited;
+
+    User.update({_id:user_id},{$pullAll:{address:[address]}}).exec((err,user)=>{
+        if(err){
+            res.json({success:false,msg:err});
+        }else{
+            if(user){
+                // Add placeholder address
+                User.findOneAndUpdate({ _id: user_id }, { $addToSet: {address : pl_address} }).exec((eror, us) => {
+                    if (eror) {
+                        res.json({ success: false, msg: err });
+                    } else {
+                        res.json({ success: true, msg: us });
+                    }
+                });
+
+            }
+        }
+    });
+    
+});
 // Save address
 router.post('/save-address', (req, res, next) => {
 

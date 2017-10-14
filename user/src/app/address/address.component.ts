@@ -68,19 +68,10 @@ export class AddressComponent implements OnInit {
     this.authService.deleteAddress(address).subscribe(res=>{
         if(res.success){
           window.location.reload();
-          // this.router.navigate['/home'];
-          // this.addressDeleted = true;
-          // setTimeout(function() {
-          //   alert('loop');
-          //   this.addressDeleted = false;
-          // }, 1000);
         }else{
           console.log('Something went wrong');
         }
     });
-    // var target = event.target;
-    // $(target).parent().parent().parent().hide();
-    // this.authService
   }
 
   geoLocate(callback) {
@@ -125,5 +116,20 @@ export class AddressComponent implements OnInit {
 
   closeUpAddress(){
     $('.db').css({'display':'none'});
+  }
+  updateAddress(){
+    // alert('fd');
+    let addresses = {
+      user_id: this.userId,
+      original : this.original_address,
+      edited : this.placeholder_address
+    }
+    this.authService.updateAddress(addresses).subscribe(res=>{
+      if(res.success){
+        window.location.reload();
+      }else{
+        console.log(res.msg);
+      }
+    });
   }
 }
