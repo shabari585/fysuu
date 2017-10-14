@@ -132,7 +132,7 @@ export class AppComponent implements OnInit {
             // Email exists
             // Log user in
             this.authService.authenticateUser(user).subscribe(dat => {
-              console.log(dat);
+              // console.log(dat);
               if (dat.success) {
 
                 this.uName = dat.user.name;

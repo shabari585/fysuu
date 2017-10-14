@@ -88,7 +88,8 @@
                 </ul>
             </div>
         </div> -->
-        <div *ngFor="let cat of categories">
+        <!-- <div *ngFor="let cat of categories"> -->
+        <div>
             <h2 class="menu-title">COMBO</h2>
             {{curtime}}
             <div class="row">
@@ -112,7 +113,8 @@
                             </div>
                             <div class="item-dets">
                                 <div class="pull-left">
-                                    <span class="item-price"> &#8377; {{tab_one_cost}} </span><span class="incl-tax">(Inclusive of all taxes)</span>
+                                    <span class="item-price"> &#8377; {{tab_one_cost}} </span>
+                                    <!-- <span class="incl-tax">(Inclusive of all taxes)</span> -->
                                 </div>
                                 <div class="pull-right">
                                     <button type="button" class="item-add-btn" (click)='todayAdd("tab_one")'> + Add</button>
@@ -141,7 +143,8 @@
                             </div>
                             <div class="item-dets">
                                 <div class="pull-left">
-                                    <span class="item-price"> &#8377; {{tab_two_cost}} </span><span class="incl-tax">(Inclusive of all taxes)</span>
+                                    <span class="item-price"> &#8377; {{tab_two_cost}} </span>
+                                    <!-- <span class="incl-tax">(Inclusive of all taxes)</span> -->
                                 </div>
                                 <div class="pull-right">
                                     <button type="button" class="item-add-btn" (click)='todayAdd("tab_two")'> + Add</button>
@@ -172,7 +175,8 @@
                             </div>
                             <div class="item-dets">
                                 <div class="pull-left">
-                                    <span class="item-price"> &#8377; {{tab_three_cost}} </span><span class="incl-tax">(Inclusive of all taxes)</span>
+                                    <span class="item-price"> &#8377; {{tab_three_cost}} </span>
+                                    <!-- <span class="incl-tax">(Inclusive of all taxes)</span> -->
                                 </div>
                                 <div class="pull-right">
                                     <button type="button" class="item-add-btn" (click)='todayAdd("tab_three")'> + Add</button>

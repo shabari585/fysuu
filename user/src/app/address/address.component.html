@@ -22,13 +22,19 @@
         <h6>{{address}}</h6>
       </div>
     </div>
-
-
-    
-
-    <div class="add-address" (click)='addAddress($event)'>
+    <div class="add-address" (click)='geoLocate()'>
       <h5>Locate new address</h5>
       <i class="fa fa-plus-circle" aria-hidden="true"></i>
     </div>
+  </div>
+</div>
+<div class="db">
+  <div class="wb">
+      <i class="fa fa-times" aria-hidden="true" (click)='closeUpAddress()'></i>
+    <h2>Update Address</h2>
+    <textarea [(ngModel)]='placeholder_address'>
+
+    </textarea>
+    <button class="save-btns" (click)='updateAddress()' style="margin-top:20px;">SUBMIT</button>
   </div>
 </div>

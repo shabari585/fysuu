@@ -152,7 +152,7 @@ export class HomeComponent implements OnInit {
               localStorage.setItem('home_address', this.address);
               // Add to user's address if he is logged in
               if (this.authService.loggedIn()) {
-                console.log('user is logged in');
+                // console.log('user is logged in');
                 // User is logged in 
                 // send this address to save
                 let address = {
@@ -174,6 +174,7 @@ export class HomeComponent implements OnInit {
                 });
               } else {
                 // Not logged in 
+                this.give_menu_permission = true;
               }
               // Add to input box
               $('.location-search-input').val(this.address);

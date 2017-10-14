@@ -26,6 +26,9 @@ export class AddressComponent implements OnInit {
   lat: number;
   long: number;
   address: string;
+  
+  original_address :string;
+  placeholder_address :string;
 
   // addressDeleted = false;
 
@@ -50,11 +53,12 @@ export class AddressComponent implements OnInit {
   }
 
   editAddress(i, address){
-    console.log(i);
+    this.original_address = address;
+    this.placeholder_address = address;
+    $('.db').css({'display':'flex'});
   }
 
   addressDelete(event,ad) {
-    
 
     let address = {
       user_id: this.userId,
@@ -63,7 +67,7 @@ export class AddressComponent implements OnInit {
     // delete the respective address
     this.authService.deleteAddress(address).subscribe(res=>{
         if(res.success){
-          var address = event.target;
+          window.location.reload();
           // this.router.navigate['/home'];
           // this.addressDeleted = true;
           // setTimeout(function() {
@@ -78,10 +82,6 @@ export class AddressComponent implements OnInit {
     // $(target).parent().parent().parent().hide();
     // this.authService
   }
-  addAddress(event: any) {
-    
-
-  }
 
   geoLocate(callback) {
     if (navigator.geolocation) {
@@ -89,91 +89,41 @@ export class AddressComponent implements OnInit {
         this.location = position.coords;
         this.lat = position.coords.latitude;
         this.long = position.coords.longitude;
+        if (this.lat == undefined) {
+          
+        } else {
+          this.authService.getLocation(this.lat, this.long).subscribe(res => {
+  
+            this.address = res.results[0].formatted_address;
+            // if (this.address.includes('Madhapur')) {
+                // send this address to save
+                let address = {
+                  user_id: this.userId,
+                  address: this.address
+                }
+                this.authService.saveAddress(address).subscribe(res => {
+                  if (res.success) {
+                    // Address saved
+                    // console.log(res);
+                    window.location.reload();
+                  } else {
+                    // Address not saved
+                    if (res.msg = 'exists') {
+                      // address already exists
+                    } else {
+                      console.log(res);
+                    }
+                  }
+                });
+            // } 
+          });
+        }
       });
-      // console.log(this.lat);
-      if (this.lat == undefined) {
-        // this.geoLocate();
-        $('#locate-me-btn').trigger('click');
-      } else {
-        this.authService.getLocation(this.lat, this.long).subscribe(res => {
-          // console.log(res);
-          // console.log(res.results[0].formatted_address);
-
-          this.address = res.results[0].formatted_address;
-          if (this.address.includes('Madhapur')) {
-            localStorage.setItem('home_address', this.address);
-            // Add to user's address if he is logged in
-            if (this.authService.loggedIn()) {
-              console.log('user is logged in');
-              // User is logged in 
-              // send this address to save
-              let address = {
-                user_id: this.userId,
-                address: this.address
-              }
-              this.authService.saveAddress(address).subscribe(res => {
-                if (res.success) {
-                  // Address saved
-                  console.log(res);
-                } else {
-                  // Address not saved
-                  if (res.msg = 'exists') {
-                    // address already exists
-                  } else {
-                    console.log(res);
-                  }
-                }
-              });
-            } else {
-              console.log('not logged in');
-            }
-            // Add to input box
-            $('.location-search-input').val(this.address);
-          } else {
-            // ********** VERY IMPORTANT DELETE AFTER TESTING IS DONE ************** 
-            // Delete after testing is done
-
-
-
-            localStorage.setItem('home_address', this.address);
-            // Add to user's address if he is logged in
-            if (this.authService.loggedIn()) {
-              console.log('user is logged in');
-              // User is logged in 
-              // send this address to save
-              let address = {
-                user_id: this.userId,
-                address: this.address
-              }
-              // console.log(address);
-              this.authService.saveAddress(address).subscribe(res => {
-                console.log('entered');
-                if (res.success) {
-                  // Address saved
-                  console.log(res.msg);
-                } else {
-                  // Address not saved
-                  if (res.msg == 'exists') {
-                    // address already exists
-                    console.log('exists');
-                  } else {
-                    console.log(res.msg);
-                  }
-                }
-              });
-            } else {
-              console.log('not logged in');
-            }
-
-
-
-            $('.location-search-input').val(this.address);
-            $('.location-warning-div').show();
-          }
-        });
-      }
     }
 
   }
 
+  closeUpAddress(){
+    $('.db').css({'display':'none'});
+  }
 }

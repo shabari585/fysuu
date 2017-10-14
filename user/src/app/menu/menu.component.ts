@@ -1656,17 +1656,17 @@ export class MenuComponent implements OnInit {
     switch (true) {
       case this.tab_one_status:
         this.num_tab_one_items = event.target.value;
-        alert(this.num_tab_one_items);
+        // alert(this.num_tab_one_items);
         this.tab_one_total_price = this.num_tab_one_items * this.tab_one_cost;
         break;
       case this.tab_two_status:
         this.num_tab_two_items = event.target.value;
-        alert(this.num_tab_two_items);
+        // alert(this.num_tab_two_items);
         this.tab_two_total_price = this.num_tab_two_items * this.tab_two_cost;
         break;
         case this.tab_three_status:
         this.num_tab_three_items = event.target.value;
-        alert(this.num_tab_three_items);
+        // alert(this.num_tab_three_items);
         this.tab_three_total_price = this.num_tab_three_items * this.tab_three_cost;
         break;
       default:
@@ -1755,6 +1755,7 @@ export class MenuComponent implements OnInit {
       tab_three: this.today_tab_three_books
     }
     localStorage.setItem('today_orders', JSON.stringify(today_orders));
+    $('.today-menu-back').hide();
   }
   tdClose(){
     $('.today-menu-back').hide();
