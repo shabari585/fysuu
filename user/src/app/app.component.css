@@ -226,31 +226,6 @@ input:active {
   border-radius: 3px;
 }
 
-.locate-me-btn {
-  position: absolute;
-  margin: 0;
-  height: 30px;
-  right: 5px;
-  top: 5px;
-  padding-left: 20px;
-  padding-right: 20px;
-  color: #333;
-  border: none;
-  border-radius: 3px;
-  font-size: 90%;
-  -webkit-transition: all 0.2s ease-in;
-  -moz-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
-}
-
-.locate-me-btn:hover {
-  background-color: #c6c6c6;
-}
-
-.locate-me-btn:active {
-  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
-}
-
 .see-menu-btn {
   margin: 0;
   height: 40px;

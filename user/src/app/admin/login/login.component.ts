@@ -32,26 +32,26 @@ export class LoginComponent implements OnInit {
       adminname: this.adminname,
       password: this.password
     }
-        this.router.navigate(['/admin/add-admin']);
-    // this.authService.authenticateAdmin(admin).subscribe(data => {
-    //   if (data.success) {
+        // this.router.navigate(['/admin/add-admin']);
+    this.authService.authenticateAdmin(admin).subscribe(data => {
+      if (data.success) {
 
-    //     this.authService.storeAdminData(data.token, data.admin);
-    //     this.flash.show('You are logged in !', {
-    //       cssClass: 'alert-success',
-    //       timeout: 5000
-    //     });
-    //     this.router.navigate(['/admin/orders']);
+        this.authService.storeAdminData(data.token, data.admin);
+        this.flash.show('You are logged in !', {
+          cssClass: 'alert-success',
+          timeout: 5000
+        });
+        this.router.navigate(['/admin/orders']);
 
-    //   }
-    //   else {
-    //     this.flash.show(data.msg, {
-    //       cssClass: 'alert-danger',
-    //       timeout: 5000
-    //     });
-    //     this.router.navigate(['/admin/login']);
-    //   }
-    // });
+      }
+      else {
+        this.flash.show(data.msg, {
+          cssClass: 'alert-danger',
+          timeout: 5000
+        });
+        this.router.navigate(['/admin/login']);
+      }
+    });
 
   }
 

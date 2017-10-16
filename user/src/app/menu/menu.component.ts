@@ -202,6 +202,11 @@ export class MenuComponent implements OnInit {
 
   sweets_img = '../assets/menu-icons/sweets_b.png';
   sweets_r_img = '../assets/menu-icons/sweets_r.png';
+  
+  time_slot_one_status = true;
+  time_slot_two_status = true;
+  time_slot_three_status = true;
+  time_slot_four_status = true;
 
   // slot_one_time_form = "08:40:00";
   slot_one_time_form = moment("08:60:00", "HH:mm:ss").format('hh:mm:ss A');
@@ -216,6 +221,40 @@ export class MenuComponent implements OnInit {
         return;
       }
       window.scrollTo(0, 0)
+    });
+
+    // Getting current date and time
+    $(document).ready(function(){
+      setInterval(function(){
+        // $('#ttime').html(moment(new Date()).format('LTS'));
+        // $('#tttime').html("7:05:00 PM");
+
+        var cur_time = moment(new Date()).format('LTS');
+
+        switch (cur_time) {
+          case "11:59:00 AM":
+          // Disable slot one
+            
+            break;
+          case "12:44:00 PM":
+          // Disable slot two
+            
+            break;
+          case "1:29:00 PM":
+          // Disable slot three
+            
+            break;
+          case "2:14:00 PM":
+          // Disable slot four
+            
+            break;
+          
+        
+          default:
+            break;
+        }
+
+      },1000)
     });
 
     
@@ -1675,6 +1714,7 @@ export class MenuComponent implements OnInit {
   }
   todayAdd(tab){
     $('.today-menu-back').css('display','flex');
+
     switch (tab) {
       case 'tab_one':
         this.tab_two_status = false;

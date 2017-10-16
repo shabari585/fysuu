@@ -13,26 +13,6 @@ a {
   letter-spacing: 1px;
 }
 
-
-/* Loading gif */
-
-
-/* 
-#loading {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(192, 192, 192, 0.5);
-  background-image: url("http://i.stack.imgur.com/MnyxU.gif");
-  background-repeat: no-repeat;
-  background-position: center;
-} */
-
-
 /* Fixed scroll header */
 
 .scroll-header {
@@ -319,6 +299,9 @@ a {
   padding: 10px 20px;
 
   background-color: rgba(0, 0, 0, 0.8);
+  /* background-color: rgba(0, 0, 0, 1); */
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #000;
 }
 
 .location-warning-div ul,
@@ -438,15 +421,13 @@ a {
   color: #555;
 }
 
-
-
 .hv-look-head{
   position: relative;
   display: block;
   margin: 20px auto;
   text-align: center;
   font-size: 120%;
-  /* font-weight: bold; */
+  font-weight: bold;
   color: #444;
 }
 
@@ -475,42 +456,65 @@ a {
 .concept-div {
   position: relative;
   display: flex;
-  display: -webkit-flex;
   justify-content: center;
-  -webkit-justify-content: center;
   align-items: center;
-  -webkit-align-items: center;
   padding: 0px 0px;
 }
-.concept-div .concept-exp-div ul{
+
+
+.concept-div .img {
   position: relative;
   display: block;
-  margin: 0px 0px !important;
-  margin-right: 0 !important;
-  /* margin:0 !important; */
-  padding: 0 !important;
-  -webkit-margin-before: 0px;
-  -webkit-margin-after: 0px;
-  padding-right: 0 !important;
-}
-
-
-.concept-div img {
-  position: relative;
-  width: 40%;
   height: auto;
+  width: 40% !important;
   margin: 0 0 0 20px;
+  overflow: hidden;
 }
-
+.concept-div .img img{
+  width: 90%;
+  height: auto;
+}
 .concept-exp-div {
   position: relative;
   display: block;
   height: 100%;
-  width: 60%;
+  width: 57%;
   margin: 0;
   text-align: center;
+  overflow: hidden !important;
 }
-
+.conc-core{
+  position: relative;
+  display: block;
+  width: 86%;
+  margin: 0 auto;
+  padding: 0;
+}
+.concept-div #cn-list{
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  padding-left: 20px;
+  box-sizing: content-box;
+}
+.concept-div #cn-list li {
+  position: relative;
+  display: list-item;
+  margin: 0;
+  padding: 0;
+}
+.concept-div ul li p{
+  margin: 0;
+  padding: 0;
+}
+.rw-p{
+  margin: 20px auto !important;
+}
+.rw-pp{
+  margin: 20px auto !important;
+}
 .how-it-works-div p {
   position: relative;
   display: block;
@@ -519,7 +523,7 @@ a {
   font-size: 110%;
   line-height: 1.5;
   color: #666;
-  width: 80%;
+  width: 90%;
 }
 
 .concept-div p {
@@ -530,39 +534,8 @@ a {
   font-size: 100%;
   line-height: 1.5;
   color: #666;
-  width: 80%;
-}
-.concept-div ul{
-  position: relative;
-  display: block;
-  width: 80%;
-  margin: 10px auto;
-  /* padding: 0 0; */
-  list-style: disc;
-}
-.concept-div ul li {
-  position: relative;
-  display: block;
   width: 100%;
-  margin: 5px 0 !important;
-  padding: 0 0 !important;
-  /* list-style: disc; */
 }
-
-/* .concept-div ul p {
-  width: 100%;
-  margin: 0 !important;
-  margin-right: 0 !important;
-  padding: 0 !important;
-} */
-
-.concept-div ul li p{
-  margin: 0;
-  padding: 0;
-}
-
-
-
 
 /* Headings in how it works section and concept section */
 
@@ -603,15 +576,17 @@ a {
 }
 
 .concept-div h3 {
+  margin-top: 30px;
   margin-bottom: 20px;
   color: #222;
+  font-weight: bold;
 }
 
 #concept-rewards-trig div {
   position: relative;
   display: inline-block;
   padding: 18px 20px;
-  margin: 20px auto;
+  margin: 0px auto 20px auto;
   color: #fff;
   background-color: #6DA942;
   text-decoration: none;
@@ -624,7 +599,7 @@ a {
 }
 
 #concept-rewards-trig div:hover {
-  background-color: #62983b;
+  background-color: #588835;
   /* box-shadow: 8px 2px 10px 1px rgba(0,0,0,0.2); */
 }
 
@@ -682,10 +657,10 @@ a {
   .location-enter-div {
     width: 200px;
   }
-  .locate-me-btn {
+  /* .locate-me-btn {
     padding-left: 5px;
     padding-right: 5px;
-  }
+  } */
   .see-menu-btn {
     width: 90px;
   }

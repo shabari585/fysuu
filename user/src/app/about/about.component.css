@@ -1,3 +1,6 @@
+.about-up{
+  padding-top:0 !important;
+}
 .title-img-div {
   background-image: url('../../assets/img/pen.jpg');
   background-size: cover;

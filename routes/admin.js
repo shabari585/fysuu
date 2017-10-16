@@ -34,6 +34,7 @@ router.post('/register', (req, res, next) => {
 });
 // Authenticate
 router.post('/authenticate', (req, res, next) => {
+    // res.json({msg:'reached'});
     const adminname = req.body.adminname;
     const password = req.body.password;
 
@@ -41,26 +42,29 @@ router.post('/authenticate', (req, res, next) => {
         if (err) throw err;
         if (!admin) {
             res.json({ success: false, msg: 'Admin not found' });
+        }else{
+            Admin.comparePassword(password, admin.password, (errr, isMatch) => {
+                if (errr){
+                    res.json({success: false, msg:errr});
+                }
+                if (isMatch) {
+                    const token = jwt.sign({ data: admin }, config.secret, {
+                        expiresIn: 604800 //A week in seconds
+                    });
+    
+                    res.json({
+                        success: true,
+                        token: 'JWT ' + token,
+                        admin: {
+                            id: admin._id,
+                        }
+                    })
+                } else {
+                    res.json({ success: false, msg: 'Wrong Password' });
+                }
+            })
         }
-        Admin.comparePassword(password, admin.password, (err, isMatch) => {
-            if (err) throw err;
-            if (isMatch) {
-                const token = jwt.sign({ data: admin }, config.secret, {
-                    expiresIn: 604800 //A week in seconds
-                });
-
-                res.json({
-                    success: true,
-                    token: 'JWT ' + token,
-                    admin: {
-                        id: admin._id,
-                    }
-                })
-            } else {
-                res.json({ success: false, msg: 'Wrong Password' });
-            }
-        })
-    })
+    });
 });
 
 // Add Category Page

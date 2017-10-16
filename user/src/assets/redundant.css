@@ -223,12 +223,14 @@ input:active {
 
 .locate-me-btn {
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   height: 30px;
   right: 5px;
   top: 5px;
-  padding-left: 20px;
-  padding-right: 20px;
+  width: 120px;
   color: #333;
   border: none;
   border-radius: 3px;
@@ -236,6 +238,20 @@ input:active {
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
+  background-color: #d4d4d4;
+  cursor: pointer;
+}
+.locate-me-btn span{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%,-50%);
+  font-size: 100%;
+  line-height: 0 !important;
 }
 
 .locate-me-btn:hover {
@@ -302,6 +318,7 @@ input:active {
 
 
 .main-logo {
+  outline: none !important;
   display: inline-flex;
   display: -webkit-inline-flex;
   justify-content: center;
@@ -309,6 +326,7 @@ input:active {
   align-items: center;
   -webkit-align-items: center;
   height: 100%;
+  cursor: pointer;
 }
 
 .main-logo img {
@@ -471,12 +489,18 @@ input:active {
 }
 
 .dropdown-menu li {
+  outline: none !important;
   border-bottom: 1px solid #F2F5F6;
+  /* background-color: #000 !important; */
+}
+.dropdown-menu li a:hover{
+  background-color: #dcdcdc !important;
 }
 
 .dropdown-menu li:last-child {
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+  border-bottom: none;
 }
 
 .dropdown-menu li a {
@@ -684,6 +708,8 @@ input:active {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  text-align: left !important;
+  width: 90%;
 }
 
 .con-section h2{

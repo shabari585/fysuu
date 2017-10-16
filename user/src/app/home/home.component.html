@@ -5,7 +5,8 @@
   <div class="location-input-div">
     <div class="location-enter-div">
       <input type="search" class="location-search-input" placeholder="Type your location here">
-      <button type="button" class="locate-me-btn" (click)="geoLocate()">Locate me</button>
+      <!-- <button type="button" class="locate-me-btn" (click)="geoLocate()">Locate me</button> -->
+      <div class="locate-me-btn" (click)="geoLocate()"><span> Locate me</span></div>
     </div>
     <button type="button" class="see-menu-btn" (click)="seeMenu()">See The Menu</button>
   </div>
@@ -46,10 +47,12 @@
                 How It Works
               </li>
               <li class="concept-btn-li">
-                <a routerLink="/rewards"><button type="button" class="reward-pts-trig-btn" style="color:#fff">
-                                         <div id="rwd-hover-div"></div>
-                                         <p>Reward Points</p>
-                                </button></a>
+                <a routerLink="/rewards">
+                  <button type="button" class="reward-pts-trig-btn" style="color:#fff">
+                    <div id="rwd-hover-div"></div>
+                    <p>Reward Points</p>
+                  </button>
+                </a>
               </li>
               <li class="login-signup-trig-btn uline" *ngIf="!authService.loggedIn()" (click)="appComponent.loginSignupTrigger()">
                 Log in/Sign up
@@ -98,7 +101,8 @@
           <div class="location-input-div location-input-scrolltop-helper">
             <div class="location-enter-div">
               <input type="search" class="location-search-input" placeholder="Type your location here" [(ngModel)]="locationEntry">
-              <button type="button" class="locate-me-btn" (click)="geoLocate()">Locate me</button>
+              <!-- <button type="button" class="locate-me-btn" (click)="geoLocate()"><span>Locate me</span></button> -->
+              <div class="locate-me-btn" (click)="geoLocate()"><span> Locate me</span></div>
             </div>
             <button type="button" class="see-menu-btn" id="main-see-menu-btn" (click)="seeMenu()">See The Menu</button>
           </div>
@@ -157,8 +161,6 @@
           <div class="col-md-3 col-four-div">
             <img src="../../assets/img/smile.png" alt="">
             <h4>Enjoy fysu</h4>
-            <!--<i class="fa fa-smile-o" aria-hidden="true"></i>-->
-            <!--<br>-->
             <p>
                We’ll call you when it arrives. Ready with spoon and pen.
             </p>
@@ -169,55 +171,62 @@
     </section>
     <div class="parallax-window p-window-one sub-main"> </div>
     <section class="concept-div container">
-        <img src="../../assets/img/idea.jpg" alt="" class="pull-left">
+        <div class="img pull-left">
+          <img src="../../assets/img/idea.jpg" alt="" class="">
+        </div>
         <div class="concept-exp-div" class="pull-right">
-          <h3>Concept</h3>
-  
-  
-          <p>
-             Are you bored of the monotonous work at your desk? Are you hungry as well? We make your lunch time fun time as well. Order your lunch and be ready with Pen &amp; Paper !!!
-          </p>
-          <p>
-             We are introducing a ground-breaking idea to make your lunch-time fun, useful and creative. Bringing back the lost art of letter writings, reinventing the concept of daily writing habits and sharpen your mind.
-          </p>
-          <h5 class="hv-look-head"><b>Have a look !</b></h5>
-            <ul class="list">
-              <li>
-                <p>
-                   With every order, you get a puzzle, it may be a Sudoku/finding ways/puzzles or even a mere basic math problem. Solve them and return it on the next order.
-                </p>
-              </li>
-              <li>
-                <p>
-                   Share your thoughts and let the world know them. We are providing an excellent platform to reach out to people who are tired of Electronic media and want to go back to good old days of reading and writing.
-                </p>
-              </li>
-              <li>
-                <p>
-                   You can even write a letter to your loved ones. A few things that you cannot tell on phone can seamlessly be explained through personal letters. How cool is that?!
-                </p>
-              </li>
-            </ul>
-            <p><b>
-              Get reward points for every order you place and every letter you write or every thought you share or every puzzle you solve. Redeem them in your future orders.
-            </b></p>
+          <div class="conc-core">
+
+            <h3>Concept</h3>
             <p>
-               Making something creative can always be a boost to your brain and your personality and it makes you happier over the period of time. Doing what we love is all we crave for, so why not crave for food and happiness together?
+               Are you bored of the monotonous work at your desk? Are you hungry as well? We make your lunch time fun time as well. Order your lunch and be ready with Pen &amp; Paper !!!
             </p>
-            <p>What are you even waiting for? Place lunch order and be ready with spoon and pen.</p>
-            <p style="text-align:center">
-              <b>
-                <em>
-                   Not Just a Lunch. Not Just a Box.<br> It’s an Experience. Live It.
-                </em>
-              </b>
+            <p>
+               We are introducing a ground-breaking idea to make your lunch-time fun, useful and creative. Bringing back the lost art of letter writings, reinventing the concept of daily writing habits and sharpen your mind.
             </p>
-  
-          <a [routerLink]="['/rewards']" id="concept-rewards-trig">
-            <div>
-              REWARD POINTS
-            </div>
-          </a>
+            <h5 class="hv-look-head">Have a look !</h5>
+              <ul id="cn-list">
+                <li>
+                  <p>
+                     With every order, you get a puzzle, it may be a Sudoku/finding ways/puzzles or even a mere basic math problem. Solve them and return it on the next order.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                     Share your thoughts and let the world know them. We are providing an excellent platform to reach out to people who are tired of Electronic media and want to go back to good old days of reading and writing.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                     You can even write a letter to your loved ones. A few things that you cannot tell on phone can seamlessly be explained through personal letters. How cool is that?!
+                  </p>
+                </li>
+              </ul>
+              <p class="rw-p">
+                <b>
+                Get reward points for every order you place and every letter you write or every thought you share or every puzzle you solve. Redeem them in your future orders.
+                </b>
+              </p>
+              <p>
+                 Making something creative can always be a boost to your brain and your personality and it makes you happier over the period of time. Doing what we love is all we crave for, so why not crave for food and happiness together?
+              </p>
+              <p>What are you even waiting for? Place lunch order and be ready with spoon and pen.</p>
+              <p style="text-align:center" class="rw-pp">
+                <b>
+                  <em>
+                     Not Just a Lunch. Not Just a Box.<br> It’s an Experience. Live It.
+                  </em>
+                </b>
+              </p>
+              
+    
+            <a [routerLink]="['/rewards']" id="concept-rewards-trig">
+              <div>
+                REWARD POINTS
+              </div>
+            </a>
+
+          </div>
         </div>
       <div class="clearfix"></div>
     </section>

@@ -146,7 +146,7 @@ const appRoutes: Routes = [
             {
                 path: 'orders',
                 component: AdminOrdersComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AdminAuthGuard]
             },
             {
                 path: 'login',
@@ -155,49 +155,49 @@ const appRoutes: Routes = [
             {
                 path: 'add-admin',
                 component: AddAdminComponent,
-                // canActivate: [AuthGuard]
+                canActivate: [AdminAuthGuard]
             },
             {
                 path: 'reports',
                 component: ReportsComponent,
                 data: { title: 'Report' },
-                canActivate: [AuthGuard]
+                canActivate: [AdminAuthGuard]
             },
             {
                 path: 'add-menu',
                 component: AddMenuComponent,
                 data: { title: 'Menu' },
-                canActivate: [AuthGuard]
+                canActivate: [AdminAuthGuard]
             },
             {
                 path: 'add-rewards',
                 component: AddRewardsComponent,
                 data: { title: 'Reward Points' },
-                canActivate: [AuthGuard]
+                canActivate: [AdminAuthGuard]
             },
             {
                 path: 'add-items',
                 component: AddItemsComponent,
                 data: { title: 'Add Items' },
-                canActivate: [AuthGuard]
+                canActivate: [AdminAuthGuard]
             },
             {
                 path: 'settings',
                 component: SettingsComponent,
                 data: { title: 'Settings' },
-                canActivate: [AuthGuard]
+                canActivate: [AdminAuthGuard]
             },
             {
                 path: 'add-category',
                 component: AddCategoryComponent,
                 data: { title: 'Add Category' },
-                canActivate: [AuthGuard]
+                canActivate: [AdminAuthGuard]
             },
             {
                 path: 'add-sub-category',
                 component: AddSubsComponent,
                 data: { title: 'Add Sub Category' },
-                canActivate: [AuthGuard]
+                canActivate: [AdminAuthGuard]
             },
         ]
     }

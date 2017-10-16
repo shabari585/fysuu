@@ -41,7 +41,6 @@ export class AddAdminComponent implements OnInit {
 
       // Register Admin
       this.authService.registerAdmin(admin).subscribe(data => {
-        alert('else');
         if (data.success) {
           this.flashMessage.show('Registered !', { cssClass: 'alert-success', timeout: 3000 });
           // this.router.navigate(['/login']);
