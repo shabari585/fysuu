@@ -122,6 +122,15 @@ export class CheckoutComponent implements OnInit {
     // Getting orders
     this.title.setTitle('Fysu - Checkout');
 
+    // Get basketnumber from localstorage
+    let basket_num = parseInt(localStorage.getItem('basket_number'));
+    if(basket_num == undefined || basket_num == null || basket_num == 0){
+      // redirect to menu
+      this.router.navigate(['/menu']);
+    }else{
+      alert('yes');
+    }
+
     let user = this.authService.getUserFromLocal();
     let user_parsed = JSON.parse(user);
     this.userEmail = user_parsed.email;

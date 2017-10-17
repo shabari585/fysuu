@@ -47,6 +47,9 @@ export class AddressComponent implements OnInit {
     this.authService.getUserAddressses(this.userId).subscribe(res=>{
       if(res.success){
         this.addresses = res.msg[0].address;
+        console.log(res.msg);
+      }else{
+        console.log('err');
       }
     })
 

@@ -27,14 +27,16 @@
   justify-content: center;
   flex-direction: column;
   background-color: #fff;
-  height: 50%;
-  width: 50%;
+  height: 200px;
+  width: 500px;
+  padding: 30px 0px;
+  border-radius: 4px;
 }
 .today-core label{
   position: relative;
   display: block;
   height: 30px;
-  width: 80%;
+  width: 90%;
 }
 .today-btns{
   position: relative;
@@ -43,15 +45,21 @@
   justify-content: center;
   height: 40px;
   width: 100%;
+  margin-top: 30px;
+}
+.today-btns button{
+  height: 40px;
 }
 
 .today-core select{
+  outline: none !important;
   position: relative;
   display: block;
   height: 30px;
   width: 100%;
   font-size: 120%;
-  border: 1px solid #666;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
 
@@ -382,6 +390,7 @@ label{
   height: 50px;
   width: 200px;
   border-radius: 50px;
+  cursor: pointer;
 }
 
 .hover-basket-div a {
@@ -422,11 +431,14 @@ label{
   -webkit-align-items: center;
   top: 0;
   left: -10px;
-  background-color: #CE3529;
+  background-color: #6DA942;
   color: #fff;
   height: 50px;
   width: 50px;
   border-radius: 50%;
+}
+.shop-basket-icon:hover{
+  background-color: #588835;
 }
 
 .fa-arrow-right {
@@ -743,7 +755,7 @@ label{
 
 .sc-ch-add-btn {
   color: #fff;
-  background-color: #DA3939;
+  background-color: #6DA942;
   cursor: pointer;
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
@@ -751,7 +763,7 @@ label{
 }
 
 .sc-ch-add-btn:hover {
-  background-color: #c43333;
+  background-color: #588835;
 }
 
 

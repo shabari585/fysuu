@@ -69,7 +69,6 @@ const appRoutes: Routes = [
     {
         path: 'menu',
         component: MenuComponent,
-        canActivate: [AuthGuard]
     },
     {
         path: 'rewards',

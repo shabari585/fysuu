@@ -138,7 +138,8 @@ export class AppComponent implements OnInit {
                 this.uName = dat.user.name;
 
                 this.authService.storeUserData(dat.token, dat.user);
-                this.router.navigate(['/home']);
+                // this.router.navigate(['/home']);
+                window.location.reload();
                   $('.login-trig-div').hide();
                   $('.account-trig-div').show();
                   $('.fixed-dark-cover').hide();

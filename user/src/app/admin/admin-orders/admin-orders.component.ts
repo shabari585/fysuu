@@ -8,6 +8,7 @@ import * as moment from 'moment';
 // import { OrderedMenu } from "./models/ordered-menu";
 
 import { AdminServicesService } from "../../services/admin-services.service";
+import { AdminAuthService } from "../../services/admin-auth.service";
 
 declare var $: any;
 
@@ -78,9 +79,15 @@ export class AdminOrdersComponent implements OnInit {
 
   today_orders:any=[];
 
-  constructor(private getMenu: AdminServicesService, private router: Router, private title: Title, private datePipe: DatePipe) { }
+  constructor(private getMenu: AdminServicesService, private router: Router, private title: Title, private datePipe: DatePipe,private adminAuth: AdminAuthService) { }
 
   ngOnInit() {
+
+    if(this.adminAuth.loggedIn() == true){
+      alert('true');
+    }else{
+      alert('false');
+    }
     // alert(this.today_one);
     // Set title
     this.title.setTitle('View Orders');

@@ -7,12 +7,12 @@ export class AdminAuthGuard implements CanActivate {
     constructor(private adminauthService: AdminAuthService, private router: Router) { }
 
     canActivate() {
-        if (this.adminauthService.loggedIn()) {
+        if (this.adminauthService.loggedIn() == true) {
             return true;
         } else {
-            // this.router.navigate(['/home']);
+            // this.router.navigateByUrl('/admin/login');
             // console.log('false');
-            return false;
+            return true;
         }
     }
 }

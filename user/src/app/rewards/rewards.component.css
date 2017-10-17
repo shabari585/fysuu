@@ -78,7 +78,8 @@
   -webkit-align-items: center;
   justify-content: center;
   -webkit-justify-content: center;
-  background-color: #1F5EA9;
+  /* background-color: #1F5EA9; */
+  background-color: #6DA942;
   height: 70px;
   width: 35px;
   border: none;

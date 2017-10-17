@@ -15,7 +15,22 @@
 
   </div>
   <div class="scroll-login-div" *ngIf="authService.loggedIn()">
-    <a (click)="onLogoutClick()" style="cursor:pointer">Logout</a>
+    <!-- <a (click)="onLogoutClick()" style="cursor:pointer">Logout</a> -->
+    
+      <div class="account-trig-div" *ngIf="authService.loggedIn()">
+        <div class="dropdown home-dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" style="color:#000">{{userName}}</button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings'>My Profile</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/my-orders'>My Orders</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/address'>Saved Address</a></li>
+            <!-- <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/payments'>Payments</a></li> -->
+            <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/reward-points'>Reward Points</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/change-password'>Change Password</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" (click)="onLogoutClick()">Logout</a></li>
+          </ul>
+        </div>
+      </div>
   </div>
 </div>
 <div class="vp fvp">

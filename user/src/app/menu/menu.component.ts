@@ -263,23 +263,21 @@ export class MenuComponent implements OnInit {
 
     localStorage.removeItem('all_orders');
     localStorage.removeItem('today_orders');
-
-    // setInterval(function(){
-    //   // alert(moment().format('LTS'));
-    //   // alert(moment.utc(moment(moment().format('hh:mm:ss'), "hh:mm:ss").diff(moment(this.slot_one_time_form, "hh:mm:ss"))).format("hh:mm:ss"));
-    //   // alert(moment(moment().format('LTS'), "hh:mm:ss"));
-    //   // alert(this.slot_one_time_form);
-    // },2000);
+    localStorage.removeItem('basket_number');
+    
     // Set title
     this.title.setTitle('Fysu - Menu');
+
+    if(this.authService.loggedIn() == true){
+      let user = this.authService.getUserFromLocal();
+      let user_parsed = JSON.parse(user);
+      this.userEmail = user_parsed.email;
+      this.userName = user_parsed.name;
+      this.companyName = user_parsed.company_name;
+      this.userMobile = user_parsed.mobile;
+      this.userId = user_parsed.id;
+    }
     
-    let user = this.authService.getUserFromLocal();
-    let user_parsed = JSON.parse(user);
-    this.userEmail = user_parsed.email;
-    this.userName = user_parsed.name;
-    this.companyName = user_parsed.company_name;
-    this.userMobile = user_parsed.mobile;
-    this.userId = user_parsed.id;
 
     // console.log(this.datePipe.transform(this.day_six, 'fullDate') + 'ee roju' + this.datePipe.transform(this.last_day_six, 'fullDate'));
 
@@ -1800,5 +1798,12 @@ export class MenuComponent implements OnInit {
   tdClose(){
     $('.today-menu-back').hide();
   }
-
+  
+  navToChekout(){
+    // if basket number is atleast one
+    if(this.basketNumber>0){
+      this.router.navigate(['/checkout']); 
+      localStorage.setItem('basket_number',this.basketNumber.toString());
+    }
+  }
 }

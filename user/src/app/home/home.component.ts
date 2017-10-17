@@ -68,7 +68,8 @@ export class HomeComponent implements OnInit {
           $('.mob-main-header').css({ 'background-color': 'rgba(0,0,0,1)' });
         } else {
           $('.scroll-header').css({ 'top': '-100px' });
-          $('.mob-main-header').css({ 'background-color': 'rgba(0,0,0,.5)' });
+          $('.mob-main-header').css({ 'background-color': 'rgba(0,0,0,.5)'});
+          $('.scroll-header .dropdown').removeClass('open');
         }
       });
     });
@@ -224,73 +225,45 @@ export class HomeComponent implements OnInit {
 
   seeMenu() {
     // alert('menu');
-    this.router.navigate(['/menu']);
     // Address in this.locationEntry
-    // if (this.locationEntry.includes('Madhapur')) {
-    //   localStorage.setItem('home_address', this.locationEntry);
-    //   // Add to user's address if he is logged in
-    //   if (this.authService.loggedIn()) {
-    //     // User is logged in 
-    //     // send this address to save
-    //     let address = {
-    //       user_id: this.userId,
-    //       address: this.locationEntry
-    //     }
-    //     this.authService.saveAddress(address).subscribe(res => {
-    //       if (res.success) {
-    //         // Address saved
-    //         console.log(res);
-    //       } else {
-    //         // Address not saved
-    //         if (res.msg = 'exists') {
-    //           // address already exists
-    //         } else {
-    //           // console.log(res);
-    //         }
-    //       }
-    //     });
-    //   } else {
-    //     // Navigate to menu
-    //     this.router.navigate(['/menu']);
-    //   }
-    //   // Add to input box
-    // } else {
-    //   // ********** VERY IMPORTANT DELETE AFTER TESTING IS DONE ************** 
-    //   // Delete after testing is done
+    if(this.locationEntry != undefined){
 
-    //   localStorage.setItem('home_address', this.locationEntry);
-    //   // Add to user's address if he is logged in
-    //   if (this.authService.loggedIn()) {
-    //     console.log('user is logged in');
-    //     // User is logged in 
-    //     // send this address to save
-    //     let address = {
-    //       user_id: this.userId,
-    //       address: this.locationEntry
-    //     }
-    //     // console.log(address);
-    //     this.authService.saveAddress(address).subscribe(res => {
-    //       if (res.success) {
-    //         // Address saved
-    //         console.log(res.msg);
-    //       } else {
-    //         // Address not saved
-    //         if (res.msg == 'exists') {
-    //           // address already exists
-    //           console.log('exists');
-    //         } else {
-    //           console.log(res.msg);
-    //         }
-    //       }
-    //     });
-    //   } else {
-    //     // console.log('not logged in');
-    //     // Navigate to menu
-    //     this.router.navigateByUrl('/menu');
-    //   }
-    //   this.locationEntry = this.address;
-    //   $('.location-warning-div').show();
-    // }
+      if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry == 'Madhapur' || this.locationEntry == 'madhapur'|| this.locationEntry == 'Madapur' || this.locationEntry == 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur') ) {
+        localStorage.setItem('home_address', this.locationEntry);
+        // Add to user's address if he is logged in
+        if (this.authService.loggedIn()) {
+          // User is logged in 
+      //     // send this address to save
+          let address = {
+            user_id: this.userId,
+            address: this.locationEntry
+          }
+          this.authService.saveAddress(address).subscribe(res => {
+            if (res.success) {
+              // Address saved
+              console.log(res);
+            } else {
+              // Address not saved
+              if (res.msg = 'exists') {
+                // address already exists
+              } else {
+                // console.log(res);
+              }
+            }
+          });
+          this.router.navigate(['/menu']);
+        } else {
+          // Navigate to menu
+          this.router.navigate(['/menu']);
+        }
+      } else {
+        this.locationEntry = this.address;
+        $('.location-warning-div').show();
+  
+        // Remove later
+        this.router.navigate(['/menu']);
+      }
+    }
     
   }
 

@@ -351,10 +351,6 @@
                                     </div>
                                     </div>
                                     </div>
-
-                                   
-                                    
-
                                 </div>
                             </li>
 
@@ -366,20 +362,14 @@
                             <button type="button" class="sc-ch-cancel-btn" (click)="scClose()">CANCEL</button>
                             <button type="button" class="sc-ch-add-btn" (click)="addCartClicked()">ADD TO CART</button>
                         </div>
-
                     </div>
-
                 </div>
-
-
-
                 <div class="clearfix"></div>
             </div>
-
         </div>
         <!-- Basket -->
-        <div class="hover-basket-div visible-md visible-lg">
-            <a routerLink='/checkout'>
+        <div class="hover-basket-div visible-md visible-lg" (click)='navToChekout()'>
+            <a>
                 <div class="shop-basket-icon"><span class="hover-basket-number">{{basketNumber}}</span><i class="fa fa-shopping-basket" aria-hidden="true"></i></div>
                 <h6>Basket</h6><i class="fa fa-arrow-right" aria-hidden="true"></i>
             </a>
@@ -389,9 +379,9 @@
     </div>
 </div>
 <!-- Basket for mobiles -->
-<div class="mob-basket-div visible-xs visible-sm">
-    <a href="#">
-            <i class="fa fa-shopping-basket" aria-hidden="true"></i><h6>BASKET</h6><span class="mob-hover-basket-number">0</span><i class="fa fa-arrow-right" aria-hidden="true"></i>
+<div class="mob-basket-div visible-xs visible-sm" (click)='navToChekout()'>
+    <a>
+        <i class="fa fa-shopping-basket" aria-hidden="true"></i><h6>BASKET</h6><span class="mob-hover-basket-number">0</span><i class="fa fa-arrow-right" aria-hidden="true"></i>
     </a>
 </div>
 
