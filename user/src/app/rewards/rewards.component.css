@@ -30,7 +30,7 @@
   position: relative;
   display: block;
   width: 100%;
-  padding: 20px 0px;
+  padding: 50px 0px 20px 0px;
   background-color: #EEEEEE;
 }
 
@@ -43,6 +43,12 @@
   margin: 0;
 }
 
+.right-rew-section ul{
+  font-size: 90%;
+}
+.right-rew-section ul li{
+  margin: 0;
+}
 .left-rew-section {
   display: flex;
   display: -webkit-flex;
@@ -181,9 +187,10 @@
   left: 85%;
 }
 
-.redeem-div {
+.main-container .redeem-div {
   position: relative;
   display: block;
+  width: 100% !important;
   margin: 0;
   padding: 10px 0;
 }
@@ -199,13 +206,18 @@
 
 .redeem-points-div {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  margin : 0;
 }
 
 .redeem-core {
   position: relative;
   display: inline-block;
-  height: 530px;
+  height: 430px;
   /* width: 350px; */
 }
 
