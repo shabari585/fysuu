@@ -1712,7 +1712,9 @@ export class MenuComponent implements OnInit {
   }
   todayAdd(tab){
     $('.today-menu-back').css('display','flex');
-
+    // Reset dropdowns in today-menu tab
+    $('#t-menu-select-slot').prop('selectedIndex',0);
+    $('#t-menu-select-times').prop('selectedIndex',0);
     switch (tab) {
       case 'tab_one':
         this.tab_two_status = false;

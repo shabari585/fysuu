@@ -240,7 +240,7 @@ const appRoutes: Routes = [
     FlashMessagesModule,
     MyDatePickerModule
   ],
-  providers: [ValidateService, AuthService, AdminAuthService, AuthGuard, GetMenuService, DatePipe, UserService, AdminServicesService],
+  providers: [ValidateService, AuthService, AdminAuthService, AuthGuard,AdminAuthGuard, GetMenuService, DatePipe, UserService, AdminServicesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

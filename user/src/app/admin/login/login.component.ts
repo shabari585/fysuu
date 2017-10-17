@@ -4,6 +4,8 @@ import { Title } from '@angular/platform-browser';
 import { AdminAuthService } from "../../services/admin-auth.service";
 import { FlashMessagesService } from "angular2-flash-messages";
 
+import { AdminAuthGuard } from "../../guards/admin-auth.guard";
+
 declare var $: any;
 
 @Component({
@@ -16,16 +18,11 @@ export class LoginComponent implements OnInit {
   adminname: string;
   password: string;
   constructor(private router: Router, private title: Title, private authService: AdminAuthService,
-    private flash: FlashMessagesService) { }
+    private flash: FlashMessagesService, private adminAuth: AdminAuthGuard) { }
 
   ngOnInit() {
     this.title.setTitle('Login');
-    if(this.authService.loggedIn()){
-      // Admin is logged in redirect to orders page
-      this.router.navigate(['/admin/orders']);
-    }else{
-      // stay in login
-    }
+    
   }
   adminLoginFormSubmit() {
     const admin = {

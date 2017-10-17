@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, RouterModule } from "@angular/router";
 import { AuthService } from "../services/auth.service";
+import { AdminAuthService } from "../services/admin-auth.service";
 import { AdminServicesService } from "../services/admin-services.service";
 declare var $: any;
 
@@ -24,10 +25,12 @@ export class OrdersComponent implements OnInit {
   userId: string;
   orders_exist:boolean = false;
 
-  constructor(private router: Router, private title: Title, private getadMenu: AdminServicesService, private authService: AuthService) { }
+  constructor(private router: Router,private adminAuth: AdminAuthService ,private title: Title, private getadMenu: AdminServicesService, private authService: AuthService) { }
 
   ngOnInit() {
     this.title.setTitle('Settings: Orders');
+
+    
 
 
     let user = this.authService.getUserFromLocal();
