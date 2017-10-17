@@ -10,3 +10,14 @@
   </div>
   <input type="submit" class="btn btn-primary" value="Add Admin">
 </form>
+<h3>View Admin</h3>
+<table class="table-striped">
+  <tr *ngFor="let admin of admins">
+    <td>
+      {{admin.adminname}}
+    </td>
+    <td>
+      <i class="fa fa-times cat-close-btn" aria-hidden="true" (click)="deleteAdmin(admin._id)"></i>
+    </td>
+  </tr>
+</table>

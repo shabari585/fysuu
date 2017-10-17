@@ -13,12 +13,13 @@ declare var $: any;
 @Component({
   selector: 'app-add-admin',
   templateUrl: './add-admin.component.html',
-  styleUrls: ['../admin/admin.component.css']
+  styleUrls: ['../admin/admin.component.css','./add-admin.component.css']
 })
 export class AddAdminComponent implements OnInit {
 
   adminname: String;
   password: String;
+  admins;
 
   constructor(private getMenu: AdminServicesService, private validateService: ValidateService, private flashMessage: FlashMessagesService, private router: Router, private authService: AdminAuthService, private title: Title) { }
 
@@ -26,6 +27,13 @@ export class AddAdminComponent implements OnInit {
   ngOnInit() {
     // Set title
     this.title.setTitle('Add Admin - Admin');
+    // Get admins
+    this.authService.getAdmins().subscribe(res=>{
+      console.log(res);
+      if(res.success){
+        this.admins = res.msg;
+      }
+    });
   }
 
   onAddAdminSubmit() {
@@ -51,5 +59,14 @@ export class AddAdminComponent implements OnInit {
       });
     }
   }
-
+  deleteAdmin(id){
+    this.authService.deleteAdmin(id).subscribe(res=>{
+      if(res.success){
+        this.flashMessage.show('Registered !', { cssClass: 'alert-success', timeout: 3000 });
+        window.location.reload();
+      }else{
+        console.log(res.msg);
+      }
+    });
+  }
 }

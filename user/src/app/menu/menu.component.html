@@ -102,7 +102,7 @@
                         <div class="item-image" style="background-image:url('../../assets/menu-img/tab_one.jpg')">
 
                         <div class="item-announcement" id='tab-one-band'>
-                            {{tab_one_text}}
+                            <h5>{{num_tab_one}} x Added !</h5>
                         </div>
                         </div>
                         <div class="item-dets-div">
@@ -119,6 +119,7 @@
                                     <!-- <span class="incl-tax">(Inclusive of all taxes)</span> -->
                                 </div>
                                 <div class="pull-right">
+                                    <button type="button" class="removie-t-item-btn" (click)='removeTodayTab("tab_one")'> - </button>
                                     <button type="button" class="item-add-btn" (click)='todayAdd("tab_one")'> + Add</button>
                                 </div>
                             </div>
@@ -133,7 +134,7 @@
                         <div class="item-image" style="background-image:url('../../assets/menu-img/tab_two.jpg')">
 
                             <div class="item-announcement" id='tab-two-band'>
-                                {{tab_two_text}}
+                                <h5>{{num_tab_two}} x Added !</h5>
                             </div>
                         </div>
                         <div class="item-dets-div">
@@ -149,6 +150,7 @@
                                     <!-- <span class="incl-tax">(Inclusive of all taxes)</span> -->
                                 </div>
                                 <div class="pull-right">
+                                        <button type="button" class="removie-t-item-btn" (click)='removeTodayTab("tab_two")'> - </button>
                                     <button type="button" class="item-add-btn" (click)='todayAdd("tab_two")'> + Add</button>
                                 </div>
                             </div>
@@ -165,7 +167,7 @@
                         <div class="item-image" style="background-image:url('../../assets/menu-img/tab_three.jpg')">
 
                             <div class="item-announcement" id='tab-three-band'>
-                                {{tab_three_text}}
+                                <h5>{{num_tab_three}} x Added !</h5>
                             </div>
                         </div>
                         <div class="item-dets-div">
@@ -181,6 +183,7 @@
                                     <!-- <span class="incl-tax">(Inclusive of all taxes)</span> -->
                                 </div>
                                 <div class="pull-right">
+                                        <button type="button" class="removie-t-item-btn" (click)='removeTodayTab("tab_three")'> - </button>
                                     <button type="button" class="item-add-btn" (click)='todayAdd("tab_three")'> + Add</button>
                                 </div>
                             </div>

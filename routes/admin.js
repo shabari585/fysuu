@@ -66,7 +66,26 @@ router.post('/authenticate', (req, res, next) => {
         }
     });
 });
+router.get('/get-admins',(req,res, next)=>{
+    Admin.find((err,admins)=>{
+        if(err){
+            res.json({success:false, msg: err});
+        }else{
+            res.json({success:true, msg: admins});
+        }
+    });
+});
 
+router.delete('/delete-admin/:admin_id',(req,res, next)=>{
+    id = req.params.admin_id;
+    Admin.deleteOne({_id:id},(err,deleted)=>{
+        if(err){
+            res.json({success: false, msg:err});
+        }else{
+            res.json({success: true, msg: deleted});
+        }
+    })
+});
 // Add Category Page
 
 // Add Category

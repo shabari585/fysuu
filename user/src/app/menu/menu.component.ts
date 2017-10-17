@@ -41,6 +41,9 @@ export class MenuComponent implements OnInit {
   num_tab_one_items: number = 0;
   num_tab_two_items: number = 0;
   num_tab_three_items: number = 0;
+  num_tab_one: number = 0;
+  num_tab_two: number = 0;
+  num_tab_three: number = 0;
 
   tab_one_cost = 79;
   tab_two_cost = 89;
@@ -1739,8 +1742,7 @@ export class MenuComponent implements OnInit {
   addTodayCartClicked(){
     switch (true) {
       case this.tab_one_status:
-      // alert('one');
-        // this.tab_one_total_price = this.num_tab_one_items * this.tab_one_cost;
+      this.num_tab_one = this.num_tab_one_items;
         // Add to orders
         this.today_tab_one_books = {
           name: this.tab_one,
@@ -1756,8 +1758,7 @@ export class MenuComponent implements OnInit {
         $('#tab-one-band').show();
         break;
       case this.tab_two_status:
-        // alert('two');
-        
+      this.num_tab_two = this.num_tab_two_items;
         // Add to orders
         this.today_tab_two_books = {
           name: this.tab_two,
@@ -1771,8 +1772,7 @@ export class MenuComponent implements OnInit {
         $('#tab-two-band').show();
         break;
       case this.tab_three_status:
-      // alert('threr');
-        
+      this.num_tab_three = this.num_tab_three_items;
         // Add to orders
         this.today_tab_three_books = {
           name: this.tab_three,
@@ -1797,15 +1797,57 @@ export class MenuComponent implements OnInit {
     localStorage.setItem('today_orders', JSON.stringify(today_orders));
     $('.today-menu-back').hide();
   }
+  removeTodayTab(tab){
+    switch (tab) {
+      case "tab_one":
+        // Remove from today_orders
+        this.today_tab_one_books = null;
+        // Hide band
+        $('#tab-one-band').hide();
+        // basket number decrement
+        this.basketNumber--;
+        break;
+      case "tab_two":
+        // Remove from today_orders
+        this.today_tab_two_books = null;
+         // Hide band
+         $('#tab-two-band').hide();
+
+         // basket number decrement
+        this.basketNumber--;
+        break;
+      case "tab_three":
+        // Remove from today_orders
+        this.today_tab_three_books = null;
+        // Hide band
+        $('#tab-three-band').hide();
+
+        // basket number decrement
+        this.basketNumber--;
+        break;
+    
+      default:
+        break;
+    }
+    let today_orders = {
+      date: this.p_today_one,
+      tab_one: this.today_tab_one_books,
+      tab_two: this.today_tab_two_books,
+      tab_three: this.today_tab_three_books
+    }
+    localStorage.setItem('today_orders', JSON.stringify(today_orders));
+    console.log(today_orders);
+  }
   tdClose(){
     $('.today-menu-back').hide();
   }
   
   navToChekout(){
+    alert(this.basketNumber);
     // if basket number is atleast one
-    if(this.basketNumber>0){
-      this.router.navigate(['/checkout']); 
-      localStorage.setItem('basket_number',this.basketNumber.toString());
-    }
+    // if(this.basketNumber>0){
+    //   localStorage.setItem('basket_number',this.basketNumber.toString());
+    //   this.router.navigate(['/checkout']); 
+    // }
   }
 }

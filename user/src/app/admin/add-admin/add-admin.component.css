@@ -1,0 +1,14 @@
+*{
+    color: #777;
+}
+.btn-primary{
+    color: #fff !important;
+}
+table td {
+    padding: 20px 20px;
+    font-size: 130%;
+}
+table .fa{
+    cursor: pointer;
+}
+  
