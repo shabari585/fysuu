@@ -496,6 +496,9 @@ input:active {
 .dropdown-menu li a:hover{
   background-color: #dcdcdc !important;
 }
+.dropdown-menu li a{
+  outline: none !important;
+}
 
 .dropdown-menu li:last-child {
   border-bottom-left-radius: 4px;
