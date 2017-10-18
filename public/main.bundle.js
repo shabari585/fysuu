@@ -5617,30 +5617,30 @@ var AdminAuthService = (function () {
     AdminAuthService.prototype.registerAdmin = function (admin) {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/admin/register', admin, { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.post('admin/register', admin, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/admin/register', admin, { headers: header }).map(res => res.json());
+        return this.http.post('admin/register', admin, { headers: header }).map(function (res) { return res.json(); });
     };
     AdminAuthService.prototype.getAdmins = function () {
-        return this.http.get('http://localhost:3700/admin/get-admins').map(function (res) { return res.json(); });
-        // return this.http.get('admin/get-admins').map(res => res.json());
+        // return this.http.get('http://localhost:3700/admin/get-admins').map(res => res.json());
+        return this.http.get('admin/get-admins').map(function (res) { return res.json(); });
     };
     AdminAuthService.prototype.deleteAdmin = function (admin_id) {
-        return this.http.delete('http://localhost:3700/admin/delete-admin/' + admin_id).map(function (res) { return res.json(); });
-        // return this.http.delete('admin/delete-admin/'+admin_id).map(res => res.json());
+        // return this.http.delete('http://localhost:3700/admin/delete-admin/'+admin_id).map(res => res.json());
+        return this.http.delete('admin/delete-admin/' + admin_id).map(function (res) { return res.json(); });
     };
     AdminAuthService.prototype.authenticateAdmin = function (admin) {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/admin/authenticate', admin, { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.post('admin/authenticate', admin, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/admin/authenticate', admin, { headers: header }).map(res => res.json());
+        return this.http.post('admin/authenticate', admin, { headers: header }).map(function (res) { return res.json(); });
     };
     AdminAuthService.prototype.getProfile = function () {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
         this.loadToken();
         header.append('Authorization', this.authToken);
-        return this.http.get('http://localhost:3700/admin/profile', { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.get('admin/profile', { headers: header }).map(res => res.json());
+        // return this.http.get('http://localhost:3700/admin/profile', { headers: header }).map(res => res.json());
+        return this.http.get('admin/profile', { headers: header }).map(function (res) { return res.json(); });
     };
     AdminAuthService.prototype.loadToken = function () {
         var token = localStorage.getItem('admin_id_token');
@@ -5776,36 +5776,36 @@ var AdminServicesService = (function () {
         headers.append('Content-type', 'application/json');
         var schJSON = JSON.stringify(schArray);
         var schData = { schArray: schArray, remArray: remArray };
-        return this.http.post('http://localhost:3700/admin/post-dates', schData, { headers: headers }).map(function (res) { return res.json(); });
-        // return this.http.post('admin/post-dates', schData, { headers: headers }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/admin/post-dates', schData, { headers: headers }).map(res => res.json());
+        return this.http.post('admin/post-dates', schData, { headers: headers }).map(function (res) { return res.json(); });
     };
     AdminServicesService.prototype.getDates = function () {
-        return this.http.get('http://localhost:3700/admin/get-all-dates').map(function (res) { return res.json(); });
-        // return this.http.get('admin/get-all-dates').map(res => res.json());
+        // return this.http.get('http://localhost:3700/admin/get-all-dates').map(res => res.json());
+        return this.http.get('admin/get-all-dates').map(function (res) { return res.json(); });
     };
     AdminServicesService.prototype.deleteDate = function (date_id) {
-        return this.http.delete('http://localhost:3700/admin/delete-date/' + date_id).map(function (res) { return res.json(); });
-        // return this.http.delete('admin/delete-date/' + date_id).map(res => res.json());
+        // return this.http.delete('http://localhost:3700/admin/delete-date/' + date_id).map(res => res.json());
+        return this.http.delete('admin/delete-date/' + date_id).map(function (res) { return res.json(); });
     };
     // View Orders Page
     // Reward Page
     // Get all users
     AdminServicesService.prototype.getUsers = function () {
-        return this.http.get('http://localhost:3700/admin/get-users').map(function (res) { return res.json(); });
-        // return this.http.get('admin/get-users').map(res => res.json());
+        // return this.http.get('http://localhost:3700/admin/get-users').map(res => res.json());
+        return this.http.get('admin/get-users').map(function (res) { return res.json(); });
     };
     // Get User from userId
     AdminServicesService.prototype.getUserFromId = function (user_id) {
-        return this.http.get('http://localhost:3700/admin/get-user-from-id/' + user_id).map(function (res) { return res.json(); });
-        // return this.http.get('admin/get-user-from-id/'+user_id).map(res => res.json());
+        // return this.http.get('http://localhost:3700/admin/get-user-from-id/'+user_id).map(res => res.json());
+        return this.http.get('admin/get-user-from-id/' + user_id).map(function (res) { return res.json(); });
     };
     AdminServicesService.prototype.getUserOrders = function (user_id) {
-        return this.http.get('http://localhost:3700/users/get-user-orders/' + user_id).map(function (res) { return res.json(); });
-        // return this.http.get('users/get-user-orders/' + user_id).map(res => res.json());
+        // return this.http.get('http://localhost:3700/users/get-user-orders/' + user_id).map(res => res.json());
+        return this.http.get('users/get-user-orders/' + user_id).map(function (res) { return res.json(); });
     };
     AdminServicesService.prototype.postRewards = function (email, points) {
-        return this.http.get('http://localhost:3700/admin/post-rewards/' + email + '/' + points).map(function (res) { return res.json(); });
-        // return this.http.get('admin/post-rewards/' + email + '/' + points ).map(res => res.json());
+        // return this.http.get('http://localhost:3700/admin/post-rewards/' + email + '/' + points ).map(res => res.json());
+        return this.http.get('admin/post-rewards/' + email + '/' + points).map(function (res) { return res.json(); });
     };
     return AdminServicesService;
 }());
@@ -5858,35 +5858,35 @@ var AuthService = (function () {
     AuthService.prototype.updateUser = function (user) {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/users/update-user', user, { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.post('users/update-user', user, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/users/update-user', user, { headers: header }).map(res => res.json());
+        return this.http.post('users/update-user', user, { headers: header }).map(function (res) { return res.json(); });
     };
     AuthService.prototype.updatePassword = function (pwd) {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/users/update-pwd', pwd, { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.post('users/update-pwd', pwd, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/users/update-pwd', pwd, { headers: header }).map(res => res.json());
+        return this.http.post('users/update-pwd', pwd, { headers: header }).map(function (res) { return res.json(); });
     };
     AuthService.prototype.registerUser = function (user) {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/users/register', user, { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.post('users/register', user, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/users/register', user, { headers: header }).map(res => res.json());
+        return this.http.post('users/register', user, { headers: header }).map(function (res) { return res.json(); });
     };
     AuthService.prototype.authenticateMobile = function (mobile) {
-        return this.http.get('http://localhost:3700/users/find-mobile/' + mobile).map(function (res) { return res.json(); });
-        // return this.http.get('users/find-mobile/'+ mobile).map(res=>res.json());
+        // return this.http.get('http://localhost:3700/users/find-mobile/'+ mobile).map(res=>res.json());
+        return this.http.get('users/find-mobile/' + mobile).map(function (res) { return res.json(); });
     };
     // Delete cateogry
     AuthService.prototype.authenticateEmail = function (email) {
-        return this.http.get('http://localhost:3700/users/find-email/' + email).map(function (res) { return res.json(); });
-        // return this.http.get('users/find-email/' + email).map(res => res.json());
+        // return this.http.get('http://localhost:3700/users/find-email/' + email).map(res => res.json());
+        return this.http.get('users/find-email/' + email).map(function (res) { return res.json(); });
     };
     AuthService.prototype.authenticateUser = function (user) {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/users/authenticate', user, { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.post('users/authenticate', user, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/users/authenticate', user, { headers: header }).map(res => res.json());
+        return this.http.post('users/authenticate', user, { headers: header }).map(function (res) { return res.json(); });
     };
     AuthService.prototype.storeUserData = function (token, user) {
         localStorage.setItem('id_token', token);
@@ -5906,34 +5906,34 @@ var AuthService = (function () {
     AuthService.prototype.saveAddress = function (address) {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/users/save-address', address, { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.post('users/save-address', address, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/users/save-address', address, { headers: header }).map(res => res.json());
+        return this.http.post('users/save-address', address, { headers: header }).map(function (res) { return res.json(); });
     };
     AuthService.prototype.deleteAddress = function (address) {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/users/delete-address', address, { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.post('users/delete-address', address, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/users/delete-address', address, { headers: header }).map(res => res.json());
+        return this.http.post('users/delete-address', address, { headers: header }).map(function (res) { return res.json(); });
     };
     AuthService.prototype.updateAddress = function (address) {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/users/update-address', address, { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.post('users/delete-address', address, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/users/update-address', address, { headers: header }).map(res => res.json());
+        return this.http.post('users/delete-address', address, { headers: header }).map(function (res) { return res.json(); });
     };
     AuthService.prototype.getUserAddressses = function (user_id) {
-        return this.http.get('http://localhost:3700/users/get-address/' + user_id).map(function (res) { return res.json(); });
-        // return this.http.get('users/get-address/' + user_id).map(res => res.json());
+        // return this.http.get('http://localhost:3700/users/get-address/' + user_id).map(res => res.json());
+        return this.http.get('users/get-address/' + user_id).map(function (res) { return res.json(); });
     };
     AuthService.prototype.postOrder = function (order) {
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/users/post-order', order, { headers: header }).map(function (res) { return res.json(); });
-        // return this.http.post('users/post-order', order, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/users/post-order', order, { headers: header }).map(res => res.json());
+        return this.http.post('users/post-order', order, { headers: header }).map(function (res) { return res.json(); });
     };
     AuthService.prototype.getUserRewards = function (user_id) {
-        return this.http.get('http://localhost:3700/users/get-user-rewards/' + user_id).map(function (res) { return res.json(); });
-        // return this.http.get('users/get-user-rewards/' + user_id).map(res => res.json());
+        // return this.http.get('http://localhost:3700/users/get-user-rewards/' + user_id).map(res => res.json());
+        return this.http.get('users/get-user-rewards/' + user_id).map(function (res) { return res.json(); });
     };
     return AuthService;
 }());
@@ -5973,21 +5973,21 @@ var GetMenuService = (function () {
         this.http = http;
     }
     GetMenuService.prototype.getCats = function () {
-        return this.http.get('http://localhost:3700/admin/get-categories').map(function (res) { return res.json(); });
-        // return this.http.get('admin/get-categories').map(res => res.json());
+        // return this.http.get('http://localhost:3700/admin/get-categories').map(res => res.json());
+        return this.http.get('admin/get-categories').map(function (res) { return res.json(); });
     };
     // Getting roti items
     GetMenuService.prototype.getRotiItems = function () {
-        return this.http.get('http://localhost:3700/admin/get-roti-items').map(function (res) { return res.json(); });
-        // return this.http.get('admin/get-roti-items').map(res => res.json());
+        // return this.http.get('http://localhost:3700/admin/get-roti-items').map(res => res.json());
+        return this.http.get('admin/get-roti-items').map(function (res) { return res.json(); });
     };
     GetMenuService.prototype.getDatesMenu = function (date, last_date) {
-        return this.http.get('http://localhost:3700/admin/get-dates-menu/' + date + '/' + last_date).map(function (res) { return res.json(); });
-        // return this.http.get('admin/get-dates-menu/' + date + '/' + last_date).map(res => res.json());
+        // return this.http.get('http://localhost:3700/admin/get-dates-menu/' + date + '/' + last_date).map(res => res.json());
+        return this.http.get('admin/get-dates-menu/' + date + '/' + last_date).map(function (res) { return res.json(); });
     };
     GetMenuService.prototype.getItemDetails = function (item_id) {
-        return this.http.get('http://localhost:3700/admin/get-item-details/' + item_id).map(function (res) { return res.json(); });
-        // return this.http.get('admin/get-item-details/' + item_id).map(res => res.json());
+        // return this.http.get('http://localhost:3700/admin/get-item-details/' + item_id).map(res => res.json());
+        return this.http.get('admin/get-item-details/' + item_id).map(function (res) { return res.json(); });
     };
     return GetMenuService;
 }());
