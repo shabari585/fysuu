@@ -251,7 +251,6 @@ router.get('/get-items/:cat_id/:sub_name', (req, res, next) => {
     item.find({ cat_id: cat_id, sub_name: sub_name }, (err, result) => {
         if (result) {
             res.json(result);
-
         } else {
             res.json('failed');
         }
@@ -421,11 +420,12 @@ router.get('/get-all-dates', (req, res, next) => {
 
 router.delete('/delete-date/:date_id', (req, res, next) => {
     id = req.params.date_id;
-    dates.remove({ _id: id }, (err, status) => {
+    // res.json({success:false, msg: req.params.date_id});
+    dates.deleteOne({ _id: id }, (err, status) => {
         if (status) {
             res.json({ success: true, msg: status });
         } else {
-            res.json({ success: false, msg: 'failed' });
+            res.json({ success: false, msg: err });
         }
     });
 });

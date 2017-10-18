@@ -157,7 +157,6 @@ button{
   margin: 0;
   overflow: visible;
 }
-
 .date-filter-div,
 .filter-type-div,
 .filter-filter-div {
@@ -179,6 +178,17 @@ button{
   font-size: 150%;
   margin: 25px auto 25px auto;
   text-align: center;
+}
+.menu-title::after{
+  content: '';
+  position: absolute;
+  display: block;
+  height: 1px;
+  width: 70px;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 115%;
+  left:50%;
+  transform: translate(-50%,-50%);
 }
 
 /* Check boxes in sch menu */
@@ -230,10 +240,14 @@ label{
   left: 0;
   width: 100%;
   height: auto;
-  padding: 10px 0px;
+  padding: 4px 0px;
   text-align: center;
-  background-color: rgba(240, 79, 94, 0.9);
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  background-color: rgba(109, 169, 66, 0.9);
   color: #fff;
+}
+.item-announcement h5{
+  font-weight: bold;
 }
 
 .item-dets-div {
@@ -298,7 +312,8 @@ label{
 .incl-tax {
   font-size: 80%;
 }
-.removie-t-item-btn{
+.remove-t-item-btn{
+  display: none;
   font-size: 110%;
   background-color: transparent;
   color: #6DA942;
@@ -357,8 +372,9 @@ label{
   height: 50px;
   width: 200px;
   border-radius: 50px;
+  cursor: pointer;
 }
-.sc-hover-basket-div a {
+.sc-hover-basket-div .span {
   display: flex;
   display: -webkit-flex;
   align-items: center;
@@ -407,7 +423,7 @@ label{
   cursor: pointer;
 }
 
-.hover-basket-div a {
+.hover-basket-div .span {
   display: flex;
   display: -webkit-flex;
   align-items: center;
@@ -643,6 +659,10 @@ label{
   margin: 0 40px;
   color: #444;
   background-color: #444;
+}
+
+.sc-ch-mid{
+  display: none;
 }
 
 .sc-ch-ul {

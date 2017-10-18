@@ -20,8 +20,11 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private title: Title, private authService: AdminAuthService,
     private flash: FlashMessagesService, private adminAuth: AdminAuthGuard) { }
 
-  ngOnInit() {
-    this.title.setTitle('Login');
+    ngOnInit() {
+      this.title.setTitle('Login');
+      if(this.authService.loggedIn()== true){
+        this.router.navigate(['/admin/orders']);
+      }
     
   }
   adminLoginFormSubmit() {
@@ -39,7 +42,6 @@ export class LoginComponent implements OnInit {
           timeout: 5000
         });
         this.router.navigate(['/admin/orders']);
-
       }
       else {
         this.flash.show(data.msg, {

@@ -34,6 +34,7 @@ export class SettingsComponent implements OnInit {
     this.userId = user_parsed.id;
   }
   onLogoutClick() {
+    // alert('reached');
     this.authService.logout();
     this.router.navigate(['/home']);
     return false;

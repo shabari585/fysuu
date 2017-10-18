@@ -11,7 +11,6 @@ const config = require('./config/database');
 const app = express();
 // port
 const port = 3700;
-// const port = 3600;
 
 // cors
 app.use(cors());

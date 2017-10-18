@@ -143,6 +143,7 @@ export class HomeComponent implements OnInit {
         if (this.location == undefined || this.location == null) {
         } else {
           this.authService.getLocation(this.lat, this.long).subscribe(res => {
+            console.log(res);
             this.address = res.results[0].formatted_address;
             this.locationEntry = this.address;
             // if (this.address.includes('Madhapur')) {

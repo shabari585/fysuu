@@ -4,11 +4,11 @@
   </div>
   <div class="location-input-div">
     <div class="location-enter-div">
-      <input type="search" class="location-search-input" placeholder="Type your location here">
+      <input type="search" class="location-search-input"  [(ngModel)]="locationEntry" placeholder="Type your location here">
       <!-- <button type="button" class="locate-me-btn" (click)="geoLocate()">Locate me</button> -->
       <div class="locate-me-btn" (click)="geoLocate()"><span> Locate me</span></div>
     </div>
-    <button type="button" class="see-menu-btn" (click)="seeMenu()">See The Menu</button>
+    <button type="button" class="see-menu-btn" id="main-see-menu-btn" (click)="seeMenu()">See The Menu</button>
   </div>
   <div class="scroll-login-div" *ngIf="!authService.loggedIn()">
     <button type="button" class="login-signup-trig-btn" (click)="appComponent.loginSignupTrigger()">Log in/Sign up</button>
@@ -49,6 +49,10 @@
 
   <div class="dark-cover">
     <div class="container">
+
+      <div class="cdb">
+        <h2>Coming Soon</h2>
+      </div>
 
       <!-- Header for tablets and desktops -->
       <header class="m-main-header visible-lg visible-md">

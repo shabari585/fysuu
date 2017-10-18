@@ -124,11 +124,14 @@ export class CheckoutComponent implements OnInit {
 
     // Get basketnumber from localstorage
     let basket_num = parseInt(localStorage.getItem('basket_number'));
-    if(basket_num == undefined || basket_num == null || basket_num == 0){
+    // alert(basket_num);
+    // alert(isNaN(basket_num));
+    if(basket_num == undefined || basket_num == null || basket_num == 0 || isNaN(basket_num) == true){
       // redirect to menu
       this.router.navigate(['/menu']);
+      // alert('no');
     }else{
-      alert('yes');
+      // alert('yes');
     }
 
     let user = this.authService.getUserFromLocal();
@@ -374,7 +377,7 @@ export class CheckoutComponent implements OnInit {
   }
   onLogoutClick() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
     return false;
   }
   addressChecked(event){

@@ -23,9 +23,6 @@
       <li>
         <a routerLink='/menu' class="dets-div-btns" id="our-menu-btn">Our Menu</a>
       </li>
-      <!-- <li>
-        <a routerLink='/menu' class="dets-div-btns" id="schedule-menu-btn">Schedule Menu</a>
-      </li> -->
     </ul>
     <div class="scroll-login-div pull-right">
       <div class="dropdown">
@@ -34,13 +31,11 @@
           <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings'>My Profile</a></li>
           <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/my-orders'>My Orders</a></li>
           <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/address'>Saved Address</a></li>
-          <!-- <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/payments'>Payments</a></li> -->
           <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/reward-points'>Reward Points</a></li>
           <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/change-password'>Change Password</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" (click)="onLogoutClick()">Logout</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" (click)="onLogoutClick()" routerLink=''>Logout</a></li>
         </ul>
       </div>
-      <!-- <button type="button" class="login-signup-trig-btn dets-div-btns">Basket <span>0</span></button> -->
     </div>
     <div class="clearfix"></div>
   </div>
@@ -82,7 +77,7 @@
               <h2>Change Password</h2>
             </li>
           </a>
-          <li class="left-index-items">
+          <li class="left-index-items" (click)="onLogoutClick()">
             <h2>Logout</h2>
           </li>
         </ul>

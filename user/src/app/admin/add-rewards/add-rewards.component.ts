@@ -25,6 +25,7 @@ export class AddRewardsComponent implements OnInit {
     this.title.setTitle('Reward Points');
     this.getMenu.getUsers().subscribe(res => {
       this.allUsers = res;
+      console.log(res);
     });
   }
   addRewardPoints(){

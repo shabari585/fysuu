@@ -27,6 +27,7 @@ export class AddCategoryComponent implements OnInit {
     // Set title
     this.title.setTitle('Add Category');
     this.getMenu.getCategories().subscribe(res => {
+      console.log(res);
       if (res.success) {
         this.categories = res.msg;
       }

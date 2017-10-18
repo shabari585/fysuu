@@ -46,10 +46,35 @@ export class AppComponent implements OnInit {
     this.title.setTitle('Home');
   }
 
+
   // On clicking login/signup
   public loginSignupTrigger() {
     $('.fixed-dark-cover').hide();
     $('#login-fixed-dark-cover').css({ 'display': 'flex' });
+    $('#email').keyup(function(){
+      let input = $(this).val();
+      // let input = this.initialLoginInput;
+      if(input.length > 2){
+        // Validate
+        if(input == undefined || input == null || input == ''){
+          $('#continue-btn').css({'background-color':'#b2b2b2'});
+        }else{
+          const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if(re.test(input)){
+            $('#continue-btn').css({'background-color':'#6DA942'});
+          }else{
+            if(/^\d{10}$/.test(input)){
+              $('#continue-btn').css({'background-color':'#6DA942'});
+            }else{
+              $('#continue-btn').css({'background-color':'#b2b2b2'});
+            }
+          }
+        }
+      }else{
+        $('#continue-btn').css({'background-color':'#b2b2b2'});
+      }
+
+    }); 
   }
 
   // On clicking continue in first login/signup slide
@@ -84,6 +109,8 @@ export class AppComponent implements OnInit {
           if (data.success) {
             // Mobile number exists
             $('#next-login-fixed-dark-cover').css({ 'display': 'flex' });
+            $('#login-email').keyup(function(){
+            });
           } else {
             $('#next-reg-fixed-dark-cover').css({ 'display': 'flex' });
           }

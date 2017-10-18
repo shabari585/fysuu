@@ -14,12 +14,12 @@
         </div>
         <ul class="list-inline det-ul visible-xs visible-sm pull-right">
             <li>
-                <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp; <i class="fa fa-angle-down" aria-hidden="true"></i> </button>
+                <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp;</button>
             </li>
         </ul>
         <ul class="list-inline det-ul pull-left visible-md visible-lg">
             <li>
-                <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp; <i class="fa fa-angle-down" aria-hidden="true"></i> </button>
+                <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp;</button>
             </li>
             <li>
                 <a href="" class="dets-div-btns selected" id="our-menu-btn">Our Menu</a>
@@ -88,10 +88,7 @@
                 </ul>
             </div>
         </div> -->
-        <!-- <div *ngFor="let cat of categories"> -->
         <div>
-            <!-- <span id='ttime'></span>
-            <span id='tttime'></span> -->
             <h2 class="menu-title">COMBO</h2>
             {{curtime}}
             <div class="row">
@@ -119,7 +116,7 @@
                                     <!-- <span class="incl-tax">(Inclusive of all taxes)</span> -->
                                 </div>
                                 <div class="pull-right">
-                                    <button type="button" class="removie-t-item-btn" (click)='removeTodayTab("tab_one")'> - </button>
+                                    <button type="button" class="remove-t-item-btn" id="rem-t-tab_one" (click)='removeTodayTab("tab_one")'> - </button>
                                     <button type="button" class="item-add-btn" (click)='todayAdd("tab_one")'> + Add</button>
                                 </div>
                             </div>
@@ -150,7 +147,7 @@
                                     <!-- <span class="incl-tax">(Inclusive of all taxes)</span> -->
                                 </div>
                                 <div class="pull-right">
-                                        <button type="button" class="removie-t-item-btn" (click)='removeTodayTab("tab_two")'> - </button>
+                                        <button type="button" class="remove-t-item-btn" id="rem-t-tab_two" (click)='removeTodayTab("tab_two")'> - </button>
                                     <button type="button" class="item-add-btn" (click)='todayAdd("tab_two")'> + Add</button>
                                 </div>
                             </div>
@@ -183,7 +180,7 @@
                                     <!-- <span class="incl-tax">(Inclusive of all taxes)</span> -->
                                 </div>
                                 <div class="pull-right">
-                                        <button type="button" class="removie-t-item-btn" (click)='removeTodayTab("tab_three")'> - </button>
+                                        <button type="button" class="remove-t-item-btn" id="rem-t-tab_three" (click)='removeTodayTab("tab_three")'> - </button>
                                     <button type="button" class="item-add-btn" (click)='todayAdd("tab_three")'> + Add</button>
                                 </div>
                             </div>
@@ -195,7 +192,7 @@
                 </div>
                 
             </div>
-            <button type="button" class="schedule-rep-btn" (click)="schMenuBtn('tab_one')">
+            <button type="button" class="schedule-rep-btn" (click)="schMenuBtn()">
                 SCHEDULE MENU
             </button>
             <!-- Today's Menu -->
@@ -260,11 +257,11 @@
                         </ul>
                     </div>
 
-                    <div class="sc-hover-basket-div visible-md visible-lg">
-                        <a routerLink='/checkout'>
+                    <div class="sc-hover-basket-div visible-md visible-lg" (click)='navToChekout()'>
+                        <span class="span">
                             <div class="shop-basket-icon"><span class="hover-basket-number">{{basketNumber}}</span><i class="fa fa-shopping-basket" aria-hidden="true"></i></div>
                             <h6>Basket</h6><i class="fa fa-arrow-right" aria-hidden="true"></i>
-                        </a>
+                        </span>
                     </div>
 
                 </div>
@@ -300,9 +297,9 @@
 
                         <hr>
                         <ul class="list-inline sc-ch-ul">
-
                             <li class="sch-col-one">
-                                <div class="sc-ch-mid">
+                                <!-- Day one -->
+                                <div class="sc-ch-mid day-divs" id="day-one-div">
                                     <div *ngFor="let cat of categories">
                                     <div *ngIf="cat.name == 'Vegetarian'">
                                     <div *ngFor="let sub of cat.subs">
@@ -312,7 +309,7 @@
                                     <div class="sc-ch-menu-divs">
                                         <ul class="list-inline">
                                             <!-- <div *ngFor="let menu of menu_to_be_loaded"></div> -->
-                                            <li *ngFor="let menu of menu_to_be_loaded">
+                                            <!-- <li *ngFor="let menu of menu_to_be_loaded">
                                                 <div *ngIf="menu[0].sub_name == sub">
                                                     <div class="sc-ch-item">
                                                         <label>
@@ -338,16 +335,296 @@
                                                             <div *ngIf="menu[0].sub_name == 'Sweets' || menu[0].sub_name == 'sweets' || menu[0].sub_name == 'sweet' || menu[0].sub_name == 'Sweet'">
                                                                 <img [src]="sweets_img" class="sweet-cl" alt="">
                                                             </div>
-                                                            <!-- <span class="spn"></span> -->
                                                             <p class="sc-ch-item-name">{{menu[0].item_name}}</p>
                                                         </label>
-                                                        <!-- <button type="button" class="sc-ch-num-btn" (click)="decNumberOfItem()">-</button>
-                                                        <span class="sc-ch-num">{{numberOfItems}}</span>
-                                                        <button type="button" class="sc-ch-num-btn" (click)="incNumberOfItem()">+</button> -->
                                                     </div>
-                                                    
+                                                </div>
+                                            </li> -->
+                                            <li *ngFor="let menu of day_one_books">
+                                                <div *ngIf="menu[0].sub_name == sub">
+                                                    <div class="sc-ch-item">
+                                                        <label>
+                                                            <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                            <div *ngIf="menu[0].sub_name == 'Roti'">
+                                                                <img [src]="roti_img" class="roti-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curries' || menu[0].sub_name == 'Curry' || menu[0].sub_name == 'curry' || menu[0].sub_name == 'curries'">
+                                                                <img [src]="curry_img" class="curry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Dal' || menu[0].sub_name == 'dal'">
+                                                                <img [src]="dal_img" class="dal-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Rice' || menu[0].sub_name == 'rice'">
+                                                                <img [src]="rice_img" class="rice-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curd' || menu[0].sub_name == 'curd'">
+                                                                <img [src]="curd_img" class="curd-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Fry' || menu[0].sub_name == 'fry'">
+                                                                <img [src]="fry_img" class="fry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Sweets' || menu[0].sub_name == 'sweets' || menu[0].sub_name == 'sweet' || menu[0].sub_name == 'Sweet'">
+                                                                <img [src]="sweets_img" class="sweet-cl" alt="">
+                                                            </div>
+                                                            <p class="sc-ch-item-name">{{menu[0].item_name}}</p>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </li>
+
+                                        </ul>
+
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <!-- Day two div -->
+                                <div class="sc-ch-mid day-divs" id="day-two-div">
+                                    <div *ngFor="let cat of categories">
+                                    <div *ngIf="cat.name == 'Vegetarian'">
+                                    <div *ngFor="let sub of cat.subs">
+                                        
+
+                                    <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                    <div class="sc-ch-menu-divs">
+                                        <ul class="list-inline">
+                                           
+                                            <li *ngFor="let menu of day_two_books">
+                                                <div *ngIf="menu[0].sub_name == sub">
+                                                    <div class="sc-ch-item">
+                                                        <label>
+                                                            <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                            <div *ngIf="menu[0].sub_name == 'Roti'">
+                                                                <img [src]="roti_img" class="roti-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curries' || menu[0].sub_name == 'Curry' || menu[0].sub_name == 'curry' || menu[0].sub_name == 'curries'">
+                                                                <img [src]="curry_img" class="curry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Dal' || menu[0].sub_name == 'dal'">
+                                                                <img [src]="dal_img" class="dal-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Rice' || menu[0].sub_name == 'rice'">
+                                                                <img [src]="rice_img" class="rice-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curd' || menu[0].sub_name == 'curd'">
+                                                                <img [src]="curd_img" class="curd-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Fry' || menu[0].sub_name == 'fry'">
+                                                                <img [src]="fry_img" class="fry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Sweets' || menu[0].sub_name == 'sweets' || menu[0].sub_name == 'sweet' || menu[0].sub_name == 'Sweet'">
+                                                                <img [src]="sweets_img" class="sweet-cl" alt="">
+                                                            </div>
+                                                            <p class="sc-ch-item-name">{{menu[0].item_name}}</p>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <!-- Day three div -->
+                                <div class="sc-ch-mid day-divs" id="day-three-div">
+                                    <div *ngFor="let cat of categories">
+                                    <div *ngIf="cat.name == 'Vegetarian'">
+                                    <div *ngFor="let sub of cat.subs">
+                                        
+
+                                    <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                    <div class="sc-ch-menu-divs">
+                                        <ul class="list-inline">
+                                           
+                                            <li *ngFor="let menu of day_three_books">
+                                                <div *ngIf="menu[0].sub_name == sub">
+                                                    <div class="sc-ch-item">
+                                                        <label>
+                                                            <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                            <div *ngIf="menu[0].sub_name == 'Roti'">
+                                                                <img [src]="roti_img" class="roti-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curries' || menu[0].sub_name == 'Curry' || menu[0].sub_name == 'curry' || menu[0].sub_name == 'curries'">
+                                                                <img [src]="curry_img" class="curry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Dal' || menu[0].sub_name == 'dal'">
+                                                                <img [src]="dal_img" class="dal-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Rice' || menu[0].sub_name == 'rice'">
+                                                                <img [src]="rice_img" class="rice-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curd' || menu[0].sub_name == 'curd'">
+                                                                <img [src]="curd_img" class="curd-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Fry' || menu[0].sub_name == 'fry'">
+                                                                <img [src]="fry_img" class="fry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Sweets' || menu[0].sub_name == 'sweets' || menu[0].sub_name == 'sweet' || menu[0].sub_name == 'Sweet'">
+                                                                <img [src]="sweets_img" class="sweet-cl" alt="">
+                                                            </div>
+                                                            <p class="sc-ch-item-name">{{menu[0].item_name}}</p>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <!-- Day four div -->
+                                <div class="sc-ch-mid day-divs" id="day-four-div">
+                                    <div *ngFor="let cat of categories">
+                                    <div *ngIf="cat.name == 'Vegetarian'">
+                                    <div *ngFor="let sub of cat.subs">
+                                        
+
+                                    <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                    <div class="sc-ch-menu-divs">
+                                        <ul class="list-inline">
+                                           
+                                            <li *ngFor="let menu of day_four_books">
+                                                <div *ngIf="menu[0].sub_name == sub">
+                                                    <div class="sc-ch-item">
+                                                        <label>
+                                                            <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                            <div *ngIf="menu[0].sub_name == 'Roti'">
+                                                                <img [src]="roti_img" class="roti-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curries' || menu[0].sub_name == 'Curry' || menu[0].sub_name == 'curry' || menu[0].sub_name == 'curries'">
+                                                                <img [src]="curry_img" class="curry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Dal' || menu[0].sub_name == 'dal'">
+                                                                <img [src]="dal_img" class="dal-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Rice' || menu[0].sub_name == 'rice'">
+                                                                <img [src]="rice_img" class="rice-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curd' || menu[0].sub_name == 'curd'">
+                                                                <img [src]="curd_img" class="curd-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Fry' || menu[0].sub_name == 'fry'">
+                                                                <img [src]="fry_img" class="fry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Sweets' || menu[0].sub_name == 'sweets' || menu[0].sub_name == 'sweet' || menu[0].sub_name == 'Sweet'">
+                                                                <img [src]="sweets_img" class="sweet-cl" alt="">
+                                                            </div>
+                                                            <p class="sc-ch-item-name">{{menu[0].item_name}}</p>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <!-- Day five div -->
+                                <div class="sc-ch-mid day-divs" id="day-five-div">
+                                    <div *ngFor="let cat of categories">
+                                    <div *ngIf="cat.name == 'Vegetarian'">
+                                    <div *ngFor="let sub of cat.subs">
+                                        
+
+                                    <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                    <div class="sc-ch-menu-divs">
+                                        <ul class="list-inline">
+                                           
+                                            <li *ngFor="let menu of day_five_books">
+                                                <div *ngIf="menu[0].sub_name == sub">
+                                                    <div class="sc-ch-item">
+                                                        <label>
+                                                            <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                            <div *ngIf="menu[0].sub_name == 'Roti'">
+                                                                <img [src]="roti_img" class="roti-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curries' || menu[0].sub_name == 'Curry' || menu[0].sub_name == 'curry' || menu[0].sub_name == 'curries'">
+                                                                <img [src]="curry_img" class="curry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Dal' || menu[0].sub_name == 'dal'">
+                                                                <img [src]="dal_img" class="dal-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Rice' || menu[0].sub_name == 'rice'">
+                                                                <img [src]="rice_img" class="rice-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curd' || menu[0].sub_name == 'curd'">
+                                                                <img [src]="curd_img" class="curd-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Fry' || menu[0].sub_name == 'fry'">
+                                                                <img [src]="fry_img" class="fry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Sweets' || menu[0].sub_name == 'sweets' || menu[0].sub_name == 'sweet' || menu[0].sub_name == 'Sweet'">
+                                                                <img [src]="sweets_img" class="sweet-cl" alt="">
+                                                            </div>
+                                                            <p class="sc-ch-item-name">{{menu[0].item_name}}</p>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <!-- Day six div -->
+                                <div class="sc-ch-mid day-divs" id="day-six-div">
+                                    <div *ngFor="let cat of categories">
+                                    <div *ngIf="cat.name == 'Vegetarian'">
+                                    <div *ngFor="let sub of cat.subs">
+                                        
+
+                                    <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                    <div class="sc-ch-menu-divs">
+                                        <ul class="list-inline">
+                                           
+                                            <li *ngFor="let menu of day_six_books">
+                                                <div *ngIf="menu[0].sub_name == sub">
+                                                    <div class="sc-ch-item">
+                                                        <label>
+                                                            <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                            <div *ngIf="menu[0].sub_name == 'Roti'">
+                                                                <img [src]="roti_img" class="roti-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curries' || menu[0].sub_name == 'Curry' || menu[0].sub_name == 'curry' || menu[0].sub_name == 'curries'">
+                                                                <img [src]="curry_img" class="curry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Dal' || menu[0].sub_name == 'dal'">
+                                                                <img [src]="dal_img" class="dal-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Rice' || menu[0].sub_name == 'rice'">
+                                                                <img [src]="rice_img" class="rice-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Curd' || menu[0].sub_name == 'curd'">
+                                                                <img [src]="curd_img" class="curd-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Fry' || menu[0].sub_name == 'fry'">
+                                                                <img [src]="fry_img" class="fry-cl" alt="">
+                                                            </div>
+                                                            <div *ngIf="menu[0].sub_name == 'Sweets' || menu[0].sub_name == 'sweets' || menu[0].sub_name == 'sweet' || menu[0].sub_name == 'Sweet'">
+                                                                <img [src]="sweets_img" class="sweet-cl" alt="">
+                                                            </div>
+                                                            <p class="sc-ch-item-name">{{menu[0].item_name}}</p>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+
                                         </ul>
 
                                     </div>
@@ -372,10 +649,10 @@
         </div>
         <!-- Basket -->
         <div class="hover-basket-div visible-md visible-lg" (click)='navToChekout()'>
-            <a>
+            <span class="span">
                 <div class="shop-basket-icon"><span class="hover-basket-number">{{basketNumber}}</span><i class="fa fa-shopping-basket" aria-hidden="true"></i></div>
                 <h6>Basket</h6><i class="fa fa-arrow-right" aria-hidden="true"></i>
-            </a>
+            </span>
         </div>
 
         
@@ -383,8 +660,8 @@
 </div>
 <!-- Basket for mobiles -->
 <div class="mob-basket-div visible-xs visible-sm" (click)='navToChekout()'>
-    <a>
+    <span class="span">
         <i class="fa fa-shopping-basket" aria-hidden="true"></i><h6>BASKET</h6><span class="mob-hover-basket-number">0</span><i class="fa fa-arrow-right" aria-hidden="true"></i>
-    </a>
+    </span>
 </div>
 

@@ -398,17 +398,18 @@ input:active {
 }
 
 #loc-btn {
-  color: #f00;
+  color: #6DA942;
   margin-right: 30px;
 }
 
 #our-menu-btn {
   margin-right: 20px;
+  color: #666;
 }
 
 .selected {
   font-weight: bold;
-  border-bottom: 2px solid #fa0000;
+  border-bottom: 2px solid #6DA942;
 }
 
 #schedule-menu-btn {

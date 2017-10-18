@@ -356,13 +356,9 @@ input:active {
 }
 
 #loc-btn {
-  color: #f00;
   margin-right: 30px;
 }
 
-#our-menu-btn {
-  margin-right: 20px;
-}
 
 .selected {
   font-weight: bold;

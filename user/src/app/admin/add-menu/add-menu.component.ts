@@ -10,6 +10,7 @@ import { Items } from "../../models/items";
 
 // importing service
 import { AdminServicesService } from "../../services/admin-services.service";
+import { GetMenuService } from "../../services/get-menu.service";
 
 // importing momentjs
 import * as moment from 'moment';
@@ -23,7 +24,7 @@ declare var $: any;
 })
 export class AddMenuComponent implements OnInit {
 
-  constructor(private getMenu: AdminServicesService, private router: Router, private title: Title) { }
+  constructor(private getMenu: AdminServicesService, private router: Router, private title: Title, private getMenuService: GetMenuService) { }
 
   items: Items[];
   selectedItemName: string;
@@ -50,6 +51,8 @@ export class AddMenuComponent implements OnInit {
   itemsPosted: string;
   itemsDeleted: string;
 
+  outCats:any=[];
+
 
   // date = new Date((60 * 60 * 24 * 1));
   today = moment().format('LLLL');
@@ -71,7 +74,25 @@ export class AddMenuComponent implements OnInit {
     });
     this.getMenu.getDates().subscribe(res => {
       this.dates = res;
-      console.log(res);
+      // console.log(res);
+
+      res.forEach(element => {
+        
+        // element.date
+        // element.item_id
+        this.getMenuService.getItemDetails(element.item_id).subscribe(res=>{
+          // console.log(res.msg[0].item_name);
+          let json = {date_id:element._id, date: element.date, name:res.msg[0].item_name }
+          this.outCats.push(json);
+        });
+      });
+
+      console.log(this.outCats);
+
+      // this.getMenuService.getItemDetails(res[0].item_id).subscribe(res=>{
+      //   console.log(res);
+      // });
+
     });
   }
   selectedDate(event) {
@@ -111,7 +132,7 @@ export class AddMenuComponent implements OnInit {
       if (res == 'failed') {
         // alert('failed');
       } else {
-        console.log(res);
+        // console.log(res);
 
         this.items = res.msg;
 
@@ -121,7 +142,10 @@ export class AddMenuComponent implements OnInit {
 
   onCheckChange(dateSelected: string, cat_id: string, sub_name: string, item_id, isChecked: boolean) {
 
+    alert(item_id);
+
     if (isChecked == true) {
+
       let temp_array = [dateSelected, item_id];
       // Add to added items
       // check if it already exists
@@ -131,14 +155,14 @@ export class AddMenuComponent implements OnInit {
         }
       }
       this.addedItems.push(temp_array);
-      console.log(this.addedItems);
+      
       // Remove from removedItems
       for (var x = 0; x < this.removedItems.length; x++) {
         if (this.removedItems[x][0] == dateSelected && this.removedItems[x][1] == item_id) {
           this.removedItems.splice(x, 1);
         }
       }
-
+      console.log(this.addedItems);
     } else {
       let tmp_array = [dateSelected, item_id];
       // Adding to removed items
@@ -171,8 +195,9 @@ export class AddMenuComponent implements OnInit {
     this.getMenu.deleteDate(date_id).subscribe(res => {
       if (res.success) {
         console.log(res.msg);
+        window.location.reload();
       } else {
-        console.log('failed');
+        console.log(res);
       }
     });
   }
