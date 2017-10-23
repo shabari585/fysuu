@@ -18,15 +18,12 @@
       </li>
     </ul>
     <ul class="list-inline det-ul pull-left visible-md visible-lg">
-      <li>
-        <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp;</button>
-      </li>
-      <li>
-        <a routerLink='/menu' class="dets-div-btns selected" id="our-menu-btn">Our Menu</a>
-      </li>
       <!-- <li>
-                <a class="dets-div-btns" id="schedule-menu-btn" (click)='schMenuBtn(schTrigBtn)'>Schedule Menu</a>
-            </li> -->
+        <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp;</button>
+      </li> -->
+      <li>
+        <a routerLink='/menu' class="dets-div-btns selected" id="our-menu-btn">Today, {{dateForHeader}}</a>
+      </li>
     </ul>
     <div class="scroll-login-div pull-right  visible-md visible-lg">
       <ul class="list-inline sc-ul">
@@ -35,7 +32,7 @@
         </li>
         <li class="account-trig-div" *ngIf="authService.loggedIn()">
           <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{userName}}</button>
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{userName}}&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
               <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings'>My Profile</a></li>
               <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/my-orders'>My Orders</a></li>
@@ -46,6 +43,9 @@
               <li role="presentation"><a role="menuitem" tabindex="-1" (click)="onLogoutClick()">Logout</a></li>
             </ul>
           </div>
+        </li>
+        <li class="head-basket" routerLink='/checkout'>
+          Basket &nbsp; <span class="head-basket-num">{{basket_num}}</span> 
         </li>
       </ul>
 
@@ -79,7 +79,7 @@
 
           <!-- Warning -->
           <div class="warning-div">
-            Please make sure address is accurate
+            Please edit the address to be accurate
           </div>
 
           <!-- Address statement -->
@@ -87,35 +87,26 @@
           <div class="user-address-div">
 
             <div *ngFor="let address of addresses;let i = index">
-              
               <label style="cursor:pointer">
-              <div class="user-address-item">
-                <div class="user-address pull-left">
-                  <div class="pull-left">
-                    <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)">
+              <div class="address-container">
+                <div class="user-address-item">
+                  <div class="user-address pull-left">
+                    <div class="pull-left">
+                      <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)">
+                    </div>
+                    <div class="pull-left address-lines">
+                      <h5 class="address-lines-title">Address {{i+1}}</h5>
+                      {{address}}
+                    </div>
+                    <div class="clearfix"></div>
                   </div>
-                  <div class="pull-left address-lines">
-                    <h5 class="address-lines-title">Address {{i+1}}</h5>
-                    {{address}}
+                  <div class="address-edit-div pull-right">
+                    <button type="button" id="edit-address" (click)='editAddress(i,address)'>Edit</button>
                   </div>
                   <div class="clearfix"></div>
                 </div>
-                <div class="address-edit-div pull-right">
-                  <button type="button" id="edit-address">Edit</button>
-                </div>
-                <div class="clearfix"></div>
               </div>
               </label>
-              <div class="address-edit-db">
-                <div class="address-edit-div">
-                    <label for="adress-text">
-                      <textarea>
-                        {{address}}
-                      </textarea>
-                    </label>
-                </div>
-              </div>
-
             </div>
 
 
@@ -130,38 +121,12 @@
 
       </div>
 
-      <!-- Payment Gateway Section -->
-      <div class="payment-selection-section">
-
-        <div class="address-head-div head-divs">
-          <h3 class="section-titles"> Select Payment Method</h3>
-        </div>
-
-        <div class="payment-options-div body-div">
-          <ul class="payment-options-ul list-unstyled">
-            <li>
-              <label for="credit">
-                  <input type="radio" name="payment" id="credit" value="Wallet" (click)='paymentMethod($event)'> &nbsp; Wallet
-              </label>
-            </li>
-            <li>
-              <label for="paypal">
-                  <input type="radio" name="payment" id="paypal" value="Cash on Delivery" (click)='paymentMethod($event)'> &nbsp; Cash on Delivery
-              </label>
-            </li>
-            <li>
-              <label for="invoice">
-                  <input type="radio" name="payment" id="invoice" value="Online" (click)='paymentMethod($event)'> &nbsp; Pay Online
-              </label>
-            </li>
-          </ul>
-        </div>
-      </div>
+      
 
     </div>
 
     <!-- Right Dets -->
-    <div class="right-dets-section pull-right">
+    <div class="right-dets-section pull-left">
 
       <!-- Order Summary section -->
       <div class="order-summary-section">
@@ -187,7 +152,7 @@
                     <span>
                       <p class="delivery-item-name">{{tab_one_name}}</p>
                     </span>
-                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_one_base_price}} </span> per portion</h5>
+                    
                   </div>
                 </div>
   
@@ -195,15 +160,13 @@
                   <!-- Number of items -->
                   <div class="delivery-number-div">
                     <div class="delivery-number-core">
-                      <button type="button" class="number-minus-btn number-btns"> - </button>
-                      <span class="input-number"> {{tab_one_times}} </span>
-                      <button type="button" class="number-plus-btn number-btns"> + </button>
+                        <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_one_base_price}}.00 </span> x {{tab_one_times}}</h5> 
                     </div>
                   </div>
                   <!-- Delivery item price -->
                   <div class="price-div">
                     <div class="price-core">
-                      &#8377; <span class="item-total-cost-number"> {{tab_one_total_price}} </span>
+                      &#8377; <span class="item-total-cost-number"> {{tab_one_total_price}}.00 </span>
                     </div>
                   </div>
                 </div>
@@ -222,23 +185,19 @@
                     <span>
                       <p class="delivery-item-name">{{tab_two_name}}</p>
                     </span>
-                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_two_base_price}} </span> per portion</h5>
+                    
                   </div>
                 </div>
   
                 <div class="delivery-dets">
                   <!-- Number of items -->
                   <div class="delivery-number-div">
-                    <div class="delivery-number-core">
-                      <button type="button" class="number-minus-btn number-btns"> - </button>
-                      <span class="input-number"> {{tab_two_times}} </span>
-                      <button type="button" class="number-plus-btn number-btns"> + </button>
-                    </div>
+                      <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_two_base_price}}.00 </span> x {{tab_two_times}}</h5> 
                   </div>
                   <!-- Delivery item price -->
                   <div class="price-div">
                     <div class="price-core">
-                      &#8377; <span class="item-total-cost-number"> {{tab_two_total_price}} </span>
+                      &#8377; <span class="item-total-cost-number"> {{tab_two_total_price}}.00 </span>
                     </div>
                   </div>
                 </div>
@@ -257,7 +216,7 @@
                     <span>
                       <p class="delivery-item-name">{{tab_three_name}}</p>
                     </span>
-                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_three_base_price}} </span> per portion</h5>
+                    
                   </div>
                 </div>
   
@@ -265,15 +224,13 @@
                   <!-- Number of items -->
                   <div class="delivery-number-div">
                     <div class="delivery-number-core">
-                      <button type="button" class="number-minus-btn number-btns"> - </button>
-                      <span class="input-number"> {{tab_three_times}} </span>
-                      <button type="button" class="number-plus-btn number-btns"> + </button>
+                        <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_three_base_price}}.00 </span>  x {{tab_three_times}}</h5>
                     </div>
                   </div>
                   <!-- Delivery item price -->
                   <div class="price-div">
                     <div class="price-core">
-                      &#8377; <span class="item-total-cost-number"> {{tab_three_total_price}} </span>
+                      &#8377; <span class="item-total-cost-number"> {{tab_three_total_price}}.00 </span>
                     </div>
                   </div>
                 </div>
@@ -286,31 +243,25 @@
         <!-- Day one -->
         <div *ngIf="day_one_date !=null">
           <h6 class="delivery-on-statement">Delivery on {{day_one_date}} &nbsp; {{day_one_slot}}</h6>
-
-
             <div class="delivery-item">
               <div class="delivery-item-left">
                 <div class="delivery-item-dets">
                   <span *ngFor="let menu of day_one_menu">
                     <span class="delivery-item-name">{{menu.item_name}}</span>
                   </span>
-                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_one_per_portion_price}} </span> per portion</h5>
+                  
                 </div>
               </div>
 
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                  <div class="delivery-number-core">
-                    <button type="button" class="number-minus-btn number-btns"> - </button>
-                    <span class="input-number"> {{day_one_num_items}} </span>
-                    <button type="button" class="number-plus-btn number-btns"> + </button>
-                  </div>
+                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_one_per_portion_price}}.00 </span> </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
                   <div class="price-core">
-                    &#8377; <span class="item-total-cost-number"> {{day_one_total_price}} </span>
+                    &#8377; <span class="item-total-cost-number"> {{day_one_total_price}}.00 </span>
                   </div>
                 </div>
               </div>
@@ -328,23 +279,19 @@
                   <span *ngFor="let menu of day_two_menu">
                     <span class="delivery-item-name">{{menu.item_name}}</span>
                   </span>
-                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_two_per_portion_price}} </span> per portion</h5>
+                  
                 </div>
               </div>
 
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                  <div class="delivery-number-core">
-                    <button type="button" class="number-minus-btn number-btns"> - </button>
-                    <span class="input-number"> {{day_two_num_items}} </span>
-                    <button type="button" class="number-plus-btn number-btns"> + </button>
-                  </div>
+                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_two_per_portion_price}}.00 </span> </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
                   <div class="price-core">
-                    &#8377; <span class="item-total-cost-number"> {{day_two_total_price}} </span>
+                    &#8377; <span class="item-total-cost-number"> {{day_two_total_price}}.00 </span>
                   </div>
                 </div>
               </div>
@@ -364,23 +311,19 @@
                   <span *ngFor="let menu of day_three_menu">
                   <span class="delivery-item-name">{{menu.item_name}}</span>
                   </span>
-                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_three_per_portion_price}} </span> per portion</h5>
+                  
                 </div>
               </div>
 
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                  <div class="delivery-number-core">
-                    <button type="button" class="number-minus-btn number-btns"> - </button>
-                    <span class="input-number"> {{day_three_num_items}} </span>
-                    <button type="button" class="number-plus-btn number-btns"> + </button>
-                  </div>
+                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_three_per_portion_price}}.00 </span> </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
                   <div class="price-core">
-                    &#8377; <span class="item-total-cost-number"> {{day_three_total_price}} </span>
+                    &#8377; <span class="item-total-cost-number"> {{day_three_total_price}}.00 </span>
                   </div>
                 </div>
               </div>
@@ -397,23 +340,19 @@
                   <span *ngFor="let menu of day_four_menu">
                     <span class="delivery-item-name">{{menu.item_name}}</span>
                   </span>
-                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_four_per_portion_price}} </span> per portion</h5>
+                  
                 </div>
               </div>
 
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                  <div class="delivery-number-core">
-                    <button type="button" class="number-minus-btn number-btns"> - </button>
-                    <span class="input-number"> {{day_four_num_items}} </span>
-                    <button type="button" class="number-plus-btn number-btns"> + </button>
-                  </div>
+                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_four_per_portion_price}}.00 </span> </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
                   <div class="price-core">
-                    &#8377; <span class="item-total-cost-number"> {{day_four_total_price}} </span>
+                    &#8377; <span class="item-total-cost-number"> {{day_four_total_price}}.00 </span>
                   </div>
                 </div>
               </div>
@@ -430,65 +369,26 @@
                   <span *ngFor="let menu of day_five_menu">
                     <span class="delivery-item-name">{{menu.item_name}}</span>
                   </span>
-                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_five_per_portion_price}} </span> per portion</h5>
+                  
                 </div>
               </div>
 
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                  <div class="delivery-number-core">
-                    <button type="button" class="number-minus-btn number-btns"> - </button>
-                    <span class="input-number"> {{day_five_num_items}} </span>
-                    <button type="button" class="number-plus-btn number-btns"> + </button>
-                  </div>
+                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_five_per_portion_price}}.00 </span> </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
                   <div class="price-core">
-                    &#8377; <span class="item-total-cost-number"> {{day_five_total_price}} </span>
+                    &#8377; <span class="item-total-cost-number"> {{day_five_total_price}}.00 </span>
                   </div>
                 </div>
               </div>
             </div>
 
         </div>
-        <!-- Day six -->
-        <div *ngIf="day_six_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_six_date}} &nbsp; {{day_six_slot}}</h6>
-
-          
-            <div class="delivery-item">
-              <div class="delivery-item-left">
-                <div class="delivery-item-dets">
-                  <span *ngFor="let menu of day_six_menu">
-                    <!-- <span class="delivery-item-name">{{menu.item_name}}</span> -->
-                     {{menu.item_name}}
-                  </span>
-                  <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_six_per_portion_price}} </span> per portion</h5>
-                </div>
-              </div>
-
-              <div class="delivery-dets">
-                <!-- Number of items -->
-                <div class="delivery-number-div">
-                  <div class="delivery-number-core">
-                    <button type="button" class="number-minus-btn number-btns"> - </button>
-                    <span class="input-number"> {{day_six_num_items}} </span>
-                    <button type="button" class="number-plus-btn number-btns"> + </button>
-                  </div>
-                </div>
-                <!-- Delivery item price -->
-                <div class="price-div">
-                  <div class="price-core">
-                    &#8377; <span class="item-total-cost-number"> {{day_six_total_price}} </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          
-
-        </div>
+      
             
 
 
@@ -497,22 +397,43 @@
           <div class="charges-div">
             <div class="delivery-fee">
               <div class="pull-left">
-                <h6>Delivery Fee</h6>
+                <h6>Delivery Fee :</h6>
               </div>
               <div class="pull-right cost-core">
-                &#8377; <span class="cost-number"> {{delivery_fee}} </span>
+                &#8377; <span class="cost-number"> {{delivery_fee}}.00 </span>
               </div>
               <div class="clearfix"></div>
             </div>
 
             <div class="total-fee">
               <div class="pull-left">
-                <h6>Total</h6>
+                <h6>Total :</h6>
               </div>
               <div class="pull-right cost-core">
-                &#8377;<span class="cost-number"> {{total_price}} </span>
+                &#8377;<span class="cost-number"> {{total_price}}.00 </span>
               </div>
               <div class="clearfix"></div>
+            </div>
+            <div class="total-fee">
+              <div class="pull-left">
+                <h6>Number of points you'll earn through this order :</h6>
+              </div>
+              <div class="pull-right cost-core">
+              <span class="cost-number"> {{points_earned}} </span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <div *ngIf='rewardPointsPermissions == true'>
+                
+              <div class="rewards-div">
+                  <p>
+                      You have {{rewardPoints}} reward points.
+                  </p> 
+                  <button  class="save-btns" id="redeem-btn" (click)='redeemClicked()'>
+                    Redeem
+                  </button>&nbsp; &nbsp; - {{discount}}
+              </div>
             </div>
 
             <div class="total-pay">
@@ -520,9 +441,10 @@
                 <h6>Total to pay</h6>
               </div>
               <div class="pull-right cost-core">
-                &#8377;<span class="cost-number"> {{total_price}}</span>
+                &#8377;<span class="cost-number"> {{total_to_pay}}.00</span>
               </div>
               <div class="clearfix"></div>
+              
             </div>
 
             <!-- <div class="reward-points">
@@ -539,12 +461,53 @@
         </div>
         <!-- <button type="button" id="place-order-button">Place Order</button> -->
       </div>
+      <!-- Payment Gateway Section -->
+      <div class="payment-selection-section">
+          
+        <div class="address-head-div head-divs">
+          <h3 class="section-titles"> Select Payment Method</h3>
+        </div>
+
+        <div class="payment-options-div body-div">
+          <ul class="payment-options-ul list-unstyled list-inline">
+            <li>
+                <label for="invoice">
+                    <input type="radio" name="payment" id="invoice" value="Online" (click)='paymentMethod($event)'> &nbsp; Pay Online
+                </label>
+              </li>
+            <li>
+              <label for="credit">
+                  <input type="radio" name="payment" id="credit" value="Wallet" (click)='paymentMethod($event)'> &nbsp; Wallet
+              </label>
+            </li>
+            <li>
+              <label for="paypal">
+                  <input type="radio" name="payment" id="paypal" value="Cash on Delivery" (click)='paymentMethod($event)'> &nbsp; Cash on Delivery
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="place-order-btn-div">
+        <p class="err"></p>
+        <button type="button" id="place-order-button" (click)='placeOrder()'>Place Order</button>
+      </div>
 
     </div>
     <div class="clearfix"></div>
-    <div class="place-order-btn-div">
+    <!-- <div class="place-order-btn-div">
       <p class="err"></p>
       <button type="button" id="place-order-button" (click)='placeOrder()'>Place Order</button>
-    </div>
+    </div> -->
+  </div>
+</div>
+<div class="db">
+  <div class="wb">
+      <i class="fa fa-times" aria-hidden="true" (click)='closeUpAddress()'></i>
+    <h2>Update Address</h2>
+    <textarea [(ngModel)]='placeholder_address'>
+
+    </textarea>
+    <button class="save-btns" (click)='updateAddress()' style="margin-top:20px;">SUBMIT</button>
   </div>
 </div>

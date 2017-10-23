@@ -15,7 +15,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MenuComponent } from './menu/menu.component';
 import { OrdersComponent } from './orders/orders.component';
-// import { PaymentsComponent } from './payments/payments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RewardPointsComponent } from './reward-points/reward-points.component';
 import { RewardsComponent } from './rewards/rewards.component';

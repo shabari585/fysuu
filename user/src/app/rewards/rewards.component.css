@@ -56,11 +56,11 @@
   align-items: flex-end;
   -webkit-align-items: flex-end;
   flex-direction: column;
-  width: 70%;
+  width: 50%;
 }
 
 .right-rew-section {
-  width: 30%;
+  width: 50%;
 }
 
 .points-reps {

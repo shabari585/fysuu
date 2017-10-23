@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
   address:string;
 
   public uName:string;
+  public basket_num:number;
 
   // geocoder: google.maps.Geocoder;
 
@@ -44,6 +45,41 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Set title
     this.title.setTitle('Home');
+
+    this.basket_num = parseInt(localStorage.getItem('basket_number'));
+    if(this.basket_num == undefined || this.basket_num == null || this.basket_num == 0 || isNaN(this.basket_num) == true){
+      // redirect to menu
+      this.basket_num = 0;
+      // alert('no');
+    }else{
+      // this.basket_num;
+    }
+
+    $(document).keypress(function(e) {
+      if(e.which == 13) {
+          // Login trigger tab is visible
+          if($('#login-fixed-dark-cover').is(':visible')){
+            // Trigger continue-btn
+            $('#continue-btn').trigger('click');
+          }
+          // Sign up tab is visible
+          if($('#next-reg-fixed-dark-cover').is(':visible')){
+            // OTP and sign up buttons
+            if($('#reg-otp').val()){
+              // trigger sign-up btn
+              $('#signup-btn').trigger('click');
+            }else{
+              // Trigger otp btn
+              $('#otp-btn').trigger('click');
+            }
+          }
+          // Login tab is visible
+          if($('#next-login-fixed-dark-cover').is(':visible')){
+            // trigger login-btn
+            $('#login-btn').trigger('click');
+          }
+      }
+    });
   }
 
 
@@ -143,6 +179,8 @@ export class AppComponent implements OnInit {
     $('.err').html('');
     this.loginEmailInput = loginEmailInput;
     this.loginPasswordInput = loginPasswordInput;
+    // Check if password has atleast 6 characters
+    
     const user={
       email: loginEmailInput,
       password: loginPasswordInput
@@ -186,10 +224,6 @@ export class AppComponent implements OnInit {
     }else{
       $('.err').html('All fields are required');
     }
-    // Log user in
-    // 
-    // this.showError('login-err','Password wrong !');
-    // Redirect to Menu
     
   }
 
@@ -222,14 +256,17 @@ export class AppComponent implements OnInit {
       // Validate Email and Mobile
       if(this.validate.validateEmail(regEmailInput)){
         if(this.validate.validateMobile(regMobileInput)){
-          // Valid email and mobile numbers. register user
-          this.authService.registerUser(this.user).subscribe(res=>{
-            if(res.success){
-              window.location.reload();
-            }else{
-              // Show Error
-            }
-          });
+          if(regPwdInput.length > 6){
+            // Valid email and mobile numbers. register user
+            this.authService.registerUser(this.user).subscribe(res=>{
+              if(res.success){
+                window.location.reload();
+              }else{
+                // Show Error
+              }
+            });
+
+          }
         }else{
           $('.err').html('Please Enter Valid Mobile number');
         }
@@ -257,6 +294,10 @@ export class AppComponent implements OnInit {
 
   // Onclicking Close button
   public mainClose() {
+    $('.fixed-dark-cover').hide();
+  }
+
+  clickedOnTerms(){
     $('.fixed-dark-cover').hide();
   }
 

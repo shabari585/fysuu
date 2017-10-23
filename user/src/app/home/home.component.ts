@@ -146,75 +146,75 @@ export class HomeComponent implements OnInit {
             console.log(res);
             this.address = res.results[0].formatted_address;
             this.locationEntry = this.address;
-            // if (this.address.includes('Madhapur')) {
-            //   // this.give_menu_permission = true;
-            //   localStorage.setItem('home_address', this.address);
-            //   // Add to user's address if he is logged in
-            //   if (this.authService.loggedIn()) {
-            //     // User is logged in 
-            //     // send this address to save
-            //     let address = {
-            //       user_id: this.userId,
-            //       address: this.address
-            //     }
-            //     this.authService.saveAddress(address).subscribe(res => {
-            //       if (res.success) {
-            //         // Address saved
-            //         console.log(res);
-            //       } else {
-            //         // Address not saved
-            //         if (res.msg = 'exists') {
-            //           // address already exists
-            //         } else {
-            //           // console.log(res);
-            //         }
-            //       }
-            //     });
-            //   } else {
-            //     // Not logged in 
-            //     // this.give_menu_permission = true;
-            //   }
-            //   // Add to input box
-            //   // $('.location-search-input').val(this.address);
-            //   this.locationEntry = this.address;
-            // } else {
-            //   // ********** VERY IMPORTANT DELETE AFTER TESTING IS DONE ************** 
-            //   // Delete after testing is done
+            if (this.address.includes('Madhapur')) {
+              // this.give_menu_permission = true;
+              localStorage.setItem('home_address', this.address);
+              // Add to user's address if he is logged in
+              if (this.authService.loggedIn()) {
+                // User is logged in 
+                // send this address to save
+                let address = {
+                  user_id: this.userId,
+                  address: this.address
+                }
+                this.authService.saveAddress(address).subscribe(res => {
+                  if (res.success) {
+                    // Address saved
+                    console.log(res);
+                  } else {
+                    // Address not saved
+                    if (res.msg = 'exists') {
+                      // address already exists
+                    } else {
+                      // console.log(res);
+                    }
+                  }
+                });
+              } else {
+                // Not logged in 
+                // this.give_menu_permission = true;
+              }
+              // Add to input box
+              // $('.location-search-input').val(this.address);
+              this.locationEntry = this.address;
+            } else {
+              // ********** VERY IMPORTANT DELETE AFTER TESTING IS DONE ************** 
+              // Delete after testing is done
 
-            //   // this.give_menu_permission = true;
+              // this.give_menu_permission = true;
 
 
-            //   localStorage.setItem('home_address', this.address);
-            //   // Add to user's address if he is logged in
-            //   if (this.authService.loggedIn()) {
-            //     // console.log('user is logged in');
-            //     // User is logged in 
-            //     // send this address to save
-            //     let address = {
-            //       user_id: this.userId,
-            //       address: this.address
-            //     }
-            //     // console.log(address);
-            //     this.authService.saveAddress(address).subscribe(res => {
-            //       if (res.success) {
-            //         // Address saved
-            //         console.log(res.msg);
-            //       } else {
-            //         // Address not saved
-            //         if (res.msg == 'exists') {
-            //           // address already exists
-            //           console.log('exists');
-            //         } else {
-            //           console.log(res.msg);
-            //         }
-            //       }
-            //     });
-            //   } else {
-            //     // console.log('not logged in');
-            //   }
-            //   this.locationEntry = this.address;
-            //   $('.location-warning-div').show();
-            // }
+              localStorage.setItem('home_address', this.address);
+              // Add to user's address if he is logged in
+              if (this.authService.loggedIn()) {
+                // console.log('user is logged in');
+                // User is logged in 
+                // send this address to save
+                let address = {
+                  user_id: this.userId,
+                  address: this.address
+                }
+                // console.log(address);
+                this.authService.saveAddress(address).subscribe(res => {
+                  if (res.success) {
+                    // Address saved
+                    console.log(res.msg);
+                  } else {
+                    // Address not saved
+                    if (res.msg == 'exists') {
+                      // address already exists
+                      console.log('exists');
+                    } else {
+                      console.log(res.msg);
+                    }
+                  }
+                });
+              } else {
+                // console.log('not logged in');
+              }
+              this.locationEntry = this.address;
+              $('.location-warning-div').show();
+            }
           });
         }
       });

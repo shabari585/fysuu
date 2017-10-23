@@ -109,41 +109,41 @@ export class AdminServicesService {
 
         let schData = { schArray, remArray };
 
-        // return this.http.post('http://localhost:3700/admin/post-dates', schData, { headers: headers }).map(res => res.json());
-        return this.http.post('admin/post-dates', schData, { headers: headers }).map(res => res.json());
+        return this.http.post('http://localhost:3700/admin/post-dates', schData, { headers: headers }).map(res => res.json());
+        // return this.http.post('admin/post-dates', schData, { headers: headers }).map(res => res.json());
     }
     getDates() {
-        // return this.http.get('http://localhost:3700/admin/get-all-dates').map(res => res.json());
-        return this.http.get('admin/get-all-dates').map(res => res.json());
+        return this.http.get('http://localhost:3700/admin/get-all-dates').map(res => res.json());
+        // return this.http.get('admin/get-all-dates').map(res => res.json());
     }
 
     deleteDate(date_id) {
-        // return this.http.delete('http://localhost:3700/admin/delete-date/' + date_id).map(res => res.json());
-        return this.http.delete('admin/delete-date/' + date_id).map(res => res.json());
+        return this.http.delete('http://localhost:3700/admin/delete-date/' + date_id).map(res => res.json());
+        // return this.http.delete('admin/delete-date/' + date_id).map(res => res.json());
     }
 
     // View Orders Page
     // Reward Page
     // Get all users
     getUsers() {
-        // return this.http.get('http://localhost:3700/admin/get-users').map(res => res.json());
-        return this.http.get('admin/get-users').map(res => res.json());
+        return this.http.get('http://localhost:3700/admin/get-users').map(res => res.json());
+        // return this.http.get('admin/get-users').map(res => res.json());
     }
 
     // Get User from userId
     getUserFromId(user_id){
-        // return this.http.get('http://localhost:3700/admin/get-user-from-id/'+user_id).map(res => res.json());
-        return this.http.get('admin/get-user-from-id/'+user_id).map(res => res.json());
+        return this.http.get('http://localhost:3700/admin/get-user-from-id/'+user_id).map(res => res.json());
+        // return this.http.get('admin/get-user-from-id/'+user_id).map(res => res.json());
     }
     
     getUserOrders(user_id) {
-        // return this.http.get('http://localhost:3700/users/get-user-orders/' + user_id).map(res => res.json());
-        return this.http.get('users/get-user-orders/' + user_id).map(res => res.json());
+        return this.http.get('http://localhost:3700/users/get-user-orders/' + user_id).map(res => res.json());
+        // return this.http.get('users/get-user-orders/' + user_id).map(res => res.json());
     }
     
     postRewards(email,points){
-        // return this.http.get('http://localhost:3700/admin/post-rewards/' + email + '/' + points ).map(res => res.json());
-        return this.http.get('admin/post-rewards/' + email + '/' + points ).map(res => res.json());
+        return this.http.get('http://localhost:3700/admin/post-rewards/' + email + '/' + points ).map(res => res.json());
+        // return this.http.get('admin/post-rewards/' + email + '/' + points ).map(res => res.json());
     }
 
 

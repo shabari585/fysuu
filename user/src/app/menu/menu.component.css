@@ -1,3 +1,45 @@
+.added-db{
+  z-index: 10000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+/* .added-wb{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 400px;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #777;
+} */
+.added-wb{
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 400px;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #777;
+}
+.added-wb h3{
+  font-size: 200%;
+}
+
 .main-header .container {
   width: 90%;
 }
@@ -27,7 +69,7 @@
   justify-content: center;
   flex-direction: column;
   background-color: #fff;
-  height: 200px;
+  height: 270px;
   width: 500px;
   padding: 30px 0px;
   border-radius: 4px;
@@ -37,6 +79,7 @@
   display: block;
   height: 30px;
   width: 90%;
+  color: #666;
 }
 .today-btns{
   position: relative;
@@ -55,14 +98,13 @@
   outline: none !important;
   position: relative;
   display: block;
-  height: 30px;
+  height: 35px;
   width: 100%;
-  font-size: 120%;
+  font-size: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+  font-weight: normal;
 }
-
-
 
 .main-container {
   padding-top: 30px;
@@ -123,9 +165,6 @@ button{
 }
 
 
-/* Menu container */
-
-
 /* Filters section */
 
 .filter-div {
@@ -172,12 +211,28 @@ button{
   left: 50%;
   transform: translate(-50%, 0%);
 }
-
+.menu-title-div{
+  position: relative;
+  display: block;
+  text-align: center;
+}
 .menu-title {
   position: relative;
+  display: inline-block;
   font-size: 150%;
   margin: 25px auto 25px auto;
   text-align: center;
+}
+.menu-title::before{
+  content: '';
+  position: absolute;
+  display: block;
+  height: 1px;
+  width: 70px;
+  background-color: rgba(0, 0, 0, 0.6);
+  left: 0%;
+  top:50%;
+  transform: translate(-120%,-50%);
 }
 .menu-title::after{
   content: '';
@@ -186,11 +241,10 @@ button{
   height: 1px;
   width: 70px;
   background-color: rgba(0, 0, 0, 0.6);
-  top: 115%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  left: 100%;
+  top:50%;
+  transform: translate(20%,-50%);
 }
-
 /* Check boxes in sch menu */
 
 .checks{
@@ -341,16 +395,25 @@ label{
 .item-add-btn:hover {
   background-color: #588835;
 }
-
+.plan-lunch-title{
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 140%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
 .schedule-rep-btn {
   position: relative;
   display: block;
-  width: 40%;
+  width: 250px;
   height: 40px;
-  margin: 30px auto;
-  background-color: #353637;
+  margin: 10px auto;
+  /* background-color: #353637; */
+  background-color: #6DA942;
   color: #fff;
   border: none;
+  border-radius: 4px;
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
@@ -358,49 +421,11 @@ label{
 
 .schedule-rep-btn:hover {
   /* background-color: #D84656; */
-  background-color: #494a4b;
+  /* background-color: #494a4b; */
+  background-color: #588835;
 }
 
-/* Sch hover basket */
-.sc-hover-basket-div{
-  /* z-index: 7; */
-  position: fixed;
-  display: block;
-  top: 91%;
-  left: 8%;
-  background-color: rgba(0, 0, 0, 0.6);
-  height: 50px;
-  width: 200px;
-  border-radius: 50px;
-  cursor: pointer;
-}
-.sc-hover-basket-div .span {
-  display: flex;
-  display: -webkit-flex;
-  align-items: center;
-  -webkit-align-items: center;
-  justify-content: center;
-  -webkit-justify-content: center;
-  height: 100%;
-  width: 100%;
-  color: #fff;
-  text-decoration: none;
-}
 
-.sc-hover-basket-div h6 {
-  position: relative;
-  font-size: 105%;
-}
-
-.sc-hover-basket-number {
-  position: absolute;
-  top: -10px;
-  left: -45%;
-  margin-left: 10px;
-  background-color: #fa0000;
-  padding: 5px 10px;
-  border-radius: 50%;
-}
 .sc-ch-item img{
   height: 70px;
   width: 70px;
@@ -553,7 +578,7 @@ label{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 14.2857%;
+  height: 20%;
   width: 100%;
   border-bottom: 1px solid #666;
   cursor: pointer;
@@ -745,14 +770,12 @@ label{
   padding: 10px 10px;
 }
 
-
 /* Bottom div */
-
 .sc-ch-btm {
   position: relative;
   display: flex;
   display: -webkit-flex;
-  height: 5%;
+  height: 10%;
   width: 100%;
   margin: 0;
   justify-content: flex-end;
@@ -760,20 +783,9 @@ label{
   padding: 0 40px;
   overflow: hidden;
 }
-.sc-ch-err {
-  position: absolute;
-  display: block;
-  height: 100% !important;
-  min-width: 100px !important;
-  top: 50%;
-  left: 7%;
-  text-align: left;
-  transform: translate(0%, -50%);
-}
-
 .sc-ch-cancel-btn,
 .sc-ch-add-btn {
-  height: 90%;
+  
   width: auto;
   border-radius: 4px;
   border: none;
@@ -782,6 +794,7 @@ label{
 
 .sc-ch-cancel-btn {
   background-color: #fff;
+  height: 40px;
   color: #444;
   margin-right: 20px;
   border: 1px solid #444;
@@ -791,6 +804,7 @@ label{
   color: #fff;
   background-color: #6DA942;
   cursor: pointer;
+  height: 40px;
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
@@ -799,7 +813,57 @@ label{
 .sc-ch-add-btn:hover {
   background-color: #588835;
 }
+/* Sch hover basket */
+.sc-hover-basket-div{
+  /* z-index: 7; */
+  /* position: fixed; */
+  position: relative;
+  display: block;
+  margin-left: 30px;
+  /* top: 91%;
+  left: 8%; */
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 40px;
+  width: 150px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.sc-hover-basket-div .shop-basket-icon{
+  height: 40px;
+  width: 40px;
+}
+.sc-hover-basket-div .span {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+}
 
+.sc-hover-basket-div h6 {
+  position: relative;
+  font-size: 105%;
+}
+
+.sc-hover-basket-div .hover-basket-number {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  left: -45%;
+  margin-left: 10px;
+  background-color: #fa0000;
+  height: 20px;
+  width: 20px;
+  padding: 0;
+  border-radius: 50%;
+}
 
 /* Basket button for mobiles */
 

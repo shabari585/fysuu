@@ -146,7 +146,8 @@ input:active {
 }
 
 #continue-btn,
-#accept-btn,
+#otp-btn,
+#login-btn,
 #signup-btn {
   border: none;
   background-color: #b2b2b2;
@@ -176,10 +177,6 @@ input:active {
   height: 100%;
   background-color: transparent;
   border: none;
-}
-
-#reg-mobile {
-  width: 90%;
 }
 
 #reg-terms-agree {

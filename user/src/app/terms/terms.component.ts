@@ -3,6 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { AppComponent } from "../app.component";
 import { Router, RouterModule, NavigationEnd } from "@angular/router";
 import { AuthService } from "../services/auth.service";
+import { DatePipe } from '@angular/common';
+import * as moment from 'moment';
 declare var $: any;
 
 @Component({
@@ -11,13 +13,17 @@ declare var $: any;
   styleUrls: ['./terms.component.css', '../menu/menu.component.css']
 })
 export class TermsComponent implements OnInit {
+
   userEmail: string;
   userName: string;
   companyName: string;
   userMobile: string;
   userId: string;
+  basket_num:number;
+  today_one = moment();
+  dateForHeader:string;
 
-  constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService) { }
+  constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService, private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {
@@ -26,14 +32,31 @@ export class TermsComponent implements OnInit {
       }
       window.scrollTo(0, 0)
     });
+
+    this.dateForHeader = this.datePipe.transform(this.today_one, 'EEE, MMM d');
+
     this.title.setTitle('Terms - Fysu');
-    let user = this.authService.getUserFromLocal();
-    let user_parsed = JSON.parse(user);
-    this.userEmail = user_parsed.email;
-    this.userName = user_parsed.name;
-    this.companyName = user_parsed.company_name;
-    this.userMobile = user_parsed.mobile;
-    this.userId = user_parsed.id;
+
+    
+    this.basket_num = parseInt(localStorage.getItem('basket_number'));
+    
+    if(this.authService.loggedIn() == true){
+      let user = this.authService.getUserFromLocal();
+      let user_parsed = JSON.parse(user);
+      this.userEmail = user_parsed.email;
+      this.userName = user_parsed.name;
+      this.companyName = user_parsed.company_name;
+      this.userMobile = user_parsed.mobile;
+      this.userId = user_parsed.id;
+    }else{
+      this.basket_num = 0;
+    }
+    if(this.basket_num == undefined || this.basket_num == null || this.basket_num == 0 || isNaN(this.basket_num) == true){
+      // redirect to menu
+      this.basket_num = 0;
+    }else{
+      // this.basket_num;
+    }
   }
 
 }

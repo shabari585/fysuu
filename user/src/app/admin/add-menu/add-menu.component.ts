@@ -61,8 +61,8 @@ export class AddMenuComponent implements OnInit {
   day_three = moment().add(3, 'days');
   day_four = moment().add(4, 'days');
   day_five = moment().add(5, 'days');
-  day_six = moment().add(6, 'days');
-  day_seven = moment().add(7, 'days');
+  // day_six = moment().add(6, 'days');
+  // day_seven = moment().add(7, 'days');
 
   ngOnInit() {
     // Set title

@@ -3,6 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { AppComponent } from "../app.component";
 import { Router, RouterModule } from "@angular/router";
 import { AuthService } from "../services/auth.service";
+import { AdminServicesService } from "../services/admin-services.service";
+import { DatePipe } from '@angular/common';
 import * as shortid from 'shortid';
 import * as moment from 'moment';
 declare var $: any;
@@ -16,7 +18,7 @@ declare var $: any;
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private authService: AuthService, private title: Title,private router:Router) {}
+  constructor(private authService: AuthService, private title: Title,private router:Router,private getMenu: AdminServicesService, private datePipe: DatePipe) {}
 
   addresses= [];
   userId: string;
@@ -82,6 +84,7 @@ export class CheckoutComponent implements OnInit {
 
   delivery_fee = 30;
   total_price:number;
+  total_to_pay:number;
 
   tab_one:object;
   tab_two:object;
@@ -116,17 +119,32 @@ export class CheckoutComponent implements OnInit {
   selected_address:string;
   payment_method:string;
   deliveryInst:string = '';
+  rewardPoints:number;
 
+  basket_num:number;
+
+  rewardPointsPermissions:boolean = false;
+  redeemable:number = 0;
+  discount:number = 0;
+  deduct_points:number = 0;
+  remainingPoints:number = 0;
+
+  points_earned:number = 0;
+
+  today_one = moment();
+  dateForHeader:string;
+  original_address :string;
+  placeholder_address :string;
 
   ngOnInit() {
     // Getting orders
     this.title.setTitle('Fysu - Checkout');
 
+    this.dateForHeader = this.datePipe.transform(this.today_one, 'EEE, MMM d');
+
     // Get basketnumber from localstorage
-    let basket_num = parseInt(localStorage.getItem('basket_number'));
-    // alert(basket_num);
-    // alert(isNaN(basket_num));
-    if(basket_num == undefined || basket_num == null || basket_num == 0 || isNaN(basket_num) == true){
+    this.basket_num = parseInt(localStorage.getItem('basket_number'));
+    if(this.basket_num == undefined || this.basket_num == null || this.basket_num == 0 || isNaN(this.basket_num) == true){
       // redirect to menu
       this.router.navigate(['/menu']);
       // alert('no');
@@ -141,6 +159,36 @@ export class CheckoutComponent implements OnInit {
     this.companyName = user_parsed.company_name;
     this.userMobile = user_parsed.mobile;
     this.userId = user_parsed.id;
+
+    // Getting user reward points
+    this.authService.getUserRewards(this.userId).subscribe(res=>{
+      if(res.success){
+        this.rewardPoints = res.msg;
+        // Conditions
+        if(this.rewardPoints>100){
+          this.rewardPointsPermissions = true;
+          if(this.rewardPoints <189){
+            // Number of redeemable points are 100
+            this.redeemable = 100;
+            // Cost deductable
+            this.discount = 10;
+          }
+          if(this.rewardPoints>191 && this.rewardPoints <259){
+            // Number of redeemable points are 190
+            this.redeemable = 190;
+            // Cost deductable
+            this.discount = 20;
+          }
+          if(this.rewardPoints > 360){
+            // Number of redeemable points
+          }
+        }
+
+      }else{
+        this.rewardPoints = 0;
+        // Can't do anything
+      }
+    });
 
     // Get orders from local storage
     let s_orders = localStorage.getItem('all_orders');
@@ -371,10 +419,52 @@ export class CheckoutComponent implements OnInit {
     
     // Get location from local storage
     this.total_price = this.delivery_fee + this.today_total_price + this.day_one_total_price + this.day_two_total_price + this.day_three_total_price + this.day_four_total_price + this.day_five_total_price + this.day_six_total_price+this.tab_one_total_price+this.tab_two_total_price+this.tab_three_total_price;
+
+    this.total_to_pay = this.total_price;
+
+    // calculate points_earned from total_price
+     let rounded_num = Math.round(this.total_price/10);
+     this.points_earned = rounded_num;
+    // this.points_earned
+
+
     // this.address = localStorage.getItem('home_address');
     // console.log(this.address);
     
   }
+
+  // if redeem is clicked
+  redeemClicked(){
+    // Get total points
+    this.rewardPoints;
+    // Get redeemable points;
+    this.redeemable;
+    // Get discountable amount
+    this.discount;
+    // Remaining user points
+    this.remainingPoints = this.rewardPoints - this.redeemable;
+    // Update total price
+    this.total_to_pay = this.total_price - this.discount;
+    // Update rewards
+    this.rewardPoints = this.remainingPoints;
+    // disable button
+    $('#redeem-btn').css({'background-color':'#9a9a9a'});
+    $('#redeem-btn').prop('disabled',true);
+  }
+  addRewardPoints(){
+    // alert(this.points);
+    this.getMenu.postRewards(this.userName,this.deduct_points).subscribe(res=>{
+      if(res.success){
+        // this.flash.show('Updated', {
+        //   cssClass: 'alert-success',
+        //   timeout: 5000
+        // });
+        // this.userName='';
+        // this.points='';
+      }
+    });
+  }
+
   onLogoutClick() {
     this.authService.logout();
     this.router.navigate(['/home']);
@@ -481,5 +571,29 @@ export class CheckoutComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  editAddress(i, address){
+    this.original_address = address;
+    this.placeholder_address = address;
+    $('.db').css({'display':'flex'});
+  }
+  updateAddress(){
+    // alert('fd');
+    let addresses = {
+      user_id: this.userId,
+      original : this.original_address,
+      edited : this.placeholder_address
+    }
+    this.authService.updateAddress(addresses).subscribe(res=>{
+      if(res.success){
+        window.location.reload();
+      }else{
+        console.log(res.msg);
+      }
+    });
+  }
+  closeUpAddress(){
+    $('.db').css({'display':'none'});
   }
 }

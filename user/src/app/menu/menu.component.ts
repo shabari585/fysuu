@@ -45,9 +45,9 @@ export class MenuComponent implements OnInit {
   num_tab_two: number = 0;
   num_tab_three: number = 0;
 
-  tab_one_cost = 79;
-  tab_two_cost = 89;
-  tab_three_cost = 99;
+  tab_one_cost:number = 79;
+  tab_two_cost:number = 89;
+  tab_three_cost:number = 99;
 
 
   today_one = moment();
@@ -210,6 +210,7 @@ export class MenuComponent implements OnInit {
   time_slot_two_status = true;
   time_slot_three_status = true;
   time_slot_four_status = true;
+  dateForHeader:string;
 
   // slot_one_time_form = "08:40:00";
   slot_one_time_form = moment("08:60:00", "HH:mm:ss").format('hh:mm:ss A');
@@ -303,6 +304,7 @@ export class MenuComponent implements OnInit {
     this.p_last_day_five = this.datePipe.transform(this.last_day_five,'fullDate');
     this.p_last_day_six = this.datePipe.transform(this.last_day_six,'fullDate');  
 
+    this.dateForHeader = this.datePipe.transform(this.last_today_one,'EEE, MMM d');
 
     $(document).keyup(function (e) {
       if (e.keyCode == 27) {
@@ -1495,12 +1497,11 @@ export class MenuComponent implements OnInit {
           day_six: day_six,
           // notes: this.notesToChef
         }
-        console.log(this.allOrders);
         localStorage.setItem('all_orders',JSON.stringify(this.allOrders));
-        $('.sc-ch-err').html('Added!');
+        $('.added-db').css({'display':'flex'});
         setTimeout(function() {
-          $('.sc-ch-err').html('');
-        }, 5000);
+          $('.added-db').css({'display':'none'});
+        }, 1000);
   }
 
   // Close schedule menu
@@ -1586,22 +1587,21 @@ export class MenuComponent implements OnInit {
     switch (true) {
       case this.tab_one_status:
         this.num_tab_one_items = event.target.value;
-        this.tab_one_total_price = this.num_tab_one_items * this.tab_one_cost;
         break;
       case this.tab_two_status:
         this.num_tab_two_items = event.target.value;
-        this.tab_two_total_price = this.num_tab_two_items * this.tab_two_cost;
+        
         break;
         case this.tab_three_status:
         this.num_tab_three_items = event.target.value;
-        this.tab_three_total_price = this.num_tab_three_items * this.tab_three_cost;
+        
         break;
       default:
         break;
     }
   }
   todayAdd(tab){
-    // chack if user is loggedIn
+    // check if user is loggedIn
     if(this.authService.loggedIn() == true){
       $('.today-menu-back').css('display','flex');
       // Reset dropdowns in today-menu tab
@@ -1639,7 +1639,7 @@ export class MenuComponent implements OnInit {
   addTodayCartClicked(){
     switch (true) {
       case this.tab_one_status:
-      
+        this.tab_one_total_price = this.num_tab_one_items * this.tab_one_cost;
         // Add to orders
         this.today_tab_one_books = {
           name: this.tab_one,
@@ -1657,6 +1657,7 @@ export class MenuComponent implements OnInit {
         $('#rem-t-tab_one').show();
         break;
       case this.tab_two_status:
+        this.tab_two_total_price = this.num_tab_two_items * this.tab_two_cost;
       
         // Add to orders
         this.today_tab_two_books = {
@@ -1674,6 +1675,7 @@ export class MenuComponent implements OnInit {
          $('#rem-t-tab_two').show();
         break;
       case this.tab_three_status:
+        this.tab_three_total_price = this.num_tab_three_items * this.tab_three_cost;
         // Add to orders
         this.today_tab_three_books = {
           name: this.tab_three,
@@ -1756,7 +1758,6 @@ export class MenuComponent implements OnInit {
   
   navToChekout(){
     // if basket number is atleast one
-    // alert(this.tab_one_total_price);
     if(this.basketNumber>0){
       localStorage.setItem('basket_number',this.basketNumber.toString());
       this.router.navigate(['/checkout']); 

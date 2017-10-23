@@ -2,7 +2,7 @@
 
 <div class="fixed-dark-cover" id="login-fixed-dark-cover">
   <div class="email-input-div">
-    <h4>Please enter your email or mobile number to get started !</h4>
+    <h4>Please enter your email or mobile number to get started</h4>
     <!-- <label for="email" id="email-label">Email or Mobile</label><br> -->
     <input type="text" name="email" id="email" [(ngModel)]='initialLoginInput' placeholder="Email or Mobile number">
     <p class="err"></p>
@@ -35,13 +35,13 @@
     <span class="otp-span"><label for="reg-otp" id="reg-otp-label">Enter OTP</label>
     <input type="text" name="reg-otp" class="next-inputs"  [(ngModel)]='regOTPInput' id="reg-otp" (keyup)="otpKeyUp($event)" placeholder=""><br></span>
 
-    <h5 id="reg-terms-agree">By continuing, you are accepting Fysu Terms and Conditions</h5>
+    <h5 id="reg-terms-agree">By continuing, you are accepting <a routerLink='/terms' (click)='clickedOnTerms()'>Fysu Terms and Conditions</a></h5>
 
     <p class="err"></p>
 
     <div class="ls-btns-div">
       <div class="ls-btns-core-div">
-        <button type="button" class="ls-btns" id="accept-btn" (click)="OtpBtnClick()">Send OTP</button>
+        <button type="button" class="ls-btns" id="otp-btn" (click)="OtpBtnClick()">Send OTP</button>
         <button type="button" class="ls-btns" id="signup-btn" (click)="SignUpClick(regNameInput,regEmailInput,regMobileInput,regPwdInput,regOTPInput)"
           style="display:none">Register</button>
         <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button>
@@ -62,7 +62,7 @@
 
     <div class="ls-btns-div">
       <div class="ls-btns-core-div">
-        <button type="button" class="ls-btns" id="accept-btn" (click)="LoginSubmit(loginEmailInput,loginPasswordInput)">Login</button>
+        <button type="button" class="ls-btns" id="login-btn" (click)="LoginSubmit(loginEmailInput,loginPasswordInput)">Login</button>
         <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button>
       </div>
     </div>

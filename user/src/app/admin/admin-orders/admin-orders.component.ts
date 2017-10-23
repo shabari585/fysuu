@@ -93,8 +93,7 @@ export class AdminOrdersComponent implements OnInit {
     this.p_day_three = this.datePipe.transform(this.day_three, 'fullDate');
     this.p_day_four = this.datePipe.transform(this.day_four, 'fullDate');
     this.p_day_five = this.datePipe.transform(this.day_five, 'fullDate');
-    this.p_day_six = this.datePipe.transform(this.day_six, 'fullDate');
-    console.log(this.p_today_one);
+    // this.p_day_six = this.datePipe.transform(this.day_six, 'fullDate');
 
     this.disp_today_one = this.p_today_one;
     this.disp_day_one = this.p_day_one;
@@ -102,7 +101,7 @@ export class AdminOrdersComponent implements OnInit {
     this.disp_day_three = this.p_day_three;
     this.disp_day_four = this.p_day_four;
     this.disp_day_five = this.p_day_five;
-    this.disp_day_six = this.p_day_six;
+    // this.disp_day_six = this.p_day_six;
 
     // Get orders
     this.getMenu.getOrders().subscribe(res=>{
@@ -139,7 +138,6 @@ export class AdminOrdersComponent implements OnInit {
                   var e = this.next_days[key];
                   
                   if (e != null) {
-                    // console.log(e.date);
                     switch (e.date) {
 
                       case this.p_today_one:
@@ -147,8 +145,6 @@ export class AdminOrdersComponent implements OnInit {
 
                         let iind = { user_id: user_id, user_name: username, user_mobile: user_mobile, user_email: user_email, order_id: order_id, order_time: order_time, delivery_address: element.order.delivery_address, order: e, payment_type: element.order.payment_method };
                         this.today_orders.push(iind);
-                        // console.log('now today');
-                        // console.log(iind);
 
                       break;
 

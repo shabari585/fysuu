@@ -4,7 +4,7 @@
   </div>
   <div class="location-input-div">
     <div class="location-enter-div">
-      <input type="search" class="location-search-input"  [(ngModel)]="locationEntry" placeholder="Type your location here">
+      <input type="search" class="location-search-input"  [(ngModel)]="locationEntry" placeholder="Ex: Madhapur">
       <!-- <button type="button" class="locate-me-btn" (click)="geoLocate()">Locate me</button> -->
       <div class="locate-me-btn" (click)="geoLocate()"><span> Locate me</span></div>
     </div>
@@ -19,7 +19,7 @@
     
       <div class="account-trig-div" *ngIf="authService.loggedIn()">
         <div class="dropdown home-dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" style="color:#000">{{userName}}</button>
+          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" style="color:#000">{{userName}}&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
             <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings'>My Profile</a></li>
             <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/my-orders'>My Orders</a></li>
@@ -50,9 +50,9 @@
   <div class="dark-cover">
     <div class="container">
 
-      <div class="cdb">
+      <!-- <div class="cdb">
         <h2>Coming Soon</h2>
-      </div>
+      </div> -->
 
       <!-- Header for tablets and desktops -->
       <header class="m-main-header visible-lg visible-md">
@@ -78,7 +78,7 @@
               </li>
               <li class="account-trig-div" *ngIf="authService.loggedIn()">
                 <div class="dropdown home-dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{userName}}</button>
+                  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{userName}}&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></button>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                     <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings'>My Profile</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/my-orders'>My Orders</a></li>
@@ -119,7 +119,7 @@
 
           <div class="location-input-div location-input-scrolltop-helper">
             <div class="location-enter-div">
-              <input type="search" class="location-search-input" placeholder="Type your location here" [(ngModel)]="locationEntry">
+              <input type="search" class="location-search-input" placeholder="Ex: Madhapur" [(ngModel)]="locationEntry">
               <!-- <button type="button" class="locate-me-btn" (click)="geoLocate()"><span>Locate me</span></button> -->
               <div class="locate-me-btn" (click)="geoLocate()"><span> Locate me</span></div>
             </div>

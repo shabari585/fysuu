@@ -13,16 +13,16 @@
             <img src="../../assets/logo/logo_black.png">
         </div>
         <ul class="list-inline det-ul visible-xs visible-sm pull-right">
-            <li>
+            <!-- <li>
                 <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp;</button>
-            </li>
+            </li> -->
         </ul>
         <ul class="list-inline det-ul pull-left visible-md visible-lg">
-            <li>
+            <!-- <li>
                 <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp;</button>
-            </li>
+            </li> -->
             <li>
-                <a href="" class="dets-div-btns selected" id="our-menu-btn">Our Menu</a>
+                <a routerLink='/menu' class="dets-div-btns selected" id="our-menu-btn">Today, {{dateForHeader}}</a>
             </li>
             <!-- <li>
                 <a class="dets-div-btns" id="schedule-menu-btn" (click)='schMenuBtn(schTrigBtn)'>Schedule Menu</a>
@@ -35,7 +35,7 @@
                 </li>
                 <li class="account-trig-div" *ngIf="authService.loggedIn()">
                     <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{userName}}</button>
+                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{userName}}&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                             <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings'>My Profile</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/my-orders'>My Orders</a></li>
@@ -46,6 +46,9 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" (click)="onLogoutClick()">Logout</a></li>
                         </ul>
                     </div>
+                </li>
+                <li class="head-basket" routerLink='/checkout'>
+                    Basket &nbsp; <span class="head-basket-num">{{basketNumber}}</span> 
                 </li>
             </ul>
             
@@ -89,7 +92,9 @@
             </div>
         </div> -->
         <div>
-            <h2 class="menu-title">COMBO</h2>
+            <div class="menu-title-div">
+                <h2 class="menu-title">HOME FOOD IS HERE</h2>
+            </div>
             {{curtime}}
             <div class="row">
 
@@ -192,21 +197,26 @@
                 </div>
                 
             </div>
+            <h5 class="plan-lunch-title">
+                Plan your lunch in advance for next 5 days
+            </h5>
             <button type="button" class="schedule-rep-btn" (click)="schMenuBtn()">
                 SCHEDULE MENU
             </button>
             <!-- Today's Menu -->
             <div class="today-menu-back">
                 <div class="today-core">
+                    <label for="t-menu-select-slot" id="reg-name-label">Select Delivery Slot</label>
                     <label for="">
-                        <select name="" id="t-menu-select-slot" (change)='todayMenuSlotSelect($event)'>
+                            <select name="" id="t-menu-select-slot" (change)='todayMenuSlotSelect($event)'>
                             <option value="slot_one">12:00 PM - 12:45 PM</option>
-                            <option value="slot_two">12:45 PM - 1:30 PM</option>
-                            <option value="slot_three">1:30 PM - 2:15 PM</option>
-                            <option value="slot_four">2:15 - 3:00 PM</option>
+                            <option value="slot_two">12:45 PM - 01:30 PM</option>
+                            <option value="slot_three">01:30 PM - 02:15 PM</option>
+                            <option value="slot_four">02:15 - 03:00 PM</option>
                         </select>
                     </label>
                     <br>
+                    <label for="t-menu-select-times" id="reg-name-label">Select Quantity</label>
                     <label for="">
                         <select name="" id="t-menu-select-times" (change)='todayMenuTimesSelect($event)'>
                             <option value="1">1</option>
@@ -251,17 +261,10 @@
                             <li class="calender-li" (click)="loadDay(day_five)">
                                 <h5>{{day_five | date: 'fullDate'}}</h5>
                             </li>
-                            <li class="calender-li" (click)="loadDay(day_six)">
+                            <!-- <li class="calender-li" (click)="loadDay(day_six)">
                                 <h5>{{day_six | date: 'fullDate'}}</h5>
-                            </li>
+                            </li> -->
                         </ul>
-                    </div>
-
-                    <div class="sc-hover-basket-div visible-md visible-lg" (click)='navToChekout()'>
-                        <span class="span">
-                            <div class="shop-basket-icon"><span class="hover-basket-number">{{basketNumber}}</span><i class="fa fa-shopping-basket" aria-hidden="true"></i></div>
-                            <h6>Basket</h6><i class="fa fa-arrow-right" aria-hidden="true"></i>
-                        </span>
                     </div>
 
                 </div>
@@ -283,8 +286,8 @@
                                     <select (change)=slotSelected($event) class="slot-select">
                                     <option value="slot_one">12:00 PM - 12:45 PM</option>
                                     <option value="slot_two">12:45 PM - 1:30 PM</option>
-                                    <option value="slot_three">1:30 PM - 2:15 PM</option>
-                                    <option value="slot_four">2:15 - 3:00 PM</option>
+                                    <option value="slot_three">01:30 PM - 02:15 PM</option>
+                                    <option value="slot_four">02:15PM - 03:00 PM</option>
                                 </select>
                                 </div>
                             </div>
@@ -303,8 +306,8 @@
                                     <div *ngFor="let cat of categories">
                                     <div *ngIf="cat.name == 'Vegetarian'">
                                     <div *ngFor="let sub of cat.subs">
-                                        
-
+                                    
+                                   
                                     <h5 class="sc-ch-mid-heads">{{sub}}</h5>
                                     <div class="sc-ch-menu-divs">
                                         <ul class="list-inline">
@@ -583,7 +586,7 @@
                                     </div>
                                 </div>
                                 <!-- Day six div -->
-                                <div class="sc-ch-mid day-divs" id="day-six-div">
+                                <!-- <div class="sc-ch-mid day-divs" id="day-six-div">
                                     <div *ngFor="let cat of categories">
                                     <div *ngIf="cat.name == 'Vegetarian'">
                                     <div *ngFor="let sub of cat.subs">
@@ -631,20 +634,26 @@
                                     </div>
                                     </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </li>
 
                         </ul>
 
                         <!-- Schedule menu bottom -->
                         <div class="sc-ch-btm">
-                            <div class="sc-ch-err"></div>
-                            <button type="button" class="sc-ch-cancel-btn" (click)="scClose()">CANCEL</button>
+                            <!-- <button type="button" class="sc-ch-cancel-btn" (click)="scClose()">CANCEL</button> -->
                             <button type="button" class="sc-ch-add-btn" (click)="addCartClicked()">ADD TO CART</button>
+                            <div class="sc-hover-basket-div visible-md visible-lg" (click)='navToChekout()'>
+                                <span class="span">
+                                    <div class="shop-basket-icon"><span class="hover-basket-number">{{basketNumber}}</span><i class="fa fa-shopping-basket" aria-hidden="true"></i></div>
+                                    <h6>Basket</h6><i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="clearfix"></div>
+
             </div>
         </div>
         <!-- Basket -->
@@ -665,3 +674,8 @@
     </span>
 </div>
 
+<div class="added-db">
+    <div class="added-wb">
+        <h3>Added !</h3>
+    </div>
+</div>
