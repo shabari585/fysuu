@@ -229,35 +229,74 @@ export class MenuComponent implements OnInit {
       window.scrollTo(0, 0)
     });
 
+    var m_cur_time = moment(new Date());
+    // var endTime = moment('3:00pm', 'h:mma');
+    // if(m_cur_time.isBefore(endTime)){
+    //   alert('yes');
+    // }else{
+    //   alert('no');
+    // }
+
+    // Time validations 
+
+    // Check if current time is past 02:14PM
+
+    var last_time = moment('2:14pm', 'h:mma');
+    var slot_three_end_time = moment('1:29pm','h:mma');
+    var slot_two_end_time = moment('12:44pm','h:mma');
+    var slot_one_end_time = moment('11:59am','h:mma');
+
+    if(m_cur_time.isAfter(last_time)){
+      // Disable all today slots
+      $('#slot_one_option').prop('disabled',true);
+      $('#slot_two_option').prop('disabled',true);
+      $('#slot_three_option').prop('disabled',true);
+      $('#slot_four_option').prop('disabled',true);
+    }else if(m_cur_time.isAfter(slot_three_end_time)){
+      // Diable first three slots
+      $('#slot_one_option').prop('disabled',true);
+      $('#slot_two_option').prop('disabled',true);
+      $('#slot_three_option').prop('disabled',true);
+    }else if(m_cur_time.isAfter(slot_two_end_time)){
+      // Diable first two slots
+      $('#slot_one_option').prop('disabled',true);
+      $('#slot_two_option').prop('disabled',true);
+    }else if(m_cur_time.isAfter(slot_one_end_time)){
+      // Diable first slot
+      $('#slot_one_option').prop('disabled',true);
+    }
+
+
+
     // Getting current date and time
     $(document).ready(function(){
       setInterval(function(){
-        // $('#ttime').html(moment(new Date()).format('LTS'));
-        // $('#tttime').html("7:05:00 PM");
-
-        var cur_time = moment(new Date()).format('LTS');
-
-        switch (cur_time) {
-          case "11:59:00 AM":
-          // Disable slot one
-            
-            break;
-          case "12:44:00 PM":
-          // Disable slot two
-            
-            break;
-          case "1:29:00 PM":
-          // Disable slot three
-            
-            break;
-          case "2:14:00 PM":
-          // Disable slot four
-            
-            break;
-          
-        
-          default:
-            break;
+        var m_cur_time = moment(new Date());
+        // Time validations 
+        // Check if current time is past 02:14PM
+        var last_time = moment('2:14pm', 'h:mma');
+        var slot_three_end_time = moment('1:29pm','h:mma');
+        var slot_two_end_time = moment('12:44pm','h:mma');
+        var slot_one_end_time = moment('11:59am','h:mma');
+    
+        if(m_cur_time.isAfter(last_time)){
+          // Disable all today slots
+          $('#slot_one_option').prop('disabled',true);
+          $('#slot_two_option').prop('disabled',true);
+          $('#slot_three_option').prop('disabled',true);
+          $('#slot_four_option').prop('disabled',true);
+        }else if(m_cur_time.isAfter(slot_three_end_time)){
+          // Diable first three slots
+          $('#slot_one_option').prop('disabled',true);
+          $('#slot_two_option').prop('disabled',true);
+          $('#slot_three_option').prop('disabled',true);
+        }else if(m_cur_time.isAfter(slot_two_end_time)){
+          // Diable first two slots
+          $('#slot_one_option').prop('disabled',true);
+          $('#slot_two_option').prop('disabled',true);
+        }else if(m_cur_time.isAfter(slot_one_end_time)){
+          // Diable first slot
+          $('#slot_one_option').prop('disabled',true);
         }
 
       },1000)
@@ -325,42 +364,42 @@ export class MenuComponent implements OnInit {
     });
 
     // Get day one menu
-      this.getMenuItems.getDatesMenu(this.p_day_one,this.p_last_day_one).subscribe(do_res=>{
-        if(do_res.success){
-          this.day_one_menu = do_res.msg;
-          if (this.day_one_menu.length < 1) {
-            // Menu does't exist for today
-          } else {
+    this.getMenuItems.getDatesMenu(this.p_day_one,this.p_last_day_one).subscribe(do_res=>{
+      if(do_res.success){
+        this.day_one_menu = do_res.msg;
+        if (this.day_one_menu.length < 1) {
+          // Menu does't exist for today
+        } else {
 
-            let un = [];
-            this.day_one_menu.forEach(e => {
-              if (un.length < 1) {
-                un.push(e.item_id);
+          let un = [];
+          this.day_one_menu.forEach(e => {
+            if (un.length < 1) {
+              un.push(e.item_id);
+            } else {
+              if (un.includes(e.item_id)) {
+                // Do nothing
               } else {
-                if (un.includes(e.item_id)) {
-                  // Do nothing
-                } else {
-                  un.push(e.item_id);
-                }
+                un.push(e.item_id);
               }
-            });
-
-            if (un.length > 0) {
-              // For each item id
-              un.forEach(el => {
-                this.getMenuItems.getItemDetails(el).subscribe(idets => {
-                  if (idets.success) {
-                    idets.msg[0].checked = false;
-                    idets.msg[0].date = this.p_day_one;
-                    this.day_one_item_dets.push(idets.msg);
-                  }
-                });
-              });
-              this.day_one_books = this.day_one_item_dets;
             }
+          });
+
+          if (un.length > 0) {
+            // For each item id
+            un.forEach(el => {
+              this.getMenuItems.getItemDetails(el).subscribe(idets => {
+                if (idets.success) {
+                  idets.msg[0].checked = false;
+                  idets.msg[0].date = this.p_day_one;
+                  this.day_one_item_dets.push(idets.msg);
+                }
+              });
+            });
+            this.day_one_books = this.day_one_item_dets;
           }
         }
-      });
+      }
+    });
     // Get day two menu
     this.getMenuItems.getDatesMenu(this.p_day_two,this.p_last_day_two).subscribe(dt_res => {
       if (dt_res.success) {

@@ -33,7 +33,9 @@ a:hover {
   font-family: 'Bubblegum Sans', cursive;
   font-size: 340%;
 }
-
+button p{
+  line-height: 0 !important;
+}
 button:active,
 button:focus,
 input:focus,
@@ -47,19 +49,16 @@ input:active {
 .err{
   margin: 10px 0;
   color: #6DA942;
-  font-size: 80%;
+  font-size: 70%;
 }
 
 .fixed-dark-cover {
   z-index: 10;
   position: fixed;
   display: flex;
-  display: -webkit-flex;
   display: none;
   justify-content: center;
-  -webkit-justify-content: center;
   align-items: center;
-  -webkit-align-items: center;
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.8);
@@ -175,13 +174,6 @@ input:active {
   width: 100%;
 }
 
-#country-code {
-  width: 10%;
-  height: 100%;
-  background-color: transparent;
-  border: none;
-}
-
 #reg-terms-agree {
   margin-bottom: 20px;
 }
@@ -226,6 +218,46 @@ input:active {
   border-radius: 3px;
 }
 
+
+.locate-me-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 30px;
+  right: 5px;
+  top: 5px;
+  width: 120px;
+  color: #333;
+  border: none;
+  border-radius: 3px;
+  font-size: 90%;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  background-color: #d4d4d4;
+  cursor: pointer;
+}
+.locate-me-btn span{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%,-50%);
+  font-size: 100%;
+  line-height: 0 !important;
+}
+.locate-me-btn:hover {
+  background-color: #c6c6c6;
+}
+
+.locate-me-btn:active {
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
+}
 .see-menu-btn {
   margin: 0;
   height: 40px;

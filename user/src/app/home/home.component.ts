@@ -74,52 +74,52 @@ export class HomeComponent implements OnInit {
       });
     });
 
-    showSentence();
-    // Typed effect
+    // showSentence();
+    // // Typed effect
 
-    function showSentence() {
-      var tOut = setTimeout(showSentence, 8000);
+    // function showSentence() {
+    //   var tOut = setTimeout(showSentence, 8000);
 
 
-      // First 
-      setTimeout(function () {
-        $('#t-two-one').hide();
-        $('#t-two-two').hide();
-        $('#t-three-one').hide();
-        $('#t-three-two').hide();
-        $('#t-one-one').fadeIn(500);
-      }, 0);
+    //   // First 
+    //   setTimeout(function () {
+    //     $('#t-two-one').hide();
+    //     $('#t-two-two').hide();
+    //     $('#t-three-one').hide();
+    //     $('#t-three-two').hide();
+    //     $('#t-one-one').fadeIn(500);
+    //   }, 0);
 
-      setTimeout(function () {
-        $('#t-one-two').fadeIn(500);
-      }, 1000);
+    //   setTimeout(function () {
+    //     $('#t-one-two').fadeIn(500);
+    //   }, 1000);
 
-      // Second lines
-      setTimeout(function () {
-        $('#t-one-one').hide();
-        $('#t-one-two').hide();
-        $('#t-three-one').hide();
-        $('#t-three-two').hide();
-        $('#t-two-one').fadeIn(500);
-      }, 3000);
+    //   // Second lines
+    //   setTimeout(function () {
+    //     $('#t-one-one').hide();
+    //     $('#t-one-two').hide();
+    //     $('#t-three-one').hide();
+    //     $('#t-three-two').hide();
+    //     $('#t-two-one').fadeIn(500);
+    //   }, 3000);
 
-      setTimeout(function () {
-        $('#t-two-two').fadeIn(500);
-      }, 4000);
+    //   setTimeout(function () {
+    //     $('#t-two-two').fadeIn(500);
+    //   }, 4000);
 
-      // Third lines
-      setTimeout(function () {
-        $('#t-one-one').hide();
-        $('#t-one-two').hide();
-        $('#t-two-one').hide();
-        $('#t-two-two').hide();
-        $('#t-three-one').fadeIn(500);
-      }, 5500);
+    //   // Third lines
+    //   setTimeout(function () {
+    //     $('#t-one-one').hide();
+    //     $('#t-one-two').hide();
+    //     $('#t-two-one').hide();
+    //     $('#t-two-two').hide();
+    //     $('#t-three-one').fadeIn(500);
+    //   }, 5500);
 
-      setTimeout(function () {
-        $('#t-three-two').fadeIn(500)
-      }, 6500);
-    }
+    //   setTimeout(function () {
+    //     $('#t-three-two').fadeIn(500)
+    //   }, 6500);
+    // }
   }
   public gotoHowitWorks() {
     $('html, body').animate({ scrollTop: $(".how-it-works-div").offset().top - 70 }, 1000);

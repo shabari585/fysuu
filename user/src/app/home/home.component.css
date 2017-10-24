@@ -21,13 +21,122 @@ a {
   text-decoration: none !important;
 }
 
-
 /* Typed font */
 
-.typed,
-.typed-two {
+.typed-one,
+.typed-two,.typed-three {
   font-weight: 300;
   letter-spacing: 1px;
+  position: absolute;
+  opacity: 0;
+}
+.typed-one #t-one-two{
+  opacity: 0;
+  animation: typedonetwoanime 10s ease-in infinite;
+}
+@keyframes typedonetwoanime{
+  0%,100%{
+    opacity: 0;
+  }
+  6%{
+    opacity: 0;
+  }
+  10%{
+    opacity: 1;
+  }
+  30%{
+    opacity: 1;
+  }
+  33%{
+    opacity: 0;
+  }
+  99%{
+    opacity: 0;
+  }
+}
+.typed-two #t-two-two{
+  opacity: 0;
+  animation: typedtwotwoanime 10s ease-in infinite;
+}
+@keyframes typedtwotwoanime{
+  0%,100%{
+    opacity: 0;
+  }
+  32%{
+    opacity: 0;
+  }
+  38%{
+    opacity: 0;
+  }
+  42%{
+    opacity: 1;
+  }
+  63%{
+    opacity: 1;
+  }
+  66%{
+    opacity: 0;
+  }
+}
+.typed-one{
+  animation: typedoneanime 10s ease-in infinite;
+}
+.typed-two{
+  animation: typedtwoanime 10s ease-in infinite;
+}
+.typed-three{
+  animation: typedthreeanime 10s ease-in infinite;
+}
+@keyframes typedoneanime{
+  /* Visible for 0%-33% */
+  0%,100%{
+    opacity: 1;
+  }
+  30%{
+    opacity: 1;
+  }
+  33%{
+    opacity: 0;
+  }
+  99%{
+    opacity: 0;
+  }
+}
+@keyframes typedtwoanime{
+  /* Visible for 33%-66% */
+  0%,100%{
+    opacity: 0;
+  }
+  32%{
+    opacity: 0;
+  }
+  38%{
+    opacity: 1;
+  }
+  63%{
+    opacity: 1;
+  }
+  66%{
+    opacity: 0;
+  }
+}
+@keyframes typedthreeanime{
+  /* Visible for 66%-99% */
+  0%,100%{
+    opacity: 0;
+  }
+  65%{
+    opacity: 0;
+  }
+  70%{
+    opacity: 1;
+  }
+  93%{
+    opacity: 1;
+  }
+  99%{
+    opacity: 0;
+  }
 }
 
 /* Fixed scroll header */
