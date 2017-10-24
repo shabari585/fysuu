@@ -46,6 +46,8 @@ input:active {
 
 .err{
   margin: 10px 0;
+  color: #6DA942;
+  font-size: 80%;
 }
 
 .fixed-dark-cover {
@@ -68,8 +70,9 @@ input:active {
   display: block;
   background-color: #fff;
   padding: 20px 40px;
+  border-radius: 4px;
   color: #555;
-  width: 40vw;
+  width: 400px;
 }
 .fixed-dark-cover .email-input-div #email {
   margin-bottom: 0 !important;

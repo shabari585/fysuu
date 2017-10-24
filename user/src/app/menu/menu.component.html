@@ -24,9 +24,6 @@
             <li>
                 <a routerLink='/menu' class="dets-div-btns selected" id="our-menu-btn">Today, {{dateForHeader}}</a>
             </li>
-            <!-- <li>
-                <a class="dets-div-btns" id="schedule-menu-btn" (click)='schMenuBtn(schTrigBtn)'>Schedule Menu</a>
-            </li> -->
         </ul>
         <div class="scroll-login-div pull-right  visible-md visible-lg">
             <ul class="list-inline sc-ul">
@@ -212,7 +209,7 @@
                             <option value="slot_one">12:00 PM - 12:45 PM</option>
                             <option value="slot_two">12:45 PM - 01:30 PM</option>
                             <option value="slot_three">01:30 PM - 02:15 PM</option>
-                            <option value="slot_four">02:15 - 03:00 PM</option>
+                            <option value="slot_four">02:15 PM - 03:00 PM</option>
                         </select>
                     </label>
                     <br>
@@ -230,6 +227,7 @@
                             <option value="10">10</option>
                         </select>
                     </label>
+                    <label id="letter-label"><input type="checkbox" name="" id="" (change)='letterCheck($event)'> Wish to write a letter to beloved one? <b> (&#8377;5) </b> </label>
                     <div class="today-btns">
                         <button type="button" class="sc-ch-cancel-btn" (click)="tdClose()">CANCEL</button>
                         <button type="button" class="sc-ch-add-btn" (click)="addTodayCartClicked()">ADD TO CART</button>

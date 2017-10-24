@@ -80,6 +80,7 @@ export class AppComponent implements OnInit {
           }
       }
     });
+    
   }
 
 
@@ -130,9 +131,40 @@ export class AppComponent implements OnInit {
             // Email exists
             $('#next-login-fixed-dark-cover').css({ 'display': 'flex' });
             this.loginEmailInput = this.initialLoginInput;
+            $('#login-password').keyup(function(e){
+              let inp = $(this).val();
+              if(inp.length>5){
+                $('#login-btn').css({'background-color':'#6DA942'});
+              }else{
+                $('#login-btn').css({'background-color':'#b2b2b2'});
+              }
+            });
           }else{
             $('#next-reg-fixed-dark-cover').css({ 'display': 'flex' });
             this.regEmailInput = this.initialLoginInput;
+            $('#next-reg-fixed-dark-cover').keyup(function(e) {
+              let regname = $('#reg-name').val();
+              let regemail = $('#reg-email').val();
+              let regmobile = $('#reg-mobile').val();
+              let regpwd = $('#reg-pwd').val();
+              let otp = $('#reg-otp').val();
+              // Validate inputs
+              if (
+                regname && 
+                regemail && 
+                regmobile && 
+                regpwd
+              ){
+                if(regpwd.length>5){
+                  $('#otp-btn').css({'background-color':'#6DA942'});
+                  if(otp){
+                    $('#signup-btn').css({'background-color':'#6DA942'});
+                  }
+                }
+              }else{
+                $('#otp-btn').css({'background-color':'#b2b2b2'});
+              }
+            });
           }
         });
         $('.err').html('');
@@ -154,19 +186,14 @@ export class AppComponent implements OnInit {
         
       } else {
         $('.err').html('Please enter valid Email or Mobile number');
+        $('#email').css({'border-color':'#6DA942'});
       }
     } else {
       $('.err').html('Please enter valid Email or Mobile number');
+      $('#email').css({'border-color':'#6DA942'});
     }
   }
 
-  // On clicking enter OTP button
-  public OtpBtnClick() {
-    $('.otp-span').show('slow');
-    $('#accept-btn').hide();
-    $('#signup-btn').css({ 'display': 'block' });
-
-  }
 
   public otpKeyUp(event: any) {
     var otp = event.target.value;
@@ -223,8 +250,62 @@ export class AppComponent implements OnInit {
       }
     }else{
       $('.err').html('All fields are required');
+      if(this.validate.validateInput(loginEmailInput)){
+        $('#login-email').css({'border-color':'#6DA942'});
+      }
     }
     
+  }
+
+   // On clicking enter OTP button
+   public OtpBtnClick() {
+
+    $('.err').html('');
+    // Validate inputs
+    if (
+      this.validate.validateInput(this.regNameInput) && 
+      this.validate.validateInput(this.regEmailInput) && 
+      this.validate.validateInput(this.regMobileInput) && 
+      this.validate.validateInput(this.regPwdInput)
+    ){
+      // Validate Email and Mobile
+      if(this.validate.validateEmail(this.regEmailInput)){
+        if(this.validate.validateMobile(this.regMobileInput)){
+          if(this.regPwdInput.length > 6){
+            $('.otp-span').show('slow');
+            $('#otp-btn').hide();
+            $('#signup-btn').css({ 'display': 'block' });
+
+          }else{
+            $('.err').html('Please Enter password with atleast 6 characters');
+            $('#reg-pwd').css({'border-color':'#6DA942'});
+          }
+        }else{
+          $('.err').html('Please Enter Valid Mobile number');
+          $('#reg-mobile').css({'border-color':'#6DA942'});
+        }
+      }else{
+        $('.err').html('Please Enter Valid Email');
+        $('#reg-email').css({'border-color':'#6DA942'});
+      }
+    }else{
+      $('.err').html('All input fields are required');
+      if(!this.validate.validateInput(this.regNameInput)){
+        $('#reg-name').css({'border-color':'#6DA942'});
+      }
+      if(!this.validate.validateInput(this.regEmailInput)){
+        $('#reg-email').css({'border-color':'#6DA942'});
+      }
+      if(!this.validate.validateInput(this.regMobileInput)){
+        $('#reg-mobile').css({'border-color':'#6DA942'});
+      }
+      if(!this.validate.validateInput(this.regPwdInput)){
+        $('#reg-pwd').css({'border-color':'#6DA942'});
+      }
+    }
+
+    
+
   }
 
   public SignUpClick(regNameInput: string, regEmailInput: string, regMobileInput: string, regPwdInput: string, regOTPInput: string) {
@@ -266,15 +347,33 @@ export class AppComponent implements OnInit {
               }
             });
 
+          }else{
+            $('.err').html('Please Enter password with atleast 6 characters');
+            $('#reg-pwd').css({'border-color':'#6DA942'});
           }
         }else{
           $('.err').html('Please Enter Valid Mobile number');
+          // Hightlight mogile number
+          $('#reg-mobile').css({'border-color':'#6DA942'});
         }
       }else{
         $('.err').html('Please Enter Valid Email');
+        $('#reg-email').css({'border-color':'#6DA942'});
       }
     }else{
       $('.err').html('All input fields are required');
+      if(!this.validate.validateInput(this.regNameInput)){
+        $('#reg-name').css({'border-color':'#6DA942'});
+      }
+      if(!this.validate.validateInput(this.regEmailInput)){
+        $('#reg-email').css({'border-color':'#6DA942'});
+      }
+      if(!this.validate.validateInput(this.regMobileInput)){
+        $('#reg-mobile').css({'border-color':'#6DA942'});
+      }
+      if(!this.validate.validateInput(this.regPwdInput)){
+        $('#reg-pwd').css({'border-color':'#6DA942'});
+      }
     }
 
     $('.login-trig-div').hide();
@@ -303,7 +402,7 @@ export class AppComponent implements OnInit {
 
   onLogoutClick() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
     return false;
   }
 

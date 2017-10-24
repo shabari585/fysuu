@@ -85,28 +85,53 @@
           <!-- Address statement -->
 
           <div class="user-address-div">
-
-            <div *ngFor="let address of addresses;let i = index">
-              <label style="cursor:pointer">
-              <div class="address-container">
-                <div class="user-address-item">
-                  <div class="user-address pull-left">
-                    <div class="pull-left">
-                      <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)">
+            <div *ngIf='one_address == true'>
+              <div *ngFor="let address of addresses;let i = index">
+                <label style="cursor:pointer">
+                <div class="address-container">
+                  <div class="user-address-item">
+                    <div class="user-address pull-left">
+                      <div class="pull-left">
+                        <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)">
+                      </div>
+                      <div class="pull-left address-lines">
+                        <h5 class="address-lines-title">Address {{i+1}}</h5>
+                        {{address}}
+                      </div>
+                      <div class="clearfix"></div>
                     </div>
-                    <div class="pull-left address-lines">
-                      <h5 class="address-lines-title">Address {{i+1}}</h5>
-                      {{address}}
+                    <div class="address-edit-div pull-right">
+                      <button type="button" id="edit-address" (click)='editAddress(i,address)'>Edit</button>
                     </div>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="address-edit-div pull-right">
-                    <button type="button" id="edit-address" (click)='editAddress(i,address)'>Edit</button>
-                  </div>
-                  <div class="clearfix"></div>
                 </div>
+                </label>
               </div>
-              </label>
+            </div>
+            <div *ngIf='one_address == false'>
+              <div *ngFor="let address of addresses;let i = index">
+                <label style="cursor:pointer">
+                <div class="address-container">
+                  <div class="user-address-item">
+                    <div class="user-address pull-left">
+                      <div class="pull-left">
+                        <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)" checked>
+                      </div>
+                      <div class="pull-left address-lines">
+                        <h5 class="address-lines-title">Address {{i+1}}</h5>
+                        {{address}}
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="address-edit-div pull-right">
+                      <button type="button" id="edit-address" (click)='editAddress(i,address)'>Edit</button>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+                </label>
+              </div>
             </div>
 
 
@@ -395,6 +420,15 @@
           </div>
 
           <div class="charges-div">
+            <div class="total-fee">
+              <div class="pull-left">
+                <h6>Added letter :</h6>
+              </div>
+              <div class="pull-right cost-core">
+                &#8377;<span class="cost-number"> {{letter_price}}.00 </span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
             <div class="delivery-fee">
               <div class="pull-left">
                 <h6>Delivery Fee :</h6>

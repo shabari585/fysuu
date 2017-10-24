@@ -105,7 +105,10 @@
   border-radius: 4px;
   font-weight: normal;
 }
-
+#letter-label{
+  font-weight: normal;
+  margin-top: 10px;
+}
 .main-container {
   padding-top: 30px;
   background-color: #F2F5F6;

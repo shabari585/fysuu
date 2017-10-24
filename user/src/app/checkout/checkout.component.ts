@@ -82,7 +82,7 @@ export class CheckoutComponent implements OnInit {
   slot_three = '1:30 - 2:15';
   slot_four = '2:15 - 3';
 
-  delivery_fee = 30;
+  delivery_fee = 0;
   total_price:number;
   total_to_pay:number;
 
@@ -135,6 +135,9 @@ export class CheckoutComponent implements OnInit {
   dateForHeader:string;
   original_address :string;
   placeholder_address :string;
+  letter_price:number = 0;
+  letter_added:string = 'false';
+  one_address:boolean=false;
 
   ngOnInit() {
     // Getting orders
@@ -190,6 +193,14 @@ export class CheckoutComponent implements OnInit {
       }
     });
 
+    // Get if letter is added from localstorage
+    this.letter_added = localStorage.getItem('letter_added');
+
+    if(this.letter_added == 'true'){
+      this.letter_price = 5;
+    }else{
+
+    }
     // Get orders from local storage
     let s_orders = localStorage.getItem('all_orders');
     this.orders = JSON.parse(s_orders);
@@ -236,6 +247,9 @@ export class CheckoutComponent implements OnInit {
     this.authService.getUserAddressses(this.userId).subscribe(res => {
       if (res.success) {
         this.addresses = res.msg[0].address;
+        if(this.addresses.length == 1){
+          this.one_address = true;
+        }
       }
     })
     
@@ -418,7 +432,7 @@ export class CheckoutComponent implements OnInit {
 
     
     // Get location from local storage
-    this.total_price = this.delivery_fee + this.today_total_price + this.day_one_total_price + this.day_two_total_price + this.day_three_total_price + this.day_four_total_price + this.day_five_total_price + this.day_six_total_price+this.tab_one_total_price+this.tab_two_total_price+this.tab_three_total_price;
+    this.total_price = this.delivery_fee + this.today_total_price + this.day_one_total_price + this.day_two_total_price + this.day_three_total_price + this.day_four_total_price + this.day_five_total_price + this.day_six_total_price+this.tab_one_total_price+this.tab_two_total_price+this.tab_three_total_price+this.letter_price;
 
     this.total_to_pay = this.total_price;
 

@@ -211,6 +211,8 @@ export class MenuComponent implements OnInit {
   time_slot_three_status = true;
   time_slot_four_status = true;
   dateForHeader:string;
+  letter_added:boolean = false;
+  letter_price:number = 0;
 
   // slot_one_time_form = "08:40:00";
   slot_one_time_form = moment("08:60:00", "HH:mm:ss").format('hh:mm:ss A');
@@ -995,7 +997,26 @@ export class MenuComponent implements OnInit {
     }
   }
 
-
+  letterCheck(e){
+    console.log(e.target.checked);
+    switch (e.target.checked) {
+      case true:
+        // Add 5 rupees to the total
+        this.letter_added = true;
+        this.letter_price = 5;
+        localStorage.setItem('letter_added','true');
+        break;
+      case false:
+        // Deduct 5 rupees from the total
+        this.letter_added = false;
+        this.letter_price = 0;
+        localStorage.setItem('letter_added','false');
+        break;
+    
+      default:
+        break;
+    }
+  }
   onCheckChange(menu,event,mevent){
     
     menu.checked = event;
@@ -1486,7 +1507,7 @@ export class MenuComponent implements OnInit {
         // this.basketNumber += index;
         // Get noted to chef
         // this.notesToChef;
-
+        
         this.allOrders = {
           // today: today,
           day_one: day_one,
