@@ -1,3 +1,4 @@
+
 .added-db{
   z-index: 10000;
   position: fixed;
@@ -112,6 +113,10 @@
 .main-container {
   padding-top: 30px;
   background-color: #F2F5F6;
+  background-image: url('../../assets/img/mbg.png');
+  background-size: auto;
+  /* filter: sepia(10%); */
+  /* background-repeat: repeat; */
 }
 
 .main-container .container {
@@ -223,7 +228,7 @@ button{
   position: relative;
   display: inline-block;
   font-size: 150%;
-  margin: 25px auto 25px auto;
+  margin: 0px auto 25px auto;
   text-align: center;
 }
 .menu-title::before{
@@ -271,7 +276,7 @@ label{
   -webkit-align-items: center;
   flex-direction: column;
   /* height: 400px; */
-  height: 410px;
+  height: 400px;
   width: 380px;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
   border-radius: 2px;

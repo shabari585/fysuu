@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService) { }
 
   ngOnInit() {
-
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;

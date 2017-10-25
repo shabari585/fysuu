@@ -53,6 +53,8 @@ export class AddMenuComponent implements OnInit {
 
   outCats:any=[];
 
+  searchable_outCats:any=[];
+
 
   // date = new Date((60 * 60 * 24 * 1));
   today = moment().format('LLLL');
@@ -63,6 +65,9 @@ export class AddMenuComponent implements OnInit {
   day_five = moment().add(5, 'days');
   // day_six = moment().add(6, 'days');
   // day_seven = moment().add(7, 'days');
+
+  dateItems:any=[];
+  noItems:any=[];
 
   ngOnInit() {
     // Set title
@@ -84,14 +89,17 @@ export class AddMenuComponent implements OnInit {
           // console.log(res.msg[0].item_name);
           let json = {date_id:element._id, date: element.date, name:res.msg[0].item_name }
           this.outCats.push(json);
+
+          let searchable_json = {date:element.date,name:res.msg[0].item_name};
+
+          this.searchable_outCats.push(searchable_json);
+
+          
+
+
         });
       });
-
-      console.log(this.outCats);
-
-      // this.getMenuService.getItemDetails(res[0].item_id).subscribe(res=>{
-      //   console.log(res);
-      // });
+      // console.log(this.outCats);
 
     });
   }
@@ -100,10 +108,11 @@ export class AddMenuComponent implements OnInit {
     this.dateIsSelected = 'false';
     this.catSelected = 'false';
     this.subSelected = 'false';
-    $('#cat-select').prop('selectedIndex', 0)
-    $('#sub-cat-select').prop('selectedIndex', 0)
+    $('#cat-select').prop('selectedIndex', 0);
+    $('#sub-cat-select').prop('selectedIndex', 0);
     this.dateIsSelected = 'true';
     this.dateSelected = event;
+    
   }
 
   catSelect(event) {
@@ -128,21 +137,41 @@ export class AddMenuComponent implements OnInit {
     this.selectedCat;
     // selected sub category
     this.selectedSubCat;
+
     this.getMenu.getDateItems(this.selectedCat, this.selectedSubCat, this.dateSelected).subscribe(res => {
       if (res == 'failed') {
         // alert('failed');
       } else {
-        // console.log(res);
+        
 
         this.items = res.msg;
-
+        
+        this.items.forEach(element => {
+          // element.item_name;
+          // this.dateSelected;
+          // let searchable_json = {date:element.date,name:res.msg[0].item_name};
+          let find_json = {date:this.dateSelected,name:element.item_name};
+          let found_arr:any=[];
+          found_arr = this.searchable_outCats.find(find => find.date == find_json.date && find_json.name == find.name);
+          // console.log('dorikindi');
+          // console.log(found_arr);
+          if(found_arr == undefined){
+              element.checked = false;
+          }else{
+            this.dateItems.push(found_arr);
+            element.checked = true;
+          }
+          console.log(element);
+        });
+        console.log(this.items);
+        // console.log(this.dateItems);
       }
     });
   }
 
   onCheckChange(dateSelected: string, cat_id: string, sub_name: string, item_id, isChecked: boolean) {
 
-    alert(item_id);
+    // alert(item_id);
 
     if (isChecked == true) {
 
@@ -162,7 +191,7 @@ export class AddMenuComponent implements OnInit {
           this.removedItems.splice(x, 1);
         }
       }
-      console.log(this.addedItems);
+      // console.log(this.addedItems);
     } else {
       let tmp_array = [dateSelected, item_id];
       // Adding to removed items
@@ -181,6 +210,7 @@ export class AddMenuComponent implements OnInit {
       // console.log(this.addedItems);
     }
   }
+
   submitMenu() {
     this.getMenu.postSchedule(this.addedItems, this.removedItems).subscribe(res => {
 
@@ -194,10 +224,10 @@ export class AddMenuComponent implements OnInit {
   deleteDate(date_id) {
     this.getMenu.deleteDate(date_id).subscribe(res => {
       if (res.success) {
-        console.log(res.msg);
+        // console.log(res.msg);
         window.location.reload();
       } else {
-        console.log(res);
+        // console.log(res);
       }
     });
   }

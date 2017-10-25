@@ -8,7 +8,7 @@ declare var $: any;
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['../settings/settings.component.css']
+  styleUrls: ['../settings/settings.component.css','./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
 

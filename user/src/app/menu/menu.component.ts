@@ -395,6 +395,14 @@ export class MenuComponent implements OnInit {
                 }
               });
             });
+            console.log(this.day_one_item_dets);
+            // Experiment to re-order array
+            let arr;
+            
+            this.day_one_item_dets.forEach(bele => {
+              console.log('hi');
+            });
+            
             this.day_one_books = this.day_one_item_dets;
           }
         }
@@ -439,7 +447,6 @@ export class MenuComponent implements OnInit {
 
         }
       }else{
-        // console.log(dt_res.msg);
       }
     });
 
@@ -486,7 +493,7 @@ export class MenuComponent implements OnInit {
     // Get day four menu
     this.getMenuItems.getDatesMenu(this.p_day_four,this.p_last_day_four).subscribe(df_res => {
       if (df_res.success) {
-        console.log(df_res);
+        // console.log(df_res);
         this.day_four_menu = df_res.msg;
         if (this.day_four_menu.length < 1) {
           // Menu does't exist for today
