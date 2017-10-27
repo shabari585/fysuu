@@ -7,27 +7,70 @@ const config = require('../config/database');
 const User = require('../models/user');
 const Order = require('../models/order');
 const bcrypt = require('bcryptjs');
+const SendOtp = require('sendotp');
+
+const sendOtp = new SendOtp('169485AwtkPnUOqshf598d9ce4');
+sendOtp.setOtpExpiry('1');
+// resend after 1 minute
+
+
+// Send otp
+router.get('/send-otp/:mobile', (req, res, next) => {
+    
+    mobile = req.params.mobile;
+    let input = "91"+mobile;
+    // console.log(res.json({input:input}));
+    sendOtp.send(input, "FYSUBX", (err,data,response)=>{
+        if(err){
+            res.json({success:false,msg:err});
+        }else{
+            res.json({success:true,msg:data});
+        }
+    });
+    // res.json({msg:'sent'});
+});
 
 // Register
 router.post('/register', (req, res, next) => {
-    let newUser = new User({
-        email: req.body.email,
-        mobile: req.body.mobile,
-        name: req.body.name,
-        password: req.body.password,
-        address: req.body.address,
-        rewardPoints: req.body.rewardPoints
-    });
 
-    User.addUser(newUser, (er, user) => {
-        if (er) {
-            res.json({ success: false, msg: 'Failed to Register' })
-        } else {
-            res.json({ success: true, msg: user });
+    mobile = req.body.mobile;
+    let input = "91"+mobile;
+    otp = req.body.otp;
 
+    // res.json({mob:otp});
+
+    // Verify OTP
+
+    sendOtp.verify(input,otp, function (error, data, response) {
+        // console.log(data); // data object with keys 'message' and 'type'
+        if(data.type == 'success') {
+            // res.json({success:true,msg:"success"});
+            let newUser = new User({
+                email: req.body.email,
+                mobile: req.body.mobile,
+                name: req.body.name,
+                password: req.body.password,
+                address: req.body.address,
+                rewardPoints: req.body.rewardPoints
+            });
+
+            User.addUser(newUser, (er, user) => {
+                if (er) {
+                    res.json({ success: false, msg: 'Failed to Register' })
+                } else {
+                    res.json({ success: true, msg: user });
+
+                }
+            });
         }
-    });
+        if(data.type == 'error') {
+            res.json({success:false,msg:data});
+        }
+      });
+
+    
 });
+    
 
 // Update User
 router.post('/update-user', (req, res, next) => {
@@ -196,37 +239,69 @@ router.get('/find-mobile/:mobile', (req, res, next) => {
 
 // Authenticate
 router.post('/authenticate', (req, res, next) => {
+
     const email = req.body.email;
     const password = req.body.password;
 
-    User.getUserByEmail(email, (err, user) => {
-        if (err) throw err;
-        if (!user) {
-            res.json({ success: false, msg: 'User not found' });
-        }
-        User.comparePassword(password, user.password, (err, isMatch) => {
+    if(/^\d{10}$/.test(email)){
+        User.getUserByMobile(email, (err, user) => {
             if (err) throw err;
-            if (isMatch) {
-                const token = jwt.sign({ data: user }, config.secret, {
-                    expiresIn: 604800 //A week in seconds
-                });
-
-                res.json({
-                    success: true,
-                    token: 'JWT ' + token,
-                    user: {
-                        id: user._id,
-                        name: user.name,
-                        username: user.username,
-                        email: user.email,
-                        mobile: user.mobile
-                    }
-                })
-            } else {
-                res.json({ success: false, msg: 'Wrong Password' });
+            if (!user) {
+                res.json({ success: false, msg: 'User not found' });
             }
-        })
-    })
+            User.comparePassword(password, user.password, (err, isMatch) => {
+                if (err) throw err;
+                if (isMatch) {
+                    const token = jwt.sign({ data: user }, config.secret, {
+                        expiresIn: 604800 //A week in seconds
+                    });
+    
+                    res.json({
+                        success: true,
+                        token: 'JWT ' + token,
+                        user: {
+                            id: user._id,
+                            name: user.name,
+                            username: user.username,
+                            email: user.email,
+                            mobile: user.mobile
+                        }
+                    })
+                } else {
+                    res.json({ success: false, msg: 'Wrong Password' });
+                }
+            })
+        });
+    }else{
+        User.getUserByEmail(email, (err, user) => {
+            if (err) throw err;
+            if (!user) {
+                res.json({ success: false, msg: 'User not found' });
+            }
+            User.comparePassword(password, user.password, (err, isMatch) => {
+                if (err) throw err;
+                if (isMatch) {
+                    const token = jwt.sign({ data: user }, config.secret, {
+                        expiresIn: 604800 //A week in seconds
+                    });
+    
+                    res.json({
+                        success: true,
+                        token: 'JWT ' + token,
+                        user: {
+                            id: user._id,
+                            name: user.name,
+                            username: user.username,
+                            email: user.email,
+                            mobile: user.mobile
+                        }
+                    })
+                } else {
+                    res.json({ success: false, msg: 'Wrong Password' });
+                }
+            })
+        });
+    }
 });
 // Find Email
 router.get('/get-address/:user_id', (req, res, next) => {

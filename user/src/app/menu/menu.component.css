@@ -115,6 +115,7 @@
   background-color: #F2F5F6;
   background-image: url('../../assets/img/mbg.png');
   background-size: auto;
+  padding-bottom: 20px !important;
   /* filter: sepia(10%); */
   /* background-repeat: repeat; */
 }

@@ -7,6 +7,8 @@ import { AdminServicesService } from "../services/admin-services.service";
 import { DatePipe } from '@angular/common';
 import * as shortid from 'shortid';
 import * as moment from 'moment';
+import { WindowRef } from './WindowRef';
+
 declare var $: any;
 
 // var shortid = require('shortid');
@@ -18,7 +20,11 @@ declare var $: any;
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private authService: AuthService, private title: Title,private router:Router,private getMenu: AdminServicesService, private datePipe: DatePipe) {}
+  constructor(private authService: AuthService, private title: Title,private router:Router,private getMenu: AdminServicesService, private datePipe: DatePipe,private winRef:WindowRef) {}
+  
+  // Razorpay variables
+  rzp1:any;
+  options:any;
 
   addresses= [];
   userId: string;
@@ -138,6 +144,7 @@ export class CheckoutComponent implements OnInit {
   letter_price:number = 0;
   letter_added:string = 'false';
   one_address:boolean=false;
+  showDiscount:boolean = false;
 
   ngOnInit() {
     // Getting orders
@@ -249,6 +256,7 @@ export class CheckoutComponent implements OnInit {
         this.addresses = res.msg[0].address;
         if(this.addresses.length == 1){
           this.one_address = true;
+          console.log('one address');
         }
       }
     })
@@ -449,6 +457,8 @@ export class CheckoutComponent implements OnInit {
 
   // if redeem is clicked
   redeemClicked(){
+    // Show discount points
+    this.showDiscount = true;
     // Get total points
     this.rewardPoints;
     // Get redeemable points;
@@ -490,7 +500,6 @@ export class CheckoutComponent implements OnInit {
   }
   paymentMethod(event){
     this.payment_method = event.target.value;
-    // alert(this.payment_method);
   }
   placeOrder(){
     // Check for address
@@ -543,19 +552,74 @@ export class CheckoutComponent implements OnInit {
         // var json = { 'name': catName };
         let json = {'order_dets':main_order}
         console.log(json);
-        this.authService.postOrder(json).subscribe(res=>{
-          if(res.success){
-            console.log(res.msg);
-            // Save order id to local storage
-            // localStorage.setItem('order_id',order_id);
-            // localStorage.removeItem('all_orders');
-            // localStorage.removeItem('today_orders');
-            // redirect to thanks page
-            // this.router.navigate(['/thanks']);
+
+        if(this.payment_method != "cod"){
+          if(this.payment_method == "wallet"){
+            this.options = {
+              "key": "rzp_test_hJMKKQwECWfY82",
+              "amount": this.total_to_pay*100, // 2000 paise = INR 20
+              "name": "Fysy",
+              "description": "Purchase Description",
+              "image": "../../assets/logo/logo_black.png",
+              "handler": function (response){
+                  alert(response.razorpay_payment_id);
+              },
+              "prefill": {
+                  "name": this.userName,
+                  "email": this.userEmail,
+                  "contact": this.userMobile,
+                  "method": this.payment_method
+              },
+              "notes": {
+                  "address": this.deliveryInst
+              },
+              "theme": {
+                  "color": "#F37254"
+              }
+            };
           }else{
-            $('.err').html('Something went wrong. please try again later');
+            this.options = {
+              "key": "rzp_test_hJMKKQwECWfY82",
+              "amount": this.total_to_pay*100, // 2000 paise = INR 20
+              "name": "Fysu",
+              "description": "Purchase Description",
+              "image": "../../assets/logo/logo_black.png",
+              "handler": function (response){
+                  alert(response.razorpay_payment_id);
+              },
+              "prefill": {
+                  "name": this.userName,
+                  "email": this.userEmail,
+                  "contact": this.userMobile
+              },
+              "notes": {
+                  "address": this.deliveryInst
+              },
+              "theme": {
+                  "color": "#F37254"
+              }
+            };
           }
-        });
+  
+          
+        this.rzp1 = new this.winRef.nativeWindow.Razorpay(this.options);
+        this.rzp1.open();
+        }
+
+
+        // this.authService.postOrder(json).subscribe(res=>{
+        //   if(res.success){
+        //     console.log(res.msg);
+        //     // Save order id to local storage
+        //     // localStorage.setItem('order_id',order_id);
+        //     // localStorage.removeItem('all_orders');
+        //     // localStorage.removeItem('today_orders');
+        //     // redirect to thanks page
+        //     // this.router.navigate(['/thanks']);
+        //   }else{
+        //     $('.err').html('Something went wrong. please try again later');
+        //   }
+        // });
 
       }
     }
@@ -609,5 +673,100 @@ export class CheckoutComponent implements OnInit {
   }
   closeUpAddress(){
     $('.db').css({'display':'none'});
+  }
+  removeDate(day){
+    switch (day) {
+
+      case 'tab_one':
+        // Remove tab_one from orders
+        this.today_orders['tab_one'] = null;
+        this.tab_one = null;
+        // Update from localstorage
+        localStorage.setItem('today_orders', JSON.stringify(this.today_orders));
+        // Minus the cost from total
+        this.total_price = this.total_price-this.tab_one_total_price;
+        this.total_to_pay = this.total_to_pay-this.tab_one_total_price;
+        break;
+      case 'tab_two':
+        // Remove tab_one from orders
+        this.today_orders['tab_two'] = null;
+        this.tab_two = null;
+        // Update from localstorage
+        localStorage.setItem('today_orders', JSON.stringify(this.today_orders));
+        // Minus the cost from total
+        this.total_price = this.total_price-this.tab_two_total_price;
+        this.total_to_pay = this.total_to_pay-this.tab_two_total_price;
+        
+        break;
+
+      case 'tab_three':
+        // Remove tab_one from orders
+        this.today_orders['tab_three'] = null;
+        this.tab_three = null;
+        // Update from localstorage
+        localStorage.setItem('today_orders', JSON.stringify(this.today_orders));
+        // Minus the cost from total
+        this.total_price = this.total_price-this.tab_three_total_price;
+        this.total_to_pay = this.total_to_pay-this.tab_three_total_price;
+        break;
+
+      case 'day_one':
+        // Remove day one from orders
+        this.orders['day_one'] = null;
+        this.day_one_date = null;
+        // Update LocalStorage
+        localStorage.setItem('all_orders',JSON.stringify(this.orders));
+        // Minus the cost from total
+        this.total_price = this.total_price-this.day_one_total_price;
+        this.total_to_pay = this.total_to_pay-this.day_one_total_price;
+        break;
+        
+      case 'day_two':
+        // Remove day one from orders
+        this.orders['day_two'] = null;
+        this.day_two_date = null;
+        // Update LocalStorage
+        localStorage.setItem('all_orders',JSON.stringify(this.orders));
+        // Minus the cost from total
+        this.total_price = this.total_price-this.day_two_total_price;
+        this.total_to_pay = this.total_to_pay-this.day_two_total_price;
+        break;
+
+      case 'day_three':
+        // Remove day one from orders
+        this.orders['day_three'] = null;
+        this.day_three_date = null;
+        // Update LocalStorage
+        localStorage.setItem('all_orders',JSON.stringify(this.orders));
+        // Minus the cost from total
+        this.total_price = this.total_price-this.day_three_total_price;
+        this.total_to_pay = this.total_to_pay-this.day_three_total_price;
+        break;
+        
+      case 'day_four':
+        // Remove day one from orders
+        this.orders['day_four'] = null;
+        this.day_four_date = null;
+        // Update LocalStorage
+        localStorage.setItem('all_orders',JSON.stringify(this.orders));
+        // Minus the cost from total
+        this.total_price = this.total_price-this.day_four_total_price;
+        this.total_to_pay = this.total_to_pay-this.day_four_total_price;
+        break;
+
+      case 'day_five':
+        // Remove day one from orders
+        this.orders['day_five'] = null;
+        this.day_five_date = null;
+        // Update LocalStorage
+        localStorage.setItem('all_orders',JSON.stringify(this.orders));
+        // Minus the cost from total
+        this.total_price = this.total_price-this.day_five_total_price;
+        this.total_to_pay = this.total_to_pay-this.day_five_total_price;
+        break;
+    
+      default:
+        break;
+    }
   }
 }

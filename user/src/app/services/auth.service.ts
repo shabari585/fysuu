@@ -38,6 +38,11 @@ export class AuthService {
         // return this.http.post('users/update-pwd', pwd, { headers: header }).map(res => res.json());
     }
 
+    sendOtp(mobile){
+        return this.http.get('http://localhost:3700/users/send-otp/'+ mobile).map(res=>res.json());
+        // return this.http.get('users/send-otp/'+ mobile).map(res=>res.json());
+    }
+
     registerUser(user) {
         let header = new Headers();
         header.append('Content-Type', 'application/json');

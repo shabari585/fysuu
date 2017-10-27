@@ -75,6 +75,14 @@ input:active {
   color: #555;
   width: 40vw;
 }
+.email-input-div .fa-times{
+  position: absolute;
+  display: block;
+  top:5%;
+  left: 95%;
+  color: #666;
+  cursor: pointer;
+}
 
 #next-reg-fixed-dark-cover .email-input-div {
   padding-left: 30px;
@@ -104,6 +112,12 @@ input:active {
   padding-left: 10px;
   padding-right: 10px;
 }
+.err{
+  margin: 10px 0;
+  color: #fa0000;
+  font-size: 70%;
+}
+
 
 .next-inputs {
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -178,6 +192,7 @@ input:active {
 }
 #reg-terms-agree {
   margin-bottom: 20px;
+  font-size: 80%;
 }
 
 .otp-span {

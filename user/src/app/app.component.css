@@ -46,11 +46,6 @@ input:active {
 
 /* Login/Signup sections*/
 
-.err{
-  margin: 10px 0;
-  color: #6DA942;
-  font-size: 70%;
-}
 
 .fixed-dark-cover {
   z-index: 10;

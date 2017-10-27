@@ -37,6 +37,10 @@ module.exports.getUserByEmail = (email, callback) => {
     const query = { email: email }
     User.findOne(query, callback);
 }
+module.exports.getUserByMobile = (mobile, callback) => {
+    const query = { mobile: mobile }
+    User.findOne(query, callback);
+}
 module.exports.addUser = (newUser, callback) => {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {

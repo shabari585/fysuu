@@ -34,9 +34,9 @@ export class MenuComponent implements OnInit {
   today_tab_two_books: object;
   today_tab_three_books: object;
   today_slot: string;
-  today_tab_one_slot: string = "slot_one";
-  today_tab_two_slot: string = "slot_one";
-  today_tab_three_slot: string = "slot_one";
+  today_tab_one_slot: string = null;
+  today_tab_two_slot: string = null;
+  today_tab_three_slot: string = null;
   num_today_items: number = 0;
   num_tab_one_items: number = 0;
   num_tab_two_items: number = 0;
@@ -188,14 +188,18 @@ export class MenuComponent implements OnInit {
   roti_img = '../assets/menu-icons/roti_b.png';
   roti_r_img = '../assets/menu-icons/roti_r.png';
 
+  rice_img = '../assets/menu-icons/rice_b.png';
+  rice_r_img = '../assets/menu-icons/rice_r.png';
+
+  rice_roti_img = '../assets/menu-icons/rice_roti_b.png';
+  rice_roti_r_img = '../assets/menu-icons/rice_roti_r.png';
+
   curry_img = '../assets/menu-icons/cur_b.png';
   curry_r_img = '../assets/menu-icons/cur_r.png';
 
   dal_img = '../assets/menu-icons/dal_b.png';
   dal_r_img = '../assets/menu-icons/dal_r.png';
 
-  rice_img = '../assets/menu-icons/rice_b.png';
-  rice_r_img = '../assets/menu-icons/rice_r.png';
 
   curd_img = '../assets/menu-icons/curd_b.png';
   curd_r_img = '../assets/menu-icons/curd_r.png';
@@ -309,6 +313,7 @@ export class MenuComponent implements OnInit {
     localStorage.removeItem('all_orders');
     localStorage.removeItem('today_orders');
     localStorage.removeItem('basket_number');
+    localStorage.removeItem('letter_added');
     
     // Set title
     this.title.setTitle('Fysu - Menu');
@@ -345,7 +350,7 @@ export class MenuComponent implements OnInit {
     this.p_last_day_five = this.datePipe.transform(this.last_day_five,'fullDate');
     this.p_last_day_six = this.datePipe.transform(this.last_day_six,'fullDate');  
 
-    this.dateForHeader = this.datePipe.transform(this.last_today_one,'EEE, MMM d');
+    this.dateForHeader = this.datePipe.transform(this.today_one,'EEE, MMM d');
 
     $(document).keyup(function (e) {
       if (e.keyCode == 27) {
@@ -1074,6 +1079,10 @@ export class MenuComponent implements OnInit {
         $(tar).parent().find('img').attr('src',this.roti_r_img);
       }
 
+      if ($(tar).parent().find('img').hasClass('rice-roti-cl')){
+        $(tar).parent().find('img').attr('src',this.rice_roti_r_img);
+      }
+
       if ($(tar).parent().find('img').hasClass('curry-cl')){
         $(tar).parent().find('img').attr('src',this.curry_r_img);
       }
@@ -1101,6 +1110,10 @@ export class MenuComponent implements OnInit {
       // r_img
       if ($(tar).parent().find('img').hasClass('roti-cl')) {
         $(tar).parent().find('img').attr('src',this.roti_img);
+      }
+
+      if ($(tar).parent().find('img').hasClass('rice-roti-cl')) {
+        $(tar).parent().find('img').attr('src',this.rice_roti_img);
       }
 
       if ($(tar).parent().find('img').hasClass('curry-cl')) {
@@ -1634,6 +1647,7 @@ export class MenuComponent implements OnInit {
 
   // Today slot select
   todayMenuSlotSelect(event){
+    $('#t-menu-select-slot').css({'border-color':'rgba(0,0,0,.2)'});
     let tslot = event.target.value;
     // this.today_slot = tslot;
     switch (true) {
@@ -1704,71 +1718,115 @@ export class MenuComponent implements OnInit {
     
   }
   addTodayCartClicked(){
+    $('#t-menu-select-slot').css({'border-color':'rgba(0,0,0,.2)'});
     switch (true) {
       case this.tab_one_status:
-        this.tab_one_total_price = this.num_tab_one_items * this.tab_one_cost;
-        // Add to orders
-        this.today_tab_one_books = {
-          name: this.tab_one,
-          time_slot: this.today_tab_one_slot,
-          num_of_items: this.num_tab_one_items,
-          base_price: this.tab_one_cost,
-          total_price: this.tab_one_total_price
+        if(this.today_tab_one_slot != null || this.today_tab_one_slot != undefined){
+          this.tab_one_total_price = this.num_tab_one_items * this.tab_one_cost;
+          // Add to orders
+          this.today_tab_one_books = {
+            name: this.tab_one,
+            time_slot: this.today_tab_one_slot,
+            num_of_items: this.num_tab_one_items,
+            base_price: this.tab_one_cost,
+            total_price: this.tab_one_total_price
+          }
+          this.basketNumber++;
+          // add announcement
+          // Update tab_one_text and display
+          this.num_tab_one = this.num_tab_one_items;
+          $('#tab-one-band').show();
+          // Show tab remove btn
+          $('#rem-t-tab_one').show();
+
+          let today_orders = {
+            date: this.p_today_one,
+            tab_one: this.today_tab_one_books,
+            tab_two: this.today_tab_two_books,
+            tab_three: this.today_tab_three_books
+          }
+          localStorage.setItem('today_orders', JSON.stringify(today_orders));
+          $('.today-menu-back').hide();
+
+        }else{
+          // Do nothing
+          this.today_tab_one_books = null;
+          $('.today-core #t-menu-select-slot').css({'border-color':'#fa0000'});
         }
-        this.basketNumber++;
-        // add announcement
-        // Update tab_one_text and display
-        this.num_tab_one = this.num_tab_one_items;
-        $('#tab-one-band').show();
-        // Show tab remove btn
-        $('#rem-t-tab_one').show();
         break;
       case this.tab_two_status:
-        this.tab_two_total_price = this.num_tab_two_items * this.tab_two_cost;
-      
-        // Add to orders
-        this.today_tab_two_books = {
-          name: this.tab_two,
-          time_slot: this.today_tab_two_slot,
-          num_of_items: this.num_tab_two_items,
-          base_price: this.tab_two_cost,
-          total_price: this.tab_two_total_price
+        if(this.today_tab_two_slot != null || this.today_tab_two_slot != undefined){
+
+          this.tab_two_total_price = this.num_tab_two_items * this.tab_two_cost;
+        
+          // Add to orders
+          this.today_tab_two_books = {
+            name: this.tab_two,
+            time_slot: this.today_tab_two_slot,
+            num_of_items: this.num_tab_two_items,
+            base_price: this.tab_two_cost,
+            total_price: this.tab_two_total_price
+          }
+          this.basketNumber++;
+          // Update tab_two_text and display
+          this.num_tab_two = this.num_tab_two_items;
+          $('#tab-two-band').show();
+          // Show tab remove btn
+          $('#rem-t-tab_two').show();
+
+          let today_orders = {
+            date: this.p_today_one,
+            tab_one: this.today_tab_one_books,
+            tab_two: this.today_tab_two_books,
+            tab_three: this.today_tab_three_books
+          }
+          localStorage.setItem('today_orders', JSON.stringify(today_orders));
+          $('.today-menu-back').hide();
+
+        }else{
+          // Do nothing
+          this.today_tab_two_books = null;
+          $('#t-menu-select-slot').css({'border-color':'#fa0000'});
         }
-        this.basketNumber++;
-        // Update tab_two_text and display
-        this.num_tab_two = this.num_tab_two_items;
-        $('#tab-two-band').show();
-         // Show tab remove btn
-         $('#rem-t-tab_two').show();
         break;
       case this.tab_three_status:
-        this.tab_three_total_price = this.num_tab_three_items * this.tab_three_cost;
-        // Add to orders
-        this.today_tab_three_books = {
-          name: this.tab_three,
-          time_slot: this.today_tab_three_slot,
-          num_of_items: this.num_tab_three_items,
-          base_price: this.tab_three_cost,
-          total_price: this.tab_three_total_price
+        if(this.today_tab_three_slot != null || this.today_tab_three_slot != undefined){
+          
+          this.tab_three_total_price = this.num_tab_three_items * this.tab_three_cost;
+          // Add to orders
+          this.today_tab_three_books = {
+            name: this.tab_three,
+            time_slot: this.today_tab_three_slot,
+            num_of_items: this.num_tab_three_items,
+            base_price: this.tab_three_cost,
+            total_price: this.tab_three_total_price
+          }
+          this.basketNumber++;
+          // Update tab three text and display band
+          this.num_tab_three = this.num_tab_three_items;
+          $('#tab-three-band').show();
+          // Show tab remove btn
+          $('#rem-t-tab_three').show();
+
+          let today_orders = {
+            date: this.p_today_one,
+            tab_one: this.today_tab_one_books,
+            tab_two: this.today_tab_two_books,
+            tab_three: this.today_tab_three_books
+          }
+          localStorage.setItem('today_orders', JSON.stringify(today_orders));
+          $('.today-menu-back').hide();
+
+        }else{
+          // Do nothing
+          this.today_tab_three_books = null;
+          $('#t-menu-select-slot').css({'border-color':'#fa0000'});
         }
-        this.basketNumber++;
-        // Update tab three text and display band
-        this.num_tab_three = this.num_tab_three_items;
-        $('#tab-three-band').show();
-        // Show tab remove btn
-        $('#rem-t-tab_three').show();
         break;
       default:
         break;
     }
-    let today_orders = {
-      date: this.p_today_one,
-      tab_one: this.today_tab_one_books,
-      tab_two: this.today_tab_two_books,
-      tab_three: this.today_tab_three_books
-    }
-    localStorage.setItem('today_orders', JSON.stringify(today_orders));
-    $('.today-menu-back').hide();
+    
   }
   removeTodayTab(tab){
     switch (tab) {
@@ -1818,6 +1876,7 @@ export class MenuComponent implements OnInit {
   }
   tdClose(){
     $('.today-menu-back').hide();
+    $('#t-menu-select-slot').css({'border-color':'rgba(0,0,0,.2)'});
     this.num_tab_one_items = 0;
     this.num_tab_two_items = 0;
     this.num_tab_three_items = 0;

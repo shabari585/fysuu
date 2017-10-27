@@ -193,6 +193,9 @@ a {
   background-color: transparent;
   /* letter-spacing: 0.1px; */
 }
+.scroll-header .see-menu-btn{
+  line-height: 0;
+}
 
 .fvp {
   background: transparent;

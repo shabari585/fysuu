@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { WindowRef } from './checkout/WindowRef';
 import { MenuComponent } from './menu/menu.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -239,7 +240,7 @@ const appRoutes: Routes = [
     FlashMessagesModule,
     MyDatePickerModule
   ],
-  providers: [ValidateService, AuthService, AdminAuthService, AuthGuard,AdminAuthGuard, GetMenuService, DatePipe, UserService, AdminServicesService],
+  providers: [ValidateService, AuthService, AdminAuthService, AuthGuard,AdminAuthGuard, GetMenuService, DatePipe, UserService, AdminServicesService,WindowRef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

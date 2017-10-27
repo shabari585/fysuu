@@ -193,7 +193,7 @@ h6 {
 
 .payment-options-ul li {
   padding: 10px 20px 10px 20px;
-  border-bottom: 2px solid #F2F5F6;
+  /* border-bottom: 2px solid #F2F5F6; */
 }
 
 .payment-options-ul li label {
@@ -330,7 +330,20 @@ h6 {
   font-size: 100%;
   color: #888;
 }
-
+.delivery-number-div{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.minus-btn{
+  margin-right: 10px;
+  background-color: transparent;
+  color: #6DA942;
+  border: 1px solid #6DA942;
+  height: 20px;
+  font-size: 80%;
+}
 .delivery-dets {
   position: relative;
   display: inline-flex;

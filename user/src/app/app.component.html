@@ -2,7 +2,8 @@
 
 <div class="fixed-dark-cover" id="login-fixed-dark-cover">
   <div class="email-input-div">
-    <h4>Please enter your email or mobile number to get started</h4>
+    <i class="fa fa-times" aria-hidden="true" (click)="mainClose()"></i>
+    <h4>Let's get started!</h4>
     <!-- <label for="email" id="email-label">Email or Mobile</label><br> -->
     <input type="text" name="email" id="email" [(ngModel)]='initialLoginInput' placeholder="Email or Mobile number">
     <p class="err"></p>
@@ -16,16 +17,17 @@
 </div>
 <div class="fixed-dark-cover" id="next-reg-fixed-dark-cover">
   <div class="email-input-div">
+    <i class="fa fa-times" aria-hidden="true" (click)="mainClose()"></i>
     <h4>We just need few more details</h4>
    
-    <label for="reg-name" id="reg-name-label">Name</label>
+    <label for="reg-name" id="reg-name-label">Full Name</label>
     <input type="text" name="reg-name" class="next-inputs" id="reg-name" [(ngModel)]='regNameInput' placeholder=""><br>
     
 
     <label for="reg-email" id="reg-email-label">Email</label>
-    <input type="text" name="reg-email" class="next-inputs" id="reg-email" [(ngModel)]='regEmailInput' placeholder="" value="{{initialLoginInput}}"><br>
+    <input type="text" name="reg-email" class="next-inputs" id="reg-email" [(ngModel)]='regEmailInput' placeholder=""><br>
 
-    <label for="reg-mobile" id="reg-mobile-label">Mobile Number</label>
+    <label for="reg-mobile" id="reg-mobile-label">Phone Number</label>
       <input type="text" class="next-inputs" [(ngModel)]='regMobileInput'
         name="reg-mobile" id="reg-mobile" placeholder="">
 
@@ -52,9 +54,10 @@
 
 <div class="fixed-dark-cover" id="next-login-fixed-dark-cover">
   <div class="email-input-div">
+    <i class="fa fa-times" aria-hidden="true" (click)="mainClose()"></i>
     <h4>We just need few more details</h4>
-    <label for="login-email" id="login-email-label">Email</label>
-    <input type="text" name="login-email" class="next-inputs" id="login-email" [(ngModel)]='loginEmailInput' placeholder="" value="{{initialLoginInput}}"><br>
+    <label for="login-email" id="login-email-label">Email or Mobile</label>
+    <input type="text" name="login-email" class="next-inputs" id="login-email" [(ngModel)]='loginEmailInput' placeholder=""><br>
 
     <label for="login-password" id="login-password-label">Password</label>
     <input type="password" name="login-password" class="next-inputs" [(ngModel)]='loginPasswordInput' id="login-password" placeholder=""><br>

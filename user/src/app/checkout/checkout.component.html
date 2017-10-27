@@ -92,7 +92,7 @@
                   <div class="user-address-item">
                     <div class="user-address pull-left">
                       <div class="pull-left">
-                        <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)">
+                        <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)" checked>
                       </div>
                       <div class="pull-left address-lines">
                         <h5 class="address-lines-title">Address {{i+1}}</h5>
@@ -116,7 +116,7 @@
                   <div class="user-address-item">
                     <div class="user-address pull-left">
                       <div class="pull-left">
-                        <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)" checked>
+                        <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)">
                       </div>
                       <div class="pull-left address-lines">
                         <h5 class="address-lines-title">Address {{i+1}}</h5>
@@ -139,7 +139,7 @@
 
           <div class="instructions-div">
             <h6>Delivery Instructions</h6>
-            <textarea id="delivery-instructions-input" placeholder="Instructions for your driver (Optional)" [(ngModel)]='deliveryInst'></textarea>
+            <textarea id="delivery-instructions-input" placeholder="Instructions for delivery boy (Optional)" [(ngModel)]='deliveryInst'></textarea>
           </div>
 
         </div>
@@ -185,7 +185,7 @@
                   <!-- Number of items -->
                   <div class="delivery-number-div">
                     <div class="delivery-number-core">
-                        <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_one_base_price}}.00 </span> x {{tab_one_times}}</h5> 
+                      <button class="minus-btn" (click)="removeDate('tab_one')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_one_base_price}}.00 </span> x {{tab_one_times}}</h5> 
                     </div>
                   </div>
                   <!-- Delivery item price -->
@@ -217,7 +217,7 @@
                 <div class="delivery-dets">
                   <!-- Number of items -->
                   <div class="delivery-number-div">
-                      <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_two_base_price}}.00 </span> x {{tab_two_times}}</h5> 
+                    <button class="minus-btn" (click)="removeDate('tab_two')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_two_base_price}}.00 </span> x {{tab_two_times}}</h5> 
                   </div>
                   <!-- Delivery item price -->
                   <div class="price-div">
@@ -249,7 +249,7 @@
                   <!-- Number of items -->
                   <div class="delivery-number-div">
                     <div class="delivery-number-core">
-                        <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_three_base_price}}.00 </span>  x {{tab_three_times}}</h5>
+                      <button class="minus-btn" (click)="removeDate('tab_three')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{tab_three_base_price}}.00 </span>  x {{tab_three_times}}</h5>
                     </div>
                   </div>
                   <!-- Delivery item price -->
@@ -281,7 +281,7 @@
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_one_per_portion_price}}.00 </span> </h5>
+                  <button class="minus-btn" (click)="removeDate('day_one')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_one_per_portion_price}}.00 </span> </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
@@ -311,7 +311,7 @@
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_two_per_portion_price}}.00 </span> </h5>
+                  <button class="minus-btn" (click)="removeDate('day_two')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_two_per_portion_price}}.00 </span> </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
@@ -343,7 +343,7 @@
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_three_per_portion_price}}.00 </span> </h5>
+                  <button class="minus-btn" (click)="removeDate('day_three')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_three_per_portion_price}}.00 </span> </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
@@ -372,7 +372,7 @@
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_four_per_portion_price}}.00 </span> </h5>
+                  <button class="minus-btn" (click)="removeDate('day_four')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_four_per_portion_price}}.00 </span> </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
@@ -401,7 +401,7 @@
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                    <h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_five_per_portion_price}}.00 </span> </h5>
+                  <button class="minus-btn" (click)="removeDate('day_five')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_five_per_portion_price}}.00 </span> </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
@@ -414,83 +414,81 @@
 
         </div>
       
-            
+      </div>
 
-
+        <div class="charges-div">
+          <div class="total-fee">
+            <div class="pull-left">
+              <h6>Added letter :</h6>
+            </div>
+            <div class="pull-right cost-core">
+              &#8377;<span class="cost-number"> {{letter_price}}.00 </span>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="delivery-fee">
+            <div class="pull-left">
+              <h6>Delivery Fee :</h6>
+            </div>
+            <div class="pull-right cost-core">
+              &#8377; <span class="cost-number"> {{delivery_fee}}.00 </span>
+            </div>
+            <div class="clearfix"></div>
           </div>
 
-          <div class="charges-div">
-            <div class="total-fee">
-              <div class="pull-left">
-                <h6>Added letter :</h6>
-              </div>
-              <div class="pull-right cost-core">
-                &#8377;<span class="cost-number"> {{letter_price}}.00 </span>
-              </div>
-              <div class="clearfix"></div>
+          <div class="total-fee">
+            <div class="pull-left">
+              <h6>Total :</h6>
             </div>
-            <div class="delivery-fee">
-              <div class="pull-left">
-                <h6>Delivery Fee :</h6>
-              </div>
-              <div class="pull-right cost-core">
-                &#8377; <span class="cost-number"> {{delivery_fee}}.00 </span>
-              </div>
-              <div class="clearfix"></div>
+            <div class="pull-right cost-core">
+              &#8377;<span class="cost-number"> {{total_price}}.00 </span>
             </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="total-fee">
+            <div class="pull-left">
+              <h6>Number of points you'll earn through this order :</h6>
+            </div>
+            <div class="pull-right cost-core">
+            <span class="cost-number"> {{points_earned}} </span>
+            </div>
+            <div class="clearfix"></div>
+          </div>
 
-            <div class="total-fee">
-              <div class="pull-left">
-                <h6>Total :</h6>
-              </div>
-              <div class="pull-right cost-core">
-                &#8377;<span class="cost-number"> {{total_price}}.00 </span>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <div class="total-fee">
-              <div class="pull-left">
-                <h6>Number of points you'll earn through this order :</h6>
-              </div>
-              <div class="pull-right cost-core">
-              <span class="cost-number"> {{points_earned}} </span>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-
-            <div *ngIf='rewardPointsPermissions == true'>
-                
-              <div class="rewards-div">
-                  <p>
-                      You have {{rewardPoints}} reward points.
-                  </p> 
-                  <button  class="save-btns" id="redeem-btn" (click)='redeemClicked()'>
-                    Redeem
-                  </button>&nbsp; &nbsp; - {{discount}}
-              </div>
-            </div>
-
-            <div class="total-pay">
-              <div class="pull-left">
-                <h6>Total to pay</h6>
-              </div>
-              <div class="pull-right cost-core">
-                &#8377;<span class="cost-number"> {{total_to_pay}}.00</span>
-              </div>
-              <div class="clearfix"></div>
+          <div *ngIf='rewardPointsPermissions == true'>
               
+            <div class="rewards-div">
+                <p>
+                    You have {{rewardPoints}} reward points.
+                </p> 
+                <button  class="save-btns" id="redeem-btn" (click)='redeemClicked()'>
+                  Redeem
+                </button>&nbsp; &nbsp; 
+                <div *ngIf="showDiscount">- {{discount}}</div>
             </div>
-
-            <!-- <div class="reward-points">
-              <div class="pull-left">
-                <h6>Reward points</h6>
-              </div>
-              <div class="pull-right cost-core">
-                <span class="cost-number"> 5 </span>
-              </div>
-              <div class="clearfix"></div>
-            </div> -->
           </div>
+
+          <div class="total-pay">
+            <div class="pull-left">
+              <h6>Total to pay</h6>
+            </div>
+            <div class="pull-right cost-core">
+              &#8377;<span class="cost-number"> {{total_to_pay}}.00</span>
+            </div>
+            <div class="clearfix"></div>
+            
+          </div>
+
+          <!-- <div class="reward-points">
+            <div class="pull-left">
+              <h6>Reward points</h6>
+            </div>
+            <div class="pull-right cost-core">
+              <span class="cost-number"> 5 </span>
+            </div>
+            <div class="clearfix"></div>
+          </div> -->
+        </div>
           <!-- <span class="place-order-notif">*Blah blah blah blah</span> -->
         </div>
         <!-- <button type="button" id="place-order-button">Place Order</button> -->
@@ -511,12 +509,12 @@
               </li>
             <li>
               <label for="credit">
-                  <input type="radio" name="payment" id="credit" value="Wallet" (click)='paymentMethod($event)'> &nbsp; Wallet
+                  <input type="radio" name="payment" id="credit" value="wallet" (click)='paymentMethod($event)'> &nbsp; Wallet
               </label>
             </li>
             <li>
               <label for="paypal">
-                  <input type="radio" name="payment" id="paypal" value="Cash on Delivery" (click)='paymentMethod($event)'> &nbsp; Cash on Delivery
+                  <input type="radio" name="payment" id="paypal" value="cod" (click)='paymentMethod($event)'> &nbsp; Cash on Delivery
               </label>
             </li>
           </ul>
@@ -524,15 +522,11 @@
       </div>
       <div class="place-order-btn-div">
         <p class="err"></p>
-        <button type="button" id="place-order-button" (click)='placeOrder()'>Place Order</button>
+        <button type="button" id="place-order-button" (click)='placeOrder()'>Proceed to Checkout</button>
       </div>
 
     </div>
     <div class="clearfix"></div>
-    <!-- <div class="place-order-btn-div">
-      <p class="err"></p>
-      <button type="button" id="place-order-button" (click)='placeOrder()'>Place Order</button>
-    </div> -->
   </div>
 </div>
 <div class="db">
@@ -545,3 +539,7 @@
     <button class="save-btns" (click)='updateAddress()' style="margin-top:20px;">SUBMIT</button>
   </div>
 </div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+</script>
