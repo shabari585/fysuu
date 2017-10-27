@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { Category } from "../../models/category";
 
 // import { MenuItem } from "./models/menu-item";
-import { Items } from "../../models/items";
+// import { Items } from "../../models/items";
 
 // importing service
 import { AdminServicesService } from "../../services/admin-services.service";
@@ -26,7 +26,7 @@ export class AddMenuComponent implements OnInit {
 
   constructor(private getMenu: AdminServicesService, private router: Router, private title: Title, private getMenuService: GetMenuService) { }
 
-  items: Items[];
+  items: any = [];
   selectedItemName: string;
   selectedItemPrice: string;
   selectedItemId: string;
@@ -79,18 +79,16 @@ export class AddMenuComponent implements OnInit {
     });
     this.getMenu.getDates().subscribe(res => {
       this.dates = res;
-      // console.log(res);
 
       res.forEach(element => {
         
         // element.date
         // element.item_id
         this.getMenuService.getItemDetails(element.item_id).subscribe(res=>{
-          // console.log(res.msg[0].item_name);
           let json = {date_id:element._id, date: element.date, name:res.msg[0].item_name }
           this.outCats.push(json);
 
-          let searchable_json = {date:element.date,name:res.msg[0].item_name};
+          let searchable_json = {date:element.date,name:res.msg[0].item_name,item_id:res.msg[0]._id};
 
           this.searchable_outCats.push(searchable_json);
 
@@ -99,7 +97,6 @@ export class AddMenuComponent implements OnInit {
 
         });
       });
-      // console.log(this.outCats);
 
     });
   }
@@ -126,7 +123,7 @@ export class AddMenuComponent implements OnInit {
         this.subsOfCat = res;
         this.catSelected = 'true';
       } else {
-        console.log(res.msg);
+        console.log(res);
       }
     });
   }
@@ -147,33 +144,42 @@ export class AddMenuComponent implements OnInit {
         this.items = res.msg;
         
         this.items.forEach(element => {
+          // console.log(element);
           // element.item_name;
           // this.dateSelected;
           // let searchable_json = {date:element.date,name:res.msg[0].item_name};
-          let find_json = {date:this.dateSelected,name:element.item_name};
+          let find_json = {date:this.dateSelected,name:element.item_name,item_id:element._id};
           let found_arr:any=[];
-          found_arr = this.searchable_outCats.find(find => find.date == find_json.date && find_json.name == find.name);
+          found_arr = this.searchable_outCats.find(find => find.date == find_json.date && find_json.name == find.name && find_json.item_id == find.item_id);
           // console.log('dorikindi');
           // console.log(found_arr);
           if(found_arr == undefined){
-              element.checked = false;
+            element.checked = false;
           }else{
             this.dateItems.push(found_arr);
             element.checked = true;
+
+            let temp_array = [find_json.date,find_json.item_id];
+            // console.log(temp_array);
+            // console.log('Added auto to added items');
+            this.addedItems.push(temp_array);
+            // console.log('added Items');
+            // console.log(this.addedItems);
           }
-          console.log(element);
+          // console.log(element);
         });
-        console.log(this.items);
+        // console.log(this.items);
         // console.log(this.dateItems);
       }
     });
   }
 
   onCheckChange(dateSelected: string, cat_id: string, sub_name: string, item_id, isChecked: boolean) {
-
+    
     // alert(item_id);
 
     if (isChecked == true) {
+
 
       let temp_array = [dateSelected, item_id];
       // Add to added items
@@ -184,6 +190,7 @@ export class AddMenuComponent implements OnInit {
         }
       }
       this.addedItems.push(temp_array);
+      // console.log(this.addedItems);
       
       // Remove from removedItems
       for (var x = 0; x < this.removedItems.length; x++) {
@@ -209,13 +216,19 @@ export class AddMenuComponent implements OnInit {
       }
       // console.log(this.addedItems);
     }
+    // console.log('Added items');
+    // console.log(this.addedItems);
+    // console.log('Removed items');
+    // console.log(this.removedItems);
   }
 
   submitMenu() {
     this.getMenu.postSchedule(this.addedItems, this.removedItems).subscribe(res => {
-
+      // console.log(this.addedItems);
+      // console.log(this.removedItems);
       if (res) {
         window.location.reload();
+        // console.log(res);
       }
     });
 

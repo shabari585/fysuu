@@ -420,7 +420,6 @@ router.get('/get-all-dates', (req, res, next) => {
 
 router.delete('/delete-date/:date_id', (req, res, next) => {
     id = req.params.date_id;
-    // res.json({success:false, msg: req.params.date_id});
     dates.deleteOne({ _id: id }, (err, status) => {
         if (status) {
             res.json({ success: true, msg: status });
@@ -428,82 +427,81 @@ router.delete('/delete-date/:date_id', (req, res, next) => {
             res.json({ success: false, msg: err });
         }
     });
+    // dates.remove((err,status)=>{
+    //     if(err){
+    //         res.json({ success: false, msg: err });
+    //     }else{
+    //         res.json({ success: true, msg: status });
+    //     }
+    // });
 });
 
 // Add schdule
 router.post('/post-dates', (req, res, next) => {
 
-    addCheck = "not yet", remCheck = [];
     // res.json(req.body.schArray.length);
     // // // check if any elements need to be added
+    let ar =[];
     if (req.body.schArray.length > 0) {
-        for (var i = 0; i < req.body.schArray.length; i++) {
-            // addCheck = 'entered for';
-            dated = req.body.schArray[i][0];
-            i_id = req.body.schArray[i][1];
+        req.body.schArray.forEach(function(element) {
+            // ar.push(element[1]);
 
-            dates.find({
-                date: dated,
-                item_id: i_id
-            }, (err, r) => {
-                if (r.length == 0) {
-                    // we have to add it
-                    let newdate = new dates({
-                        date: dated,
-                        item_id: i_id,
-                    });
-                    newdate.save((err, da) => {
-
-                    });
-                }
-                if (err) {
-                    // we have to add it
-                    let newdate = new dates({
-                        date: dated,
-                        item_id: i_id,
-                    });
-                    newdate.save((err, da) => {
-
-                    });
-                } else {
-
-                }
+            let newdate = new dates({
+                date : element[0],
+                item_id : element[1]
             });
-        }
-    }
-    else {
-        addCheck = "true";
+            // Delete if exists
+            dates.deleteOne({date:element[0],item_id:element[1]},(err,deleted)=>{
+            });
+            newdate.save((err,da)=>{
+
+            });
+
+            ar.push(newdate);
+
+        }, this);
+        res.json({msg:ar});
+    }else{
+        res.json({msg:'no length'})
     }
 
     if (req.body.remArray.length > 0) {
-        // req.body[1] = > Array of items to be removed
-        for (var j = 0; j < req.body.remArray.length; j++) {
-
-            datee = req.body.remArray[j][0];
-            item_idd = req.body.remArray[j][1];
-
-            dates.remove({
-                date: datee, item_id: item_idd
-            }, (err, ru) => {
-                // this.remCheck = "true";
-                if (err) {
-                    // remCheck = "true";
-                } else {
-                    // remCheck = "true";
-                }
+        req.body.remArray.forEach(function(element) {
+            // Delete
+            dates.deleteOne({date:element[0],item_id:element[1]},(err,deleted)=>{
             });
+            ar.push(newdate);
 
-        }
-    } else {
-        remCheck = "true";
+        }, this);
+        res.json({msg:ar});
+    }else{
+        res.json({msg:'no length'})
     }
-    // res.json('returned');
-    res.json(addCheck);
-    // if (addCheck == "true" && remCheck == "true") {
-    //     res.json('success');
+
+    // if (req.body.remArray.length > 0) {
+    //     // req.body[1] = > Array of items to be removed
+    //     for (var j = 0; j < req.body.remArray.length; j++) {
+
+    //         datee = req.body.remArray[j][0];
+    //         item_idd = req.body.remArray[j][1];
+
+    //         dates.remove({
+    //             date: datee, item_id: item_idd
+    //         }, (err, ru) => {
+    //             // this.remCheck = "true";
+    //             if (err) {
+    //                 // remCheck = "true";
+    //             } else {
+    //                 // remCheck = "true";
+    //             }
+    //         });
+
+    //     }
     // } else {
-    //     res.json(addCheck);
+    //     remCheck = "true";
     // }
+    // res.json('returned');
+    // res.json(addCheck);
 });
 
 

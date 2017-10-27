@@ -312,7 +312,6 @@
                                         <h5 class="sc-ch-mid-heads">{{sub}}</h5>
                                         <div class="sc-ch-menu-divs">
                                             <ul class="list-inline">
-                                                
                                                 <li *ngFor="let menu of day_one_books">
                                                     <div *ngIf="menu[0].sub_name == sub">
                                                         <div class="sc-ch-item">
@@ -321,7 +320,7 @@
                                                                 <div *ngIf="menu[0].item_name == 'Roti'">
                                                                     <img [src]="roti_img" class="roti-cl" alt="">
                                                                 </div>
-                                                                <div *ngIf="menu[0].item_name == 'Roti + Rice' || menu[0].item_name == 'Roti + Half Rice' || menu[0].item_name == 'Roti + Full Rice' || menu[0].item_name == 'Roti + Full rice' || menu[0].item_name == 'Roti + Half rice'">
+                                                                <div *ngIf="menu[0].item_name == 'Roti + Rice' || menu[0].item_name == 'Roti + Half Rice'|| menu[0].item_name == 'Roti and Half Rice' || menu[0].item_name == 'Roti + Full Rice' ||menu[0].item_name == 'Roti and Full Rice' || menu[0].item_name == 'Roti + Full rice' || menu[0].item_name == 'Roti + Half rice'">
                                                                     <img [src]="rice_roti_img" class="rice-roti-cl" alt="">
                                                                 </div>
                                                                 <div *ngIf="menu[0].item_name == 'Rice'">
@@ -334,9 +333,7 @@
                                                     </div>
                                                 </li>
                                             </ul>
-    
                                         </div>
-
                                     </div>
 
                                     </div>
