@@ -118,7 +118,21 @@ export class AuthService {
         return this.http.get('http://localhost:3700/users/get-address/' + user_id).map(res => res.json());
         // return this.http.get('users/get-address/' + user_id).map(res => res.json());
     }
+    getUserMobileFromEmail(email){
+        return this.http.get('http://localhost:3700/users/get-mobile-from-email/' + email).map(res => res.json());
+        // return this.http.get('users/get-mobile-from-email/' + email).map(res => res.json());
+    }
 
+    updateUserPwdFromHome(user){
+        let header = new Headers();
+        header.append('Content-Type', 'application/json');
+        return this.http.post('http://localhost:3700/users/update-pwd-home', user, { headers: header }).map(res => res.json());
+        // return this.http.post('users/update-pwd-home', user, { headers: header }).map(res => res.json());
+    }
+    retryOtp(mobile){
+        return this.http.get('http://localhost:3700/users/retry-otp/' + mobile).map(res => res.json());
+        // return this.http.get('users/retry-otp/' + mobile).map(res => res.json());
+    }
     postOrder(order) {
         let header = new Headers();
         header.append('Content-Type', 'application/json');

@@ -10,7 +10,7 @@ const bcrypt = require('bcryptjs');
 const SendOtp = require('sendotp');
 
 const sendOtp = new SendOtp('169485AwtkPnUOqshf598d9ce4');
-sendOtp.setOtpExpiry('1');
+// sendOtp.setOtpExpiry('1');
 // resend after 1 minute
 
 
@@ -28,6 +28,19 @@ router.get('/send-otp/:mobile', (req, res, next) => {
         }
     });
     // res.json({msg:'sent'});
+});
+
+router.get('/retry-otp/:mobile',(req,res,next)=>{
+    let mobile = req.params.mobile;
+    let input = "91"+mobile;
+    // res.json({input});
+    sendOtp.retry(input,false,(error,data,response)=>{
+        if(data.type == 'success'){
+            res.json({success: true, msg: data});
+        }else{
+            res.json({success:false,msg:data});
+        }
+    });
 });
 
 // Register
@@ -202,6 +215,46 @@ router.post('/update-pwd',(req,res,next)=>{
 
 });
 
+// Update pwd
+router.post('/update-pwd-home',(req,res,next)=>{
+
+    mob = req.body.mobile;
+    otp = req.body.otp;
+    password = req.body.newPwd;
+
+    let input = "91"+mob;
+    // res.json({input});
+
+    sendOtp.verify(input,otp, function (error, data, response) {
+        // console.log(data); // data object with keys 'message' and 'type'
+        if(data.type == 'success') {
+            // Update password
+            User.find({mobile:mob},(err,user)=>{
+                // res.json({success:false,msg:user[0].email});
+                if(user){
+                    bcrypt.genSalt(10, (err, salt) => {
+                        bcrypt.hash(password, salt, (err, hash) => {
+                            if (err) throw err;
+                            user[0].password = hash;
+                            user[0].save((err,saved)=>{
+                                if(err){
+                                    res.json({ success: false, msg: err });   
+                                }else{
+                                    res.json({ success: true, msg: saved });   
+                                }
+                            });
+                        })
+                    })
+                }
+            });
+        }
+        if(data.type == 'error') {
+            res.json({success:false,msg:data});
+        }
+      });
+
+
+});
 // Find Email
 router.get('/find-email/:email', (req, res, next) => {
     e = req.params.email;
@@ -210,6 +263,23 @@ router.get('/find-email/:email', (req, res, next) => {
         if(re){
             if(re.length>0){
                 res.json({success:true, msg:'User Found'});
+            }else{
+                res.json({succcess:false, msg:'No user found'});
+            }
+        }else{
+            res.json({succcess:false, msg:'No user found'});
+        }
+    });
+});
+// Get Mobile from Email
+router.get('/get-mobile-from-email/:email', (req, res, next) => {
+    
+    e = req.params.email;
+
+    User.find({email: e},(err,re)=>{
+        if(re){
+            if(re.length>0){
+                res.json({success:true, msg:re[0].mobile});
             }else{
                 res.json({succcess:false, msg:'No user found'});
             }
