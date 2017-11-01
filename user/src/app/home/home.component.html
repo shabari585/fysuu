@@ -1,5 +1,5 @@
 <div class="scroll-header">
-  <div class="main-logo pull-left">
+  <div class="main-logo pull-left" (click)='pageScrollTop()'>
     <img src="../../assets/logo/logo_black.png">
   </div>
   <div class="location-input-div">
@@ -12,7 +12,6 @@
   </div>
   <div class="scroll-login-div" *ngIf="!authService.loggedIn()">
     <button type="button" class="login-signup-trig-btn" (click)="appComponent.loginSignupTrigger()">Log in/Sign up</button>
-
   </div>
   <div class="scroll-login-div" *ngIf="authService.loggedIn()">
     <!-- <a (click)="onLogoutClick()" style="cursor:pointer">Logout</a> -->
@@ -31,6 +30,11 @@
           </ul>
         </div>
       </div>
+
+      <div *ngIf="authService.loggedIn()" class="head-basket" routerLink='/checkout'>
+        Basket &nbsp; <span class="head-basket-num">{{basket_num}}</span>
+      </div>
+
   </div>
 </div>
 <div class="vp fvp">
@@ -87,6 +91,9 @@
                     <li role="presentation"><a role="menuitem" tabindex="-1" (click)="onLogoutClick()">Logout</a></li>
                   </ul>
                 </div>
+              </li>
+              <li *ngIf="authService.loggedIn()" class="head-basket" routerLink='/checkout'>
+                Basket &nbsp; <span class="head-basket-num">{{basket_num}}</span>
               </li>
             </ul>
           </nav>

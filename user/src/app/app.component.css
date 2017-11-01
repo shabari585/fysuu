@@ -151,16 +151,6 @@ input:active {
   color: #fff;
   margin-right: 20px;
 }
-.forgot-pwd-trig{
-  font-size: 80%;
-  color: #428bcA;
-  cursor: pointer;
-}
-.close-btn {
-  border: 1px solid #515151;
-  background-color: #fff;
-  color: #787878;
-}
 
 #reg-mobile-div {
   position: relative;

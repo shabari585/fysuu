@@ -5,6 +5,7 @@
   position: relative;
   display: block;
   background-color: #F2F5F6;
+  margin-top: 70px;
   min-height: 75vh;
   padding-bottom: 30px;
   overflow: hidden;
@@ -45,10 +46,13 @@
 .left-index li {
   padding: 15px 20px;
   font-size: 100%;
-  border-bottom: 1px solid #F2F5F6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
+}
+.left-index #li{
+  border-bottom: none;
 }
 
 .left-index a {
@@ -68,7 +72,7 @@
 
 .left-index li:hover {
   cursor: pointer;
-  background-color: #F2F5F6;
+  background-color: #d9dcdd;
 }
 
 .selected-index-item {
@@ -118,9 +122,9 @@
 }
 
 .dets-core .inputs {
-  width: 50%;
+  width: 100%;
   height: 40px;
-  border: 2px solid #F3F3F3;
+  border: 2px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 0 10px;
 }
@@ -132,8 +136,8 @@
 
 .save-btns {
   border-radius: 5px;
-  height: 45px;
-  width: 80px;
+  height: 40px;
+  width: 120px;
   border: none;
   background-color: #6DA942;
   color: #fff;
@@ -253,12 +257,16 @@
   display: flex;
   display: -webkit-flex;
   width: 100%;
+  height: auto;
   align-items: center;
   -webkit-align-items: center;
   justify-content: space-between;
   -webkit-justify-content: space-between;
 }
-
+.err{
+  margin:0;
+  padding: 0;
+}
 .change-pwd-btn {
   border: none;
   /* border-bottom: 1px solid #00f; */

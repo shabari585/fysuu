@@ -38,6 +38,10 @@ export class ProfileComponent implements OnInit {
     this.authService.updateUser(user).subscribe(res=>{
       if(res.success){
         console.log(res.msg);
+        $('.err').html('Updated Successfully');
+        setTimeout(function() {
+          $('.err').html('');
+        }, 1000);
       }else{
         console.log(res.msg);
       }

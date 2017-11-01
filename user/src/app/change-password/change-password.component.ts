@@ -39,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
           if(res.success){
             $('.err').html('Password Changed !');
           }else{
-            $('.err').html('Something went wrong');
+            $('.err').html('Incorrect old password');
           }
         });
       }else{

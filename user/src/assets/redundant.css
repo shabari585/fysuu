@@ -112,7 +112,25 @@ input:active {
 .err{
   margin: 10px 0;
   color: #fa0000;
-  font-size: 70%;
+  font-size: 80%;
+}
+.forgot-pwd-trig{
+  font-size: 80%;
+  color: #428bcA;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.close-btn {
+  border: 1px solid #515151;
+  background-color: #fff;
+  color: #787878;
+}
+.fixed-dark-cover .fa-times:hover{
+  color: #fa0000;
+}
+#next-reg-fixed-dark-cover .fa-times{
+  top:3%;
+  left: 94%;
 }
 
 
@@ -163,7 +181,10 @@ input:active {
   color: #fff;
   margin-right: 20px;
 }
-
+#continue-btn,#login-btn,#otp-btn,#signup-btn{
+  width: 200px;
+  margin-right: 0 !important;
+}
 .close-btn {
   border: 1px solid #515151;
   background-color: #fff;
@@ -312,7 +333,7 @@ input:active {
 
 .main-header {
   z-index: 8;
-  position: relative;
+  position: fixed;
   display: block;
   top: 0px;
   left: 0;
@@ -441,11 +462,14 @@ input:active {
   margin-right: 30px;
 }
 
-#our-menu-btn {
+#our-menu-btn,#sch-menu-btn {
   margin-right: 20px;
   color: #666;
 }
-
+#sch-menu-btn{
+  cursor: pointer;
+  font-weight: bold;
+}
 .selected {
   font-weight: bold;
   border-bottom: 2px solid #6DA942;
@@ -730,6 +754,7 @@ input:active {
 .con-section{
  min-height: 80vh;
  height: auto;
+ margin-top: 70px;
  padding-top:30px !important;
  padding-bottom: 40px !important;
  margin-bottom: 0 !important;

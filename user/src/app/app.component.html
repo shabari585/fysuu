@@ -5,12 +5,12 @@
     <i class="fa fa-times" aria-hidden="true" (click)="mainClose()"></i>
     <h4>Let's get started!</h4>
     <!-- <label for="email" id="email-label">Email or Mobile</label><br> -->
-    <input type="text" name="email" id="email" [(ngModel)]='initialLoginInput' placeholder="Email or Mobile number">
+    <input type="text" name="email" id="email" [(ngModel)]='initialLoginInput' placeholder="Email or Mobile">
     <p class="err"></p>
     <div class="ls-btns-div">
       <div class="ls-btns-core-div">
         <button type="button" class="ls-btns" id="continue-btn" (click)="firstConClick(initialLoginInput)">Continue</button>
-        <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button>
+        <!-- <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button> -->
       </div>
     </div>
   </div>
@@ -20,14 +20,14 @@
     <i class="fa fa-times" aria-hidden="true" (click)="mainClose()"></i>
     <h4>We just need few more details</h4>
    
-    <label for="reg-name" id="reg-name-label">Full Name</label>
+    <label for="reg-name" id="reg-name-label">Name</label>
     <input type="text" name="reg-name" class="next-inputs" id="reg-name" [(ngModel)]='regNameInput' placeholder=""><br>
     
 
     <label for="reg-email" id="reg-email-label">Email</label>
     <input type="text" name="reg-email" class="next-inputs" id="reg-email" [(ngModel)]='regEmailInput' placeholder=""><br>
 
-    <label for="reg-mobile" id="reg-mobile-label">Phone Number</label>
+    <label for="reg-mobile" id="reg-mobile-label">Mobile Number</label>
       <input type="text" class="next-inputs" [(ngModel)]='regMobileInput'
         name="reg-mobile" id="reg-mobile" placeholder="">
 
@@ -50,7 +50,7 @@
         <button type="button" class="ls-btns" id="otp-btn" (click)="OtpBtnClick()">Send OTP</button>
         <button type="button" class="ls-btns" id="signup-btn" (click)="SignUpClick(regNameInput,regEmailInput,regMobileInput,regPwdInput,regOTPInput)"
           style="display:none">Register</button>
-        <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button>
+        <!-- <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button> -->
       </div>
     </div>
   </div>
@@ -71,7 +71,7 @@
     <div class="ls-btns-div">
       <div class="ls-btns-core-div">
         <button type="button" class="ls-btns" id="login-btn" (click)="LoginSubmit(loginEmailInput,loginPasswordInput)">Login</button>
-        <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button>
+        <!-- <button type="button" class="ls-btns close-btn" (click)="mainClose()">Close</button> -->
       </div>
     </div>
   </div>

@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
 
-  locationEntry: string;
+  locationEntry: string = null;
   location = {};
   lat: number;
   long: number;
@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit {
   userMobile :string;
   userId :string;
 
+  basket_num:number;
+
 
   constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService) { }
 
@@ -35,6 +37,16 @@ export class HomeComponent implements OnInit {
       }
       window.scrollTo(0, 0)
     });
+
+    this.basket_num = parseInt(localStorage.getItem('basket_number'));
+    if(this.basket_num == undefined || this.basket_num == null || this.basket_num == 0 || isNaN(this.basket_num) == true){
+      // redirect to menu
+      this.basket_num = 0;
+      // alert(this.basket_num);
+      // alert('no');
+    }else{
+      // this.basket_num;
+    }
 
     if(this.authService.loggedIn()){
 
@@ -72,53 +84,6 @@ export class HomeComponent implements OnInit {
         }
       });
     });
-
-    // showSentence();
-    // // Typed effect
-
-    // function showSentence() {
-    //   var tOut = setTimeout(showSentence, 8000);
-
-
-    //   // First 
-    //   setTimeout(function () {
-    //     $('#t-two-one').hide();
-    //     $('#t-two-two').hide();
-    //     $('#t-three-one').hide();
-    //     $('#t-three-two').hide();
-    //     $('#t-one-one').fadeIn(500);
-    //   }, 0);
-
-    //   setTimeout(function () {
-    //     $('#t-one-two').fadeIn(500);
-    //   }, 1000);
-
-    //   // Second lines
-    //   setTimeout(function () {
-    //     $('#t-one-one').hide();
-    //     $('#t-one-two').hide();
-    //     $('#t-three-one').hide();
-    //     $('#t-three-two').hide();
-    //     $('#t-two-one').fadeIn(500);
-    //   }, 3000);
-
-    //   setTimeout(function () {
-    //     $('#t-two-two').fadeIn(500);
-    //   }, 4000);
-
-    //   // Third lines
-    //   setTimeout(function () {
-    //     $('#t-one-one').hide();
-    //     $('#t-one-two').hide();
-    //     $('#t-two-one').hide();
-    //     $('#t-two-two').hide();
-    //     $('#t-three-one').fadeIn(500);
-    //   }, 5500);
-
-    //   setTimeout(function () {
-    //     $('#t-three-two').fadeIn(500)
-    //   }, 6500);
-    // }
   }
   public gotoHowitWorks() {
     $('html, body').animate({ scrollTop: $(".how-it-works-div").offset().top - 70 }, 1000);
@@ -176,13 +141,15 @@ export class HomeComponent implements OnInit {
               // Add to input box
               // $('.location-search-input').val(this.address);
               this.locationEntry = this.address;
+              this.router.navigate(['/menu']);
             } else {
               // ********** VERY IMPORTANT DELETE AFTER TESTING IS DONE ************** 
               // Delete after testing is done
-
+              
               // this.give_menu_permission = true;
-
-
+              
+              this.router.navigate(['/menu']);
+            
               localStorage.setItem('home_address', this.address);
               // Add to user's address if he is logged in
               if (this.authService.loggedIn()) {
@@ -224,47 +191,70 @@ export class HomeComponent implements OnInit {
   }
 
   seeMenu() {
-    // alert('menu');
     // Address in this.locationEntry
-    if(this.locationEntry != undefined){
 
-      if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry == 'Madhapur' || this.locationEntry == 'madhapur'|| this.locationEntry == 'Madapur' || this.locationEntry == 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur') ) {
-        localStorage.setItem('home_address', this.locationEntry);
-        // Add to user's address if he is logged in
-        if (this.authService.loggedIn()) {
-          // User is logged in 
-      //     // send this address to save
-          let address = {
-            user_id: this.userId,
-            address: this.locationEntry
-          }
-          this.authService.saveAddress(address).subscribe(res => {
-            if (res.success) {
-              // Address saved
-              console.log(res);
-            } else {
-              // Address not saved
-              if (res.msg = 'exists') {
-                // address already exists
-              } else {
-                // console.log(res);
-              }
+    alert(this.locationEntry);
+
+    if(this.authService.loggedIn()){
+      this.router.navigate(['/menu']);
+    }else{
+      // alert('hi');
+      if(this.locationEntry != undefined){
+  
+        if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry == 'Madhapur' || this.locationEntry == 'madhapur'|| this.locationEntry == 'Madapur' || this.locationEntry == 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur') ) {
+          localStorage.setItem('home_address', this.locationEntry);
+          // Add to user's address if he is logged in
+          if (this.authService.loggedIn()) {
+            // User is logged in 
+            // send this address to save
+            let address = {
+              user_id: this.userId,
+              address: this.locationEntry
             }
-          });
-          this.router.navigate(['/menu']);
+            this.authService.saveAddress(address).subscribe(res => {
+              if (res.success) {
+                // Address saved
+                console.log(res);
+              } else {
+                // Address not saved
+                if (res.msg = 'exists') {
+                  // address already exists
+                } else {
+                  // console.log(res);
+                }
+              }
+            });
+            this.router.navigate(['/menu']);
+          } else {
+            // Navigate to menu
+            // this.appComponent.loginSignupTrigger();
+            this.router.navigate(['/menu']);
+            
+          }
         } else {
-          // Navigate to menu
+          this.locationEntry = this.address;
+          $('.location-warning-div').show();
+    
+          // Remove later
           this.router.navigate(['/menu']);
         }
-      } else {
-        this.locationEntry = this.address;
-        $('.location-warning-div').show();
-  
-        // Remove later
-        this.router.navigate(['/menu']);
+      }else{
+        if(!this.authService.loggedIn()){
+          if(this.locationEntry == null){
+            // Do nothing
+          }else{
+            this.router.navigate(['/menu']);
+          }
+          // this.appComponent.loginSignupTrigger();
+        }
       }
     }
+
     
+  }
+
+  pageScrollTop(){
+    $('html, body').animate({ scrollTop: $("html").offset().top }, 1000);
   }
 
 }

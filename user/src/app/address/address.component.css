@@ -15,8 +15,8 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
 .wb{
-    height: 300px;
-    width: 400px;
+    height: 270px;
+    width: 300px;
     border-radius: 4px;
     background-color: #fff;
 }
@@ -29,10 +29,15 @@
     outline: none !important;
     height: 150px;
     width: 250px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 }
 .wb .fa{
     position: absolute;
     top:5%;
     left:92%;
     cursor: pointer;
+}
+.fa-trash-o{
+    margin-left: 10px;
 }

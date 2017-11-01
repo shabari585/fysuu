@@ -50,6 +50,23 @@ router.post('/register', (req, res, next) => {
     let input = "91"+mobile;
     otp = req.body.otp;
 
+    // let newUser = new User({
+    //                 email: req.body.email,
+    //                 mobile: req.body.mobile,
+    //                 name: req.body.name,
+    //                 password: req.body.password,
+    //                 address: req.body.address,
+    //                 rewardPoints: req.body.rewardPoints
+    //             });
+    // User.addUser(newUser, (er, user) => {
+    //     if (er) {
+    //         res.json({ success: false, msg: 'Failed to Register' })
+    //     } else {
+    //         res.json({ success: true, msg: user });
+
+    //     }
+    // });
+
     // res.json({mob:otp});
 
     // Verify OTP

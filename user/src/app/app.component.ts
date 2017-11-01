@@ -92,6 +92,7 @@ export class AppComponent implements OnInit {
 
   // On clicking login/signup
   public loginSignupTrigger() {
+    $('.err').html('');
     $('.fixed-dark-cover').hide();
     $('#login-fixed-dark-cover').css({ 'display': 'flex' });
     $('#email').keyup(function(){
@@ -139,6 +140,7 @@ export class AppComponent implements OnInit {
             this.isInputEmail = true;
             $('#next-login-fixed-dark-cover').css({ 'display': 'flex' });
             this.loginEmailInput = this.initialLoginInput;
+            $('#login-password').focus();
             $('#login-password').keyup(function(e){
               let inp = $(this).val();
               if(inp.length>5){
@@ -149,7 +151,9 @@ export class AppComponent implements OnInit {
             });
           }else{
             $('#next-reg-fixed-dark-cover').css({ 'display': 'flex' });
+            $('#reg-name').focus();
             this.regEmailInput = this.initialLoginInput;
+            $('#reg-email').val(this.initialLoginInput);
             $('#next-reg-fixed-dark-cover').keyup(function(e) {
               let regname = $('#reg-name').val();
               let regemail = $('#reg-email').val();
@@ -188,20 +192,23 @@ export class AppComponent implements OnInit {
             this.isInputMobile = true;
             // Mobile number exists
             $('#next-login-fixed-dark-cover').css({ 'display': 'flex' });
+            $('#login-password').focus();
             $('#login-email').keyup(function(){
             });
           } else {
             this.regMobileInput = this.initialLoginInput;
+            $('#reg-mobile').val(this.initialLoginInput);
+            // alert(this.initialLoginInput);
             $('#next-reg-fixed-dark-cover').css({ 'display': 'flex' });
           }
         });
         
       } else {
-        $('.err').html('Please enter valid Email or Mobile number');
+        $('.err').html('Please enter valid a Email or Mobile');
         $('#email').css({'border-color':'#fa0000'});
       }
     } else {
-      $('.err').html('Please enter valid Email or Mobile number');
+      $('.err').html('Please enter a valid Email or Mobile');
       $('#email').css({'border-color':'#fa0000'});
     }
   }
@@ -297,12 +304,8 @@ export class AppComponent implements OnInit {
             }
           });
           $('.err').html('');
-
-
-
-          
         }else{
-          $('.err').html('Please enter valid input');
+          $('.err').html('Please enter a valid email or 10 digit mobile number');
         }
       }
     }else{
@@ -316,6 +319,7 @@ export class AppComponent implements OnInit {
 
    // On clicking enter OTP button
    public OtpBtnClick() {
+    //  alert(this.regMobileInput);
 
     $('.err').html('');
     // Validate inputs
@@ -334,18 +338,18 @@ export class AppComponent implements OnInit {
               if (data.success) {
                 // Mobile exists
                 // Send otp
-                this.authService.sendOtp(this.regMobileInput).subscribe(res=>{
-                  this.resendotptrig('signup');
-                });
+                // this.authService.sendOtp(this.regMobileInput).subscribe(res=>{
+                //   this.resendotptrig('signup');
+                // });
                 $('.otp-span').show('slow');
                 $('#otp-btn').hide();
                 $('#signup-btn').css({ 'display': 'block' });
-                $('.err').html('That mobile number is already registered with us.');
+                $('.err').html('The mobile number is already registered with us.');
               } else {
                 // Send otp
-                this.authService.sendOtp(this.regMobileInput).subscribe(res=>{
-                  console.log(res);
-                });
+                // this.authService.sendOtp(this.regMobileInput).subscribe(res=>{
+                //   console.log(res);
+                // });
                 $('.otp-span').show('slow');
                 $('#otp-btn').hide();
                 $('#signup-btn').css({ 'display': 'block' });
@@ -426,7 +430,10 @@ export class AppComponent implements OnInit {
                 // Valid email and mobile numbers. register user
                 this.authService.registerUser(this.user).subscribe(res=>{
                   if(res.success){
-                    window.location.reload();
+                    // window.location.reload();
+                    // Log user in
+
+                    
                   }else{
                     // Show Error
                     // if(res.msg = )
@@ -443,27 +450,31 @@ export class AppComponent implements OnInit {
             }
           });
         }else{
-          $('.err').html('Please Enter Valid Mobile number');
+          $('.err').html('Please enter a 10 digit Mobile number');
           // Hightlight mogile number
           $('#reg-mobile').css({'border-color':'#fa0000'});
         }
       }else{
-        $('.err').html('Please Enter Valid Email');
+        $('.err').html('Please enter a valid email address');
         $('#reg-email').css({'border-color':'#fa0000'});
       }
     }else{
       $('.err').html('All input fields are required');
       if(!this.validate.validateInput(this.regNameInput)){
         $('#reg-name').css({'border-color':'#fa0000'});
+        $('.err').html('Please enter your name');
       }
       if(!this.validate.validateInput(this.regEmailInput)){
         $('#reg-email').css({'border-color':'#fa0000'});
+        $('.err').html('Please enter a valid email address');
       }
       if(!this.validate.validateInput(this.regMobileInput)){
         $('#reg-mobile').css({'border-color':'#fa0000'});
+        $('.err').html('Please enter 10 digit mobile number');
       }
       if(!this.validate.validateInput(this.regPwdInput)){
         $('#reg-pwd').css({'border-color':'#fa0000'});
+        $('.err').html('Password must have at least 6 characters');
       }
     }
 
@@ -485,6 +496,8 @@ export class AppComponent implements OnInit {
   // Onclicking Close button
   public mainClose() {
     $('.fixed-dark-cover').hide();
+    $('#next-reg-fixed-dark-cover input').val('');
+    $('.fixed-dark-cover input').css({'border-color':'rgba(0, 0, 0, 0.2)'});
   }
 
   clickedOnTerms(){
@@ -551,11 +564,11 @@ export class AppComponent implements OnInit {
         });
         
       } else {
-        $('.err').html('Please enter valid Email or Mobile number');
+        $('.err').html('Please enter a valid Email or Mobile');
         $('#email').css({'border-color':'#fa0000'});
       }
     } else {
-      $('.err').html('Please enter valid Email or Mobile number');
+      $('.err').html('Please enter a valid Email or Mobile');
       $('#email').css({'border-color':'#fa0000'});
     }
   }

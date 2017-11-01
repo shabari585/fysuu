@@ -79,7 +79,7 @@
 
           <!-- Warning -->
           <div class="warning-div">
-            Please edit the address to be accurate
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i><p>Please edit the address to be accurate</p>
           </div>
 
           <!-- Address statement -->
@@ -95,7 +95,7 @@
                         <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)" checked>
                       </div>
                       <div class="pull-left address-lines">
-                        <h5 class="address-lines-title">Address {{i+1}}</h5>
+                        <h5 class="address-lines-title">OFFICE ADDRESS {{i+1}}</h5>
                         {{address}}
                       </div>
                       <div class="clearfix"></div>
@@ -468,7 +468,7 @@
             </div>
           </div>
 
-          <div class="total-pay">
+          <div class="total-pay total-to-pay-div">
             <div class="pull-left">
               <h6>Total to pay</h6>
             </div>

@@ -25,7 +25,7 @@ export class MenuComponent implements OnInit {
 
   // Three menus
   tab_one: string = "Rajin-e ka Roti";
-  tab_two: string = "Kohil-e ka Khana";
+  tab_two: string = "Kohil-e ka Khaana";
   tab_three: string = "Mode-e ka Meals";
   // Today 
   today_books = [];
@@ -282,8 +282,15 @@ export class MenuComponent implements OnInit {
         var slot_three_end_time = moment('1:29pm','h:mma');
         var slot_two_end_time = moment('12:44pm','h:mma');
         var slot_one_end_time = moment('11:59am','h:mma');
+        var tup_time = moment('12:00am','h:mma');
+
+        if(m_cur_time.isAfter(tup_time)){
+          // $('.time-up-db').hide();
+        }
     
         if(m_cur_time.isAfter(last_time)){
+          // Show time up div
+          $('.time-up-db').css({'display':'flex'});
           // Disable all today slots
           $('#slot_one_option').prop('disabled',true);
           $('#slot_two_option').prop('disabled',true);
@@ -323,6 +330,7 @@ export class MenuComponent implements OnInit {
       let user_parsed = JSON.parse(user);
       this.userEmail = user_parsed.email;
       this.userName = user_parsed.name;
+
       this.companyName = user_parsed.company_name;
       this.userMobile = user_parsed.mobile;
       this.userId = user_parsed.id;
@@ -635,7 +643,7 @@ export class MenuComponent implements OnInit {
   }
   // Load menu
   loadDay(date){
-    
+    // console.log(this.day_five_books);
     switch (this.datePipe.transform(date, 'fullDate')) {
       case this.p_day_one:
         // Day one menu
@@ -1142,7 +1150,7 @@ export class MenuComponent implements OnInit {
     }
     switch (true) {
       case this.day_one_status:
-        this.day_one_books = this.menu_to_be_loaded;
+        // this.day_one_books = this.menu_to_be_loaded;
         if (event) {
           // checked
           // Add to added items
@@ -1178,7 +1186,7 @@ export class MenuComponent implements OnInit {
         }
         break;
       case this.day_two_status:
-        this.day_two_books = this.menu_to_be_loaded;
+        // this.day_two_books = this.menu_to_be_loaded;
         if (event) {
           // checked
           // Add to added items
@@ -1254,7 +1262,7 @@ export class MenuComponent implements OnInit {
         }
         break;
       case this.day_four_status:
-        this.day_four_books = this.menu_to_be_loaded;
+        // this.day_four_books = this.menu_to_be_loaded;
         
         if(event){
           // checked
@@ -1291,7 +1299,7 @@ export class MenuComponent implements OnInit {
         }
         break;
       case this.day_five_status:
-        this.day_five_books = this.menu_to_be_loaded;
+      
         if (event) {
           // checked
           // Add to added items
@@ -1323,43 +1331,6 @@ export class MenuComponent implements OnInit {
                 this.place_holder_price = this.total_day_five_price;
               }
             }
-          });
-        }
-        break;
-      case this.day_six_status:
-        this.day_six_books = this.menu_to_be_loaded;
-        if (event) {
-          // checked
-          // Add to added items
-          this.day_six_c_books.push(menu);
-          // Update books
-          if (this.num_day_six_items == 0) {
-            this.num_day_six_items++;
-            this.numberOfItems = this.num_day_six_items;
-            let to_be_added_price = this.num_day_six_items * menu.item_price;
-            this.day_six_price += +menu.item_price;
-            this.total_day_six_price += +menu.item_price;
-            this.place_holder_price = this.total_day_six_price;
-          } else {
-            let to_be_added_price = this.num_day_six_items * menu.item_price;
-            this.day_six_price += +menu.item_price;
-            this.total_day_six_price += +to_be_added_price;
-            this.place_holder_price = this.total_day_six_price;
-          }
-        } else {
-          // must remove from added items if exists
-          this.day_six_c_books.forEach(element => {
-            if (element._id == menu._id && element.date == menu.date) {
-              var ind = this.day_six_c_books.indexOf(element, 0);
-              if (ind > -1) {
-                this.day_six_c_books.splice(ind, 1);
-                this.day_six_price -= menu.item_price;
-                let to_be_added_price = this.num_day_six_items * menu.item_price;
-                this.total_day_six_price -= to_be_added_price;
-                this.place_holder_price = this.total_day_six_price;
-              }
-            }
-            // console.log(this.day_six_c_books);
           });
         }
         break;
@@ -1594,7 +1565,8 @@ export class MenuComponent implements OnInit {
     return false;
   }
   schMenuBtn(){
-
+    $('.calender-li').removeClass('selected-date-li');
+    $('#top-calender-li').addClass('selected-date-li');
     if(this.authService.loggedIn()== true){
       this.day_one_status = true;
       this.day_two_status = false;

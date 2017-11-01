@@ -768,5 +768,8 @@ export class CheckoutComponent implements OnInit {
       default:
         break;
     }
+    if(this.total_price == 0){
+      this.router.navigate(['/menu']);
+    }
   }
 }
