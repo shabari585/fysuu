@@ -30,18 +30,24 @@ export class ChangePasswordComponent implements OnInit {
   changePwd(){
     if (this.validate.validateInput(this.oldPassword) && this.validate.validateInput(this.newPassword) && this.validate.validateInput(this.conNewPassword)){
       if(this.newPassword === this.conNewPassword){
-        let obj = {
-          u_id: this.userId,
-          password: this.oldPassword
-        }
-        // Update password
-        this.authService.updatePassword(obj).subscribe(res=>{
-          if(res.success){
-            $('.err').html('Password Changed !');
-          }else{
-            $('.err').html('Incorrect old password');
+
+        if(this.newPassword.length > 5){
+          let obj = {
+            u_id: this.userId,
+            password: this.oldPassword
           }
-        });
+          // Update password
+          this.authService.updatePassword(obj).subscribe(res=>{
+            if(res.success){
+              $('.err').html('Password Changed !');
+            }else{
+              $('.err').html('Incorrect old password');
+            }
+          });
+        }else{
+          $('.err').html('Password Must contain at least 6 characters')
+        }
+
       }else{
         $('.err').html('Passwords does\'t match !');
       }

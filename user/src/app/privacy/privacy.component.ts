@@ -17,7 +17,7 @@ export class PrivacyComponent implements OnInit {
 
   userEmail: string;
   userName: string;
-  companyName: string;
+  fullName:string;
   userMobile: string;
   userId: string;
 
@@ -53,10 +53,16 @@ export class PrivacyComponent implements OnInit {
       let user = this.authService.getUserFromLocal();
       let user_parsed = JSON.parse(user);
       this.userEmail = user_parsed.email;
-      this.userName = user_parsed.name;
-      this.companyName = user_parsed.company_name;
+      this.fullName = user_parsed.name;
       this.userMobile = user_parsed.mobile;
       this.userId = user_parsed.id;
+      var fLength = this.fullName.split(' ');
+      
+      if(fLength.length > 1){
+        this.userName = this.fullName.split(' ').slice(0, -1).join(' ');
+      }else{
+        this.userName = this.fullName;
+      }
     }else{
       this.basket_num = 0;
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, RouterModule } from "@angular/router";
 import { AuthService } from "../services/auth.service";
+import { ValidateService } from "../services/validate.service";
 declare var $: any;
 
 @Component({
@@ -11,7 +12,7 @@ declare var $: any;
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private router: Router, private title: Title, private authService: AuthService) { }
+  constructor(private router: Router, private title: Title, private authService: AuthService, private validate: ValidateService) { }
 
   userId:string;
   userEmail:string;
@@ -28,6 +29,17 @@ export class ProfileComponent implements OnInit {
     this.userId = user_parsed.id;
   }
   profileUpdate(userEmail, userName, userMobile){
+
+    if(this.validate.validateInput(userEmail) && this.validate.validateInput(userName) && this.validate.validateInput(userMobile)){
+      if(this.validate.validateEmail(userEmail)){
+
+      }else{
+        $('.err').html('Please enter proper email.');
+      }
+    }else{
+      $('.err').html('All input fields are required.');
+    }
+
     let user = {
       id: this.userId,
       name: this.userName,

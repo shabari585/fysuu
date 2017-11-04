@@ -30,9 +30,6 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle('Settings: Orders');
 
-    
-
-
     let user = this.authService.getUserFromLocal();
     let user_parsed = JSON.parse(user);
     this.userEmail = user_parsed.email;
@@ -43,7 +40,7 @@ export class OrdersComponent implements OnInit {
 
     this.getadMenu.getOrders().subscribe(res=>{
       this.all_orders = res.msg;
-      console.log(this.all_orders);
+      // console.log(this.all_orders);
       this.all_orders.forEach(element => {
         // console.log(element.order.user_id);
         if (this.userId == element.order.user_id){
@@ -51,6 +48,9 @@ export class OrdersComponent implements OnInit {
         }
       });
       console.log(this.users_orders);
+      this.users_orders.forEach(element => {
+        console.log(element.order);
+      });
       if(this.users_orders.length>0){
         this.orders_exist = true;
       }

@@ -61,34 +61,46 @@ export class AppComponent implements OnInit {
       // this.basket_num;
     }
 
-    $(document).keypress(function(e) {
-      if(e.which == 13) {
-          // Login trigger tab is visible
-          if($('#login-fixed-dark-cover').is(':visible')){
-            // Trigger continue-btn
-            $('#continue-btn').trigger('click');
+    $(document).keydown(function(e) {
+
+      switch (e.which) {
+        case 13:
+          switch (true) {
+            case $('#login-fixed-dark-cover').is(':visible'):
+              $('#continue-btn').trigger('click');
+              break;
+            case $('#next-reg-fixed-dark-cover').is(':visible'):
+              if($('#reg-otp').val()){
+                // trigger sign-up btn
+                $('#signup-btn').trigger('click');
+              }else{
+                // Trigger otp btn
+                $('#otp-btn').trigger('click');
+              }
+              break;
+            case $('#next-login-fixed-dark-cover').is(':visible'):
+                $('#login-btn').trigger('click');
+              break;
+            default:
+              break;
           }
-          // Sign up tab is visible
-          if($('#next-reg-fixed-dark-cover').is(':visible')){
-            // OTP and sign up buttons
-            if($('#reg-otp').val()){
-              // trigger sign-up btn
-              $('#signup-btn').trigger('click');
-            }else{
-              // Trigger otp btn
-              $('#otp-btn').trigger('click');
-            }
-          }
-          // Login tab is visible
-          if($('#next-login-fixed-dark-cover').is(':visible')){
-            // trigger login-btn
-            $('#login-btn').trigger('click');
-          }
+          break;
+        case 27:
+          this.mainClose();
+          break
+        default:
+          break;
       }
     });
-    
+  
   }
-
+  checkAndClose(){
+    if(!$(event.target).closest('.email-input-div').length) {
+      if($('.email-input-div').is(":visible")) {
+          $('.fixed-dark-cover').hide();
+      }
+    } 
+  }
 
   // On clicking login/signup
   public loginSignupTrigger() {
@@ -393,6 +405,7 @@ export class AppComponent implements OnInit {
 
   public SignUpClick(regNameInput: string, regEmailInput: string, regMobileInput: string, regPwdInput: string, regOTPInput: string) {
     $('.err').html('');
+    $('.fixed-dark-cover input').css({'border-color':'#b2b2b2'});
     // validate and signup
     this.regNameInput = regNameInput;
     this.regEmailInput = regEmailInput;
@@ -426,27 +439,34 @@ export class AppComponent implements OnInit {
               $('#reg-mobile').css({'border-color':'#fa0000'});
               $('.err').html('That mobile number is already registered with us');
             } else {
-              if(regPwdInput.length > 5){
-                // Valid email and mobile numbers. register user
-                this.authService.registerUser(this.user).subscribe(res=>{
-                  if(res.success){
-                    // window.location.reload();
-                    // Log user in
-
-                    
+              this.authService.authenticateEmail(regEmailInput).subscribe(edat=>{
+                if(edat.success){
+                  $('#reg-email').css({'border-color':'#fa0000'});
+                  $('.err').html('That Email is already registered with us');
+                }else{
+                  if(regPwdInput.length > 5){
+                    // Valid email and mobile numbers. register user
+                    this.authService.registerUser(this.user).subscribe(res=>{
+                      if(res.success){
+                        // window.location.reload();
+                        // Log user in
+                        this.LoginSubmit(regEmailInput,regPwdInput);
+                        
+                      }else{
+                        // Show Error
+                        // if(res.msg = )
+                        if(res.msg.message = 'otp_not_verified'){
+                          $('.err').html('Please enter valid OTP');
+                          $('#reg-otp').css({'border-color':'#fa0000'});
+                        }
+                      }
+                    });
                   }else{
-                    // Show Error
-                    // if(res.msg = )
-                    if(res.msg.message = 'otp_not_verified'){
-                      $('.err').html('Please enter valid OTP');
-                      $('#reg-otp').css({'border-color':'#fa0000'});
-                    }
+                    $('.err').html('Please Enter password with atleast 6 characters');
+                    $('#reg-pwd').css({'border-color':'#fa0000'});
                   }
-                });
-              }else{
-                $('.err').html('Please Enter password with atleast 6 characters');
-                $('#reg-pwd').css({'border-color':'#fa0000'});
-              }
+                }
+              });
             }
           });
         }else{
@@ -711,6 +731,12 @@ export class AppComponent implements OnInit {
 
     
     
+  }
+  hideFixedDarkCover(event){
+    // alert('h');
+    if(event.keyCode == 27){
+      this.mainClose();
+    }
   }
 
 }

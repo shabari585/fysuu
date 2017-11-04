@@ -21,7 +21,7 @@
           Order Time
         </th>
         <th>
-          Delivery Address
+          Ordered Items
         </th>
         <th>
           Payment Type
@@ -39,6 +39,10 @@
         </td>
         <td>
           {{order.delivery_address}}
+          <!-- Order items here -->
+          <span *ngFor="let item of order.order">
+            <span>item.today.tab_one.name</span>
+          </span>
         </td>
         <td>
           {{order.payment_method}}

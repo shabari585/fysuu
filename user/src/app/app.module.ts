@@ -36,6 +36,8 @@ import { AddMenuComponent } from './admin/add-menu/add-menu.component';
 import { ReportsComponent } from './admin/reports/reports.component';
 import { AddRewardsComponent } from './admin/add-rewards/add-rewards.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { ThanksComponent } from './thanks/thanks.component';
+import { SoldoutComponent } from './admin/soldout/soldout.component';
 import { MyDatePickerModule } from 'mydatepicker';
 // import { DaterangePickerModule } from 'ng2-daterange-picker';
 // import { AdminComponent } from "./admin/admin.component";
@@ -53,7 +55,6 @@ import { FlashMessagesModule } from "angular2-flash-messages";
 // Auth Guard
 import { AuthGuard } from "./guards/auth.guard";
 import { AdminAuthGuard } from "./guards/admin-auth.guard";
-import { ThanksComponent } from './thanks/thanks.component';
 
 
 const appRoutes: Routes = [
@@ -187,6 +188,12 @@ const appRoutes: Routes = [
                 canActivate: [AdminAuthGuard]
             },
             {
+                path: 'soldout',
+                component: SoldoutComponent,
+                data: { title: 'Soldout' },
+                canActivate: [AdminAuthGuard]
+            },
+            {
                 path: 'add-category',
                 component: AddCategoryComponent,
                 data: { title: 'Add Category' },
@@ -230,7 +237,8 @@ const appRoutes: Routes = [
     ReportsComponent,
     AddRewardsComponent,
     AdminOrdersComponent,
-    ThanksComponent
+    ThanksComponent,
+    SoldoutComponent
   ],
   imports: [
     BrowserModule,

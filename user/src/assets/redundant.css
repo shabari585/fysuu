@@ -821,7 +821,9 @@ input:active {
   border:none;
   color: #000;
 }
-
+#menu1:active{
+  box-shadow: none;
+}
 .dropdown-menu {
   top: 105%;
   left: 100%;

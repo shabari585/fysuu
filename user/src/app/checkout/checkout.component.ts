@@ -29,6 +29,7 @@ export class CheckoutComponent implements OnInit {
   addresses= [];
   userId: string;
   userEmail: string;
+  fullName:string;
   userName: string;
   companyName: string;
   userMobile: number;
@@ -165,10 +166,17 @@ export class CheckoutComponent implements OnInit {
     let user = this.authService.getUserFromLocal();
     let user_parsed = JSON.parse(user);
     this.userEmail = user_parsed.email;
-    this.userName = user_parsed.name;
+    this.fullName = user_parsed.name;
     this.companyName = user_parsed.company_name;
     this.userMobile = user_parsed.mobile;
     this.userId = user_parsed.id;
+    var fLength = this.fullName.split(' ');
+    
+    if(fLength.length > 1){
+      this.userName = this.fullName.split(' ').slice(0, -1).join(' ');
+    }else{
+      this.userName = this.fullName;
+    }
 
     // Getting user reward points
     this.authService.getUserRewards(this.userId).subscribe(res=>{

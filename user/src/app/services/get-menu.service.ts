@@ -26,4 +26,14 @@ export class GetMenuService {
         // return this.http.get('admin/get-item-details/' + item_id).map(res => res.json());
     }
 
+    getTabStatus(tab){
+        return this.http.get('http://localhost:3700/admin/get-tab-status/' + tab).map(res => res.json());
+        // return this.http.get('admin/get-item-details/' + item_id).map(res => res.json());
+    }
+    postTabStatus(tab,status){
+        return this.http.get('http://localhost:3700/admin/post-tab-status/' + tab +'/'+status).map(res => res.json());
+        // return this.http.get('admin/get-item-details/' + item_id).map(res => res.json());
+    }
+
+
 }

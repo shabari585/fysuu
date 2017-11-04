@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
 
   userEmail :string;
   userName :string;
+  fullName:string;
   companyName :string;
   userMobile :string;
   userId :string;
@@ -53,10 +54,17 @@ export class HomeComponent implements OnInit {
       let user = this.authService.getUserFromLocal();
       let user_parsed = JSON.parse(user);
       this.userEmail = user_parsed.email;
-      this.userName = user_parsed.name;
+      this.fullName = user_parsed.name;
       this.companyName = user_parsed.company_name;
       this.userMobile = user_parsed.mobile;
       this.userId = user_parsed.id;
+      var fLength = this.fullName.split(' ');
+
+      if(fLength.length > 1){
+        this.userName = this.fullName.split(' ').slice(0, -1).join(' ');
+      }else{
+        this.userName = this.fullName;
+      }
 
       if(this.userName == undefined || this.userName == null || this.userName == ''){
         this.userName  = this.appComponent.uName;
@@ -193,10 +201,47 @@ export class HomeComponent implements OnInit {
   seeMenu() {
     // Address in this.locationEntry
 
-    alert(this.locationEntry);
+    // alert(this.locationEntry);
 
     if(this.authService.loggedIn()){
       this.router.navigate(['/menu']);
+      if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry == 'Madhapur' || this.locationEntry == 'madhapur'|| this.locationEntry == 'Madapur' || this.locationEntry == 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur') ) {
+        localStorage.setItem('home_address', this.locationEntry);
+        // Add to user's address if he is logged in
+        if (this.authService.loggedIn()) {
+          // User is logged in 
+          // send this address to save
+          let address = {
+            user_id: this.userId,
+            address: this.locationEntry
+          }
+          this.authService.saveAddress(address).subscribe(res => {
+            if (res.success) {
+              // Address saved
+              console.log(res);
+            } else {
+              // Address not saved
+              if (res.msg = 'exists') {
+                // address already exists
+              } else {
+                // console.log(res);
+              }
+            }
+          });
+          this.router.navigate(['/menu']);
+        } else {
+          // Navigate to menu
+          // this.appComponent.loginSignupTrigger();
+          this.router.navigate(['/menu']);
+          
+        }
+      } else {
+        this.locationEntry = this.address;
+        $('.location-warning-div').show();
+  
+        // Remove later
+        this.router.navigate(['/menu']);
+      }
     }else{
       // alert('hi');
       if(this.locationEntry != undefined){
@@ -240,7 +285,7 @@ export class HomeComponent implements OnInit {
         }
       }else{
         if(!this.authService.loggedIn()){
-          if(this.locationEntry == null){
+          if(this.locationEntry == null || this.locationEntry == undefined || this.locationEntry == ''){
             // Do nothing
           }else{
             this.router.navigate(['/menu']);
@@ -255,6 +300,11 @@ export class HomeComponent implements OnInit {
 
   pageScrollTop(){
     $('html, body').animate({ scrollTop: $("html").offset().top }, 1000);
+  }
+  locationKeyPress(event){
+    if(event.keyCode == 13){
+      this.seeMenu();
+    }
   }
 
 }

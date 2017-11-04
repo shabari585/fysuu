@@ -10,6 +10,7 @@ const dates = require('../models/dates.js');
 const Order = require('../models/order.js');
 const category = require('../models/category.js');
 const Admin = require('../models/admin');
+const TabStatus = require('../models/tabStatus');
 var moment = require('moment');
 
 router.use(bodyParser.json());
@@ -539,6 +540,50 @@ router.get('/get-users', (req, res, next) => {
         res.json(datum);
     })
 
+});
+
+router.get('/get-tab-status/:tab', (req, res, next) => {
+    tab = req.params.tab;
+    TabStatus.find({tab:tab}, (err, data)=>{
+        if(err){
+            res.json({success:false,msg:err});
+        }else{
+            if(data.length>0){
+                res.json({success:true,msg:data});
+            }else{
+                res.json({success:false,msg:data});
+            }
+        }
+    });
+});
+
+router.get('/post-tab-status/:tab/:status', (req, res, next) => {
+    tab = req.params.tab;
+    status = req.params.status;
+    
+    if(status == "true"){
+        let newTab = new TabStatus({
+            tab: tab,
+            status: status
+        });
+        // add
+        newTab.save((err,tab)=>{
+            if(err){
+                res.json({success:true,msg:err});
+            }else{
+                res.json({success:true,msg:tab,added:'added'});
+            }
+        });
+    }else{
+        // remove
+        TabStatus.findOneAndRemove({tab:tab},(err,ress)=>{
+            if(ress){
+                res.json({success:true,msg:ress,add:"removed"});
+            }else{
+                res.json({success:false,msg:err});
+            }
+        });
+    }
 });
 
 

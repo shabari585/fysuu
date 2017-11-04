@@ -81,23 +81,13 @@ export class AddMenuComponent implements OnInit {
       this.dates = res;
 
       res.forEach(element => {
-        
-        // element.date
-        // element.item_id
         this.getMenuService.getItemDetails(element.item_id).subscribe(res=>{
           let json = {date_id:element._id, date: element.date, name:res.msg[0].item_name }
           this.outCats.push(json);
-
           let searchable_json = {date:element.date,name:res.msg[0].item_name,item_id:res.msg[0]._id};
-
           this.searchable_outCats.push(searchable_json);
-
-          
-
-
         });
       });
-
     });
   }
   selectedDate(event) {

@@ -106,7 +106,7 @@
                             <div class="item-announcement" id='tab-one-band'>
                                 <h5>{{num_tab_one}} x Added !</h5>
                             </div>
-                            <div class="sold-db">
+                            <div class="sold-db" id="tab-one-sold-out">
                                 <h5>Sold Out</h5>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="pull-right">
                                     <button type="button" class="remove-t-item-btn" id="rem-t-tab_one" (click)='removeTodayTab("tab_one")'> - </button>
-                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_one")'> + Add</button>
+                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_one")' id="tab-one-add-btn"> + Add</button>
                                 </div>
                             </div>
                         </div>
@@ -140,6 +140,9 @@
 
                             <div class="item-announcement" id='tab-two-band'>
                                 <h5>{{num_tab_two}} x Added !</h5>
+                            </div>
+                            <div class="sold-db" id="tab-two-sold-out">
+                                <h5>Sold Out</h5>
                             </div>
                         </div>
                         <div class="item-dets-div">
@@ -156,7 +159,7 @@
                                 </div>
                                 <div class="pull-right">
                                         <button type="button" class="remove-t-item-btn" id="rem-t-tab_two" (click)='removeTodayTab("tab_two")'> - </button>
-                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_two")'> + Add</button>
+                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_two")' id="tab-two-add-btn"> + Add</button>
                                 </div>
                             </div>
                         </div>
@@ -174,6 +177,9 @@
                             <div class="item-announcement" id='tab-three-band'>
                                 <h5>{{num_tab_three}} x Added !</h5>
                             </div>
+                            <div class="sold-db" id="tab-three-sold-out">
+                                <h5>Sold Out</h5>
+                            </div>
                         </div>
                         <div class="item-dets-div">
                             <div class="item-name-div">
@@ -189,7 +195,7 @@
                                 </div>
                                 <div class="pull-right">
                                         <button type="button" class="remove-t-item-btn" id="rem-t-tab_three" (click)='removeTodayTab("tab_three")'> - </button>
-                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_three")'> + Add</button>
+                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_three")' id="tab-three-add-btn"> + Add</button>
                                 </div>
                             </div>
                         </div>
@@ -278,6 +284,7 @@
                 <div class="schedule-menu-right pull-right">
 
                     <div class="schedule-choose-core">
+                    <div class="sc-ch-db"> We don't serve on Sundays !</div>
                         <!-- Top div -->
                         <div class="sc-ch-top">
                             <div class="pull-left">
@@ -319,7 +326,7 @@
                                                     <div *ngIf="menu[0].sub_name == sub">
                                                         <div class="sc-ch-item">
                                                             <label>
-                                                                <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                                <input type="radio" class= "checks" name="done-combo" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
                                                                 <div *ngIf="menu[0].item_name == 'Roti'">
                                                                     <img [src]="roti_img" class="roti-cl" alt="">
                                                                 </div>
@@ -499,7 +506,7 @@
                                                             <div *ngIf="menu[0].sub_name == sub">
                                                                 <div class="sc-ch-item">
                                                                     <label>
-                                                                        <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                                        <input type="radio" class= "checks" name="dtwo-combo" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
                                                                         <div *ngIf="menu[0].item_name == 'Roti'">
                                                                             <img [src]="roti_img" class="roti-cl" alt="">
                                                                         </div>
@@ -679,7 +686,7 @@
                                                             <div *ngIf="menu[0].sub_name == sub">
                                                                 <div class="sc-ch-item">
                                                                     <label>
-                                                                        <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                                        <input type="radio" class= "checks" name="dthree-combo" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
                                                                         <div *ngIf="menu[0].item_name == 'Roti'">
                                                                                 <img [src]="roti_img" class="roti-cl" alt="">
                                                                             </div>
@@ -859,7 +866,7 @@
                                                             <div *ngIf="menu[0].sub_name == sub">
                                                                 <div class="sc-ch-item">
                                                                     <label>
-                                                                        <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                                        <input type="radio" class= "checks" name="dfour-combo" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
                                                                         <div *ngIf="menu[0].item_name == 'Roti'">
                                                                                 <img [src]="roti_img" class="roti-cl" alt="">
                                                                             </div>
@@ -1040,7 +1047,7 @@
                                                             <div *ngIf="menu[0].sub_name == sub">
                                                                 <div class="sc-ch-item">
                                                                     <label>
-                                                                        <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                                        <input type="radio" class= "checks" name="dfive-combo" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
                                                                         <div *ngIf="menu[0].item_name == 'Roti'">
                                                                                 <img [src]="roti_img" class="roti-cl" alt="">
                                                                             </div>

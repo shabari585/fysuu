@@ -173,12 +173,17 @@ export class MenuComponent implements OnInit {
   tab_two_status = false;
   tab_three_status = false;
 
+  tab_one_sold_out:boolean;
+  tab_two_sold_out:boolean;
+  tab_three_sold_out:boolean;
+
   tab_one_total_price:number;
   tab_two_total_price:number;
   tab_three_total_price:number;
 
   userEmail: string;
   userName: string;
+  fullName:string;
   companyName: string;
   userMobile: string;
   userId: string;
@@ -218,6 +223,11 @@ export class MenuComponent implements OnInit {
   letter_added:boolean = false;
   letter_price:number = 0;
 
+  // day_one_combos:any=[];
+  // day_two_combos:any=[];
+  // day_three_combos:any=[];
+  // day_four_combos:any=[];
+
   // slot_one_time_form = "08:40:00";
   slot_one_time_form = moment("08:60:00", "HH:mm:ss").format('hh:mm:ss A');
 
@@ -226,6 +236,39 @@ export class MenuComponent implements OnInit {
   constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService, private getMenuItems: GetMenuService, private datePipe: DatePipe) { }
 
   ngOnInit() {
+
+    this.getMenuItems.getTabStatus('tab_one').subscribe(res=>{
+      if(res.success){
+        this.tab_one_sold_out = true;
+        $('#tab-one-sold-out').css({'display':'flex'});
+        $('#tab-one-add-btn').prop('disabled',true);
+        $('#tab-one-add-btn').css({'background-color':'#b2b2b2'});
+      }else{
+        this.tab_one_sold_out = false;
+      }
+    });
+    this.getMenuItems.getTabStatus('tab_two').subscribe(res=>{
+      if(res.success){
+        this.tab_two_sold_out = true;
+        $('#tab-two-sold-out').css({'display':'flex'});
+        $('#tab-two-add-btn').prop('disabled',true);
+        $('#tab-two-add-btn').css({'background-color':'#b2b2b2'});
+      }else{
+        this.tab_two_sold_out = false;
+      }
+    });
+    this.getMenuItems.getTabStatus('tab_three').subscribe(res=>{
+      if(res.success){
+        this.tab_three_sold_out = true;
+        $('#tab-three-sold-out').css({'display':'flex'});
+        $('#tab-three-add-btn').prop('disabled',true);
+        $('#tab-three-add-btn').css({'background-color':'#b2b2b2'});
+      }else{
+        this.tab_three_sold_out = false;
+      }
+    });
+ 
+
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;
@@ -329,11 +372,16 @@ export class MenuComponent implements OnInit {
       let user = this.authService.getUserFromLocal();
       let user_parsed = JSON.parse(user);
       this.userEmail = user_parsed.email;
-      this.userName = user_parsed.name;
-
-      this.companyName = user_parsed.company_name;
+      this.fullName = user_parsed.name;
       this.userMobile = user_parsed.mobile;
       this.userId = user_parsed.id;
+      var fLength = this.fullName.split(' ');
+      
+      if(fLength.length > 1){
+        this.userName = this.fullName.split(' ').slice(0, -1).join(' ');
+      }else{
+        this.userName = this.fullName;
+      }
     }
     
 
@@ -408,14 +456,6 @@ export class MenuComponent implements OnInit {
                 }
               });
             });
-            console.log(this.day_one_item_dets);
-            // Experiment to re-order array
-            let arr;
-            
-            this.day_one_item_dets.forEach(bele => {
-              console.log('hi');
-            });
-            
             this.day_one_books = this.day_one_item_dets;
           }
         }
@@ -456,8 +496,6 @@ export class MenuComponent implements OnInit {
             });
             this.day_two_books = this.day_two_item_dets;
           }
-
-
         }
       }else{
       }
@@ -643,12 +681,20 @@ export class MenuComponent implements OnInit {
   }
   // Load menu
   loadDay(date){
+    let pdate = this.datePipe.transform(date, 'fullDate')
+    if(pdate.includes('Sunday')){
+      $('.sc-ch-db').css({'display':'flex'});
+    }else{
+      $('.sc-ch-db').css({'display':'none'});
+    }
     // console.log(this.day_five_books);
     switch (this.datePipe.transform(date, 'fullDate')) {
       case this.p_day_one:
         // Day one menu
         
         this.menu_to_be_loaded = this.day_one_books;
+
+        
 
         // Experiment
         $('.sc-ch-mid').hide();
@@ -1079,16 +1125,29 @@ export class MenuComponent implements OnInit {
   onCheckChange(menu,event,mevent){
     
     menu.checked = event;
+    // console.log(menu);
 
     let tar = mevent.target;
     if(event == true){
       // b_img
+      // Handling Combo images
+
       if ($(tar).parent().find('img').hasClass('roti-cl')){
         $(tar).parent().find('img').attr('src',this.roti_r_img);
+        $(tar).parent().parent().parent().parent().parent().find('img.rice-roti-cl').attr('src',this.rice_roti_img);
+        $(tar).parent().parent().parent().parent().parent().find('img.rice-cl').attr('src',this.rice_img);
       }
 
       if ($(tar).parent().find('img').hasClass('rice-roti-cl')){
+        $(tar).parent().parent().parent().parent().parent().find('img.rice-roti-cl').attr('src',this.rice_roti_img);
+        $(tar).parent().parent().parent().parent().parent().find('img.roti-cl').attr('src',this.roti_img);
+        $(tar).parent().parent().parent().parent().parent().find('img.rice-cl').attr('src',this.rice_img);
         $(tar).parent().find('img').attr('src',this.rice_roti_r_img);
+      }
+      if ($(tar).parent().find('img').hasClass('rice-cl')){
+        $(tar).parent().find('img').attr('src',this.rice_r_img);
+        $(tar).parent().parent().parent().parent().parent().find('img.rice-roti-cl').attr('src',this.rice_roti_img);
+        $(tar).parent().parent().parent().parent().parent().find('img.roti-cl').attr('src',this.roti_img);
       }
 
       if ($(tar).parent().find('img').hasClass('curry-cl')){
@@ -1097,10 +1156,6 @@ export class MenuComponent implements OnInit {
 
       if ($(tar).parent().find('img').hasClass('dal-cl')){
         $(tar).parent().find('img').attr('src',this.dal_r_img);
-      }
-
-      if ($(tar).parent().find('img').hasClass('rice-cl')){
-        $(tar).parent().find('img').attr('src',this.rice_r_img);
       }
 
       if ($(tar).parent().find('img').hasClass('curd-cl')){
@@ -1151,9 +1206,21 @@ export class MenuComponent implements OnInit {
     switch (true) {
       case this.day_one_status:
         // this.day_one_books = this.menu_to_be_loaded;
-        if (event) {
-          // checked
-          // Add to added items
+
+        if(menu.sub_name == "Combo"){
+          this.day_one_c_books.forEach(element => {
+            if (element.sub_name == menu.sub_name && element.date == menu.date) {
+              var ind = this.day_one_c_books.indexOf(element, 0);
+              if (ind > -1) {
+                this.day_one_c_books.splice(ind, 1);
+                this.day_one_price -= element.item_price;
+                let to_be_added_price = this.num_day_one_items * element.item_price;
+                this.total_day_one_price -= to_be_added_price;
+                this.place_holder_price = this.total_day_one_price;
+              }
+            }
+          });
+          // Adding current one to basket
           this.day_one_c_books.push(menu);
           // Update prices
           if (this.num_day_one_items == 0) {
@@ -1169,27 +1236,60 @@ export class MenuComponent implements OnInit {
             this.total_day_one_price += +to_be_added_price;
             this.place_holder_price = this.total_day_one_price;
           }
-        } else {
-          // must remove from added items if exists
-          this.day_one_c_books.forEach(element => {
-            if (element._id == menu._id && element.date == menu.date) {
-              var ind = this.day_one_c_books.indexOf(element, 0);
-              if (ind > -1) {
-                this.day_one_c_books.splice(ind, 1);
-                this.day_one_price -= menu.item_price;
-                let to_be_added_price = this.num_day_one_items * menu.item_price;
-                this.total_day_one_price -= to_be_added_price;
-                this.place_holder_price = this.total_day_one_price;
-              }
+        }else{
+          if (event) {
+            // checked
+            // Add to added items
+            this.day_one_c_books.push(menu);
+            // Update prices
+            if (this.num_day_one_items == 0) {
+              this.num_day_one_items++;
+              this.numberOfItems = this.num_day_one_items;
+              let to_be_added_price = this.num_day_one_items * menu.item_price;
+              this.day_one_price += +menu.item_price;
+              this.total_day_one_price += +menu.item_price;
+              this.place_holder_price = this.total_day_one_price;
+            } else {
+              let to_be_added_price = this.num_day_one_items * menu.item_price;
+              this.day_one_price += +menu.item_price;
+              this.total_day_one_price += +to_be_added_price;
+              this.place_holder_price = this.total_day_one_price;
             }
-          });
+          } else {
+            // must remove from added items if exists
+            this.day_one_c_books.forEach(element => {
+              if (element._id == menu._id && element.date == menu.date) {
+                var ind = this.day_one_c_books.indexOf(element, 0);
+                if (ind > -1) {
+                  this.day_one_c_books.splice(ind, 1);
+                  this.day_one_price -= menu.item_price;
+                  let to_be_added_price = this.num_day_one_items * menu.item_price;
+                  this.total_day_one_price -= to_be_added_price;
+                  this.place_holder_price = this.total_day_one_price;
+                }
+              }
+            });
+          }
         }
+
         break;
       case this.day_two_status:
         // this.day_two_books = this.menu_to_be_loaded;
-        if (event) {
-          // checked
-          // Add to added items
+        if(menu.sub_name == "Combo"){
+          // Removing other combo items from basket
+          this.day_two_c_books.forEach(element => {
+            if (element.sub_name == menu.sub_name && element.date == menu.date) {
+              var ind = this.day_two_c_books.indexOf(element, 0);
+              if (ind > -1) {
+                this.day_two_c_books.splice(ind, 1);
+                this.day_two_price -= element.item_price;
+                let to_be_added_price = this.num_day_two_items * element.item_price;
+                this.total_day_two_price -= to_be_added_price;
+                this.place_holder_price = this.total_day_two_price;
+              }
+            }
+          });
+          // Adding current one to basket
           this.day_two_c_books.push(menu);
           // Update prices
           if (this.num_day_two_items == 0) {
@@ -1205,29 +1305,61 @@ export class MenuComponent implements OnInit {
             this.total_day_two_price += +to_be_added_price;
             this.place_holder_price = this.total_day_two_price;
           }
-
-        } else {
-          // must remove from added items if exists
-          this.day_two_c_books.forEach(element => {
-            if (element._id == menu._id && element.date == menu.date) {
-              var ind = this.day_two_c_books.indexOf(element, 0);
-              if (ind > -1) {
-                this.day_two_c_books.splice(ind, 1);
-                this.day_two_price -= menu.item_price;
-                let to_be_added_price = this.num_day_two_items * menu.item_price;
-                this.total_day_two_price -= to_be_added_price;
-                this.place_holder_price = this.total_day_two_price;
-              }
+        }else{
+          if (event) {
+            // checked
+            // Add to added items
+            this.day_two_c_books.push(menu);
+            // Update prices
+            if (this.num_day_two_items == 0) {
+              this.num_day_two_items++;
+              this.numberOfItems = this.num_day_two_items;
+              let to_be_added_price = this.num_day_two_items * menu.item_price;
+              this.day_two_price += +menu.item_price;
+              this.total_day_two_price += +menu.item_price;
+              this.place_holder_price = this.total_day_two_price;
+            } else {
+              let to_be_added_price = this.num_day_two_items * menu.item_price;
+              this.day_two_price += +menu.item_price;
+              this.total_day_two_price += +to_be_added_price;
+              this.place_holder_price = this.total_day_two_price;
             }
-            // console.log(this.day_two_c_books);
-          });
+  
+          } else {
+            // must remove from added items if exists
+            this.day_two_c_books.forEach(element => {
+              if (element._id == menu._id && element.date == menu.date) {
+                var ind = this.day_two_c_books.indexOf(element, 0);
+                if (ind > -1) {
+                  this.day_two_c_books.splice(ind, 1);
+                  this.day_two_price -= menu.item_price;
+                  let to_be_added_price = this.num_day_two_items * menu.item_price;
+                  this.total_day_two_price -= to_be_added_price;
+                  this.place_holder_price = this.total_day_two_price;
+                }
+              }
+            });
+          }
         }
         break;
       case this.day_three_status:
         this.day_three_books = this.menu_to_be_loaded;
-        if (event) {
-          // checked
-          // Add to added items
+
+        if(menu.sub_name == "Combo"){
+          // Removing other combo items from basket
+          this.day_three_c_books.forEach(element => {
+            if (element.sub_name == menu.sub_name && element.date == menu.date) {
+              var ind = this.day_three_c_books.indexOf(element, 0);
+              if (ind > -1) {
+                this.day_three_c_books.splice(ind, 1);
+                this.day_three_price -= element.item_price;
+                let to_be_added_price = this.num_day_three_items * element.item_price;
+                this.total_day_three_price -= to_be_added_price;
+                this.place_holder_price = this.total_day_three_price;
+              }
+            }
+          });
+          // Adding current one to basket
           this.day_three_c_books.push(menu);
           // Update prices
           if (this.num_day_three_items == 0) {
@@ -1243,30 +1375,62 @@ export class MenuComponent implements OnInit {
             this.total_day_three_price += +to_be_added_price;
             this.place_holder_price = this.total_day_three_price;
           }
-        } else {
-          // must remove from added items if exists
-          this.day_three_c_books.forEach(element => {
-            if (element._id == menu._id && element.date == menu.date) {
-              var ind = this.day_three_c_books.indexOf(element, 0);
-              if (ind > -1) {
-                this.day_three_c_books.splice(ind, 1);
-                this.day_three_c_books.splice(ind, 1);
-                this.day_three_price -= menu.item_price;
-                let to_be_added_price = this.num_day_three_items * menu.item_price;
-                this.total_day_three_price -= to_be_added_price;
-                this.place_holder_price = this.total_day_three_price;
-              }
+        }else{
+          if (event) {
+            // checked
+            // Add to added items
+            this.day_three_c_books.push(menu);
+            // Update prices
+            if (this.num_day_three_items == 0) {
+              this.num_day_three_items++;
+              this.numberOfItems = this.num_day_three_items;
+              let to_be_added_price = this.num_day_three_items * menu.item_price;
+              this.day_three_price += +menu.item_price;
+              this.total_day_three_price += +menu.item_price;
+              this.place_holder_price = this.total_day_three_price;
+            } else {
+              let to_be_added_price = this.num_day_three_items * menu.item_price;
+              this.day_three_price += +menu.item_price;
+              this.total_day_three_price += +to_be_added_price;
+              this.place_holder_price = this.total_day_three_price;
             }
-            // console.log(this.day_three_c_books);
-          });
+          } else {
+            // must remove from added items if exists
+            this.day_three_c_books.forEach(element => {
+              if (element._id == menu._id && element.date == menu.date) {
+                var ind = this.day_three_c_books.indexOf(element, 0);
+                if (ind > -1) {
+                  this.day_three_c_books.splice(ind, 1);
+                  this.day_three_c_books.splice(ind, 1);
+                  this.day_three_price -= menu.item_price;
+                  let to_be_added_price = this.num_day_three_items * menu.item_price;
+                  this.total_day_three_price -= to_be_added_price;
+                  this.place_holder_price = this.total_day_three_price;
+                }
+              }
+              // console.log(this.day_three_c_books);
+            });
+          }
         }
+
         break;
       case this.day_four_status:
         // this.day_four_books = this.menu_to_be_loaded;
-        
-        if(event){
-          // checked
-          // Add to added items
+        if(menu.sub_name == "Combo"){
+          // Removing other combo items from basket
+          this.day_four_c_books.forEach(element => {
+            if (element.sub_name == menu.sub_name && element.date == menu.date) {
+              var ind = this.day_four_c_books.indexOf(element, 0);
+              if (ind > -1) {
+                this.day_four_c_books.splice(ind, 1);
+                this.day_four_price -= element.item_price;
+                let to_be_added_price = this.num_day_four_items * element.item_price;
+                this.total_day_four_price -= to_be_added_price;
+                this.place_holder_price = this.total_day_four_price;
+              }
+            }
+          });
+          // Adding current one to basket
           this.day_four_c_books.push(menu);
           // Update prices
           if (this.num_day_four_items == 0) {
@@ -1283,23 +1447,75 @@ export class MenuComponent implements OnInit {
             this.place_holder_price = this.total_day_four_price;
           }
         }else{
-          // must remove from added items if exists
-          this.day_four_c_books.forEach(element => {
-            if(element._id == menu._id && element.date == menu.date){
-              var ind = this.day_four_c_books.indexOf(element, 0);
-              if (ind > -1) {
-                this.day_four_c_books.splice(ind, 1);
-                this.day_four_price -= menu.item_price;
-                let to_be_added_price = this.num_day_four_items * menu.item_price;
-                this.total_day_four_price -= to_be_added_price;
-                this.place_holder_price = this.total_day_four_price;
-              }
+          if(event){
+            // checked
+            // Add to added items
+            this.day_four_c_books.push(menu);
+            // Update prices
+            if (this.num_day_four_items == 0) {
+              this.num_day_four_items++;
+              this.numberOfItems = this.num_day_four_items;
+              let to_be_added_price = this.num_day_four_items * menu.item_price;
+              this.day_four_price += +menu.item_price;
+              this.total_day_four_price += +menu.item_price;
+              this.place_holder_price = this.total_day_four_price;
+            } else {
+              let to_be_added_price = this.num_day_four_items * menu.item_price;
+              this.day_four_price += +menu.item_price;
+              this.total_day_four_price += +to_be_added_price;
+              this.place_holder_price = this.total_day_four_price;
             }
-          });
+          }else{
+            // must remove from added items if exists
+            this.day_four_c_books.forEach(element => {
+              if(element._id == menu._id && element.date == menu.date){
+                var ind = this.day_four_c_books.indexOf(element, 0);
+                if (ind > -1) {
+                  this.day_four_c_books.splice(ind, 1);
+                  this.day_four_price -= menu.item_price;
+                  let to_be_added_price = this.num_day_four_items * menu.item_price;
+                  this.total_day_four_price -= to_be_added_price;
+                  this.place_holder_price = this.total_day_four_price;
+                }
+              }
+            });
+          }
         }
+        
         break;
       case this.day_five_status:
-      
+
+      if(menu.sub_name == "Combo"){
+        // Removing other combo items from basket
+        this.day_five_c_books.forEach(element => {
+          if (element.sub_name == menu.sub_name && element.date == menu.date) {
+            var ind = this.day_five_c_books.indexOf(element, 0);
+            if (ind > -1) {
+              this.day_five_c_books.splice(ind, 1);
+              this.day_five_price -= element.item_price;
+              let to_be_added_price = this.num_day_five_items * element.item_price;
+              this.total_day_five_price -= to_be_added_price;
+              this.place_holder_price = this.total_day_five_price;
+            }
+          }
+        });
+        // Adding current one to basket
+        this.day_five_c_books.push(menu);
+        // Update prices
+        if (this.num_day_five_items == 0) {
+          this.num_day_five_items++;
+          this.numberOfItems = this.num_day_five_items;
+          let to_be_added_price = this.num_day_five_items * menu.item_price;
+          this.day_five_price += +menu.item_price;
+          this.total_day_five_price += +menu.item_price;
+          this.place_holder_price = this.total_day_five_price;
+        } else {
+          let to_be_added_price = this.num_day_five_items * menu.item_price;
+          this.day_five_price += +menu.item_price;
+          this.total_day_five_price += +to_be_added_price;
+          this.place_holder_price = this.total_day_five_price;
+        }
+      }else{
         if (event) {
           // checked
           // Add to added items
@@ -1333,6 +1549,8 @@ export class MenuComponent implements OnInit {
             }
           });
         }
+      }
+      
         break;
     
       default:
