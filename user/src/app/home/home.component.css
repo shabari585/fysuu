@@ -29,6 +29,7 @@ a {
   letter-spacing: 1px;
   position: absolute;
   opacity: 0;
+  font-size: 90%;
 }
 .typed-one #t-one-two{
   opacity: 0;
@@ -610,8 +611,6 @@ a {
   align-items: center;
   padding: 0px 0px;
 }
-
-
 .concept-div .img {
   position: relative;
   display: block;

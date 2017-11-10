@@ -34,10 +34,12 @@ export class ChangePasswordComponent implements OnInit {
         if(this.newPassword.length > 5){
           let obj = {
             u_id: this.userId,
-            password: this.oldPassword
+            password: this.oldPassword,
+            new_password: this.newPassword
           }
           // Update password
           this.authService.updatePassword(obj).subscribe(res=>{
+            console.log(res);
             if(res.success){
               $('.err').html('Password Changed !');
             }else{
@@ -45,7 +47,7 @@ export class ChangePasswordComponent implements OnInit {
             }
           });
         }else{
-          $('.err').html('Password Must contain at least 6 characters')
+          $('.err').html('Password must contain at least 6 characters')
         }
 
       }else{

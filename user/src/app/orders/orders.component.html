@@ -38,11 +38,33 @@
           {{order.order_time}}
         </td>
         <td>
-          {{order.delivery_address}}
+          <!-- {{order.delivery_address}} -->
           <!-- Order items here -->
-          <span *ngFor="let item of order.order">
-            <span>item.today.tab_one.name</span>
+          <span *ngFor="let tday of user_today">
+
+            <span  *ngIf="tday != null">
+              <span  *ngIf="tday.order != null">
+                <span *ngIf="tday.order_id == order.order_id">
+                <span  *ngIf="tday.order.tab_one != null">
+                  <span>{{tday.order.tab_one.name}}</span>,
+                </span>
+                <span  *ngIf="tday.order.tab_two != null">
+                  <span>{{tday.order.tab_two.name}}</span>,
+                </span>
+                <span  *ngIf="tday.order.tab_three != null">
+                  <span>{{tday.order.tab_three.name}}</span>,
+                </span>
+                </span>
+              </span>
+            </span>
           </span>
+
+          <span *ngFor="let dday of user_day">
+              <span *ngIf="dday != undefined || dday != null">
+                <span>{{ dday[0].item_name }}</span>,
+              </span>
+          </span>
+
         </td>
         <td>
           {{order.payment_method}}

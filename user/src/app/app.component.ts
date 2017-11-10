@@ -43,12 +43,14 @@ export class AppComponent implements OnInit {
   isInputMobile:boolean = false;
   fpOtpInput:string;
   fpNewPwd:string;
+  cfpNewPwd:string;
   mobileNumForfp:string;
   signUpResendTime:number;
   // geocoder: google.maps.Geocoder;
 
   constructor(private title: Title, private router: Router,private validate: ValidateService,private authService:AuthService,private http:Http) { }
   ngOnInit() {
+
     // Set title
     this.title.setTitle('Home');
 
@@ -60,7 +62,6 @@ export class AppComponent implements OnInit {
     }else{
       // this.basket_num;
     }
-
     $(document).keydown(function(e) {
 
       switch (e.which) {
@@ -92,8 +93,11 @@ export class AppComponent implements OnInit {
           break;
       }
     });
+
+    
   
   }
+  
   checkAndClose(){
     if(!$(event.target).closest('.email-input-div').length) {
       if($('.email-input-div').is(":visible")) {
@@ -106,6 +110,7 @@ export class AppComponent implements OnInit {
   public loginSignupTrigger() {
     $('.err').html('');
     $('.fixed-dark-cover').hide();
+    $('.fixed-dark-cover input').css({'border-color':'#b2b2b2'});
     $('#login-fixed-dark-cover').css({ 'display': 'flex' });
     $('#email').keyup(function(){
       let input = $(this).val();
@@ -212,6 +217,7 @@ export class AppComponent implements OnInit {
             $('#reg-mobile').val(this.initialLoginInput);
             // alert(this.initialLoginInput);
             $('#next-reg-fixed-dark-cover').css({ 'display': 'flex' });
+            $('#reg-name').focus();
           }
         });
         
@@ -234,6 +240,7 @@ export class AppComponent implements OnInit {
   }
 
   public LoginSubmit(loginEmailInput: string, loginPasswordInput: string) {
+    $('.fixed-dark-cover input').css({'border-color':'#b2b2b2'});
 
     this.isInputEmail = false;
     this.isInputMobile = false;
@@ -276,7 +283,7 @@ export class AppComponent implements OnInit {
               }
             });
           } else {
-            $('.err').html('That email is not registered with us');
+            $('.err').html('Email is not registered with us');
           }
         });
         $('.err').html('');
@@ -288,8 +295,6 @@ export class AppComponent implements OnInit {
             email: loginEmailInput,
             password: loginPasswordInput
           };
-
-          
           this.authService.authenticateMobile(loginEmailInput).subscribe(data => {
             if (data.success) {
               // Mobile exists
@@ -312,7 +317,7 @@ export class AppComponent implements OnInit {
                 }
               });
             } else {
-              $('.err').html('That email is not registered with us');
+              $('.err').html('Mobile is not registered with us');
             }
           });
           $('.err').html('');
@@ -405,7 +410,7 @@ export class AppComponent implements OnInit {
 
   public SignUpClick(regNameInput: string, regEmailInput: string, regMobileInput: string, regPwdInput: string, regOTPInput: string) {
     $('.err').html('');
-    $('.fixed-dark-cover input').css({'border-color':'#b2b2b2'});
+    $('.fixed-dark-cover input').css({'border-color':'rgba(0, 0, 0, 0.2)'});
     // validate and signup
     this.regNameInput = regNameInput;
     this.regEmailInput = regEmailInput;
@@ -517,7 +522,7 @@ export class AppComponent implements OnInit {
   public mainClose() {
     $('.fixed-dark-cover').hide();
     $('#next-reg-fixed-dark-cover input').val('');
-    $('.fixed-dark-cover input').css({'border-color':'rgba(0, 0, 0, 0.2)'});
+    $('.fixed-dark-cover input').css({'border-color':'#b2b2b2'});
   }
 
   clickedOnTerms(){
@@ -546,13 +551,13 @@ export class AppComponent implements OnInit {
             // Get mobile number from email
             this.authService.getUserMobileFromEmail(input).subscribe(res=>{
               // res is the mobile number
-              this.mobileNumForfp = res;
+              this.mobileNumForfp = res.msg;
               // Hide current db
               $('.fixed-dark-cover').hide();
               // Open forgot pwd db
               $('#fp-fixed-dark-cover').css({'display':'flex'});
-              this.authService.sendOtp(input).subscribe(res=>{
-                console.log(res);
+              this.authService.sendOtp(this.mobileNumForfp).subscribe(ress=>{
+                console.log(ress);
                 this.resendotptrig('fp');
               });
             });
@@ -565,6 +570,7 @@ export class AppComponent implements OnInit {
         $('.err').html('');
       } else if (this.validate.validateMobile(input)) {
         // User entered mobile
+        this.mobileNumForfp = input;
         $('.err').html('');
         this.authService.authenticateMobile(input).subscribe(data => {
           if (data.success) {
@@ -598,15 +604,20 @@ export class AppComponent implements OnInit {
       otp: this.fpOtpInput,
       mobile: this.mobileNumForfp
     }
-    this.authService.updateUserPwdFromHome(pwdDets).subscribe(re=>{
-      if(re.success){
-        // refresh
-        $('#fp-fixed-dark-cover').hide();
-        $('#next-login-fixed-dark-cover').css({ 'display': 'flex' });
-      }else{
-        $('.fp-err').html('Wrong otp');
-      }
-    });
+    if(this.fpNewPwd == this.cfpNewPwd){
+
+      this.authService.updateUserPwdFromHome(pwdDets).subscribe(re=>{
+        if(re.success){
+          // refresh
+          $('#fp-fixed-dark-cover').hide();
+          $('#next-login-fixed-dark-cover').css({ 'display': 'flex' });
+        }else{
+          $('.fp-err').html('Wrong otp');
+        }
+      });
+    }else{
+      $('.fp-err').html('Passwords did\'t match');
+    }
 
   }
   resendotptrig(mode){
@@ -733,7 +744,6 @@ export class AppComponent implements OnInit {
     
   }
   hideFixedDarkCover(event){
-    // alert('h');
     if(event.keyCode == 27){
       this.mainClose();
     }

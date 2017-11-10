@@ -313,10 +313,29 @@ export class MenuComponent implements OnInit {
       $('#slot_one_option').prop('disabled',true);
     }
 
+    $(document).keydown(function(e) {
+      if(e == 27){
+        this.tdClose();
+        this.schHoverClose();
+        this.scClose();
+      }
+    });
 
 
     // Getting current date and time
     $(document).ready(function(){
+      var tdown_time = moment('11:59am','h:mma');
+      var mm_cur_time = moment(new Date());
+      if(m_cur_time.isBefore(tdown_time)){
+        
+          this.getMenuItems.postTabStatus('tab_one',event).subscribe(res=>{
+            if(res.success){
+              
+            }
+          });
+      }
+
+
       setInterval(function(){
         var m_cur_time = moment(new Date());
         // Time validations 
@@ -327,13 +346,14 @@ export class MenuComponent implements OnInit {
         var slot_one_end_time = moment('11:59am','h:mma');
         var tup_time = moment('12:00am','h:mma');
 
+
         if(m_cur_time.isAfter(tup_time)){
           // $('.time-up-db').hide();
         }
     
         if(m_cur_time.isAfter(last_time)){
           // Show time up div
-          $('.time-up-db').css({'display':'flex'});
+          // $('.time-up-db').css({'display':'flex'});
           // Disable all today slots
           $('#slot_one_option').prop('disabled',true);
           $('#slot_two_option').prop('disabled',true);
@@ -624,45 +644,6 @@ export class MenuComponent implements OnInit {
         }
       }
     });
-
-    // Get day six menu
-    this.getMenuItems.getDatesMenu(this.p_day_six,this.p_last_day_six).subscribe(dsix_res => {
-      if (dsix_res.success) {
-        this.day_six_menu = dsix_res.msg;
-        if (this.day_six_menu.length < 1) {
-          // Menu does't exist for today
-        } else {
-
-          let un = [];
-          this.day_six_menu.forEach(e => {
-            if (un.length < 1) {
-              un.push(e.item_id);
-            } else {
-              if (un.includes(e.item_id)) {
-                // Do nothing
-              } else {
-                un.push(e.item_id);
-              }
-            }
-          });
-
-          if (un.length > 0) {
-            // For each item id
-            un.forEach(el => {
-              this.getMenuItems.getItemDetails(el).subscribe(idets => {
-                if (idets.success) {
-                  idets.msg[0].checked = false;
-                  idets.msg[0].date = this.p_day_six;
-                  this.day_six_item_dets.push(idets.msg);
-                }
-              });
-            });
-            this.day_six_books = this.day_six_item_dets;
-          }
-
-        }
-      }
-    });
     
 
     // Date li
@@ -679,6 +660,25 @@ export class MenuComponent implements OnInit {
       }
     });
   }
+
+  postMenuAvailable(){
+    this.getMenuItems.postTabStatus('tab_one',event).subscribe(res=>{
+      if(res.success){
+        
+      }
+    });
+    this.getMenuItems.postTabStatus('tab_two',event).subscribe(res=>{
+      if(res.success){
+        
+      }
+    });
+    this.getMenuItems.postTabStatus('tab_three',event).subscribe(res=>{
+      if(res.success){
+        
+      }
+    });
+  }
+
   // Load menu
   loadDay(date){
     let pdate = this.datePipe.transform(date, 'fullDate')
@@ -691,16 +691,9 @@ export class MenuComponent implements OnInit {
     switch (this.datePipe.transform(date, 'fullDate')) {
       case this.p_day_one:
         // Day one menu
-        
         this.menu_to_be_loaded = this.day_one_books;
-
-        
-
-        // Experiment
         $('.sc-ch-mid').hide();
         $('#day-one-div').show();
-       
-
         this.numberOfItems = this.num_day_one_items;
         this.place_holder_price = this.total_day_one_price;
         // Update active day status
@@ -1041,66 +1034,6 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  // Each item
-
-  decNumberOfItem() {
-
-    switch (true) {
-      case this.today_status:
-
-        break;
-      case this.day_one_status:
-
-        break;
-      case this.day_two_status:
-
-        break;
-      case this.day_three_status:
-
-        break;
-      case this.day_four_status:
-
-        break;
-      case this.day_five_status:
-
-        break;
-      case this.day_six_status:
-
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  incNumberOfItem() {
-
-    switch (true) {
-      case this.today_status:
-        
-        break;
-      case this.day_one_status:
-        
-        break;
-      case this.day_two_status:
-        
-        break;
-      case this.day_three_status:
-       
-        break;
-      case this.day_four_status:
-       
-        break;
-      case this.day_five_status:
-        
-        break;
-      case this.day_six_status:
-        
-        break;
-      default:
-        break;
-    }
-  }
 
   letterCheck(e){
     console.log(e.target.checked);
@@ -1560,6 +1493,32 @@ export class MenuComponent implements OnInit {
 
   // Add to cart button clicked
   addCartClicked(){
+    
+    // $('.sch-hover-menu-back').css('display','flex');
+    switch (true) {
+      case this.day_one_status:
+        
+        break;
+      case this.day_two_status:
+        
+        break;
+      case this.day_three_status:
+        
+        break;
+      case this.day_four_status:
+        
+        break;
+      case this.day_five_status:
+        
+        break;
+    
+      default:
+        break;
+    }
+
+    // make choosing tabs appear
+
+
     let today:object,day_one:object,day_two:object,day_three:object,day_four:object,day_five:object,day_six:object;
 
         // Today's items are active
@@ -2062,7 +2021,6 @@ export class MenuComponent implements OnInit {
       tab_three: this.today_tab_three_books
     }
     localStorage.setItem('today_orders', JSON.stringify(today_orders));
-    console.log(today_orders);
   }
   tdClose(){
     $('.today-menu-back').hide();
@@ -2078,5 +2036,8 @@ export class MenuComponent implements OnInit {
       localStorage.setItem('basket_number',this.basketNumber.toString());
       this.router.navigate(['/checkout']); 
     }
+  }
+  schHoverClose(){
+    $('.sch-hover-menu-back').hide();
   }
 }

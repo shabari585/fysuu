@@ -1,3 +1,37 @@
+#sch-menu-btn{
+  font-weight: normal !important;
+}
+#sch-menu-btn:hover{
+  color: #6DA843;
+}
+.sch-main-back{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  padding: 0 30px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  /* border: 1px solid #000; */
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+.sch-main-back p{
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 110%;
+  margin-right: 40px;
+}
+.sch-main-back .schedule-rep-btn{
+  margin: 0;
+  padding: 0;
+  height: 70%;
+  width: 180px;
+}
 .sch-col-one{
   z-index: 2;
 }
@@ -14,7 +48,8 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 200%;
+  background-color: rgba(0, 0, 0, 0.9);
 }
 .time-up-db{
   z-index: 7;
@@ -87,8 +122,11 @@
   margin-left: 50px;
 }
 
+/* Sch select */
+
+
 /* Today select */
-.today-menu-back{
+.today-menu-back,.sch-hover-menu-back{
    z-index: 100;
    position: fixed;
    display: flex;
@@ -102,7 +140,10 @@
    align-items: center;
    flex-direction: row;
 }
-.today-core{
+.sch-hover-menu-back{
+  z-index: 10000;
+}
+.today-core,.sch-hover-core{
   position: relative;
   display: flex;
   align-items: center;
@@ -114,7 +155,7 @@
   padding: 30px 0px;
   border-radius: 4px;
 }
-.today-core label{
+.today-core label,.sch-hover-core label{
   position: relative;
   display: block;
   height: 30px;
@@ -133,7 +174,7 @@
 .today-btns button{
   height: 40px;
 }
-.today-core .fa-times{
+.today-core .fa-times,.sch-hover-core .fa-times{
   position: absolute;
   display: block;
   top:4%;
@@ -142,10 +183,10 @@
   color: #666;
   cursor: pointer;
 }
-.today-core .fa-times:hover{
+.today-core .fa-times:hover,.sch-hover-core .fa-times:hover{
   color: #fa0000;
 }
-.today-core select{
+.today-core select,.sch-hover-core select{
   outline: none !important;
   position: relative;
   display: block;
@@ -156,12 +197,12 @@
   border-radius: 4px;
   font-weight: normal;
 }
-.today-core .today-btns{
+.today-core .today-btns,.sch-hover-core .today-btns{
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.today-core .sc-ch-add-btn{
+.today-core .sc-ch-add-btn,.sch-hover-core .sc-ch-add-btn{
   width: 220px;
 }
 #letter-label{
@@ -177,7 +218,7 @@
   background-size: auto;
   padding-bottom: 20px !important;
   /* filter: sepia(10%); */
-  /* background-repeat: repeat; */
+  background-repeat: repeat;
 }
 
 .main-container .container {

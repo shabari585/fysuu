@@ -18,10 +18,10 @@ export class ThanksComponent implements OnInit {
 
   ngOnInit() {
 
-    if (localStorage.getItem('order_id') == null || localStorage.getItem('order_id') == undefined){
-      // redirect to Home page
-      this.router.navigate(['/home']);
-    }
+    // if (localStorage.getItem('order_id') == null || localStorage.getItem('order_id') == undefined){
+    //   // redirect to Home page
+    //   this.router.navigate(['/home']);
+    // }
 
     this.order_id = localStorage.getItem('order_id');
     this.title.setTitle('Thanks ! - Fysu');

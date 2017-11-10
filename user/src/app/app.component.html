@@ -59,13 +59,13 @@
 <div class="fixed-dark-cover" id="next-login-fixed-dark-cover" (keydown)="hideFixedDarkCover($event)" (click)="checkAndClose($event)">
   <div class="email-input-div" id="login-input-div">
     <i class="fa fa-times" aria-hidden="true" (click)="mainClose()"></i>
-    <h4>We just need few more details</h4>
+    <h4>Welcome Back!</h4>
     <label for="login-email" id="login-email-label">Email or Mobile</label>
     <input type="text" name="login-email" class="next-inputs" id="login-email" [(ngModel)]='loginEmailInput' placeholder=""><br>
 
     <label for="login-password" id="login-password-label">Password</label>
     <input type="password" name="login-password" class="next-inputs" [(ngModel)]='loginPasswordInput' id="login-password" placeholder=""><br>
-    <p class='forgot-pwd-trig' (click)="triggerForgotPwd()">Forgot Password ?</p>
+    <p class='forgot-pwd-trig' (click)="triggerForgotPwd()">Forgot Password?</p>
     <p class="login-err err"></p>
 
     <div class="ls-btns-div">
@@ -80,16 +80,15 @@
 <div class="fixed-dark-cover" id="fp-fixed-dark-cover" (keydown)="hideFixedDarkCover($event)" (click)="checkAndClose($event)">
   <div class="email-input-div">
     <i class="fa fa-times" aria-hidden="true" (click)="mainClose()"></i>
-    <h4>We have sent an otp to your mobile</h4>
-    <label for="otp" id="otp-label">Enter OTP</label><br>
+    <h4>We have sent an OTP to {{mobileNumForfp}}</h4>
     <input type="text" name="otp" id="otp" [(ngModel)]='fpOtpInput' placeholder="Enter OTP">
-    <label for="email" id="email-label">Enter new password</label>
     <input type="text" name="email" id="fpnewpwd" [(ngModel)]='fpNewPwd' placeholder="New Password">
+    <input type="text" name="email" id="cfpnewpwd" [(ngModel)]='cfpNewPwd' placeholder="Confirm New Password">
 
     <h5 class="resend-otp-txt" id="fp-resend-otp-text">
       <!-- You can resend otp in  seconds. -->
     </h5>
-    <h5 class="resend-otp-trig" id="fp-resend" (click)="retryOtp('fp')">RESEND OTP</h5>
+    <h5 class="resend-otp-trig" id="fp-resend" (click)="retryOtp('fp')"> If you haven't got OTP - <span>RESEND OTP</span></h5>
 
     <p class="fp-err err"></p>
     <div class="ls-btns-div">

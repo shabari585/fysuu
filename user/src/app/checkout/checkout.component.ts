@@ -147,12 +147,26 @@ export class CheckoutComponent implements OnInit {
   one_address:boolean=false;
   showDiscount:boolean = false;
 
+  tab_one_change_status:boolean = false;
+  tab_two_change_status:boolean = false;
+  tab_three_change_status:boolean = false;
+  day_one_change_status:boolean = false;
+  day_two_change_status:boolean = false;
+  day_three_change_status:boolean = false;
+  day_four_change_status:boolean = false;
+  day_five_change_status:boolean = false;
+
+  schSlot:any;
+  schTimes:any;
+
   ngOnInit() {
     // Getting orders
     this.title.setTitle('Fysu - Checkout');
-
+  
+    
+    
     this.dateForHeader = this.datePipe.transform(this.today_one, 'EEE, MMM d');
-
+    
     // Get basketnumber from localstorage
     this.basket_num = parseInt(localStorage.getItem('basket_number'));
     if(this.basket_num == undefined || this.basket_num == null || this.basket_num == 0 || isNaN(this.basket_num) == true){
@@ -162,7 +176,7 @@ export class CheckoutComponent implements OnInit {
     }else{
       // alert('yes');
     }
-
+    
     let user = this.authService.getUserFromLocal();
     let user_parsed = JSON.parse(user);
     this.userEmail = user_parsed.email;
@@ -177,7 +191,7 @@ export class CheckoutComponent implements OnInit {
     }else{
       this.userName = this.fullName;
     }
-
+    
     // Getting user reward points
     this.authService.getUserRewards(this.userId).subscribe(res=>{
       if(res.success){
@@ -201,7 +215,6 @@ export class CheckoutComponent implements OnInit {
             // Number of redeemable points
           }
         }
-
       }else{
         this.rewardPoints = 0;
         // Can't do anything
@@ -265,6 +278,20 @@ export class CheckoutComponent implements OnInit {
         if(this.addresses.length == 1){
           this.one_address = true;
           console.log('one address');
+        }else{
+          let addressd = {
+            user_id: this.userId,
+            address: localStorage.getItem('home_address')
+          }
+          this.authService.saveAddress(addressd).subscribe(res => {
+            if (res.success) {
+              // Address saved
+              alert('saved');
+            }else{
+              alert('nope')
+            }
+          });
+          this.addresses.push(localStorage.getItem('home_address'));
         }
       }
     })
@@ -779,5 +806,240 @@ export class CheckoutComponent implements OnInit {
     if(this.total_price == 0){
       this.router.navigate(['/menu']);
     }
+  }
+  changeDets(order_tab){
+    switch (order_tab) {
+      case 'tab_one':
+        this.tab_one_change_status = true;
+        this.tab_two_change_status = false;
+        this.tab_three_change_status = false;
+        this.day_one_change_status = false;
+        this.day_two_change_status = false;
+        this.day_three_change_status = false;
+        this.day_four_change_status = false;
+        this.day_five_change_status = false;
+
+        break;
+      case 'tab_two':
+        this.tab_one_change_status = false;
+        this.tab_two_change_status = true;
+        this.tab_three_change_status = false;
+        this.day_one_change_status = false;
+        this.day_two_change_status = false;
+        this.day_three_change_status = false;
+        this.day_four_change_status = false;
+        this.day_five_change_status = false;
+        
+        break;
+      case 'tab_three':
+        this.tab_one_change_status = false;
+        this.tab_two_change_status = false;
+        this.tab_three_change_status = true;
+        this.day_one_change_status = false;
+        this.day_two_change_status = false;
+        this.day_three_change_status = false;
+        this.day_four_change_status = false;
+        this.day_five_change_status = false;
+        
+        break;
+      case 'day_one':
+        this.tab_one_change_status = false;
+        this.tab_two_change_status = false;
+        this.tab_three_change_status = false;
+        this.day_one_change_status = true;
+        this.day_two_change_status = false;
+        this.day_three_change_status = false;
+        this.day_four_change_status = false;
+        this.day_five_change_status = false;
+        // Now
+        break;
+      case 'day_two':
+        // $('.today-menu-back').css('display','flex');
+        this.tab_one_change_status = false;
+        this.tab_two_change_status = false;
+        this.tab_three_change_status = false;
+        this.day_one_change_status = false;
+        this.day_two_change_status = true;
+        this.day_three_change_status = false;
+        this.day_four_change_status = false;
+        this.day_five_change_status = false;
+        
+        break;
+      case 'day_three':
+        this.tab_one_change_status = false;
+        this.tab_two_change_status = false;
+        this.tab_three_change_status = false;
+        this.day_one_change_status = false;
+        this.day_two_change_status = false;
+        this.day_three_change_status = true;
+        this.day_four_change_status = false;
+        this.day_five_change_status = false;
+        
+        break;
+      case 'day_four':
+        this.tab_one_change_status = false;
+        this.tab_two_change_status = false;
+        this.tab_three_change_status = false;
+        this.day_one_change_status = false;
+        this.day_two_change_status = false;
+        this.day_three_change_status = false;
+        this.day_four_change_status = true;
+        this.day_five_change_status = false;
+        break;
+      case 'day_five':
+        this.tab_one_change_status = false;
+        this.tab_two_change_status = false;
+        this.tab_three_change_status = false;
+        this.day_one_change_status = false;
+        this.day_two_change_status = false;
+        this.day_three_change_status = false;
+        this.day_four_change_status = false;
+        this.day_five_change_status = true;
+        break;
+    
+      default:
+        break;
+    }
+    $('.today-menu-back').css('display','flex');
+  }
+  tdClose(){
+    $('.today-menu-back').hide();
+  }
+  addTodayCartClicked(){
+    switch (true) {
+      case this.tab_one_change_status:
+        this.today_orders['tab_one'].time_slot = this.schSlot;
+        this.tab_one_time_slot = this.getSlotValue(this.schSlot);
+        break;
+      case this.tab_two_change_status:
+        this.today_orders['tab_two'].time_slot = this.schSlot;
+        this.tab_two_time_slot = this.getSlotValue(this.schSlot);
+        break;
+      case this.tab_three_change_status:
+        this.today_orders['tab_three'].time_slot = this.schSlot;
+        this.tab_three_time_slot = this.getSlotValue(this.schSlot);
+        break;
+      case this.day_one_change_status:
+        // alert(this.schTimes);
+        if(this.orders['day_one'] != null){
+          // this.day_one_per_portion_price = this.orders['day_one'].perPortionPrice;
+          // this.day_one_total_price = this.orders['day_one'].totalPrice;
+          // this.day_one_num_items = this.orders['day_one'].numOfTimes;
+          // this.day_one_slot = this.schSlot;
+          // Time slots
+          switch (this.schSlot) {
+            case 'slot_one':
+              this.day_one_slot = this.slot_one;
+              break;
+            case 'slot_two':
+              this.day_one_slot = this.slot_two;
+              break;
+            case 'slot_three':
+              this.day_one_slot = this.slot_three;
+              break;
+            default:
+              break;
+          }
+        }
+        this.orders['day_one'].timeSlot = this.schSlot;
+        console.log(this.orders);
+        break;
+      case this.day_two_change_status:
+          if(this.orders['day_two'] != null){
+            // this.day_two_per_portion_price = this.orders['day_two'].perPortionPrice;
+            // this.day_two_total_price = this.orders['day_two'].totalPrice;
+            // this.day_two_num_items = this.orders['day_two'].numOfTimes;
+            // this.day_two_slot = this.schSlot;
+            // Time slots
+            switch (this.schSlot) {
+              case 'slot_one':
+                this.day_two_slot = this.slot_one;
+                break;
+              case 'slot_two':
+                this.day_two_slot = this.slot_two;
+                break;
+              case 'slot_three':
+                this.day_two_slot = this.slot_three;
+                break;
+              default:
+                break;
+            }
+          }
+        
+        break;
+      case this.day_three_change_status:
+      if(this.orders['day_three'] != null){
+        // this.day_three_per_portion_price = this.orders['day_three'].perPortionPrice;
+        // this.day_three_total_price = this.orders['day_three'].totalPrice;
+        // this.day_three_num_items = this.orders['day_three'].numOfTimes;
+        // this.day_three_slot = this.schSlot;
+        // Time slots
+        switch (this.schSlot) {
+          case 'slot_one':
+            this.day_three_slot = this.slot_one;
+            break;
+          case 'slot_two':
+            this.day_three_slot = this.slot_two;
+            break;
+          case 'slot_three':
+            this.day_three_slot = this.slot_three;
+            break;
+          default:
+            break;
+        }
+      }
+        
+        break;
+      case this.day_four_change_status:
+        if(this.orders['day_four'] != null){
+          // this.day_four_per_portion_price = this.orders['day_four'].perPortionPrice;
+          // this.day_four_total_price = this.orders['day_four'].totalPrice;
+          // this.day_four_num_items = this.orders['day_four'].numOfTimes;
+          // this.day_four_slot = this.schSlot;
+          // Time slots
+          switch (this.schSlot) {
+            case 'slot_one':
+              this.day_four_slot = this.slot_one;
+              break;
+            case 'slot_two':
+              this.day_four_slot = this.slot_two;
+              break;
+            case 'slot_three':
+              this.day_four_slot = this.slot_three;
+              break;
+            default:
+              break;
+          }
+        }
+        
+        break;
+      case this.day_five_change_status:
+        if(this.orders['day_five'] != null){
+          // this.day_five_per_portion_price = this.orders['day_five'].perPortionPrice;
+          // this.day_five_total_price = this.orders['day_five'].totalPrice;
+          // this.day_five_num_items = this.orders['day_five'].numOfTimes;
+          // this.day_five_slot = this.schSlot;
+          // Time slots
+          switch (this.schSlot) {
+            case 'slot_one':
+              this.day_five_slot = this.slot_one;
+              break;
+            case 'slot_two':
+              this.day_five_slot = this.slot_two;
+              break;
+            case 'slot_three':
+              this.day_five_slot = this.slot_three;
+              break;
+            default:
+              break;
+          }
+        }
+        
+        break;
+    
+      default:
+        break;
+    }
+    $('.today-menu-back').hide();
   }
 }

@@ -92,6 +92,14 @@
             </div>
         </div> -->
         <div>
+            <div class="sch-main-back">
+                <p>
+                    Order until 2:15PM for today. Plan your own meal for next 4 days.
+                </p>
+                <button type="button" class="schedule-rep-btn" (click)="schMenuBtn()">
+                        PLAN NOW
+                </button>
+            </div>
             <div class="menu-title-div">
                 <h2 class="menu-title">HOME FOOD IS HERE</h2>
             </div>
@@ -206,12 +214,12 @@
                 </div>
                 
             </div>
-            <h5 class="plan-lunch-title">
+            <!-- <h5 class="plan-lunch-title">
                 Plan your lunch in advance for next 5 days
             </h5>
             <button type="button" class="schedule-rep-btn" (click)="schMenuBtn()">
                 SCHEDULE MENU
-            </button>
+            </button> -->
             <!-- Today's Menu -->
             <div class="today-menu-back">
                 <div class="today-core">
@@ -235,15 +243,42 @@
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
                         </select>
                     </label>
                     <label id="letter-label"><input type="checkbox" name="" id="" (change)='letterCheck($event)'> Wish to write a letter to beloved one? Will provide you an Inland Letter<b> (&#8377;5) </b> </label>
                     <div class="today-btns">
                         <!-- <button type="button" class="sc-ch-cancel-btn" (click)="tdClose()">CANCEL</button> -->
+                        <button type="button" class="sc-ch-add-btn" (click)="addTodayCartClicked()">ADD TO BASKET</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sch menu hover -->
+            <div class="sch-hover-menu-back">
+                <div class="sch-hover-core">
+                    <i class="fa fa-times" aria-hidden="true" (click)="schHoverClose()"></i>
+                    <label for="t-menu-select-slot" id="reg-name-label">Select Delivery Slot</label>
+                    <label for="">
+                        <select name="" id="sch-menu-select-slot" (change)='schMenuSlotSelect($event)'>
+                            <option selected disabled>Choose time slot</option>
+                            <option value="slot_one" id="slot_one_option">12:00 PM - 12:45 PM</option>
+                            <option value="slot_two" id="slot_two_option">12:45 PM - 01:30 PM</option>
+                            <option value="slot_three" id="slot_three_option">01:30 PM - 02:15 PM</option>
+                            <option value="slot_four" id="slot_four_option">02:15 PM - 03:00 PM</option>
+                        </select>
+                    </label>
+                    <br>
+                    <label for="t-menu-select-times" id="reg-name-label">Select Quantity</label>
+                    <label for="">
+                        <select name="" id="t-menu-select-times" (change)='todayMenuTimesSelect($event)'>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </label>
+                    <div class="today-btns">
                         <button type="button" class="sc-ch-add-btn" (click)="addTodayCartClicked()">ADD TO BASKET</button>
                     </div>
                 </div>
@@ -284,7 +319,7 @@
                 <div class="schedule-menu-right pull-right">
 
                     <div class="schedule-choose-core">
-                    <div class="sc-ch-db"> We don't serve on Sundays !</div>
+                    <div class="sc-ch-db"> We do not serve on Sundays !</div>
                         <!-- Top div -->
                         <div class="sc-ch-top">
                             <div class="pull-left">
@@ -1255,7 +1290,7 @@
     </div>
 </div>
 
-<div class="time-up-db">
+<!-- <div class="time-up-db">
     <div class="timeup-core">
         <p>
             We serve till 2:15 PM (Monday to Saturday). You can pre-order for next 5 days.
@@ -1264,4 +1299,4 @@
             SCHEDULE MENU
         </button>
     </div>
-</div>
+</div> -->

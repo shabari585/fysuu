@@ -5,7 +5,7 @@
 }
 body,
 html {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
   width: 100vw;
   overflow-x: hidden;
 }
@@ -63,14 +63,14 @@ input:active {
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.8);
 }
-
 .email-input-div {
   position: relative;
   display: block;
-  background-color: #fff;
+  background-color: #e5e5e5;
   padding: 20px 40px;
+  border-radius: 4px;
   color: #555;
-  width: 40vw;
+  width: 400px;
 }
 .email-input-div .fa-times{
   position: absolute;
@@ -98,7 +98,7 @@ input:active {
   margin-top: 10px;
 }
 
-#email,#otp,#fpnewpwd {
+#email,#otp,#fpnewpwd,#cfpnewpwd {
   /* border: none; */
   margin-top: 10px;
   margin-bottom: 25px;
@@ -437,6 +437,7 @@ input:active {
   color: #fff;
   height: 20px;
   width: 20px;
+  line-height: 0;
   border-radius: 50%;
 }
 
@@ -605,8 +606,11 @@ input:active {
   padding-bottom: 20px;
   background-color: #fff;
   overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, .1);
 }
-
+.footer-nav ul{
+  margin: 0;
+}
 .footer-nav,
 .footer-social-div {
   position: relative;
@@ -759,6 +763,7 @@ input:active {
  padding-bottom: 40px !important;
  margin-bottom: 0 !important;
  overflow: hidden;
+ background-color: #F2F5F6 !important;
 }
 .con-section .db{
   z-index: 2;

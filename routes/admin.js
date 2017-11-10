@@ -604,40 +604,7 @@ router.get('/get-dates-menu/:date/:last_date', (req, res, next) => {
         if (err) {
             res.json({ success: false, msg: err });
         } else {
-            if (ditem.length == 0) {
-                // Add last week's menu to ditem
-                dates.find({
-                    date: last_date
-                }, (err, lditem) => {
-                    if (lditem) {
-                        // res.json({ success: false, msg: err });
-                        if (lditem.length > 0) {
-                            lditem.forEach(function (element) {
-                                i_id = element.item_id;
-                                let newdate = new dates({
-                                    date: date,
-                                    item_id: i_id,
-                                });
-                                newdate.save((err, da) => {
-                                    if (da) {
-                                        // res.json({success:true,msg:da});
-                                    }
-                                });
-
-                            });
-
-                            dates.find({ date: date }, (err, datef) => {
-                                if (datef) {
-                                    res.json({ success: true, msg: datef });
-                                }
-                            });
-                        }
-                    }
-                });
-
-            } else {
-                res.json({ success: true, msg: ditem });
-            }
+            res.json({ success: true, msg: ditem });
         }
     });
 });

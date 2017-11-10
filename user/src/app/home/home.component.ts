@@ -243,7 +243,6 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/menu']);
       }
     }else{
-      // alert('hi');
       if(this.locationEntry != undefined){
   
         if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry == 'Madhapur' || this.locationEntry == 'madhapur'|| this.locationEntry == 'Madapur' || this.locationEntry == 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur') ) {

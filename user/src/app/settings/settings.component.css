@@ -6,9 +6,11 @@
   display: block;
   background-color: #F2F5F6;
   margin-top: 70px;
-  min-height: 75vh;
+  min-height: 82vh;
   padding-bottom: 30px;
   overflow: hidden;
+  background-image: url('../../assets/img/mbg.png');
+  background-size: auto;
 }
 
 

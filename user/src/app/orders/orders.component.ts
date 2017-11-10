@@ -24,6 +24,8 @@ export class OrdersComponent implements OnInit {
   userMobile: string;
   userId: string;
   orders_exist:boolean = false;
+  user_today:any=[];
+  user_day:any=[];
 
   constructor(private router: Router,private adminAuth: AdminAuthService ,private title: Title, private getadMenu: AdminServicesService, private authService: AuthService) { }
 
@@ -47,14 +49,51 @@ export class OrdersComponent implements OnInit {
           this.users_orders.push(element.order);
         }
       });
-      console.log(this.users_orders);
+      console.log(this.users_orders.length);
       this.users_orders.forEach(element => {
-        console.log(element.order);
+        // console.log(element.order);
+        if(element.order.next_days != null){
+          // console.log(element.order.next_days);
+          if(element.order.next_days.day_one != null){
+            // console.log(element.order.next_days.day_one.menu);
+            this.user_day.push(element.order.next_days.day_one.menu);
+          }
+          if(element.order.next_days.day_two != null){
+            // console.log(element.order.next_days.day_two.menu);
+            this.user_day.push(element.order.next_days.day_two.menu);
+          }
+          if(element.order.next_days.day_three != null){
+            // console.log(element.order.next_days.day_three.menu);
+            this.user_day.push(element.order.next_days.day_three.menu);
+          }
+          if(element.order.next_days.day_four != null){
+            // console.log(element.order.next_days.day_four.menu);
+            this.user_day.push(element.order.next_days.day_four.menu);
+          }
+          if(element.order.next_days.day_five != null){
+            // console.log(element.order.next_days.day_five.menu);
+            this.user_day.push(element.order.next_days.day_five.menu);
+          }
+        }
+
+        let today_json = {order_id: element.order_id,order: element.order.today};
+        this.user_today.push(today_json);
       });
       if(this.users_orders.length>0){
         this.orders_exist = true;
       }
     });
+    // console.log(this.user_today);
+    console.log(this.user_day);
+  }
+
+  contains(a,obj) {
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] === obj) {
+          return true;
+      }
+  }
+  return false;
   }
 
 }

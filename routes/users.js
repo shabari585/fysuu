@@ -201,6 +201,7 @@ router.post('/save-address', (req, res, next) => {
 router.post('/update-pwd',(req,res,next)=>{
     user_id = req.body.u_id;
     password = req.body.password;
+    newPassword = req.body.new_password;
 
     User.find({_id:user_id},(err,user)=>{
         // res.json({success:false,msg:user[0].email});
@@ -210,7 +211,7 @@ router.post('/update-pwd',(req,res,next)=>{
                 if (isMatch) {
                 // Password matched
                     bcrypt.genSalt(10, (err, salt) => {
-                        bcrypt.hash(password, salt, (err, hash) => {
+                        bcrypt.hash(newPassword, salt, (err, hash) => {
                             if (err) throw err;
                             user[0].password = hash;
                             user[0].save((err,saved)=>{

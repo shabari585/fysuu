@@ -149,6 +149,38 @@
       
 
     </div>
+    
+    <div class="today-menu-back">
+      <div class="today-core">
+          <i class="fa fa-times" aria-hidden="true" (click)="tdClose()"></i>
+          <label for="t-menu-select-slot" id="reg-name-label">Select Delivery Slot</label>
+          <label for="">
+              <select name="" id="t-menu-select-slot" [(ngModel)]="schSlot">
+                  <option selected disabled>Choose time slot</option>
+                  <option value="slot_one">12:00 PM - 12:45 PM</option>
+                  <option value="slot_two">12:45 PM - 01:30 PM</option>
+                  <option value="slot_three">01:30 PM - 02:15 PM</option>
+                  <option value="slot_four">02:15 PM - 03:00 PM</option>
+              </select>
+          </label>
+          <br>
+          <!-- <label for="t-menu-select-times" id="reg-name-label">Select Quantity</label>
+          <label for="">
+              <select name="" id="t-menu-select-times" (change)='todayMenuTimesSelect($event)' [(ngModel)]="schTimes">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+              </select>
+          </label> -->
+          <!-- <label id="letter-label"><input type="checkbox" name="" id="" (change)='letterCheck($event)'> Wish to write a letter to beloved one? Will provide you an Inland Letter<b> (&#8377;5) </b> </label> -->
+          <div class="today-btns">
+              <!-- <button type="button" class="sc-ch-cancel-btn" (click)="tdClose()">CANCEL</button> -->
+              <button type="button" class="sc-ch-add-btn" (click)="addTodayCartClicked()">ADD TO BASKET</button>
+          </div>
+      </div>
+  </div>
 
     <!-- Right Dets -->
     <div class="right-dets-section pull-left">
@@ -168,7 +200,7 @@
         <div *ngIf="today_orders !=null">
           <div *ngIf="tab_one !=null">
             
-            <h6 class="delivery-on-statement">Delivery today &nbsp; {{tab_one_time_slot}}</h6>
+            <h6 class="delivery-on-statement" (click)="changeDets('tab_one')">Delivery today &nbsp; {{tab_one_time_slot}}</h6>
             <!-- Today exists -->
               <div class="delivery-item">
   
@@ -267,7 +299,7 @@
         </div>
         <!-- Day one -->
         <div *ngIf="day_one_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_one_date}} &nbsp; {{day_one_slot}}</h6>
+          <h6 class="delivery-on-statement" (click)="changeDets('day_one')">Delivery on {{day_one_date}} &nbsp; {{day_one_slot}}</h6>
             <div class="delivery-item">
               <div class="delivery-item-left">
                 <div class="delivery-item-dets">
@@ -296,7 +328,7 @@
         </div>
         <!-- Day two -->
         <div *ngIf="day_two_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_two_date}} &nbsp; {{day_two_slot}}</h6>
+          <h6 class="delivery-on-statement" (click)="changeDets('day_two')">Delivery on {{day_two_date}} &nbsp; {{day_two_slot}}</h6>
           
             <div class="delivery-item">
               <div class="delivery-item-left">

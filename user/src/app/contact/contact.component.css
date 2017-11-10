@@ -7,11 +7,24 @@
     position: relative;
     display: block;
 }
-table td{
-    padding: 20px 0px;
+.contact-core .bgw{
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 500px;
+    background-color: #fff;
+    padding: 30px 30px;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
 }
-table h6{
-    font-size: 140%;
+h6{
+    font-size: 120%;
+}
+.b{
+    margin-top: 20px;
+    font-weight: bold;
+}
+p{
+    font-size: 100%;
 }
 table img{
     height: 80px;

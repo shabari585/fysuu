@@ -1,6 +1,20 @@
+.db{
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .5);
+}
 .main-container {
   padding: 0 !important;
   margin-top: 70px;
+  background: none;
+  background-image: none !important;
+  background-size: auto;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .main-container>.container {
@@ -32,7 +46,7 @@
   display: block;
   width: 100%;
   padding: 50px 0px 20px 0px;
-  background-color: #EEEEEE;
+  background-color: #F2F5F6;
 }
 
 /* Left rewards section */
