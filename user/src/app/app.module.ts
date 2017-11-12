@@ -1,11 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
-import { HttpModule, Http } from "@angular/http";
-import { RouterModule, Router, Routes } from "@angular/router";
+import { FormsModule } from '@angular/forms';
+import { HttpModule, Http } from '@angular/http';
+import { RouterModule, Router, Routes } from '@angular/router';
 // import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-
-// Google
 // import { GoogleMapDirective } from '../app/directives/google-map.directive';
 
 import { AppComponent } from './app.component';
@@ -44,17 +42,17 @@ import { MyDatePickerModule } from 'mydatepicker';
 
 
 // Services
-import { ValidateService } from "./services/validate.service";
-import { AuthService } from "./services/auth.service";
-import { AdminAuthService } from "./services/admin-auth.service";
-import { GetMenuService } from "./services/get-menu.service";
-import { UserService } from "./services/user-service.service";
-import { AdminServicesService } from "./services/admin-services.service";
+import { ValidateService } from './services/validate.service';
+import { AuthService } from './services/auth.service';
+import { AdminAuthService } from './services/admin-auth.service';
+import { GetMenuService } from './services/get-menu.service';
+import { UserService } from './services/user-service.service';
+import { AdminServicesService } from './services/admin-services.service';
 import { DatePipe } from '@angular/common';
-import { FlashMessagesModule } from "angular2-flash-messages";
+import { FlashMessagesModule } from 'angular2-flash-messages';
 // Auth Guard
-import { AuthGuard } from "./guards/auth.guard";
-import { AdminAuthGuard } from "./guards/admin-auth.guard";
+import { AuthGuard } from './guards/auth.guard';
+import { AdminAuthGuard } from './guards/admin-auth.guard';
 
 
 const appRoutes: Routes = [
@@ -135,8 +133,8 @@ const appRoutes: Routes = [
         ]
     },
     {
-        path:'admin',
-        component:AdminComponent,
+        path: 'admin',
+        component: AdminComponent,
         children: [
             {
                 path: '',
@@ -208,7 +206,7 @@ const appRoutes: Routes = [
         ]
     }
 
-]
+];
 
 @NgModule({
   declarations: [
@@ -248,7 +246,8 @@ const appRoutes: Routes = [
     FlashMessagesModule,
     MyDatePickerModule
   ],
-  providers: [ValidateService, AuthService, AdminAuthService, AuthGuard,AdminAuthGuard, GetMenuService, DatePipe, UserService, AdminServicesService,WindowRef],
+  // tslint:disable-next-line:max-line-length
+  providers: [ValidateService, AuthService, AdminAuthService, AuthGuard, AdminAuthGuard, GetMenuService, DatePipe, UserService, AdminServicesService, WindowRef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

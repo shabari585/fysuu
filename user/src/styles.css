@@ -184,7 +184,7 @@ input:active {
 
 #continue-btn,
 #accept-btn,
-#signup-btn {
+#signup-btn,#otp-btn,#login-btn {
   border: none;
   background-color: #b2b2b2;
   color: #fff;

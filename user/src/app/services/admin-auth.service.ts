@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from "@angular/http";
+import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { tokenNotExpired } from "angular2-jwt";
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AdminAuthService {
@@ -12,23 +12,22 @@ export class AdminAuthService {
     constructor(private http: Http) { }
 
     registerAdmin(admin) {
-        let header = new Headers();
+        const header = new Headers();
         header.append('Content-Type', 'application/json');
 
         return this.http.post('http://localhost:3700/admin/register', admin, { headers: header }).map(res => res.json());
         // return this.http.post('admin/register', admin, { headers: header }).map(res => res.json());
     }
-    
-    getAdmins(){
+    getAdmins() {
         return this.http.get('http://localhost:3700/admin/get-admins').map(res => res.json());
         // return this.http.get('admin/get-admins').map(res => res.json());
     }
-    deleteAdmin(admin_id){
-        return this.http.delete('http://localhost:3700/admin/delete-admin/'+admin_id).map(res => res.json());
+    deleteAdmin(admin_id) {
+        return this.http.delete('http://localhost:3700/admin/delete-admin/' + admin_id).map(res => res.json());
         // return this.http.delete('admin/delete-admin/'+admin_id).map(res => res.json());
     }
     authenticateAdmin(admin) {
-        let header = new Headers();
+        const header = new Headers();
         header.append('Content-Type', 'application/json');
 
         return this.http.post('http://localhost:3700/admin/authenticate', admin, { headers: header }).map(res => res.json());
@@ -36,7 +35,7 @@ export class AdminAuthService {
     }
 
     getProfile() {
-        let header = new Headers();
+        const header = new Headers();
         header.append('Content-Type', 'application/json');
         this.loadToken();
         header.append('Authorization', this.authToken);

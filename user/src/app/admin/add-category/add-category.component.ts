@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { NgModel } from '@angular/forms';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { Http, Headers, HttpModule } from "@angular/http";
+import { Http, Headers, HttpModule } from '@angular/http';
 
-import { Category } from "../../models/category";
+import { Category } from '../../models/category';
 
-import { AdminServicesService } from "../../services/admin-services.service";
+import { AdminServicesService } from '../../services/admin-services.service';
 
 declare var $: any;
 
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
-  styleUrls: ['../admin/admin.component.css','./add-category.component.css']
+  styleUrls: ['../admin/admin.component.css', './add-category.component.css']
 })
 export class AddCategoryComponent implements OnInit {
 
@@ -32,12 +32,11 @@ export class AddCategoryComponent implements OnInit {
         this.categories = res.msg;
       }
     });
-    
   }
   addCategory(catName) {
-    var json = { 'name': catName };
+    const json = { 'name': catName };
     this.getMenu.addCategory(json).subscribe(res => {
-      if (res.msg == 'success') {
+      if (res.msg === 'success') {
         // Category added
         window.location.reload();
       }
@@ -45,10 +44,10 @@ export class AddCategoryComponent implements OnInit {
   }
   deleteCategory(id: string) {
     this.getMenu.deleteCategory(id).subscribe(res => {
-      if (res == 'success') {
+      if (res === 'success') {
         window.location.reload();
       }
-    })
+    });
   }
 
 }

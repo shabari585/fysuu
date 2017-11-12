@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from "@angular/http";
+import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { tokenNotExpired } from "angular2-jwt";
+import { tokenNotExpired } from 'angular2-jwt';
 
 
 @Injectable()
@@ -11,9 +11,8 @@ export class UserService {
     user: any;
 
     constructor(private http: Http) { }
-    
-    getUserFromLocal(){
-        let user = localStorage.getItem('user');
+    getUserFromLocal() {
+        const user = localStorage.getItem('user');
         // user = JSON.parse(user);
         return user;
     }

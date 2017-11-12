@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { AppComponent } from "../app.component";
-import { Router, RouterModule } from "@angular/router";
-import { AuthService } from "../services/auth.service";
-import { UserService } from "../services/user-service.service";
+import { AppComponent } from '../app.component';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user-service.service';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
 declare var $: any;
@@ -12,7 +12,7 @@ declare var $: any;
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css','../menu/menu.component.css']
+  styleUrls: ['./settings.component.css', '../menu/menu.component.css']
 })
 export class SettingsComponent implements OnInit {
 
@@ -22,37 +22,37 @@ export class SettingsComponent implements OnInit {
   userMobile: string;
   userId: string;
 
-  basket_num:number;
+  basket_num: number;
   today_one = moment();
-  dateForHeader:string;
+  dateForHeader: string;
 
-  constructor(private router: Router, private title: Title,private authService:AuthService,private userService:UserService, private datePipe: DatePipe) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private router: Router, private title: Title, private authService: AuthService, private userService: UserService, private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.title.setTitle('Settings');
 
     this.dateForHeader = this.datePipe.transform(this.today_one, 'EEE, MMM d');
 
-    let user = this.authService.getUserFromLocal();
-    let user_parsed = JSON.parse(user);
+    const user = this.authService.getUserFromLocal();
+    const user_parsed = JSON.parse(user);
     this.userEmail = user_parsed.email;
     this.fullName = user_parsed.name;
     this.userMobile = user_parsed.mobile;
     this.userId = user_parsed.id;
-    var fLength = this.fullName.split(' ');
-    
-    if(fLength.length > 1){
+    const fLength = this.fullName.split(' ');
+    if (fLength.length > 1) {
       this.userName = this.fullName.split(' ').slice(0, -1).join(' ');
-    }else{
+    }else {
       this.userName = this.fullName;
     }
-
+    // tslint:disable-next-line:radix
     this.basket_num = parseInt(localStorage.getItem('basket_number'));
-    if(this.basket_num == undefined || this.basket_num == null || this.basket_num == 0 || isNaN(this.basket_num) == true){
+    if (this.basket_num === undefined || this.basket_num === null || this.basket_num === 0 || isNaN(this.basket_num) === true) {
       // redirect to menu
       this.basket_num = 0;
       // alert('no');
-    }else{
+    }else {
       // this.basket_num;
     }
   }

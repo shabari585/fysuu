@@ -4,5 +4,5 @@ export class Items {
     item_name: string;
     item_price: number;
     item_img: string;
-    checked:boolean;
+    checked: boolean;
 }

@@ -6,26 +6,27 @@ export class ValidateService {
     constructor() { }
 
     validateRegister(user) {
-        if (user.name == undefined || user.email == undefined || user.username == undefined || user.password == undefined) {
+        if (user.name === undefined || user.email === undefined || user.username === undefined || user.password === undefined) {
             return false;
         } else {
             return true;
         }
     }
 
-    validateMobile(mobile){
+    validateMobile(mobile) {
         return /^\d{10}$/.test(mobile);
     }
 
     validateEmail(email) {
+        // tslint:disable-next-line:max-line-length
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     }
 
-    validateInput(string){
-        if(string == undefined || string == null || string == ''){
+    validateInput(string) {
+        if (string === undefined || string === null || string === '') {
             return false;
-        }else{
+        }else {
             return true;
         }
     }

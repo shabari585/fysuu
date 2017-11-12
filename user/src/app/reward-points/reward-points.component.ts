@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router, RouterModule } from "@angular/router";
-import { AuthService } from "../services/auth.service";
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 declare var $: any;
 
 @Component({
   selector: 'app-reward-points',
   templateUrl: './reward-points.component.html',
-  styleUrls: ['./reward-points.component.css','../settings/settings.component.css']
+  styleUrls: ['./reward-points.component.css', '../settings/settings.component.css']
 })
 export class RewardPointsComponent implements OnInit {
 
-  rewardPoints:number;
+  rewardPoints: number;
 
   userEmail: string;
   userName: string;
@@ -23,19 +23,19 @@ export class RewardPointsComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Settings: Reward Points');
-    let user = this.authService.getUserFromLocal();
-    let user_parsed = JSON.parse(user);
+    const user = this.authService.getUserFromLocal();
+    const user_parsed = JSON.parse(user);
     this.userEmail = user_parsed.email;
     this.userName = user_parsed.name;
     this.companyName = user_parsed.company_name;
     this.userMobile = user_parsed.mobile;
     this.userId = user_parsed.id;
 
-    this.authService.getUserRewards(this.userId).subscribe(res=>{
+    this.authService.getUserRewards(this.userId).subscribe(res => {
       console.log(res.msg);
-      if(res.success){
+      if (res.success) {
         this.rewardPoints = res.msg;
-      }else{
+      }else {
         this.rewardPoints = 0;
       }
     });

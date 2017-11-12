@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { AppComponent } from "../app.component";
-import { Router, RouterModule } from "@angular/router";
-import { AuthService } from "../services/auth.service";
+import { AppComponent } from '../app.component';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 declare var $: any;
 
 @Component({
@@ -14,7 +14,7 @@ export class ThanksComponent implements OnInit {
 
   constructor(private authService: AuthService, private title: Title, private router: Router) { }
 
-  order_id:string;
+  order_id: string;
 
   ngOnInit() {
 

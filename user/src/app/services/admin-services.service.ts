@@ -1,7 +1,6 @@
-import { Injectable } from "@angular/core";
-import { Http, Headers, HttpModule } from "@angular/http";
+import { Injectable } from '@angular/core';
+import { Http, Headers, HttpModule } from '@angular/http';
 import 'rxjs/add/operator/map';
-// http://localhost:3700/
 
 @Injectable()
 export class AdminServicesService {
@@ -12,27 +11,21 @@ export class AdminServicesService {
 
     // Adding a category
     addCategory(newData: any) {
-        var headers = new Headers();
-
+        const headers = new Headers();
         headers.append('Content-type', 'application/json');
-
         return this.http.post('http://localhost:3700/admin/add-category', newData, { headers: headers }).map(res => res.json());
         // return this.http.post('admin/add-category', newData, { headers: headers }).map(res => res.json());
-
     }
-
     // Delete cateogry
     deleteCategory(id: string) {
         return this.http.delete('http://localhost:3700/admin/delete-category/' + id).map(res => res.json());
         // return this.http.delete('admin/delete-category/' + id).map(res => res.json());
     }
-
     // Get Categories
     getCategories() {
         return this.http.get('http://localhost:3700/admin/get-categories').map(res => res.json());
         // return this.http.get('admin/get-categories').map(res => res.json());
     }
-    
     // Get Orders
     getOrders() {
         return this.http.get('http://localhost:3700/admin/get-orders').map(res => res.json());
@@ -44,18 +37,15 @@ export class AdminServicesService {
     // Add Items Page
     // Add Item
     addItem(cat_id, sub_name, item_name, item_price, item_img) {
-        var headers = new Headers();
-
+        const headers = new Headers();
         headers.append('Content-type', 'application/json');
-
-        var Data = {
+        const Data = {
             'cat_id': cat_id,
             'sub_name': sub_name,
             'item_name': item_name,
             'item_price': item_price,
             'item_img': item_img
-        }
-
+        };
         return this.http.post('http://localhost:3700/admin/add-item', Data, { headers: headers }).map(res => res.json());
         // return this.http.post('admin/add-item', Data, { headers: headers }).map(res => res.json());
     }
@@ -75,7 +65,7 @@ export class AdminServicesService {
     // Add Sub Categories Page
     // Add subcategory
     addSub(subData: any) {
-        var headers = new Headers();
+        const headers = new Headers();
 
         headers.append('Content-type', 'application/json');
 
@@ -103,12 +93,10 @@ export class AdminServicesService {
     }
     // post schedule
     postSchedule(schArray: any, remArray: any) {
-        var headers = new Headers();
+        const headers = new Headers();
         headers.append('Content-type', 'application/json');
-        let schJSON = JSON.stringify(schArray);
-
-        let schData = { schArray, remArray };
-
+        const schJSON = JSON.stringify(schArray);
+        const schData = { schArray, remArray };
         return this.http.post('http://localhost:3700/admin/post-dates', schData, { headers: headers }).map(res => res.json());
         // return this.http.post('admin/post-dates', schData, { headers: headers }).map(res => res.json());
     }
@@ -131,17 +119,15 @@ export class AdminServicesService {
     }
 
     // Get User from userId
-    getUserFromId(user_id){
-        return this.http.get('http://localhost:3700/admin/get-user-from-id/'+user_id).map(res => res.json());
+    getUserFromId(user_id) {
+        return this.http.get('http://localhost:3700/admin/get-user-from-id/' + user_id).map(res => res.json());
         // return this.http.get('admin/get-user-from-id/'+user_id).map(res => res.json());
     }
-    
     getUserOrders(user_id) {
         return this.http.get('http://localhost:3700/users/get-user-orders/' + user_id).map(res => res.json());
         // return this.http.get('users/get-user-orders/' + user_id).map(res => res.json());
     }
-    
-    postRewards(email,points){
+    postRewards(email, points) {
         return this.http.get('http://localhost:3700/admin/post-rewards/' + email + '/' + points ).map(res => res.json());
         // return this.http.get('admin/post-rewards/' + email + '/' + points ).map(res => res.json());
     }

@@ -1,59 +1,60 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router, RouterModule } from "@angular/router";
-import { AuthService } from "../services/auth.service";
-import { ValidateService } from "../services/validate.service";
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { ValidateService } from '../services/validate.service';
 declare var $: any;
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['../settings/settings.component.css','./change-password.component.css']
+  styleUrls: ['../settings/settings.component.css', './change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
 
   constructor(private router: Router, private title: Title, private validate: ValidateService, private authService: AuthService) { }
 
-  oldPassword:string;
-  newPassword:string;
-  conNewPassword:string;
-  userId:string;
+  oldPassword: string;
+  newPassword: string;
+  conNewPassword: string;
+  userId: string;
 
   ngOnInit() {
 
     this.title.setTitle('Settings: Profile');
-    let user = this.authService.getUserFromLocal();
-    let user_parsed = JSON.parse(user);
+    const user = this.authService.getUserFromLocal();
+    const user_parsed = JSON.parse(user);
     this.userId = user_parsed.id;
 
   }
-  changePwd(){
-    if (this.validate.validateInput(this.oldPassword) && this.validate.validateInput(this.newPassword) && this.validate.validateInput(this.conNewPassword)){
-      if(this.newPassword === this.conNewPassword){
+  changePwd() {
+    // tslint:disable-next-line:max-line-length
+    if (this.validate.validateInput(this.oldPassword) && this.validate.validateInput(this.newPassword) && this.validate.validateInput(this.conNewPassword)) {
+      if (this.newPassword === this.conNewPassword) {
 
-        if(this.newPassword.length > 5){
-          let obj = {
+        if (this.newPassword.length > 5) {
+          const obj = {
             u_id: this.userId,
             password: this.oldPassword,
             new_password: this.newPassword
-          }
+          };
           // Update password
-          this.authService.updatePassword(obj).subscribe(res=>{
+          this.authService.updatePassword(obj).subscribe(res => {
             console.log(res);
-            if(res.success){
+            if (res.success) {
               $('.err').html('Password Changed !');
-            }else{
+            }else {
               $('.err').html('Incorrect old password');
             }
           });
-        }else{
-          $('.err').html('Password must contain at least 6 characters')
+        }else {
+          $('.err').html('Password must contain at least 6 characters');
         }
 
-      }else{
+      }else {
         $('.err').html('Passwords does\'t match !');
       }
-    }else{
+    }else {
       $('.err').html('All fields are required');
     }
   }

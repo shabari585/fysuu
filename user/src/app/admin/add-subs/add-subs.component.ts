@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { NgModel } from '@angular/forms';
-import { Category } from "../../models/category";
-import { Router } from "@angular/router";
+import { Category } from '../../models/category';
+import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { AdminServicesService } from "../../services/admin-services.service";
+import { AdminServicesService } from '../../services/admin-services.service';
 
 declare var $: any;
 
 @Component({
   selector: 'app-add-subs',
   templateUrl: './add-subs.component.html',
-  styleUrls: ['./add-subs.component.css','../admin/admin.component.css']
+  styleUrls: ['./add-subs.component.css', '../admin/admin.component.css']
 })
 export class AddSubsComponent implements OnInit {
 
@@ -37,9 +37,9 @@ export class AddSubsComponent implements OnInit {
   submitSubCat(cat: string, sub: string) {
     if (sub) {
       sub = sub.trim();
-      var json = { 'category_id': cat, 'sub': sub };
+      const json = { 'category_id': cat, 'sub': sub };
       this.getMenu.addSub(json).subscribe(res => {
-        if (res.msg == 'success') {
+        if (res.msg === 'success') {
           // Category added
           $('.err').html('Added !');
           $('#sub-inp').val('');
@@ -54,9 +54,9 @@ export class AddSubsComponent implements OnInit {
   catSelect(event) {
     // var cjson = {'catId':event};
     this.selectedCat = event;
-    var cjson = event;
+    const cjson = event;
     this.getMenu.getSubs(cjson).subscribe(res => {
-      if (res.msg != 'failed') {
+      if (res.msg !== 'failed') {
         this.subsOfCat = res;
       } else {
         console.log(res.msg);
@@ -67,7 +67,7 @@ export class AddSubsComponent implements OnInit {
   deleteSubFromCategory(subName: string) {
 
     this.getMenu.deleteSubFromCategory(subName, this.selectedCat).subscribe(res => {
-      if (res.msg == 'success') {
+      if (res.msg === 'success') {
         // deleted
         $('.err').html('Deleted ' + subName);
         window.location.reload();

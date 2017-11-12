@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, Router } from "@angular/router";
+import { RouterModule, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { AdminAuthService } from "../../services/admin-auth.service";
-import { FlashMessagesService } from "angular2-flash-messages";
+import { AdminAuthService } from '../../services/admin-auth.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
-import { AdminAuthGuard } from "../../guards/admin-auth.guard";
+import { AdminAuthGuard } from '../../guards/admin-auth.guard';
 
 declare var $: any;
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css','../admin/admin.component.css']
+  styleUrls: ['./login.component.css', '../admin/admin.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -22,16 +22,15 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
       this.title.setTitle('Login');
-      if(this.authService.loggedIn()== true){
+      if (this.authService.loggedIn() === true) {
         this.router.navigate(['/admin/orders']);
       }
-    
   }
   adminLoginFormSubmit() {
     const admin = {
       adminname: this.adminname,
       password: this.password
-    }
+    };
         // this.router.navigate(['/admin/add-admin']);
     this.authService.authenticateAdmin(admin).subscribe(data => {
       if (data.success) {
@@ -42,8 +41,7 @@ export class LoginComponent implements OnInit {
           timeout: 5000
         });
         this.router.navigate(['/admin/orders']);
-      }
-      else {
+      }else {
         this.flash.show(data.msg, {
           cssClass: 'alert-danger',
           timeout: 5000

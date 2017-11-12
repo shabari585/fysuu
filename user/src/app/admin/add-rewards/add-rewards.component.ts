@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { NgModel } from '@angular/forms';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { FlashMessagesService } from "angular2-flash-messages";
+import { FlashMessagesService } from 'angular2-flash-messages';
 
-import { AdminServicesService } from "../../services/admin-services.service";
+import { AdminServicesService } from '../../services/admin-services.service';
 
 declare var $: any;
 
 @Component({
   selector: 'app-add-rewards',
   templateUrl: './add-rewards.component.html',
-  styleUrls: ['./add-rewards.component.css','../admin/admin.component.css']
+  styleUrls: ['./add-rewards.component.css', '../admin/admin.component.css']
 })
 export class AddRewardsComponent implements OnInit {
 
@@ -28,16 +28,16 @@ export class AddRewardsComponent implements OnInit {
       console.log(res);
     });
   }
-  addRewardPoints(){
+  addRewardPoints() {
     // alert(this.points);
-    this.getMenu.postRewards(this.userName,this.points).subscribe(res=>{
-      if(res.success){
+    this.getMenu.postRewards(this.userName, this.points).subscribe(res => {
+      if (res.success) {
         this.flash.show('Updated', {
           cssClass: 'alert-success',
           timeout: 5000
         });
-        this.userName='';
-        this.points='';
+        this.userName = '';
+        this.points = '';
       }
     });
   }

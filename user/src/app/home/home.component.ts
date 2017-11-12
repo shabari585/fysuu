@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router, RouterModule, NavigationEnd } from "@angular/router";
-import { AuthService } from "../services/auth.service";
-import { AppComponent } from "../app.component";
+import { Router, RouterModule, NavigationEnd } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { AppComponent } from '../app.component';
 declare var $: any;
 
 @Component({
@@ -18,15 +18,14 @@ export class HomeComponent implements OnInit {
   long: number;
   address: string;
   // give_menu_permission= false;
+  userEmail: string;
+  userName: string;
+  fullName: string;
+  companyName: string;
+  userMobile: string;
+  userId: string;
 
-  userEmail :string;
-  userName :string;
-  fullName:string;
-  companyName :string;
-  userMobile :string;
-  userId :string;
-
-  basket_num:number;
+  basket_num: number;
 
 
   constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService) { }
@@ -36,52 +35,45 @@ export class HomeComponent implements OnInit {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     });
 
+    // tslint:disable-next-line:radix
     this.basket_num = parseInt(localStorage.getItem('basket_number'));
-    if(this.basket_num == undefined || this.basket_num == null || this.basket_num == 0 || isNaN(this.basket_num) == true){
+    if (this.basket_num === undefined || this.basket_num === null || this.basket_num === 0 || isNaN(this.basket_num) === true) {
       // redirect to menu
       this.basket_num = 0;
-      // alert(this.basket_num);
-      // alert('no');
-    }else{
-      // this.basket_num;
+    }else {
     }
 
-    if(this.authService.loggedIn()){
+    if (this.authService.loggedIn()) {
 
-      let user = this.authService.getUserFromLocal();
-      let user_parsed = JSON.parse(user);
+      const user = this.authService.getUserFromLocal();
+      const user_parsed = JSON.parse(user);
       this.userEmail = user_parsed.email;
       this.fullName = user_parsed.name;
       this.companyName = user_parsed.company_name;
       this.userMobile = user_parsed.mobile;
       this.userId = user_parsed.id;
-      var fLength = this.fullName.split(' ');
+      const fLength = this.fullName.split(' ');
 
-      if(fLength.length > 1){
+      if (fLength.length > 1) {
         this.userName = this.fullName.split(' ').slice(0, -1).join(' ');
-      }else{
+      }else {
         this.userName = this.fullName;
       }
 
-      if(this.userName == undefined || this.userName == null || this.userName == ''){
+      if (this.userName === undefined || this.userName === null || this.userName === '') {
         this.userName  = this.appComponent.uName;
       }
-      
-    }else{
-      // window.location.reload();
-      // console.log('shlog');
+    }else {
     }
-
     // Set title
     this.title.setTitle('Fysu - Home');
-
     $(window).on('scroll', function () {
-      var scrollTop = $(this).scrollTop();
+      const scrollTop = $(this).scrollTop();
       $('.location-input-scrolltop-helper').each(function () {
-        var topDistance = $(this).offset().top;
+        const topDistance = $(this).offset().top;
         if ((topDistance + 100) < scrollTop) {
           $('.scroll-header').css({ 'top': '0' });
           $('.mob-main-header').css({ 'background-color': 'rgba(0,0,0,1)' });
@@ -94,11 +86,11 @@ export class HomeComponent implements OnInit {
     });
   }
   public gotoHowitWorks() {
-    $('html, body').animate({ scrollTop: $(".how-it-works-div").offset().top - 70 }, 1000);
+    $('html, body').animate({ scrollTop: $('.how-it-works-div').offset().top - 70 }, 1000);
   }
 
-  gotoConcept(){
-    $('html, body').animate({ scrollTop: $(".concept-div").offset().top - 70 }, 1000);
+  gotoConcept() {
+    $('html, body').animate({ scrollTop: $('.concept-div').offset().top - 70 }, 1000);
   }
 
   onLogoutClick() {
@@ -112,7 +104,7 @@ export class HomeComponent implements OnInit {
         this.location = position.coords;
         this.lat = position.coords.latitude;
         this.long = position.coords.longitude;
-        if (this.location == undefined || this.location == null) {
+        if (this.location === undefined || this.location === null) {
         } else {
           this.authService.getLocation(this.lat, this.long).subscribe(res => {
             console.log(res);
@@ -123,27 +115,26 @@ export class HomeComponent implements OnInit {
               localStorage.setItem('home_address', this.address);
               // Add to user's address if he is logged in
               if (this.authService.loggedIn()) {
-                // User is logged in 
+                // User is logged in
                 // send this address to save
-                let address = {
+                const address = {
                   user_id: this.userId,
                   address: this.address
-                }
-                this.authService.saveAddress(address).subscribe(res => {
-                  if (res.success) {
+                };
+                this.authService.saveAddress(address).subscribe(rres => {
+                  if (rres.success) {
                     // Address saved
-                    console.log(res);
+                    console.log(rres);
                   } else {
                     // Address not saved
-                    if (res.msg = 'exists') {
+                    if (rres.msg = 'exists') {
                       // address already exists
                     } else {
-                      // console.log(res);
                     }
                   }
                 });
               } else {
-                // Not logged in 
+                // Not logged in
                 // this.give_menu_permission = true;
               }
               // Add to input box
@@ -151,35 +142,32 @@ export class HomeComponent implements OnInit {
               this.locationEntry = this.address;
               this.router.navigate(['/menu']);
             } else {
-              // ********** VERY IMPORTANT DELETE AFTER TESTING IS DONE ************** 
+              // ********** VERY IMPORTANT DELETE AFTER TESTING IS DONE **************
               // Delete after testing is done
-              
               // this.give_menu_permission = true;
-              
               this.router.navigate(['/menu']);
-            
               localStorage.setItem('home_address', this.address);
               // Add to user's address if he is logged in
               if (this.authService.loggedIn()) {
                 // console.log('user is logged in');
-                // User is logged in 
+                // User is logged in
                 // send this address to save
-                let address = {
+                const address = {
                   user_id: this.userId,
                   address: this.address
-                }
+                };
                 // console.log(address);
-                this.authService.saveAddress(address).subscribe(res => {
-                  if (res.success) {
+                this.authService.saveAddress(address).subscribe(rees => {
+                  if (rees.success) {
                     // Address saved
-                    console.log(res.msg);
+                    console.log(rees.msg);
                   } else {
                     // Address not saved
-                    if (res.msg == 'exists') {
+                    if (rees.msg === 'exists') {
                       // address already exists
                       console.log('exists');
                     } else {
-                      console.log(res.msg);
+                      console.log(rees.msg);
                     }
                   }
                 });
@@ -192,8 +180,6 @@ export class HomeComponent implements OnInit {
           });
         }
       });
-    
-      
     }
 
   }
@@ -203,18 +189,19 @@ export class HomeComponent implements OnInit {
 
     // alert(this.locationEntry);
 
-    if(this.authService.loggedIn()){
+    if (this.authService.loggedIn()) {
       this.router.navigate(['/menu']);
-      if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry == 'Madhapur' || this.locationEntry == 'madhapur'|| this.locationEntry == 'Madapur' || this.locationEntry == 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur') ) {
+      // tslint:disable-next-line:max-line-length
+      if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry === 'Madhapur' || this.locationEntry === 'madhapur' || this.locationEntry === 'Madapur' || this.locationEntry === 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur')) {
         localStorage.setItem('home_address', this.locationEntry);
         // Add to user's address if he is logged in
         if (this.authService.loggedIn()) {
-          // User is logged in 
+          // User is logged in
           // send this address to save
-          let address = {
+          const address = {
             user_id: this.userId,
             address: this.locationEntry
-          }
+          };
           this.authService.saveAddress(address).subscribe(res => {
             if (res.success) {
               // Address saved
@@ -233,28 +220,26 @@ export class HomeComponent implements OnInit {
           // Navigate to menu
           // this.appComponent.loginSignupTrigger();
           this.router.navigate(['/menu']);
-          
         }
       } else {
         this.locationEntry = this.address;
         $('.location-warning-div').show();
-  
         // Remove later
         this.router.navigate(['/menu']);
       }
-    }else{
-      if(this.locationEntry != undefined){
-  
-        if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry == 'Madhapur' || this.locationEntry == 'madhapur'|| this.locationEntry == 'Madapur' || this.locationEntry == 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur') ) {
+    }else {
+      if (this.locationEntry !== undefined) {
+        // tslint:disable-next-line:max-line-length
+        if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry === 'Madhapur' || this.locationEntry === 'madhapur' || this.locationEntry === 'Madapur' || this.locationEntry === 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur') ) {
           localStorage.setItem('home_address', this.locationEntry);
           // Add to user's address if he is logged in
           if (this.authService.loggedIn()) {
-            // User is logged in 
+            // User is logged in
             // send this address to save
-            let address = {
+            const address = {
               user_id: this.userId,
               address: this.locationEntry
-            }
+            };
             this.authService.saveAddress(address).subscribe(res => {
               if (res.success) {
                 // Address saved
@@ -273,20 +258,20 @@ export class HomeComponent implements OnInit {
             // Navigate to menu
             // this.appComponent.loginSignupTrigger();
             this.router.navigate(['/menu']);
-            
+
           }
         } else {
           this.locationEntry = this.address;
           $('.location-warning-div').show();
-    
+
           // Remove later
           this.router.navigate(['/menu']);
         }
-      }else{
-        if(!this.authService.loggedIn()){
-          if(this.locationEntry == null || this.locationEntry == undefined || this.locationEntry == ''){
+      }else {
+        if (!this.authService.loggedIn()) {
+          if (this.locationEntry == null || this.locationEntry === undefined || this.locationEntry === '') {
             // Do nothing
-          }else{
+          }else {
             this.router.navigate(['/menu']);
           }
           // this.appComponent.loginSignupTrigger();
@@ -294,14 +279,14 @@ export class HomeComponent implements OnInit {
       }
     }
 
-    
+
   }
 
-  pageScrollTop(){
-    $('html, body').animate({ scrollTop: $("html").offset().top }, 1000);
+  pageScrollTop() {
+    $('html, body').animate({ scrollTop: $('html').offset().top }, 1000);
   }
-  locationKeyPress(event){
-    if(event.keyCode == 13){
+  locationKeyPress(event) {
+    if (event.keyCode === 13) {
       this.seeMenu();
     }
   }

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { NgModel } from '@angular/forms';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { Category } from "../../models/category";
-import { FlashMessagesService } from "angular2-flash-messages";
+import { Category } from '../../models/category';
+import { FlashMessagesService } from 'angular2-flash-messages';
 // import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ValidatorFn } from '@angular/forms/src/directives/validators';
 
-import { AdminServicesService } from "../../services/admin-services.service";
+import { AdminServicesService } from '../../services/admin-services.service';
 
 declare var $: any;
 
@@ -45,9 +45,9 @@ export class AddItemsComponent implements OnInit {
     this.catSelected = 'false';
     // var cjson = {'catId':event};
     this.selectedCat = event;
-    var cjson = event;
+    const cjson = event;
     this.getMenu.getSubs(cjson).subscribe(res => {
-      if (res.msg != 'failed') {
+      if (res.msg !== 'failed') {
         this.subsOfCat = res;
         this.catSelected = 'true';
       } else {
@@ -65,10 +65,10 @@ export class AddItemsComponent implements OnInit {
   }
 
   AddItem(itemName: string, itemPrice: number) {
-    // selected category 
-    this.selectedCat;
+    // selected category
+    // this.selectedCat;
     // selected sub category
-    this.selectedSubCat;
+    // this.selectedSubCat;
     // Item Name
     this.itemName = itemName;
     // Item Price
@@ -77,7 +77,7 @@ export class AddItemsComponent implements OnInit {
     this.item_img = 'img/img.jpg';
 
     this.getMenu.addItem(this.selectedCat, this.selectedSubCat, this.itemName, this.itemPrice, this.item_img).subscribe(res => {
-      if (res.msg == 'success') {
+      if (res.msg === 'success') {
         this.flash.show('Item Added !', {
           cssClass: 'alert-success',
           timeout: 5000
