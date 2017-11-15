@@ -73,6 +73,10 @@ export class AdminOrdersComponent implements OnInit {
   p_h_user_mobile;
   p_h_address;
   p_h_num_times;
+  p_h_tab_one_times;
+  p_h_tab_two_times;
+  p_h_tab_three_times;
+  today_active= false;
 
   today_orders = [];
 
@@ -120,12 +124,14 @@ export class AdminOrdersComponent implements OnInit {
               const user_mobile = user[0].mobile;
               const user_email = user[0].email;
               // Today
-              if (this.p_today_one === element.order.order.today.date) {
-                // Add these to today orders
-                // tab_one, tab_two,tab_three
-                // tslint:disable-next-line:max-line-length
-                const iind = { user_id: user_id, user_name: username, user_mobile: user_mobile, user_email: user_email, order_id: order_id, order_time: order_time, delivery_address: element.order.delivery_address, order: element.order.order.today, payment_type: element.order.payment_method };
-                this.today_orders.push(iind);
+              if (element.order.order.today !== null) {
+                if (this.p_today_one === element.order.order.today.date) {
+                  // Add these to today orders
+                  // tab_one, tab_two,tab_three
+                  // tslint:disable-next-line:max-line-length
+                  const iind = { user_id: user_id, user_name: username, user_mobile: user_mobile, user_email: user_email, order_id: order_id, order_time: order_time, delivery_address: element.order.delivery_address, order: element.order.order.today, payment_type: element.order.payment_method };
+                  this.today_orders.push(iind);
+                }
               }
               // Next Days
               this.next_days = element.order.order.next_days;
@@ -230,12 +236,13 @@ export class AdminOrdersComponent implements OnInit {
     $('.db').css({'display': 'flex'});
     switch (today) {
       case 'today':
+      this.today_active = true;
       // Get order with order id
         console.log(this.today_orders);
         // place_holder_order = this.today_orders;
       // this.p_today_one;
       this.today_orders.forEach(element => {
-        // console.log(element.order_id);
+        console.log(element);
         if (order_id === element.order_id) {
           // console.log(element);
           this.p_h_order_id = element.order_id;
@@ -243,18 +250,37 @@ export class AdminOrdersComponent implements OnInit {
           this.p_h_user_email = element.user_email;
           this.p_h_user_mobile = element.user_mobile;
           this.p_h_address = element.delivery_address;
-          this.p_h_num_times = element.order.numOfTimes;
-          console.log('kk' + element.order.numOfTimes);
-          element.order.menu.forEach(el => {
-              this.p_h_order.push(el);
-          });
+          // this.p_h_num_times = element.order.numOfTimes;
+          if (element.order.tab_one) {
+            if (element.order.tab_one !== undefined || element.order.tab_one !== null) {
+              console.log(element.order.tab_one);
+              this.p_h_order.push(element.order.tab_one.name);
+              this.p_h_tab_one_times = element.order.tab_one.num_of_items;
+            }
+          }
+          if (element.order.tab_two) {
+            if (element.order.tab_two !== undefined || element.order.tab_two !== null) {
+              console.log(element.order.tab_two);
+              this.p_h_order.push(element.order.tab_two.name);
+              this.p_h_tab_two_times = element.order.tab_two.num_of_items;
+            }
+          }
+          if (element.order.tab_three) {
+            if (element.order.tab_three !== undefined || element.order.tab_three !== null) {
+              console.log(element.order.tab_three);
+              this.p_h_order.push(element.order.tab_three.name);
+              this.p_h_tab_three_times = element.order.tab_three.num_of_items;
+            }
+          }
+          console.log(this.p_h_order);
         }
       });
 
 
 
         break;
-        case 'day_one':
+        case 'today_one':
+        this.today_active = false;
 
         this.day_one_total_orders.forEach(element => {
 
@@ -269,14 +295,34 @@ export class AdminOrdersComponent implements OnInit {
             // console.log('kk' + element.order.numOfTimes);
             element.order.menu.forEach(el => {
               this.p_h_order.push(el);
+            });
+          }
+        });
 
+        break;
+        case 'day_one':
+        this.today_active = false;
+
+        this.day_one_total_orders.forEach(element => {
+
+          if (order_id === element.order_id) {
+            // console.log(element);
+            this.p_h_order_id = element.order_id;
+            this.p_h_user_name = element.user_name;
+            this.p_h_user_email = element.user_email;
+            this.p_h_user_mobile = element.user_mobile;
+            this.p_h_address = element.delivery_address;
+            this.p_h_num_times = element.order.numOfTimes;
+            // console.log('kk' + element.order.numOfTimes);
+            element.order.menu.forEach(el => {
+              this.p_h_order.push(el);
             });
           }
         });
 
         break;
         case 'day_two':
-        console.log(this.day_two_total_orders);
+        this.today_active = false;
         this.day_two_total_orders.forEach(element => {
 
           console.log(element.order_id);
@@ -297,11 +343,9 @@ export class AdminOrdersComponent implements OnInit {
           }
         });
 
-      // this.p_day_two;
-
-
         break;
         case 'day_three':
+        this.today_active = false;
         this.day_three_total_orders.forEach(element => {
 
           if (order_id === element.order_id) {
@@ -318,13 +362,9 @@ export class AdminOrdersComponent implements OnInit {
             });
           }
         });
-
-      // this.p_day_three;
-
-
         break;
         case 'day_four':
-        // console.log(this.day_four_total_orders);
+        this.today_active = false;
         this.day_four_total_orders.forEach(element => {
 
           if (order_id === element.order_id) {
@@ -342,13 +382,9 @@ export class AdminOrdersComponent implements OnInit {
             });
           }
         });
-
-      // this.p_day_four;
-
-
         break;
         case 'day_five':
-        // console.log(this.day_five_total_orders);
+        this.today_active = false;
         this.day_five_total_orders.forEach(element => {
 
           if (order_id === element.order_id) {
@@ -359,43 +395,13 @@ export class AdminOrdersComponent implements OnInit {
             this.p_h_user_mobile = element.user_mobile;
             this.p_h_address = element.delivery_address;
             this.p_h_num_times = element.order.numOfTimes;
-            // console.log('kk' + element.order.numOfTimes);
             element.order.menu.forEach(el => {
               this.p_h_order.push(el);
-
             });
           }
         });
 
-      // this.p_day_five;
-
-
         break;
-        case 'day_six':
-        console.log(this.day_six_total_orders);
-        this.day_six_total_orders.forEach(element => {
-
-          if (order_id === element.order_id) {
-            // console.log(element);
-            this.p_h_order_id = element.order_id;
-            this.p_h_user_name = element.user_name;
-            this.p_h_user_email = element.user_email;
-            this.p_h_user_mobile = element.user_mobile;
-            this.p_h_address = element.delivery_address;
-            this.p_h_num_times = element.order.numOfTimes;
-            // console.log('kk' + element.order.numOfTimes);
-            element.order.menu.forEach(el => {
-              this.p_h_order.push(el);
-
-            });
-          }
-        });
-
-      // this.p_day_six;
-
-
-        break;
-
       default:
         break;
     }

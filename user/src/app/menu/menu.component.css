@@ -220,7 +220,23 @@
   /* filter: sepia(10%); */
   background-repeat: repeat;
 }
-
+.sch-slot-select-div{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.sch-slot-select-div p{
+  margin: 0;
+}
+.sch-err{
+  position: absolute;
+  display: block;
+  left: 5%;
+  top: 50%;
+  transform: translate(0%,-50%);
+  color: #fa0000;
+}
 .main-container .container {
   width: 90%;
 }
@@ -829,6 +845,9 @@ label{
   height: 100%;
   overflow-y: scroll;
 }
+.list-inline li{
+  padding: 0 0 !important;
+}
 
 .roti-div,
 .mini-meals-div,
@@ -849,11 +868,26 @@ label{
   overflow-x: scroll;
   margin: 20px auto;
 }
-
-.sc-ch-menu-divs li {
-  margin-left: 20px;
+.sc-ch-menu-divs ul{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 }
 
+ .sc-ch-menu-divs li {
+  text-align: center;
+} 
+
+.sc-ch-menu-divs li .sc-ch-item-core{
+  position: relative;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+}
 .sc-ch-menu-divs li .sc-ch-item {
   position: relative;
   display: flex;
@@ -864,12 +898,27 @@ label{
   -webkit-align-items: center;
   flex-direction: column;
   cursor: pointer;
+  margin: 0 20px;
+}
+.sc-ch-menu-divs li .sc-ch-item label{
+  position: relative;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  flex-direction: column;
 }
 
 .sc-ch-menu-divs li .sc-ch-item img {
   margin-bottom: 10px;
 }
-
+.sc-ch-item-name{
+  text-align: center;
+  font-size: 90%;
+  color: #666;
+}
 .sch-note-div {
   margin: 10px 0;
   padding: 5px 10px;

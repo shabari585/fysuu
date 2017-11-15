@@ -51,10 +51,65 @@
   <select id="sort-dropdown">
       <option value="">Status</option>
   </select> -->
-
-  
-
   <!-- Today -->
+  <div class="days-div">
+    <h2>{{disp_today_one}} (Now)</h2>
+    <table class="table table-striped">
+      <tr>
+        <th>
+          Order id
+        </th>
+        <th>
+          Order Time
+        </th>
+        <th>
+          Delivery Address
+        </th>
+        <th>
+          Payment Type
+        </th>
+        <th>
+          User name
+        </th>
+        <th>
+          User Mobile
+        </th>
+        <th>
+          User Email
+        </th>
+        <th>
+          Details
+        </th>
+      </tr>
+      <tr *ngFor='let today of today_orders'>
+        <td>
+           {{today.order_id}}
+        </td>
+        <td>
+          {{today.order_time}}
+        </td>
+        <td>
+           {{today.delivery_address}}
+        </td>
+        <td>
+          {{today.payment_type}}
+        </td>
+        <td>
+           {{today.user_name}}
+        </td>
+        <td>
+           {{today.user_mobile}}
+        </td>
+        <td>
+           {{today.user_email}}
+        </td>
+        <td>
+          <span (click)='ViewDetails("today",today.order_id,p_today_one)'>View</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!-- Today Orders-->
   <div class="days-div">
     <h2>{{disp_today_one}} (Today)</h2>
     <table class="table table-striped">
@@ -107,7 +162,7 @@
            {{today.user_email}}
         </td>
         <td>
-          <span (click)='ViewDetails("today",today.order_id,p_today_one)'>View</span>
+          <span (click)='ViewDetails("today_one",today.order_id,p_today_one)'>View</span>
         </td>
       </tr>
     </table>
@@ -407,69 +462,6 @@
         </tr>
       </table>
     </div>
-
-  
-    <!-- Day six -->
-    <!-- <div class="days-div">
-      <h2>{{p_day_six}}</h2>
-      <table class="table table-striped">
-        <tr>
-          <th>
-            Order id
-          </th>
-          <th>
-            Order Time
-          </th>
-          <th>
-            Delivery Address
-          </th>
-          <th>
-            Payment Type
-          </th>
-          <th>
-            User name
-          </th>
-          <th>
-            User Mobile
-          </th>
-          <th>
-            User Email
-          </th>
-          <th>
-            Details
-          </th>
-        </tr>
-        <tr *ngFor='let order of day_six_total_orders'>
-          <td>
-            {{order.order_id}}
-          </td>
-          <td>
-            {{order.order_time}}
-          </td>
-          <td>
-            {{order.delivery_address}}
-          </td>
-          <td>
-            {{order.payment_type}}
-          </td>
-          <td>
-            {{order.user_name}}
-          </td>
-          <td>
-            {{order.user_mobile}}
-          </td>
-          <td>
-            {{order.user_email}}
-          </td>
-          <td>
-            <span (click)='ViewDetails("day_six",order.order_id)'>View</span>
-          </td>
-        </tr>
-      </table>
-    </div> -->
-
-
-
 </div>
 
 <div class="db">
@@ -489,7 +481,7 @@
         <th>
           User Email
         </th>
-        <th>
+        <th class="address-cell">
           User Address
         </th>
         <th>
@@ -512,16 +504,30 @@
         <td>
            {{p_h_user_email}}
         </td>
-        <td>
+        <td class="address-cell">
            {{p_h_address}}
         </td>
         <td>
-          <div *ngFor='let order of p_h_order'>
-            {{order.item_name}}
-          </div>
+          <span *ngIf="today_active == true">
+            <div *ngFor='let order of p_h_order'>
+              {{order}}
+            </div>
+          </span>
+          <span *ngIf="today_active == false">
+            <div *ngFor='let order of p_h_order'>
+              {{order.item_name}}
+            </div>
+          </span>
         </td>
         <td>
-           {{p_h_num_times}}
+          <span *ngIf="today_active == true">
+            {{p_h_tab_one_times}}<br>
+            {{p_h_tab_two_times}}<br>
+            {{p_h_tab_three_times}}<br>
+          </span>
+          <span *ngIf="today_active == false">
+            {{p_h_num_times}}
+          </span>
         </td>
       </tr>
     </table>

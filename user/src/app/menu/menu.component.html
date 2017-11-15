@@ -63,34 +63,6 @@
                 <button type="button" class="dets-div-btns" id="loc-btn"> MADHAPUR &nbsp; <i class="fa fa-angle-down" aria-hidden="true"></i> </button>
             </li>
         </ul>
-        <!-- <div class="filter-div">
-            <div class="date-filter-div">
-                <button class="btn btn-default dropdown-toggle" type="button" id="menu" data-toggle="dropdown">Today, 16 July</button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Today</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tomorrow</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Saturday</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sunday</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Monday</a></li>
-                </ul>
-            </div>
-            <div class="filter-type-div">
-                <button class="btn btn-default dropdown-toggle" type="button" id="menu" data-toggle="dropdown">Ready To Heat Meals</button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Item One</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Item Two</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Item Three</a></li>
-                </ul>
-            </div>
-            <div class="filter-filter-div">
-                <button class="btn btn-default dropdown-toggle" type="button" id="menu" data-toggle="dropdown">Filter</button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Item One</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Item Two</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Item Three</a></li>
-                </ul>
-            </div>
-        </div> -->
         <div>
             <div class="sch-main-back">
                 <p>
@@ -214,12 +186,6 @@
                 </div>
                 
             </div>
-            <!-- <h5 class="plan-lunch-title">
-                Plan your lunch in advance for next 5 days
-            </h5>
-            <button type="button" class="schedule-rep-btn" (click)="schMenuBtn()">
-                SCHEDULE MENU
-            </button> -->
             <!-- Today's Menu -->
             <div class="today-menu-back">
                 <div class="today-core">
@@ -328,8 +294,9 @@
                                     <span class="sc-ch-num">{{numberOfItems}}</span>
                                     <button type="button" class="sc-ch-num-btn" (click)="incNumberOfItems()">+</button>
                                 </div>
-                                <div>
-                                    <select (change)=slotSelected($event) class="slot-select">
+                                <div class="sch-slot-select-div">
+                                    <p>Select Delivery Slot : </p> &nbsp; &nbsp;
+                                    <select (change)=slotSelected($event) class="slot-select" id="sch-slot-select">
                                     <option default selected disabled>Choose</option>
                                     <option value="slot_one">12:00 PM - 12:45 PM</option>
                                     <option value="slot_two">12:45 PM - 01:30 PM</option>
@@ -347,9 +314,7 @@
 
                         <ul class="list-inline sc-ch-ul">
                             <li class="sch-col-one">
-                                <!-- Day one -->
                                 <div class="sc-ch-mid day-divs" id="day-one-div">
-
                                     <!-- Combo -->
                                     <div *ngFor="let cat of categories">
                                     <div *ngIf="cat.name == 'Vegetarian'">
@@ -1201,7 +1166,7 @@
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_five_books">
-                                                            <div *ngIf="menu[0].sub_name == sub">
+                                                            <div *ngIf="menu[0].sub_name == sub" class="sc-ch-item-core">
                                                                 <div class="sc-ch-item">
                                                                     <label>
                                                                         <input type="checkbox" class= "checks" name="{{menu[0].item_name}}" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
@@ -1252,7 +1217,7 @@
 
                         <!-- Schedule menu bottom -->
                         <div class="sc-ch-btm">
-                            <!-- <button type="button" class="sc-ch-cancel-btn" (click)="scClose()">CANCEL</button> -->
+                            <p class="sch-err"></p>
                             <button type="button" class="sc-ch-add-btn" (click)="addCartClicked()">ADD TO BASKET</button>
                             <div class="sc-hover-basket-div visible-md visible-lg" (click)='navToChekout()'>
                                 <span class="span">

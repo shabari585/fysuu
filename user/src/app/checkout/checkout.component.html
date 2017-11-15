@@ -303,7 +303,7 @@
             <div class="delivery-item">
               <div class="delivery-item-left">
                 <div class="delivery-item-dets">
-                  <span *ngFor="let menu of day_one_menu">
+                  <span *ngFor="let menu of day_one_menu" class="item-name-core">
                     <span class="delivery-item-name">{{menu.item_name}}</span>
                   </span>
                   
@@ -534,17 +534,17 @@
 
         <div class="payment-options-div body-div">
           <ul class="payment-options-ul list-unstyled list-inline">
-            <li>
+            <li class="payment-li">
                 <label for="invoice">
                     <input type="radio" name="payment" id="invoice" value="Online" (click)='paymentMethod($event)'> &nbsp; Pay Online
                 </label>
               </li>
-            <li>
+            <li class="payment-li">
               <label for="credit">
                   <input type="radio" name="payment" id="credit" value="wallet" (click)='paymentMethod($event)'> &nbsp; Wallet
               </label>
             </li>
-            <li>
+            <li class="payment-li">
               <label for="paypal">
                   <input type="radio" name="payment" id="paypal" value="cod" (click)='paymentMethod($event)'> &nbsp; Cash on Delivery
               </label>

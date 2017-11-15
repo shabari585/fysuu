@@ -16,8 +16,10 @@ declare var $: any;
   styleUrls: ['./reports.component.css', '../admin/admin.component.css'],
 })
 export class ReportsComponent implements OnInit {
-  public fromDate: any = { date: { year: 2017, month: 10, day: 1 } };
-  public toDate: any = { date: { year: 2017, month: 10, day: 4 } };
+  // public fromDate: any = { date: { year: 2017, month: 10, day: 1 } };
+  // public toDate: any = { date: { year: 2017, month: 10, day: 4 } };
+
+  public fromDate; toDate;
 
   allTodayOrders = [];
   allNextDayOrders = [];
@@ -50,17 +52,15 @@ export class ReportsComponent implements OnInit {
   }
   datesUpdated() {
     const datesArray: any = [];
-    // console.log(this.datesArray);
     let unique_items = [];
     let filter_array = [];
     this.un_items = [];
     let all_items = [];
     const orders_of_todays: any = [];
     let orders_of_next_days: any = [];
-    // this.fromDate;
-    // this.toDate;
     const for_from = this.fromDate.date.month + '/' +  this.fromDate.date.day + '/' + this.fromDate.date.year;
     const for_to = this.toDate.date.month + '/' + this.toDate.date.day + '/' + this.toDate.date.year;
+
     const from = this.datePipe.transform(for_from, 'fullDate');
     const to = this.datePipe.transform(for_to, 'fullDate');
     const mfrom = moment(this.datePipe.transform(from, 'shortDate'));
@@ -70,54 +70,57 @@ export class ReportsComponent implements OnInit {
       const ph = mfrom;
       datesArray.push(this.datePipe.transform(ph.add(1, 'days'), 'fullDate'));
     }
+    // console.log(datesArray);
     datesArray.forEach(element => {
       // Today dates
       this.allTodayOrders.forEach(to_e => {
-        if (to_e.date === element) {
-          orders_of_todays.push(to_e);
+        if (to_e !== null) {
+          // console.log(to_e);
+          if (to_e.date === element) {
+            orders_of_todays.push(to_e);
+          }
         }
       });
       // Next days orders
       this.allNextDayOrders.forEach(n_e => {
-        // day_one
-        if (n_e.day_one != null) {
-          if (n_e.day_one.date === element) {
-            orders_of_next_days.push(n_e.day_one);
+        if (n_e !== null) {
+          // day_one
+          if (n_e.day_one !== null) {
+            if (n_e.day_one.date === element) {
+              orders_of_next_days.push(n_e.day_one);
+            }
+          }
+          // day_two
+          if (n_e.day_two != null) {
+            if (n_e.day_two.date === element) {
+              orders_of_next_days.push(n_e.day_two);
+            }
+          }
+          // day_three
+          if (n_e.day_three != null) {
+            if (n_e.day_three.date === element) {
+              orders_of_next_days.push(n_e.day_three);
+            }
+          }
+          // day_four
+          if (n_e.day_four != null) {
+            if (n_e.day_four.date === element) {
+              orders_of_next_days.push(n_e.day_four);
+            }
+          }
+          // day_five
+          if (n_e.day_five != null) {
+            if (n_e.day_five.date === element) {
+              orders_of_next_days.push(n_e.day_five);
+            }
+          }
+          // day_six
+          if (n_e.day_six != null) {
+            if (n_e.day_six.date === element) {
+              orders_of_next_days.push(n_e.day_six);
+            }
           }
         }
-        // day_two
-        if (n_e.day_two != null) {
-          if (n_e.day_two.date === element) {
-            orders_of_next_days.push(n_e.day_two);
-          }
-        }
-        // day_three
-        if (n_e.day_three != null) {
-          if (n_e.day_three.date === element) {
-            orders_of_next_days.push(n_e.day_three);
-          }
-        }
-        // n_e.day_three.date
-        // day_four
-        if (n_e.day_four != null) {
-          if (n_e.day_four.date === element) {
-            orders_of_next_days.push(n_e.day_four);
-          }
-        }
-        // day_five
-        if (n_e.day_five != null) {
-          if (n_e.day_five.date === element) {
-            orders_of_next_days.push(n_e.day_five);
-          }
-        }
-        // n_e.day_five.date
-        // day_six
-        if (n_e.day_six != null) {
-          if (n_e.day_six.date === element) {
-            orders_of_next_days.push(n_e.day_six);
-          }
-        }
-        // n_e.day_six.date
       });
 
     });
@@ -151,6 +154,7 @@ export class ReportsComponent implements OnInit {
         }
       });
     });
+    console.log(this.un_items);
     all_items.length = 0;
     all_items = [];
     filter_array.length = 0;

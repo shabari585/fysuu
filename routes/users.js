@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
 const Order = require('../models/order');
+const dateItem = require('../models/dateItem');
 const bcrypt = require('bcryptjs');
 const SendOtp = require('sendotp');
 
@@ -441,15 +442,61 @@ router.post('/post-order', (req, res, next) => {
         }
     });
 });
+// Post dateItem
+router.post('/post-dateItem', (req, res, next) => {
+    dateItem = req.body.dateItem;
+
+    let dI = new dateItem({
+        dateItem : dateItem
+    });
+    dI.save((err,or)=>{
+        if(err){
+            res.json({success:false,msg:err});
+        }else{
+            res.json({success:true,msg:or});
+        }
+    });
+});
+
+// Post dateItem
+router.post('/get-dateItem', (req, res, next) => {
+    dateItem = req.body.dateItem;
+    dateItem.find((err,dateItems)=>{
+        if(dateItems) {
+            res.json({success: true, msg: dateItems});
+        }else {
+            if(err) {
+                res.json({success: false, msg: 'Something wrong'});
+            }else {
+                res.json({success: false, msg: err});
+            }
+        }
+    });
+});
 
 router.get('/get-user-orders/:user_id', (req, res, next) => {
 
     user_id = req.params.user_id;
-    user.find({ _id: user_id }, (err, user) => {
+    var user_orders = [];
+    
+    // User.find({ _id: user_id }, (err, user) => {
+    //     if (err) {
+    //         res.json({ success: false, msg: err });
+    //     } else {
+    //         return res.json({ success: true, msg: user });
+    //     }
+    // });
+
+    Order.find((err, order) => {
         if (err) {
             res.json({ success: false, msg: err });
         } else {
-            return res.json({ success: true, msg: user });
+            order.forEach(element => {
+               if(element.order.user_id === user_id){
+                user_orders.push(element);
+               }
+            });
+            res.json({success: true, msg: user_orders});
         }
     });
 });

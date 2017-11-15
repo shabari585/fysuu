@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
     }else {
     }
     // Set title
-    this.title.setTitle('Fysu - Home');
+    this.title.setTitle('Fysu | Office Lunch Redefined - Be ready with SPOON and PEN | Madhapur, Hyderabad');
     $(window).on('scroll', function () {
       const scrollTop = $(this).scrollTop();
       $('.location-input-scrolltop-helper').each(function () {

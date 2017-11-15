@@ -28,3 +28,6 @@
     font-size: 240%;
     cursor: pointer;
 }
+.address-cell{
+    width: 200px;
+}

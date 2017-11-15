@@ -74,6 +74,7 @@ export class AddMenuComponent implements OnInit {
     this.getMenu.getCategories().subscribe(res => {
       this.categories = res.msg;
     });
+
     this.getMenu.getDates().subscribe(res => {
       this.dates = res;
 

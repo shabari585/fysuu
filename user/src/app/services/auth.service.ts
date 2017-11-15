@@ -134,6 +134,12 @@ export class AuthService {
         return this.http.post('http://localhost:3700/users/post-order', order, { headers: header }).map(res => res.json());
         // return this.http.post('users/post-order', order, { headers: header }).map(res => res.json());
     }
+    postDateItem(dateItem) {
+        const header = new Headers();
+        header.append('Content-Type', 'application/json');
+        return this.http.post('http://localhost:3700/users/post-dateItem', dateItem, { headers: header }).map(res => res.json());
+        // return this.http.post('users/post-dateItem'', order, { headers: header }).map(res => res.json());
+    }
 
     getUserRewards(user_id) {
         return this.http.get('http://localhost:3700/users/get-user-rewards/' + user_id).map(res => res.json());

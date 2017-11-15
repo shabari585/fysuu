@@ -158,6 +158,8 @@ export class CheckoutComponent implements OnInit {
   schSlot: any;
   schTimes: any;
 
+  date_and_item_array = [];
+
   ngOnInit() {
     // Getting orders
     this.title.setTitle('Fysu - Checkout');
@@ -275,7 +277,7 @@ export class CheckoutComponent implements OnInit {
     this.authService.getUserAddressses(this.userId).subscribe(res => {
       if (res.success) {
         this.addresses = res.msg[0].address;
-        if (this.addresses.length === 1) {
+        if (this.addresses.length > 0) {
           this.one_address = true;
           console.log('one address');
         }else {
@@ -286,9 +288,9 @@ export class CheckoutComponent implements OnInit {
           this.authService.saveAddress(addressd).subscribe(rees => {
             if (rees.success) {
               // Address saved
-              alert('saved');
+              // alert('saved');
             }else {
-              alert('nope');
+              // alert('nope');
             }
           });
           this.addresses.push(localStorage.getItem('home_address'));
@@ -455,12 +457,6 @@ export class CheckoutComponent implements OnInit {
     // calculate points_earned from total_price
      const rounded_num = Math.round(this.total_price / 10);
      this.points_earned = rounded_num;
-    // this.points_earned
-
-
-    // this.address = localStorage.getItem('home_address');
-    // console.log(this.address);
-
   }
 
   // if redeem is clicked
@@ -468,11 +464,8 @@ export class CheckoutComponent implements OnInit {
     // Show discount points
     this.showDiscount = true;
     // Get total points
-    // this.rewardPoints;
     // Get redeemable points;
-    // this.redeemable;
     // Get discountable amount
-    // this.discount;
     // Remaining user points
     this.remainingPoints = this.rewardPoints - this.redeemable;
     // Update total price
@@ -535,7 +528,37 @@ export class CheckoutComponent implements OnInit {
           next_days: this.orders
 
         };
+        // insert this.today_orders into this.date_and_item_array
+        // console.log();
+        // insert this.orders into this.date_and_item_array
+        // this.orders
+        // day_one
+        // console.log(this.orders['day_one']);
+        // this.orders['day_one'].menu.forEach(donem => {
+        //   const dyone = { date: donem.date, item_id: donem._id };
+        //   this.date_and_item_array.push(dyone);
+        // });
 
+        // // day_two
+        // this.orders['day_two'].menu.forEach(dtwom => {
+        //   const dytwo = { date: dtwom.date, item_id: dtwom._id };
+        //   this.date_and_item_array.push(dytwo);
+        // });
+        // // day_three
+        // this.orders['day_three'].menu.forEach(dthreem => {
+        //   const dythree = { date: dthreem.date, item_id: dthreem._id };
+        //   this.date_and_item_array.push(dythree);
+        // });
+        // // day_four
+        // this.orders['day_four'].menu.forEach(dfourm => {
+        //   const dyfour = { date: dfourm.date, item_id: dfourm._id };
+        //   this.date_and_item_array.push(dyfour);
+        // });
+        // // day_five
+        // this.orders['day_five'].menu.forEach(dfivem => {
+        //   const dyfive = { date: dfivem.date, item_id: dfivem._id };
+        //   this.date_and_item_array.push(dyfive);
+        // });
         // Whole order in one place
         const main_order = {
           user_id: this.userId,
@@ -546,18 +569,14 @@ export class CheckoutComponent implements OnInit {
           order: cum_orders,
           total_price: this.total_price
         };
-        // console.log(main_order);
         // Send order to backend
-        // var json = { 'name': catName };
         const json = {'order_dets': main_order};
-        console.log(json);
-
         if (this.payment_method !== 'cod') {
           if (this.payment_method === 'wallet') {
             this.options = {
               'key': 'rzp_test_hJMKKQwECWfY82',
               'amount': this.total_to_pay * 100, // 2000 paise = INR 20
-              'name': 'Fysy',
+              'name': 'Fysu',
               'description': 'Purchase Description',
               'image': '../../assets/logo/logo_black.png',
               'handler': function (response){
@@ -599,26 +618,28 @@ export class CheckoutComponent implements OnInit {
               }
             };
           }
-
-
         this.rzp1 = new this.winRef.nativeWindow.Razorpay(this.options);
         this.rzp1.open();
+        }else {
+          // Place order
+          this.authService.postOrder(json).subscribe(res => {
+            if (res.success) {
+              // post date and item array
+              const dIjson = { dateItem: this.date_and_item_array };
+                // console.log(res.msg);
+                // Save order id to local storage
+                localStorage.setItem('order_id', order_id);
+                localStorage.removeItem('all_orders');
+                localStorage.removeItem('today_orders');
+                // redirect to thanks page
+                this.router.navigate(['/thanks']);
+            }else {
+              $('.err').html('Something went wrong. please try again later');
+            }
+          });
         }
 
 
-        // this.authService.postOrder(json).subscribe(res=>{
-        //   if(res.success){
-        //     console.log(res.msg);
-        //     // Save order id to local storage
-        //     // localStorage.setItem('order_id',order_id);
-        //     // localStorage.removeItem('all_orders');
-        //     // localStorage.removeItem('today_orders');
-        //     // redirect to thanks page
-        //     // this.router.navigate(['/thanks']);
-        //   }else{
-        //     $('.err').html('Something went wrong. please try again later');
-        //   }
-        // });
 
       }
     }
