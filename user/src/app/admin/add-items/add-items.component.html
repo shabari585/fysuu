@@ -13,7 +13,7 @@
     </tr>
     <tr>
       <td>
-        <select [(ngModel)]="selectedCat" (change)="catSelect($event.target.value)">
+        <select class="option" [(ngModel)]="selectedCat" (change)="catSelect($event.target.value)">
                         <option value="" disabled default="true">Choose Category</option>
                         <option *ngFor="let category of categories" value="{{category._id}}">{{category.name}}</option>
                     </select>

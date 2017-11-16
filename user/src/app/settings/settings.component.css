@@ -12,6 +12,9 @@
   background-image: url('../../assets/img/mbg.png');
   background-size: auto;
 }
+h2{
+  color: #333333
+}
 
 
 /* Change pwd btn in profile */

@@ -1,5 +1,6 @@
 // Mobile Menu
 $('.mob-menu-trig-btn').click(function(){
+    alert('al');
     var mob_menu_offest = $('.mob-menu').offset().top;
     if(mob_menu_offest < 0){
         // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'50vw' },200);

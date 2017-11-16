@@ -8,3 +8,9 @@
   font-size: 100%;
   color: #888;
 }
+#add-item-table input{
+  border: 1px solid #888;
+}
+.option{
+  border: 1px solid #888;
+}

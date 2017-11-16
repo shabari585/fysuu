@@ -11,7 +11,7 @@
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
   <div class="mob-main-logo" routerLink='/home'>
-    <img src="../assets/logo/logo_black.png">
+    <img src="../assets/logo/logo.png">
   </div>
 </header>
 <header class="main-header visible-md visible-lg">
@@ -27,7 +27,7 @@
             <a routerLink='/menu' class="dets-div-btns" id="our-menu-btn">Today, {{dateForHeader}}</a>
         </li>            
     </ul>
-    <div class="scroll-login-div pull-right">
+    <div class="scroll-login-div pull-right visible-md visible-lg">
         <ul class="list-inline sc-ul">
             <li class="account-trig-div" *ngIf="authService.loggedIn()">
               <div class="dropdown">

@@ -8,3 +8,9 @@
   font-size: 100%;
   color: #888;
 }
+.orders-list-section input{
+  border: 1px solid #888888;
+}
+select option{
+  border: 1px solid #888888;
+}
