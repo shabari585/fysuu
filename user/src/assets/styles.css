@@ -722,10 +722,10 @@ input:active {
   z-index: 12;
   position: fixed;
   display: block;
-  top: -300px;
-  left: 0;
-  width: 100vw;
-  height: auto;
+  top: 0;
+  left: -40vw;
+  width: 40vw;
+  height: 100vh;
   padding-top: 20px;
   background-color: #fff;
   color: #000;

@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
       if (mob_menu_offest < 0) {
           // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'50vw' },200);
           $('.mob-menu').animate({'left': '0vw' }, 200);
-      }else{
+      }else {
           // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'0vw' },200);
           $('.mob-menu').animate({'left': '-50vw' }, 200);
       }
