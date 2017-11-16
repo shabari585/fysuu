@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit {
       window.scrollTo(0, 0);
     });
 
-  
     // tslint:disable-next-line:radix
     this.basket_num = parseInt(localStorage.getItem('basket_number'));
     if (this.basket_num === undefined || this.basket_num === null || this.basket_num === 0 || isNaN(this.basket_num) === true) {
