@@ -20,19 +20,20 @@ export class AdminComponent implements OnInit {
     this.title.setTitle('Admin');
     // Mobile menu on menu click
     $('.mob-menu-trig-btn').click(function () {
-      const mob_menu_offest = $('.mob-menu').offset().left;
+      $('.mob-menu').css({'left':'-40vw'});
+      const mob_menu_offest = $('.mob-menu-admin').offset().left;
       if (mob_menu_offest < 0) {
         $('.main-container').animate({
           'margin-left': '50vw'
         }, 200);
-        $('.mob-menu').animate({
+        $('.mob-menu-admin').animate({
           'left': '0'
         }, 200);
       } else {
         $('.main-container').animate({
           'margin-left': '0vw'
         }, 200);
-        $('.mob-menu').animate({
+        $('.mob-menu-admin').animate({
           'left': '-50vw'
         }, 200);
       }

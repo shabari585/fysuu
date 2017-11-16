@@ -1,12 +1,4 @@
-<!-- Header for mobiles and smaller devices -->
-<header class="mob-main-header visible-sm visible-xs">
-    <button type="button" class="mob-menu-trig-btn">
-            <i class="fa fa-bars" aria-hidden="true"></i>
-    </button>
-    <div class="mob-main-logo" routerLink='/home'>
-        <img src="../../assets/logo/logo.png">
-    </div>
-</header>
+
 <header class="main-header visible-md visible-lg">
     <div class="container">
         <div class="main-logo pull-left" routerLink='/home'>
@@ -289,8 +281,9 @@
                                     <span class="sc-ch-num">{{numberOfItems}}</span>
                                     <button type="button" class="sc-ch-num-btn" (click)="incNumberOfItems()">+</button>
                                 </div>
+                                <h5 class="slot">Select Delivery Slot : </h5> 
                                 <div class="sch-slot-select-div">
-                                    <p>Select Delivery Slot : </p> &nbsp; &nbsp;
+                                    
                                     <select (change)=slotSelected($event) class="slot-select" id="sch-slot-select">
                                     <option default selected disabled>Choose</option>
                                     <option value="slot_one">12:00 PM - 12:45 PM</option>
@@ -1212,7 +1205,7 @@
 
                         <!-- Schedule menu bottom -->
                         <div class="sc-ch-btm">
-                            <p class="sch-err"></p>
+                            <p style="color:red;" class="sch-err"></p>
                             <button type="button" class="sc-ch-add-btn" (click)="addCartClicked()">ADD TO BASKET</button>
                             <div class="sc-hover-basket-div visible-md visible-lg" (click)='navToChekout()'>
                                 <span class="span">
@@ -1241,17 +1234,17 @@
 <!-- Basket for mobiles -->
 <div class="mob-basket-div visible-xs visible-sm" (click)='navToChekout()'>
     <span class="span">
-            <div class="row">
-                    <div class="col-xs-4 mob1" style="margin-left:5%;margin-top:4%;">
-                            <i   class="fa fa-shopping-basket" aria-hidden="true"></i>
-                    </div>
-                    <div class="col-xs-4 mob2" style="margin-top:-1%;margin-left:-5%">
-                            <h3>BASKET</h3><span  class="mob-hover-basket-number">0</span>
-                        </div>
-                        <div class="col-xs-4 mob3" style="margin-left:-15%;margin-top:7%;">
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                            </div>
-                        </div>
+        <div class="row">
+            <div class="col-xs-4 mob1" style="margin-left:5%;margin-top:4%;">
+                    <i   class="fa fa-shopping-basket" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-4 mob2">
+                <h3>BASKET <span  class="mob-hover-basket-number">0</span></h3>
+            </div>
+            <div class="col-xs-4 mob3" style="margin-left:-15%;margin-top:7%;">
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </div>
+        </div>
                         
     </span>
 </div>

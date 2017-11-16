@@ -261,6 +261,23 @@ export class MenuComponent implements OnInit {
       window.scrollTo(0, 0);
     });
 
+
+    // Mobile Menu
+    $('.mob-menu-trig-btn').click(function(){
+      // alert('al');
+      const mob_menu_offest = $('.mob-menu').offset().left;
+      if (mob_menu_offest < 0) {
+          // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'50vw' },200);
+          $('.mob-menu').animate({'left': '0vw' }, 200);
+      }else {
+          // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'0vw' },200);
+          $('.mob-menu').animate({'left': '-50vw' }, 200);
+      }
+    });
+    $('.mob-menu li').click(function() {
+      $('.mob-menu').animate({'left': '-50vw' }, 200);
+    });
+
     const om_cur_time = moment(new Date());
     const last_time = moment('2:14pm', 'h:mma');
     const slot_three_end_time = moment('1:29pm', 'h:mma');

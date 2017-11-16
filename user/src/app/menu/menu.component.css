@@ -1,3 +1,22 @@
+.mob-basket-div row,.mob-basket-div span{
+  height: 100%;
+  width: 100%;
+}
+.mob2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  /* background: #000; */
+}
+.mob2 h3{
+  margin: 0 auto;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
 #sch-menu-btn{
   font-weight: normal !important;
 }
@@ -1047,6 +1066,10 @@ label{
    color: #fff;
 
 }
+.sch-err{
+  position: absolute;
+  left: 10%;
+}
 
 
 /* Extra Small Devices, .visible-xs-* */
@@ -1224,8 +1247,13 @@ label{
   .slot-select{
     outline: none;
     height: 30px;
-    width: 130px;
-    
+    width: 110px;
+    left: -100%;
+    transform: translate(-50%)
+     
+    }
+    .slot{
+      visibility: hidden;
     }
 
     .sc-ch-top .pull-left select {
@@ -1234,18 +1262,22 @@ label{
   
   
   .sc-ch-add-btn{
-    height: 40px;
+    height: 30px;
     width: 170px;
+    font-size: 13px;
+    
     
   }
   .sc-ch-btm .sc-ch-add-btn{
     position: relative;
     display: block;
-    top: 40%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%,-50%);
   }
-  
+  .sc-ch-btm .sc-ch-add-btn{
+    padding: 0px 6px 0px 0px;
+  }
 
   
   .sc-ch-num-btn {
@@ -1281,6 +1313,8 @@ label{
     background-color: #fff;
     color: #777;
   }
+
+  
   
 }
 @media screen and (min-width:768px) and (max-width:1024px){

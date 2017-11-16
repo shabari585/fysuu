@@ -683,6 +683,7 @@ input:active {
 }
 
 .mob-main-logo {
+  outline: none !important;
   position: absolute;
   display: flex;
   display: -webkit-flex;
@@ -725,10 +726,11 @@ input:active {
   top: 0;
   left: -40vw;
   width: 40vw;
+  margin-top: 60px;
   height: 100vh;
-  padding-top: 20px;
-  background-color: #fff;
-  color: #000;
+  /* padding-top: 20px; */
+  background-color: #343233;
+  color: #fff;
   box-shadow: 0 10px 10px 1px rgba(0, 0, 0, .1);
 }
 
@@ -741,7 +743,7 @@ input:active {
   -webkit-align-items: center;
   height: 40px;
   width: 100%;
-  color: #000;
+  color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 

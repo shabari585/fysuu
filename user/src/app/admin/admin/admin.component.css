@@ -415,7 +415,7 @@ a {
 
 /* Mobile menu */
 
-.mob-menu {
+.mob-menu-admin {
   z-index: 10;
   position: fixed;
   display: block;
@@ -427,7 +427,7 @@ a {
   color: #fff;
 }
 
-.mob-menu li {
+.mob-menu-admin li {
   position: relative;
   display: flex;
   display: -webkit-flex;
@@ -444,17 +444,17 @@ a {
   transition: all 0.2s ease-in;
 }
 
-.mob-menu li:hover {
+.mob-menu-admin li:hover {
   cursor: pointer;
   background-color: #142026;
 }
 
-.mob-menu .selected-li {
+.mob-menu-admin .selected-li {
   border-left: 3px solid #4288BB;
   background-color: #142026;
 }
 
-.mob-menu li i {
+.mob-menu-admin li i {
   margin-right: 20px;
 }
 

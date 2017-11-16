@@ -38,6 +38,24 @@ export class AboutComponent implements OnInit {
       window.scrollTo(0, 0);
     });
 
+
+// Mobile Menu
+$('.mob-menu-trig-btn').click(function(){
+  // alert('al');
+  const mob_menu_offest = $('.mob-menu').offset().left;
+  if (mob_menu_offest < 0) {
+      // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'50vw' },200);
+      $('.mob-menu').animate({'left': '0vw'}, 200);
+  }else {
+      // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'0vw' },200);
+      $('.mob-menu').animate({'left': '-50vw' }, 200);
+  }
+});
+$('.mob-menu li').click(function() {
+  $('.mob-menu').animate({'left': '-50vw' }, 200);
+});
+
+
     this.dateForHeader = this.datePipe.transform(this.today_one, 'EEE, MMM d');
     // tslint:disable-next-line:radix
     this.basket_num = parseInt(localStorage.getItem('basket_number'));

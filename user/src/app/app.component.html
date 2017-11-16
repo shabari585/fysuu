@@ -1,3 +1,17 @@
+<!-- Header for mobiles and smaller devices -->
+<header class="mob-main-header visible-sm visible-xs">
+  <button type="button" class="mob-menu-trig-btn">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+  </button>
+  <div class="mob-main-logo" routerLink='/home'>
+    <img src="../../assets/logo/logo.png">
+  </div>
+<span *ngIf="!authService.loggedIn()" (click)='loginSignupTrigger()'>
+  <i style="color:white;font-size:20px;float:right;padding:20px;" class="fa fa-user-o" aria-hidden="true"></i>
+</span>
+</header>
+
+
 <div *ngIf="!authService.loggedIn()">
 
 <div class="fixed-dark-cover" id="login-fixed-dark-cover" (keydown)="hideFixedDarkCover($event)" (click)="checkAndClose($event)">
@@ -101,19 +115,40 @@
 </div>
 
 </div>
+
+<div *ngIf="!authService.loggedIn()">    
 <div class="mob-menu visible-sm visible-xs">
   <ul class="list-unstyled">
-    <li class="reward-pts-trig-btn">
+    <a routerLink='/rewards'>
+    <li class="reward-pts-trig-btn" (click)='closeMobMenu()'>
       REWARDS
     </li>
-    <li  *ngIf="!authService.loggedIn()" (click)="appComponent.loginSignupTrigger()">
+    </a>
+    <li *ngIf="!authService.loggedIn()" (click)="loginSignupTrigger()">
       LOGIN / SIGNUP
-    </li>
-    <li  *ngIf="authService.loggedIn()" (click)="onLogoutClick()">
-      LOGOUT
     </li>
   </ul>
 </div>
+</div>
+
+<div *ngIf="authService.loggedIn()">    
+    <div class="mob-menu visible-sm visible-xs">
+      <ul class="list-unstyled">
+        <li class="reward-pts-trig-btn">
+          REWARDS
+        </li>
+        <li>
+            <a style="color:white;text-align:center;font-size:11px;width:100%;margin:0;" routerLink='/menu' id="our-menu-btn">Today, {{dateForHeader}}</a>
+        </li>
+        <li class="" (click)="navToChekout()">
+                Basket &nbsp; <span class="head-basket-num">{{basket_num}}</span> 
+        </li>
+        <li  *ngIf="authService.loggedIn()" (click)="onLogoutClick()" class="">
+          LOGOUT
+        </li>
+      </ul>
+    </div>
+    </div>
 
 <router-outlet>
 

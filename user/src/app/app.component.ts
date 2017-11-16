@@ -5,6 +5,8 @@ import { Http } from '@angular/http';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { DatePipe } from '@angular/common';
+import * as moment from 'moment';
 declare var $: any;
 
 
@@ -28,6 +30,8 @@ export class AppComponent implements OnInit {
   public regMobileInput: string;
   public regPwdInput: string;
   public regOTPInput: string;
+  today_one = moment();
+  dateForHeader: string;
 
   public loginEmailInput: string;
   public loginPasswordInput: string;
@@ -37,7 +41,7 @@ export class AppComponent implements OnInit {
   address: string;
 
   public uName: string;
-  public basket_num: number;
+  public basket_num = 0;
 
   isInputEmail = false;
   isInputMobile = false;
@@ -48,11 +52,38 @@ export class AppComponent implements OnInit {
   signUpResendTime: number;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private title: Title, private router: Router, private validate: ValidateService, private authService: AuthService, private http: Http) { }
+  constructor(private title: Title, private router: Router, private validate: ValidateService, private authService: AuthService, private http: Http, private datePipe: DatePipe) { }
   ngOnInit() {
 
     // Set title
     this.title.setTitle('Home');
+
+    this.dateForHeader = this.datePipe.transform(this.today_one, 'EEE, MMM d');
+
+      // Mobile Menu
+      $('.mob-menu-trig-btn').click(function(){
+        // alert('al');
+        const mob_menu_offest = $('.mob-menu').offset().left;
+        if (mob_menu_offest < 0) {
+            // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'50vw' },200);
+            $('.mob-menu').animate({'left': '0vw'}, 200);
+        }else {
+            // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'0vw' },200);
+            $('.mob-menu').animate({'left': '-50vw' }, 200);
+        }
+      });
+      $('.mob-menu').click(function() {
+        alert('g');
+        const mob_menu_offest = $('.mob-menu').offset().left;
+        if (mob_menu_offest < 0) {
+            // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'50vw' },200);
+            $('.mob-menu').animate({'left': '0vw'}, 200);
+        }else {
+            // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'0vw' },200);
+            $('.mob-menu').animate({'left': '-50vw' }, 200);
+        }
+      });
+  
 
     // tslint:disable-next-line:radix
     this.basket_num = parseInt(localStorage.getItem('basket_number'));
@@ -102,9 +133,12 @@ export class AppComponent implements OnInit {
       }
     }
   }
-
+  closeMobMenu(){
+    $('.mob-menu').animate({'left': '-50vw' }, 200);
+  }
   // On clicking login/signup
   public loginSignupTrigger() {
+    this.closeMobMenu();
     $('.err').html('');
     $('.fixed-dark-cover').hide();
     $('.fixed-dark-cover input').css({'border-color': '#b2b2b2'});
