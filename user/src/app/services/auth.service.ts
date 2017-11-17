@@ -106,7 +106,7 @@ export class AuthService {
         header.append('Content-Type', 'application/json');
 
         // return this.http.post('http://localhost:3700/users/update-address', address, { headers: header }).map(res => res.json());
-        return this.http.post('users/delete-address', address, { headers: header }).map(res => res.json());
+        return this.http.post('users/update-address', address, { headers: header }).map(res => res.json());
     }
 
     getUserAddressses(user_id) {
@@ -131,8 +131,8 @@ export class AuthService {
     postOrder(order) {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3700/users/post-order', order, { headers: header }).map(res => res.json());
-        // return this.http.post('users/post-order', order, { headers: header }).map(res => res.json());
+        // return this.http.post('http://localhost:3700/users/post-order', order, { headers: header }).map(res => res.json());
+        return this.http.post('users/post-order', order, { headers: header }).map(res => res.json());
     }
     postDateItem(dateItem) {
         const header = new Headers();

@@ -462,10 +462,7 @@ router.post('/post-dates', (req, res, next) => {
 
         }, this);
         res.json({msg:ar});
-    }else{
-        res.json({msg:'no length'})
     }
-
     if (req.body.remArray.length > 0) {
         req.body.remArray.forEach(function(element) {
             // Delete

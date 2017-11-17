@@ -631,6 +631,7 @@ export class CheckoutComponent implements OnInit {
                 localStorage.setItem('order_id', order_id);
                 localStorage.removeItem('all_orders');
                 localStorage.removeItem('today_orders');
+                localStorage.removeItem('basket_number');
                 // redirect to thanks page
                 this.router.navigate(['/thanks']);
             }else {

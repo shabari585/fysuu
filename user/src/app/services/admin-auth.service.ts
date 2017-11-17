@@ -24,7 +24,7 @@ export class AdminAuthService {
     }
     deleteAdmin(admin_id) {
         // return this.http.delete('http://localhost:3700/admin/delete-admin/' + admin_id).map(res => res.json());
-        return this.http.delete('admin/delete-admin/'+admin_id).map(res => res.json());
+        return this.http.delete('admin/delete-admin/' + admin_id).map(res => res.json());
     }
     authenticateAdmin(admin) {
         const header = new Headers();

@@ -31,9 +31,6 @@ export class AdminServicesService {
         // return this.http.get('http://localhost:3700/admin/get-orders').map(res => res.json());
         return this.http.get('admin/get-orders').map(res => res.json());
     }
-
-
-
     // Add Items Page
     // Add Item
     addItem(cat_id, sub_name, item_name, item_price, item_img) {

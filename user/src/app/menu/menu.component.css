@@ -868,9 +868,21 @@ label{
   overflow-x: scroll;
   margin: 20px auto;
 }
-
-.sc-ch-menu-divs li {
-  margin-left: 20px;
+.sc-ch-menu-divs ul{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list-inline>li {
+  display: inline-block;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.sc-ch-item label{
+  text-align: center;
+  font-size: 80%;
+  color: #666;
+  padding: 0 10px;
 }
 
 .sc-ch-menu-divs li .sc-ch-item {
