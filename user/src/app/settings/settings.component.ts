@@ -42,7 +42,7 @@ export class SettingsComponent implements OnInit {
     this.userId = user_parsed.id;
     const fLength = this.fullName.split(' ');
     if (fLength.length > 1) {
-      this.userName = this.fullName.split(' ').slice(0, -1).join(' ');
+      this.userName = this.fullName.split(' ').slice(0, -(this.fullName.split(' ').length - 1)).join(' ');
     }else {
       this.userName = this.fullName;
     }

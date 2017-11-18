@@ -1,3 +1,4 @@
+
 /* Changing time slot section */
 .today-menu-back,.sch-hover-menu-back{
   z-index: 100;
@@ -124,6 +125,9 @@
   background-color: #F2F5F6;
   padding: 20px 0px 50px 0px;
   color: #515151;
+  background-image: url('../../assets/img/mbg.png');
+  background-size: auto;
+  background-repeat: repeat;
 }
 
 .head-divs {
@@ -242,13 +246,15 @@ h6 {
   min-height: 80px;
   margin: 0;
 }
-
-#edit-address {
+.d-edit-address{
+  display: inline-block;
+}
+.edit-address,.d-edit-address {
   border: none;
   background-color: transparent;
   color: #6DA942;
 }
-#edit-address:hover{
+.edit-address:hover,.d-edit-address{
   color: #588835;
 }
 
@@ -326,6 +332,8 @@ h6 {
 .delivery-on-statement {
   font-weight: bold;
   padding: 20px 0px 10px 0px;
+  white-space: nowrap;
+  word-wrap: none;
 }
 
 .delivery-items-div {
@@ -527,6 +535,7 @@ h6 {
   padding: 20px;
   background-color: #fff;
   border-radius: 4px;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
 }
 
 .place-order-notif {

@@ -1,4 +1,4 @@
-.container{
+.m-container{
     position: relative;
     display: flex;
     align-items: center;
@@ -6,7 +6,7 @@
     flex-direction: column;
     margin: 0 auto;
     width: 80%;
-    min-height: 92vh;
+    min-height: 90vh;
     text-align: center;
 }
 h2,h3{

@@ -76,7 +76,12 @@ export class AdminOrdersComponent implements OnInit {
   p_h_tab_one_times;
   p_h_tab_two_times;
   p_h_tab_three_times;
+  p_h_time_slot;
   today_active= false;
+  now_exists = false;
+  p_h_one_time_slot;
+  p_h_two_time_slot;
+  p_h_three_time_slot;
 
   today_orders = [];
 
@@ -126,6 +131,7 @@ export class AdminOrdersComponent implements OnInit {
               // Today
               if (element.order.order.today !== null) {
                 if (this.p_today_one === element.order.order.today.date) {
+                  this.now_exists = true;
                   // Add these to today orders
                   // tab_one, tab_two,tab_three
                   // tslint:disable-next-line:max-line-length
@@ -142,11 +148,11 @@ export class AdminOrdersComponent implements OnInit {
                     switch (e.date) {
 
                       case this.p_today_one:
-                        console.log(e.date);
+                        // console.log(e.date);
 
                         // tslint:disable-next-line:max-line-length
                         const iind = { user_id: user_id, user_name: username, user_mobile: user_mobile, user_email: user_email, order_id: order_id, order_time: order_time, delivery_address: element.order.delivery_address, order: e, payment_type: element.order.payment_method };
-                        this.today_orders.push(iind);
+                        this.today_total_orders.push(iind);
 
                       break;
 
@@ -250,33 +256,31 @@ export class AdminOrdersComponent implements OnInit {
           this.p_h_user_email = element.user_email;
           this.p_h_user_mobile = element.user_mobile;
           this.p_h_address = element.delivery_address;
+          this.p_h_time_slot = element.order.timeSlot;
           // this.p_h_num_times = element.order.numOfTimes;
           if (element.order.tab_one) {
             if (element.order.tab_one !== undefined || element.order.tab_one !== null) {
-              console.log(element.order.tab_one);
               this.p_h_order.push(element.order.tab_one.name);
               this.p_h_tab_one_times = element.order.tab_one.num_of_items;
+              this.p_h_one_time_slot = element.order.tab_one.time_slot;
             }
           }
           if (element.order.tab_two) {
             if (element.order.tab_two !== undefined || element.order.tab_two !== null) {
-              console.log(element.order.tab_two);
               this.p_h_order.push(element.order.tab_two.name);
               this.p_h_tab_two_times = element.order.tab_two.num_of_items;
+              this.p_h_two_time_slot = element.order.tab_two.time_slot;
             }
           }
           if (element.order.tab_three) {
             if (element.order.tab_three !== undefined || element.order.tab_three !== null) {
-              console.log(element.order.tab_three);
               this.p_h_order.push(element.order.tab_three.name);
               this.p_h_tab_three_times = element.order.tab_three.num_of_items;
+              this.p_h_three_time_slot = element.order.tab_three.time_slot;
             }
           }
-          console.log(this.p_h_order);
         }
       });
-
-
 
         break;
         case 'today_one':
@@ -292,6 +296,29 @@ export class AdminOrdersComponent implements OnInit {
             this.p_h_user_mobile = element.user_mobile;
             this.p_h_address = element.delivery_address;
             this.p_h_num_times = element.order.numOfTimes;
+            this.p_h_time_slot = element.order.timeSlot;
+            // console.log('kk' + element.order.numOfTimes);
+            element.order.menu.forEach(el => {
+              this.p_h_order.push(el);
+            });
+          }
+        });
+
+        break;
+        case 't_today_one':
+        this.today_active = false;
+
+        this.today_total_orders.forEach(element => {
+          console.log(element);
+          if (order_id === element.order_id) {
+            // console.log(element);
+            this.p_h_order_id = element.order_id;
+            this.p_h_user_name = element.user_name;
+            this.p_h_user_email = element.user_email;
+            this.p_h_user_mobile = element.user_mobile;
+            this.p_h_address = element.delivery_address;
+            this.p_h_num_times = element.order.numOfTimes;
+            this.p_h_time_slot = element.order.timeSlot;
             // console.log('kk' + element.order.numOfTimes);
             element.order.menu.forEach(el => {
               this.p_h_order.push(el);
@@ -313,6 +340,7 @@ export class AdminOrdersComponent implements OnInit {
             this.p_h_user_mobile = element.user_mobile;
             this.p_h_address = element.delivery_address;
             this.p_h_num_times = element.order.numOfTimes;
+            this.p_h_time_slot = element.order.timeSlot;
             // console.log('kk' + element.order.numOfTimes);
             element.order.menu.forEach(el => {
               this.p_h_order.push(el);
@@ -335,6 +363,7 @@ export class AdminOrdersComponent implements OnInit {
             this.p_h_user_mobile = element.user_mobile;
             this.p_h_address = element.delivery_address;
             this.p_h_num_times = element.order.numOfTimes;
+            this.p_h_time_slot = element.order.timeSlot;
             // console.log('kk' + element.order.numOfTimes);
             element.order.menu.forEach(el => {
               this.p_h_order.push(el);
@@ -356,6 +385,7 @@ export class AdminOrdersComponent implements OnInit {
             this.p_h_user_mobile = element.user_mobile;
             this.p_h_address = element.delivery_address;
             this.p_h_num_times = element.order.numOfTimes;
+            this.p_h_time_slot = element.order.timeSlot;
             // console.log('kk' + element.order.numOfTimes);
             element.order.menu.forEach(el => {
               this.p_h_order.push(el);
@@ -375,6 +405,7 @@ export class AdminOrdersComponent implements OnInit {
             this.p_h_user_mobile = element.user_mobile;
             this.p_h_address = element.delivery_address;
             this.p_h_num_times = element.order.numOfTimes;
+            this.p_h_time_slot = element.order.timeSlot;
             // console.log('kk' + element.order.numOfTimes);
             element.order.menu.forEach(el => {
               this.p_h_order.push(el);
@@ -395,6 +426,7 @@ export class AdminOrdersComponent implements OnInit {
             this.p_h_user_mobile = element.user_mobile;
             this.p_h_address = element.delivery_address;
             this.p_h_num_times = element.order.numOfTimes;
+            this.p_h_time_slot = element.order.timeSlot;
             element.order.menu.forEach(el => {
               this.p_h_order.push(el);
             });
@@ -405,8 +437,23 @@ export class AdminOrdersComponent implements OnInit {
       default:
         break;
     }
+    switch (this.p_h_time_slot) {
+      case 'slot_one':
+        this.p_h_time_slot = '12:00 PM - 12:45 PM';
+        break;
+      case 'slot_two':
+        this.p_h_time_slot = '12:45 PM - 1:30 PM';
+        break;
+      case 'slot_three':
+        this.p_h_time_slot = '1:30 PM - 2:15 PM';
+        break;
+      case 'slot_four':
+        this.p_h_time_slot = '2:15 PM - 3:00 PM';
+        break;
+      default:
+        break;
+    }
   }
-
   closedb() {
     $('.db').hide();
   }

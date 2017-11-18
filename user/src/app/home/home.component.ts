@@ -58,7 +58,8 @@ export class HomeComponent implements OnInit {
       const fLength = this.fullName.split(' ');
 
       if (fLength.length > 1) {
-        this.userName = this.fullName.split(' ').slice(0, -1).join(' ');
+        this.userName = this.fullName.split(' ').slice(0, -(this.fullName.split(' ').length - 1)).join(' ');
+        // this.userName = this.fullName.split(' ').slice(0, -1);
       }else {
         this.userName = this.fullName;
       }
@@ -98,7 +99,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/']);
     return false;
   }
-  public geoLocate(callback) {
+  public geoLocate() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.location = position.coords;
@@ -107,7 +108,6 @@ export class HomeComponent implements OnInit {
         if (this.location === undefined || this.location === null) {
         } else {
           this.authService.getLocation(this.lat, this.long).subscribe(res => {
-            console.log(res);
             this.address = res.results[0].formatted_address;
             this.locationEntry = this.address;
             if (this.address.includes('Madhapur')) {
@@ -186,11 +186,18 @@ export class HomeComponent implements OnInit {
 
   seeMenu() {
     // Address in this.locationEntry
-
     // alert(this.locationEntry);
-
     if (this.authService.loggedIn()) {
-      this.router.navigate(['/menu']);
+      this.authService.getUserAddressses(this.userId).subscribe(res => {
+        if (res.success) {
+          if (res.msg[0].address.length > 0) {
+            console.log('one address');
+            this.router.navigate(['/menu']);
+          }else {
+            this.geoLocate();
+          }
+        }
+      });
       // tslint:disable-next-line:max-line-length
       if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry === 'Madhapur' || this.locationEntry === 'madhapur' || this.locationEntry === 'Madapur' || this.locationEntry === 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur')) {
         localStorage.setItem('home_address', this.locationEntry);

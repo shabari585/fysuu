@@ -200,13 +200,13 @@
                     <label id="letter-label"><input type="checkbox" name="" id="" (change)='letterCheck($event)'> Wish to write a letter to beloved one? Will provide you an Inland Letter<b> (&#8377;5) </b> </label>
                     <div class="today-btns">
                         <!-- <button type="button" class="sc-ch-cancel-btn" (click)="tdClose()">CANCEL</button> -->
-                        <button type="button" class="sc-ch-add-btn" (click)="addTodayCartClicked()">ADD TO BASKET</button>
+                        <button type="button" class="sc-ch-add-btn" id="today-add-btn" (click)="addTodayCartClicked()">ADD TO BASKET</button>
                     </div>
                 </div>
             </div>
 
             <!-- Sch menu hover -->
-            <div class="sch-hover-menu-back">
+            <!-- <div class="sch-hover-menu-back">
                 <div class="sch-hover-core">
                     <i class="fa fa-times" aria-hidden="true" (click)="schHoverClose()"></i>
                     <label for="t-menu-select-slot" id="reg-name-label">Select Delivery Slot</label>
@@ -234,7 +234,7 @@
                         <button type="button" class="sc-ch-add-btn" (click)="addTodayCartClicked()">ADD TO BASKET</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
             <!-- Schedule menu section -->
             <div class="schedule-menu-back">
@@ -280,11 +280,11 @@
                                     <span class="sc-ch-num">{{numberOfItems}}</span>
                                     <button type="button" class="sc-ch-num-btn" (click)="incNumberOfItems()">+</button>
                                 </div>
-                                <h5 class="slot">Select Delivery Slot : </h5> 
+                                <!-- <h5 class="slot">Select Delivery Slot : </h5>  -->
                                 <div class="sch-slot-select-div">
                                     
                                     <select (change)=slotSelected($event) class="slot-select" id="sch-slot-select">
-                                    <option default selected disabled>Choose</option>
+                                    <option default selected disabled>Choose time slot</option>
                                     <option value="slot_one">12:00 PM - 12:45 PM</option>
                                     <option value="slot_two">12:45 PM - 01:30 PM</option>
                                     <option value="slot_three">01:30 PM - 02:15 PM</option>
@@ -337,6 +337,7 @@
                                     </div>
                                     </div>
                                     </div>
+                                    <h4 class="sc-ch-four-heads">Choose any four items from below categories</h4>
                                     <!-- Dry Curry -->
                                     <div *ngFor="let cat of categories">
                                     <div *ngIf="cat.name == 'Vegetarian'">
@@ -518,6 +519,7 @@
                                             </div>
                                             </div>
                                             </div>
+                                            <h4 class="sc-ch-four-heads">Choose any four items from below categories</h4>
                                             <!-- Dry Curry -->
                                             <div *ngFor="let cat of categories">
                                             <div *ngIf="cat.name == 'Vegetarian'">
@@ -698,6 +700,7 @@
                                             </div>
                                             </div>
                                             </div>
+                                            <h4 class="sc-ch-four-heads">Choose any four items from below categories</h4>
                                             <!-- Dry Curry -->
                                             <div *ngFor="let cat of categories">
                                             <div *ngIf="cat.name == 'Vegetarian'">
@@ -878,6 +881,7 @@
                                             </div>
                                             </div>
                                             </div>
+                                            <h4 class="sc-ch-four-heads">Choose any four items from below categories</h4>
                                             <!-- Dry Curry -->
                                             <div *ngFor="let cat of categories">
                                             <div *ngIf="cat.name == 'Vegetarian'">
@@ -1059,6 +1063,7 @@
                                             </div>
                                             </div>
                                             </div>
+                                            <h4 class="sc-ch-four-heads">Choose any four items from below categories</h4>
                                             <!-- Dry Curry -->
                                             <div *ngFor="let cat of categories">
                                             <div *ngIf="cat.name == 'Vegetarian'">

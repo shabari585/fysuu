@@ -185,6 +185,7 @@ a {
   border: 1px solid #eaeaea;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
+  padding-right: 130px;
 }
 
 .scroll-header .login-signup-trig-btn {

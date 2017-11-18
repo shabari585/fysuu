@@ -19,7 +19,7 @@
     <i class="fa fa-times" aria-hidden="true" (click)="mainClose()"></i>
     <h4>Let's get started!</h4>
     <!-- <label for="email" id="email-label">Email or Mobile</label><br> -->
-    <input type="text" name="email" id="email" [(ngModel)]='initialLoginInput' placeholder="Email or Mobile">
+    <input type="text" name="email" id="email" class="initial-login-input" [(ngModel)]='initialLoginInput' placeholder="Email or Mobile" (keydown)='keyupped($event)'>
     <p class="err"></p>
     <div class="ls-btns-div">
       <div class="ls-btns-core-div">
@@ -35,27 +35,27 @@
     <h4>We just need few more details</h4>
    
     <label for="reg-name" id="reg-name-label">Name</label>
-    <input type="text" name="reg-name" class="next-inputs" id="reg-name" [(ngModel)]='regNameInput' placeholder=""><br>
+    <input type="text" name="reg-name" class="next-inputs" id="reg-name" [(ngModel)]='regNameInput' placeholder="" (keydown)='keyupped($event)'><br>
     
 
     <label for="reg-email" id="reg-email-label">Email</label>
-    <input type="text" name="reg-email" class="next-inputs" id="reg-email" [(ngModel)]='regEmailInput' placeholder=""><br>
+    <input type="text" name="reg-email" class="next-inputs" id="reg-email" [(ngModel)]='regEmailInput' placeholder="" (keydown)='keyupped($event)'><br>
 
     <label for="reg-mobile" id="reg-mobile-label">Mobile Number</label>
       <input type="text" class="next-inputs" [(ngModel)]='regMobileInput'
-        name="reg-mobile" id="reg-mobile" placeholder="">
+        name="reg-mobile" id="reg-mobile" placeholder="" (keydown)='keyupped($event)'>
 
     <label for="reg-pwd" id="reg-pwd-label">Choose Password</label>
-    <input type="password" name="reg-pwd" class="next-inputs" [(ngModel)]='regPwdInput' id="reg-pwd" placeholder=""><br>
+    <input type="password" name="reg-pwd" class="next-inputs" [(ngModel)]='regPwdInput' id="reg-pwd" placeholder="" (keydown)='keyupped($event)'><br>
 
     <span class="otp-span"><label for="reg-otp" id="reg-otp-label">Enter OTP</label>
-    <input type="text" name="reg-otp" class="next-inputs"  [(ngModel)]='regOTPInput' id="reg-otp" (keyup)="otpKeyUp($event)" placeholder=""><br></span>
+    <input type="text" name="reg-otp" class="next-inputs"  [(ngModel)]='regOTPInput' id="reg-otp" (keyup)="otpKeyUp($event)" placeholder="" (keydown)='keyupped($event)'><br></span>
 
     <h5 id="reg-terms-agree">By continuing, you are accepting our <a routerLink='/terms' (click)='clickedOnTerms()'>Terms and Conditions</a></h5>
     <h5 class="resend-otp-txt" id="sign-resend-otp-text">
       <!-- You can resend otp in  seconds. -->
     </h5>
-    <h5 class="resend-otp-trig" id="sign-resend" (click)="retryOtp('signup')">RESEND OTP</h5>
+    <h5 class="resend-otp-trig" id="sign-resend"> If you haven't got OTP - <span (click)="retryOtp('fp')">RESEND OTP</span></h5>
 
     <p class="err"></p>
 
@@ -74,11 +74,11 @@
   <div class="email-input-div" id="login-input-div">
     <i class="fa fa-times" aria-hidden="true" (click)="mainClose()"></i>
     <h4>Welcome Back!</h4>
-    <label for="login-email" id="login-email-label">Email or Mobile</label>
-    <input type="text" name="login-email" class="next-inputs" id="login-email" [(ngModel)]='loginEmailInput' placeholder=""><br>
+    <label for="login-email" id="login-email-label" (keydown)='keyupped($event)'>Email or Mobile</label>
+    <input type="text" name="login-email" class="next-inputs" id="login-email" [(ngModel)]='loginEmailInput' placeholder="" (keydown)='keyupped($event)'><br>
 
     <label for="login-password" id="login-password-label">Password</label>
-    <input type="password" name="login-password" class="next-inputs" [(ngModel)]='loginPasswordInput' id="login-password" placeholder=""><br>
+    <input type="password" name="login-password" class="next-inputs" [(ngModel)]='loginPasswordInput' id="login-password" placeholder="" (keydown)='keyupped($event)'><br>
     <p class='forgot-pwd-trig' (click)="triggerForgotPwd()">Forgot Password?</p>
     <p class="login-err err"></p>
 
@@ -95,14 +95,14 @@
   <div class="email-input-div">
     <i class="fa fa-times" aria-hidden="true" (click)="mainClose()"></i>
     <h4>We have sent an OTP to {{mobileNumForfp}}</h4>
-    <input type="text" name="otp" id="otp" [(ngModel)]='fpOtpInput' placeholder="Enter OTP">
-    <input type="text" name="email" id="fpnewpwd" [(ngModel)]='fpNewPwd' placeholder="New Password">
-    <input type="text" name="email" id="cfpnewpwd" [(ngModel)]='cfpNewPwd' placeholder="Confirm New Password">
+    <input type="text" name="otp" id="otp" [(ngModel)]='fpOtpInput' placeholder="Enter OTP" (keydown)='keyupped($event)'>
+    <input type="password" name="email" id="fpnewpwd" [(ngModel)]='fpNewPwd' placeholder="New Password" (keydown)='keyupped($event)'>
+    <input type="password" name="email" id="cfpnewpwd" [(ngModel)]='cfpNewPwd' placeholder="Confirm New Password" (keydown)='keyupped($event)'>
 
     <h5 class="resend-otp-txt" id="fp-resend-otp-text">
       <!-- You can resend otp in  seconds. -->
     </h5>
-    <h5 class="resend-otp-trig" id="fp-resend" (click)="retryOtp('fp')"> If you haven't got OTP - <span>RESEND OTP</span></h5>
+    <h5 class="resend-otp-trig" id="fp-resend"> If you haven't got OTP - <span (click)="retryOtp('fp')">RESEND OTP</span></h5>
 
     <p class="fp-err err"></p>
     <div class="ls-btns-div">

@@ -573,8 +573,8 @@ label{
 
 
 .sc-ch-item img{
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
 }
 
 
@@ -745,7 +745,7 @@ label{
 .schedule-choose-core {
   position: relative;
   height: 95%;
-  width: 80%;
+  width: 70%;
   background-color: #fff;
   border-radius: 4px;
 }
@@ -793,11 +793,12 @@ label{
 
 .sc-ch-price {
   color: #888;
-  font-size: 80%;
+  font-size: 120%;
+  line-height: 0;
 }
 
 .sc-ch-price-num {
-  font-size: 200%;
+  font-size: 170%;
 }
 
 .sc-ch-num {
@@ -860,13 +861,22 @@ label{
 
 .sc-ch-mid-heads {
   font-weight: bold;
+  margin: 5px auto;
+}
+.sc-ch-four-heads {
+  font-weight: bold;
+  margin: 5px auto;
+  display: block;
+  margin: 3px auto;
+  font-size: 100%;
+  text-align: center;
 }
 
 .sc-ch-menu-divs {
   position: relative;
   display: block;
   overflow-x: scroll;
-  margin: 20px auto;
+  margin: 8px auto;
 }
 .sc-ch-menu-divs ul{
   display: flex;
@@ -898,7 +908,7 @@ label{
 }
 
 .sc-ch-menu-divs li .sc-ch-item img {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .sch-note-div {

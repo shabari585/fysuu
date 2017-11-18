@@ -1,4 +1,3 @@
-
 <header class="main-header visible-md visible-lg">
   <div class="container">
     <div class="main-logo pull-left" routerLink='/home'>
@@ -76,7 +75,7 @@
                   <div class="user-address-item">
                     <div class="user-address pull-left">
                       <div class="pull-left">
-                        <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)" checked>
+                        <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)">
                       </div>
                       <div class="pull-left address-lines">
                         <h5 class="address-lines-title">OFFICE ADDRESS {{i+1}}</h5>
@@ -85,7 +84,7 @@
                       <div class="clearfix"></div>
                     </div>
                     <div class="address-edit-div pull-right">
-                      <button type="button" id="edit-address" (click)='editAddress(i,address)'>Edit</button>
+                      <button type="button" class="edit-address" (click)='editAddress(i,address)'>Edit</button>
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -109,7 +108,7 @@
                       <div class="clearfix"></div>
                     </div>
                     <div class="address-edit-div pull-right">
-                      <button type="button" id="edit-address" (click)='editAddress(i,address)'>Edit</button>
+                      <button type="button" class="edit-address" (click)='editAddress(i,address)'>Edit</button>
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -148,19 +147,7 @@
               </select>
           </label>
           <br>
-          <!-- <label for="t-menu-select-times" id="reg-name-label">Select Quantity</label>
-          <label for="">
-              <select name="" id="t-menu-select-times" (change)='todayMenuTimesSelect($event)' [(ngModel)]="schTimes">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-              </select>
-          </label> -->
-          <!-- <label id="letter-label"><input type="checkbox" name="" id="" (change)='letterCheck($event)'> Wish to write a letter to beloved one? Will provide you an Inland Letter<b> (&#8377;5) </b> </label> -->
           <div class="today-btns">
-              <!-- <button type="button" class="sc-ch-cancel-btn" (click)="tdClose()">CANCEL</button> -->
               <button type="button" class="sc-ch-add-btn" (click)="addTodayCartClicked()">ADD TO BASKET</button>
           </div>
       </div>
@@ -184,7 +171,7 @@
         <div *ngIf="today_orders !=null">
           <div *ngIf="tab_one !=null">
             
-            <h6 class="delivery-on-statement" (click)="changeDets('tab_one')">Delivery today &nbsp; {{tab_one_time_slot}}</h6>
+            <h6 class="delivery-on-statement" (click)="changeDets('tab_one')">Delivery today &nbsp; {{tab_one_time_slot}}  <button type="button" class="d-edit-address" (click)="changeDets('tab_one')">Edit</button></h6>
             <!-- Today exists -->
               <div class="delivery-item">
   
@@ -217,7 +204,7 @@
           
           <div *ngIf="tab_two !=null">
             
-            <h6 class="delivery-on-statement">Delivery today &nbsp; {{tab_two_time_slot}}</h6>
+            <h6 class="delivery-on-statement">Delivery today &nbsp; {{tab_two_time_slot}} <button type="button" class="d-edit-address" (click)="changeDets('tab_two')">Edit</button></h6>
             <!-- Today exists -->
               <div class="delivery-item">
   
@@ -248,7 +235,7 @@
           
           <div *ngIf="tab_three !=null">
             
-            <h6 class="delivery-on-statement">Delivery today &nbsp; {{tab_three_time_slot}}</h6>
+            <h6 class="delivery-on-statement">Delivery today &nbsp; {{tab_three_time_slot}} <button type="button" class="d-edit-address" (click)="changeDets('tab_three')">Edit</button></h6>
             <!-- Today exists -->
               <div class="delivery-item">
   
@@ -283,7 +270,7 @@
         </div>
         <!-- Day one -->
         <div *ngIf="day_one_date !=null">
-          <h6 class="delivery-on-statement" (click)="changeDets('day_one')">Delivery on {{day_one_date}} &nbsp; {{day_one_slot}}</h6>
+          <h6 class="delivery-on-statement">Delivery on {{day_one_date}} &nbsp; {{day_one_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_one')">Edit</button></h6>
             <div class="delivery-item">
               <div class="delivery-item-left">
                 <div class="delivery-item-dets">
@@ -312,7 +299,7 @@
         </div>
         <!-- Day two -->
         <div *ngIf="day_two_date !=null">
-          <h6 class="delivery-on-statement" (click)="changeDets('day_two')">Delivery on {{day_two_date}} &nbsp; {{day_two_slot}}</h6>
+          <h6 class="delivery-on-statement">Delivery on {{day_two_date}} &nbsp; {{day_two_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_two')">Edit</button></h6>
           
             <div class="delivery-item">
               <div class="delivery-item-left">
@@ -343,7 +330,7 @@
         </div>
         <!-- Day three -->
         <div *ngIf="day_three_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_three_date}} &nbsp; {{day_three_slot}}</h6>
+          <h6 class="delivery-on-statement">Delivery on {{day_three_date}} &nbsp; {{day_three_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_three')">Edit</button></h6>
 
           
             <div class="delivery-item">
@@ -373,7 +360,7 @@
         </div>
         <!-- Day Four -->
         <div *ngIf="day_four_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_four_date}} &nbsp; {{day_four_slot}}</h6>
+          <h6 class="delivery-on-statement">Delivery on {{day_four_date}} &nbsp; {{day_four_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_four')">Edit</button></h6>
 
             <div class="delivery-item">
               <div class="delivery-item-left">
@@ -402,7 +389,7 @@
         </div>
         <!-- Day five -->
         <div *ngIf="day_five_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_five_date}} &nbsp; {{day_five_slot}}</h6>
+          <h6 class="delivery-on-statement">Delivery on {{day_five_date}} &nbsp; {{day_five_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_five')">Edit</button></h6>
 
             <div class="delivery-item">
               <div class="delivery-item-left">

@@ -84,10 +84,10 @@ export class CheckoutComponent implements OnInit {
   day_five_slot: string;
   day_six_slot: string;
 
-  slot_one = '12:00 - 12:45';
-  slot_two = '12:45 - 1:30';
-  slot_three = '1:30 - 2:15';
-  slot_four = '2:15 - 3';
+  slot_one = '12:00 PM - 12:45 PM';
+  slot_two = '12:45 PM - 1:30 PM';
+  slot_three = '1:30 PM - 2:15 PM';
+  slot_four = '2:15 PM - 3:00 PM';
 
   delivery_fee = 0;
   total_price: number;
@@ -189,7 +189,7 @@ export class CheckoutComponent implements OnInit {
     const fLength = this.fullName.split(' ');
 
     if (fLength.length > 1) {
-      this.userName = this.fullName.split(' ').slice(0, -1).join(' ');
+      this.userName = this.fullName.split(' ').slice(0, -(this.fullName.split(' ').length - 1)).join(' ');
     }else {
       this.userName = this.fullName;
     }
@@ -278,7 +278,6 @@ export class CheckoutComponent implements OnInit {
       if (res.success) {
         this.addresses = res.msg[0].address;
         if (this.addresses.length > 0) {
-          this.one_address = true;
           console.log('one address');
         }else {
           const addressd = {
@@ -301,6 +300,7 @@ export class CheckoutComponent implements OnInit {
     if (this.orders != null) {
       if (this.orders['day_one'] != null) {
         this.day_one_date = this.orders['day_one'].date;
+        this.day_one_date = this.datePipe.transform(this.day_one_date, 'EEE, MMM d');
         this.day_one_per_portion_price = this.orders['day_one'].perPortionPrice;
         this.day_one_total_price = this.orders['day_one'].totalPrice;
         this.day_one_num_items = this.orders['day_one'].numOfTimes;
@@ -324,6 +324,7 @@ export class CheckoutComponent implements OnInit {
       }
       if (this.orders['day_two'] != null) {
         this.day_two_date = this.orders['day_two'].date;
+        this.day_two_date = this.datePipe.transform(this.day_two_date, 'EEE, MMM d');
         this.day_two_per_portion_price = this.orders['day_two'].perPortionPrice;
         this.day_two_total_price = this.orders['day_two'].totalPrice;
         this.day_two_num_items = this.orders['day_two'].numOfTimes;
@@ -350,6 +351,7 @@ export class CheckoutComponent implements OnInit {
 
       if (this.orders['day_three'] != null) {
         this.day_three_date = this.orders['day_three'].date;
+        this.day_three_date = this.datePipe.transform(this.day_three_date, 'EEE, MMM d');
         this.day_three_per_portion_price = this.orders['day_three'].perPortionPrice;
         this.day_three_total_price = this.orders['day_three'].totalPrice;
         this.day_three_num_items = this.orders['day_three'].numOfTimes;
@@ -376,6 +378,7 @@ export class CheckoutComponent implements OnInit {
 
       if (this.orders['day_four'] != null) {
         this.day_four_date = this.orders['day_four'].date;
+        this.day_four_date = this.datePipe.transform(this.day_four_date, 'EEE, MMM d');
         this.day_four_per_portion_price = this.orders['day_four'].perPortionPrice;
         this.day_four_total_price = this.orders['day_four'].totalPrice;
         this.day_four_num_items = this.orders['day_four'].numOfTimes;
@@ -401,6 +404,7 @@ export class CheckoutComponent implements OnInit {
 
       if (this.orders['day_five'] != null) {
         this.day_five_date = this.orders['day_five'].date;
+        this.day_five_date = this.datePipe.transform(this.day_five_date, 'EEE, MMM d');
         this.day_five_per_portion_price = this.orders['day_five'].perPortionPrice;
         this.day_five_total_price = this.orders['day_five'].totalPrice;
         this.day_five_num_items = this.orders['day_five'].numOfTimes;
@@ -707,6 +711,9 @@ export class CheckoutComponent implements OnInit {
         // Minus the cost from total
         this.total_price = this.total_price - this.tab_one_total_price;
         this.total_to_pay = this.total_to_pay - this.tab_one_total_price;
+        // Update earned rewards
+        const rounded_num = Math.round(this.total_price / 10);
+        this.points_earned = rounded_num;
         break;
       case 'tab_two':
         // Remove tab_one from orders
@@ -717,7 +724,9 @@ export class CheckoutComponent implements OnInit {
         // Minus the cost from total
         this.total_price = this.total_price - this.tab_two_total_price;
         this.total_to_pay = this.total_to_pay - this.tab_two_total_price;
-
+         // Update earned rewards
+         const rounded_num1 = Math.round(this.total_price / 10);
+         this.points_earned = rounded_num1;
         break;
 
       case 'tab_three':
@@ -729,6 +738,8 @@ export class CheckoutComponent implements OnInit {
         // Minus the cost from total
         this.total_price = this.total_price - this.tab_three_total_price;
         this.total_to_pay = this.total_to_pay - this.tab_three_total_price;
+        const rounded_num2 = Math.round(this.total_price / 10);
+        this.points_earned = rounded_num2;
         break;
 
       case 'day_one':
@@ -740,6 +751,8 @@ export class CheckoutComponent implements OnInit {
         // Minus the cost from total
         this.total_price = this.total_price - this.day_one_total_price;
         this.total_to_pay = this.total_to_pay - this.day_one_total_price;
+        const rounded_num3 = Math.round(this.total_price / 10);
+        this.points_earned = rounded_num3;
         break;
 
       case 'day_two':
@@ -751,6 +764,8 @@ export class CheckoutComponent implements OnInit {
         // Minus the cost from total
         this.total_price = this.total_price - this.day_two_total_price;
         this.total_to_pay = this.total_to_pay - this.day_two_total_price;
+        const rounded_num4 = Math.round(this.total_price / 10);
+        this.points_earned = rounded_num4;
         break;
 
       case 'day_three':
@@ -762,6 +777,8 @@ export class CheckoutComponent implements OnInit {
         // Minus the cost from total
         this.total_price = this.total_price - this.day_three_total_price;
         this.total_to_pay = this.total_to_pay - this.day_three_total_price;
+        const rounded_num5 = Math.round(this.total_price / 10);
+        this.points_earned = rounded_num5;
         break;
 
       case 'day_four':
@@ -773,6 +790,8 @@ export class CheckoutComponent implements OnInit {
         // Minus the cost from total
         this.total_price = this.total_price - this.day_four_total_price;
         this.total_to_pay = this.total_to_pay - this.day_four_total_price;
+        const rounded_num6 = Math.round(this.total_price / 10);
+        this.points_earned = rounded_num6;
         break;
 
       case 'day_five':
@@ -784,6 +803,8 @@ export class CheckoutComponent implements OnInit {
         // Minus the cost from total
         this.total_price = this.total_price - this.day_five_total_price;
         this.total_to_pay = this.total_to_pay - this.day_five_total_price;
+        const rounded_num7 = Math.round(this.total_price / 10);
+        this.points_earned = rounded_num7;
         break;
 
       default:
