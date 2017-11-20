@@ -1610,6 +1610,13 @@ export class MenuComponent implements OnInit {
               $('.sch-err').html('');
             }, 5000);
           }else {
+            let day_one_check = false;
+            this.day_one_c_books.forEach(element => {
+              if (element.sub_name === 'Combo') {
+                day_one_check = true;
+              }
+            });
+            if (day_one_check) {
             $('.slot-select').selectedIndex = 1;
             $('.slot-select').css({'border-color': '#666'});
             $('.sch-err').html('');
@@ -1807,6 +1814,12 @@ export class MenuComponent implements OnInit {
                     setTimeout(function() {
                       $('.added-db').css({'display': 'none'});
                     }, 1000);
+              }else {
+                $('.sch-err').html('Please select one Combo item');
+                setTimeout(() => {
+                  $('.sch-err').html('');
+                }, 5000);
+              }
           }
         }
       break;
@@ -1825,10 +1838,18 @@ export class MenuComponent implements OnInit {
             $('.sch-err').html('');
           }, 5000);
         }else {
-          $('.slot-select').selectedIndex = 1;
-          $('.slot-select').css({'border-color': '#666'});
-          $('.sch-err').html('');
-        let today: object, day_one: object, day_two: object, day_three: object, day_four: object, day_five: object, day_six: object;
+          // console.log(this.day_two_c_books);
+          let day_two_check = false;
+          this.day_two_c_books.forEach(element => {
+            if (element.sub_name === 'Combo') {
+              day_two_check = true;
+            }
+          });
+          if (day_two_check) {
+            $('.slot-select').selectedIndex = 1;
+            $('.slot-select').css({'border-color': '#666'});
+            $('.sch-err').html('');
+          let today: object, day_one: object, day_two: object, day_three: object, day_four: object, day_five: object, day_six: object;
                 // Today's items are active
                 if (this.num_today_items > 0) {
                   // let date, menu, numOfTimes, totalPrice;
@@ -2022,8 +2043,14 @@ export class MenuComponent implements OnInit {
                 setTimeout(function() {
                   $('.added-db').css({'display': 'none'});
                 }, 1000);
+              }else {
+                $('.sch-err').html('Please select one Combo item');
+                setTimeout(() => {
+                  $('.sch-err').html('');
+                }, 5000);
+              }
+            }
           }
-        }
       break;
       case this.day_three_status:
             if (this.day_three_c_books.length < 5) {
@@ -2040,6 +2067,13 @@ export class MenuComponent implements OnInit {
                   $('.sch-err').html('');
                 }, 5000);
               }else {
+                let day_three_check = false;
+                this.day_three_c_books.forEach(element => {
+                  if (element.sub_name === 'Combo') {
+                    day_three_check = true;
+                  }
+                });
+                if (day_three_check) {
                 $('.slot-select').selectedIndex = 1;
                 $('.slot-select').css({'border-color': '#666'});
                 $('.sch-err').html('');
@@ -2237,6 +2271,12 @@ export class MenuComponent implements OnInit {
                       setTimeout(function() {
                         $('.added-db').css({'display': 'none'});
                       }, 1000);
+                    }else {
+                      $('.sch-err').html('Please select one Combo item');
+                      setTimeout(() => {
+                        $('.sch-err').html('');
+                      }, 5000);
+                    }
             }
           }
         break;
@@ -2255,6 +2295,13 @@ export class MenuComponent implements OnInit {
                   $('.sch-err').html('');
                 }, 5000);
               }else {
+              let day_four_check = false;
+              this.day_four_c_books.forEach(element => {
+                if (element.sub_name === 'Combo') {
+                  day_four_check = true;
+                }
+              });
+              if (day_four_check) {
               $('.slot-select').selectedIndex = 1;
               $('.slot-select').css({'border-color': '#666'});
               $('.sch-err').html('');
@@ -2452,6 +2499,13 @@ export class MenuComponent implements OnInit {
                       setTimeout(function() {
                         $('.added-db').css({'display': 'none'});
                       }, 1000);
+
+                    } else {
+                      $('.sch-err').html('Please select one Combo item');
+                      setTimeout(() => {
+                        $('.sch-err').html('');
+                      }, 5000);
+                  }
             }
           }
         break;
@@ -2470,6 +2524,13 @@ export class MenuComponent implements OnInit {
                   $('.sch-err').html('');
                 }, 5000);
               }else {
+                let day_five_check = false;
+                this.day_five_c_books.forEach(element => {
+                  if (element.sub_name === 'Combo') {
+                    day_five_check = true;
+                  }
+                });
+                if (day_five_check) {
                 $('.slot-select').selectedIndex = 1;
                 $('.slot-select').css({'border-color': '#666'});
                 $('.sch-err').html('');
@@ -2667,6 +2728,13 @@ export class MenuComponent implements OnInit {
                       setTimeout(function() {
                         $('.added-db').css({'display': 'none'});
                       }, 1000);
+
+                    }else {
+                      $('.sch-err').html('Please select one Combo item');
+                      setTimeout(() => {
+                        $('.sch-err').html('');
+                      }, 5000);
+                  }
             }
           }
         break;
