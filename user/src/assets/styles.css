@@ -184,13 +184,13 @@ input:active {
 
 #continue-btn,
 #accept-btn,
-#signup-btn,#otp-btn,#login-btn {
+#signup-btn,#otp-btn,#login-btn,#fp-continue-btn {
   border: none;
   background-color: #b2b2b2;
   color: #fff;
   margin-right: 20px;
 }
-#continue-btn,#login-btn,#otp-btn,#signup-btn{
+#continue-btn,#login-btn,#otp-btn,#signup-btn,#fp-continue-btn{
   width: 200px;
   margin-right: 0 !important;
 }

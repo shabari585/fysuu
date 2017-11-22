@@ -9,6 +9,7 @@
 .con-section .container{
     text-align: left !important;
     width: 90%;
+    color: #333;
 }
 ul{
     margin: 0;
@@ -17,6 +18,7 @@ ul{
 }
 li{
     margin: 0;
+    font-weight: 200;
 }
 h3,h4{
     position: relative;

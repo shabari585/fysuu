@@ -157,7 +157,16 @@ export class MenuComponent implements OnInit {
   companyName: string;
   userMobile: string;
   userId: string;
-  allOrders: any;
+  // allOrders : any;
+  allOrders = {
+    day_one: null,
+    day_two: null,
+    day_three: null,
+    day_four: null,
+    day_five: null,
+    day_six: null,
+    // notes: this.notesToChef
+  };
   roti_img = '../assets/menu-icons/roti_b.png';
   roti_r_img = '../assets/menu-icons/roti_r.png';
   rice_img = '../assets/menu-icons/rice_b.png';
@@ -755,10 +764,10 @@ export class MenuComponent implements OnInit {
       }
     });
     // Date li
-    $(document).on('click', '.calender-li', function(){
-      $('.calender-li').removeClass('selected-date-li');
-      $(this).addClass('selected-date-li');
-    });
+    // $(document).on('click', '.calender-li', function(){
+    //   $('.calender-li').removeClass('selected-date-li');
+    //   $(this).addClass('selected-date-li');
+    // });
     this.getMenuItems.getRotiItems().subscribe(rotiis => {
       if (rotiis.success) {
         this.rotiItems = rotiis.msg;
@@ -783,120 +792,1071 @@ export class MenuComponent implements OnInit {
   }
 
   // Load menu
-  loadDay(date) {
-    const pdate = this.datePipe.transform(date, 'fullDate');
-    if (pdate.includes('Sunday')) {
-      $('.sc-ch-db').css({'display': 'flex'});
-    }else {
-      $('.sc-ch-db').css({'display': 'none'});
-    }
-    // $('.slot-select').selectedIndex = 1;
-    // $('#sch-slot-select').selectedIndex = 1;
-    $('#sch-slot-select option:eq(0)').prop('selected', true);
-    // console.log(this.day_five_books);
-    switch (this.datePipe.transform(date, 'fullDate')) {
-      case this.p_day_one:
-        // Day one menu
-        this.menu_to_be_loaded = this.day_one_books;
-        $('.sc-ch-mid').hide();
-        $('#day-one-div').show();
-        this.numberOfItems = this.num_day_one_items;
-        this.place_holder_price = this.total_day_one_price;
-        // Update active day status
-        this.day_one_status = true;
-        this.day_two_status = false;
-        this.day_three_status = false;
-        this.day_four_status = false;
-        this.day_five_status = false;
-        this.day_six_status = false;
-        break;
-      case this.p_day_two:
-        // Day two menu
-        this.menu_to_be_loaded = this.day_two_books;
-        // Experiment
-        $('.sc-ch-mid').hide();
-        $('#day-two-div').show();
-
-        this.numberOfItems = this.num_day_two_items;
-        this.place_holder_price = this.total_day_two_price;
-        // Update active day status
-        this.day_one_status = false;
-        this.day_two_status = true;
-        this.day_three_status = false;
-        this.day_four_status = false;
-        this.day_five_status = false;
-        this.day_six_status = false;
-        break;
-      case this.p_day_three:
-        // Day three menu
-        this.menu_to_be_loaded = this.day_three_books;
-
-        // Experiment
-        $('.sc-ch-mid').hide();
-        $('#day-three-div').show();
-
-        this.numberOfItems = this.num_day_three_items;
-        this.place_holder_price = this.total_day_three_price;
-        // Update active day status
-        this.day_one_status = false;
-        this.day_two_status = false;
-        this.day_three_status = true;
-        this.day_four_status = false;
-        this.day_five_status = false;
-        this.day_six_status = false;
-        break;
-      case this.p_day_four:
-        // Day four menu
-          this.menu_to_be_loaded = this.day_four_books;
+  loadDay(date, origin) {
+    if (origin === 'btn_clicked') {
+      const pdate = this.datePipe.transform(date, 'fullDate');
+      if (pdate.includes('Sunday')) {
+        $('.sc-ch-db').css({'display': 'flex'});
+      }else {
+        $('.sc-ch-db').css({'display': 'none'});
+      }
+      $('#sch-slot-select option:eq(0)').prop('selected', true);
+      $('.calender-li').removeClass('selected-date-li');
+      switch (this.datePipe.transform(date, 'fullDate')) {
+        case this.p_day_one:
+          // Day one menu
+          $('#top-calender-li').addClass('selected-date-li');
+          this.menu_to_be_loaded = this.day_one_books;
+          $('.sc-ch-mid').hide();
+          $('#day-one-div').show();
+          this.numberOfItems = this.num_day_one_items;
+          this.place_holder_price = this.total_day_one_price;
+          // Update active day status
+          this.day_one_status = true;
+          this.day_two_status = false;
+          this.day_three_status = false;
+          this.day_four_status = false;
+          this.day_five_status = false;
+          this.day_six_status = false;
+          break;
+        case this.p_day_two:
+          $('#calender-two').addClass('selected-date-li');
+          // Day two menu
+          this.menu_to_be_loaded = this.day_two_books;
           // Experiment
           $('.sc-ch-mid').hide();
-          $('#day-four-div').show();
+          $('#day-two-div').show();
+          this.numberOfItems = this.num_day_two_items;
+          this.place_holder_price = this.total_day_two_price;
+          // Update active day status
+          this.day_one_status = false;
+          this.day_two_status = true;
+          this.day_three_status = false;
+          this.day_four_status = false;
+          this.day_five_status = false;
+          this.day_six_status = false;
+          break;
+        case this.p_day_three:
+          $('#calender-three').addClass('selected-date-li');
+          // Day three menu
+          this.menu_to_be_loaded = this.day_three_books;
+          // Experiment
+          $('.sc-ch-mid').hide();
+          $('#day-three-div').show();
+          this.numberOfItems = this.num_day_three_items;
+          this.place_holder_price = this.total_day_three_price;
+          // Update active day status
+          this.day_one_status = false;
+          this.day_two_status = false;
+          this.day_three_status = true;
+          this.day_four_status = false;
+          this.day_five_status = false;
+          this.day_six_status = false;
+          break;
+        case this.p_day_four:
+          $('#calender-four').addClass('selected-date-li');
+          // Day four menu
+            this.menu_to_be_loaded = this.day_four_books;
+            // Experiment
+            $('.sc-ch-mid').hide();
+            $('#day-four-div').show();
+            this.numberOfItems = this.num_day_four_items;
+            this.place_holder_price = this.total_day_four_price;
+          // Update active day status
+          this.day_one_status = false;
+          this.day_two_status = false;
+          this.day_three_status = false;
+          this.day_four_status = true;
+          this.day_five_status = false;
+          this.day_six_status = false;
+          break;
+        case this.p_day_five:
+          $('#calender-five').addClass('selected-date-li');
+          // Day five menu
+          // this.menu_to_be_loaded = this.day_five_books;
+           // Experiment
+           $('.sc-ch-mid').hide();
+           $('#day-five-div').show();
+          this.numberOfItems = this.num_day_five_items;
+          this.place_holder_price = this.total_day_five_price;
+          // Update active day status
+          this.day_one_status = false;
+          this.day_two_status = false;
+          this.day_three_status = false;
+          this.day_four_status = false;
+          this.day_five_status = true;
+          this.day_six_status = false;
+          break;
+        case this.p_day_six:
+          // Day six menu
+          this.menu_to_be_loaded = this.day_six_books;
+           // Experiment
+           $('.sc-ch-mid').hide();
+           $('#day-six-div').show();
+          this.numberOfItems = this.num_day_six_items;
+          this.place_holder_price = this.total_day_six_price;
+          // Update active day status
+          this.day_one_status = false;
+          this.day_two_status = false;
+          this.day_three_status = false;
+          this.day_four_status = false;
+          this.day_five_status = false;
+          this.day_six_status = true;
+          break;
+        default:
+          break;
+      }
+    }else {
+      switch (true) {
+        case this.day_one_status:
+          if (this.day_one_c_books.length > 1) {
+            if (this.allOrders['day_one'] == null) {
+              $('.sch-err').html('You have\'t added to cart');
+            }else {
+              const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
+              $('#sch-slot-select option:eq(0)').prop('selected', true);
+              $('.calender-li').removeClass('selected-date-li');
+              switch (this.datePipe.transform(date, 'fullDate')) {
+                case this.p_day_one:
+                  alert('p_day_one');
+                  $('#top-calender-li').addClass('selected-date-li');
+                  // Day one menu
+                  this.menu_to_be_loaded = this.day_one_books;
+                  $('.sc-ch-mid').hide();
+                  $('#day-one-div').show();
+                  this.numberOfItems = this.num_day_one_items;
+                  this.place_holder_price = this.total_day_one_price;
+                  // Update active day status
+                  this.day_one_status = true;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_two:
+                $('#calender-two').addClass('selected-date-li');
+                  // Day two menu
+                  this.menu_to_be_loaded = this.day_two_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-two-div').show();
+                  this.numberOfItems = this.num_day_two_items;
+                  this.place_holder_price = this.total_day_two_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = true;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_three:
+                  $('#calender-three').addClass('selected-date-li');
+                  // Day three menu
+                  this.menu_to_be_loaded = this.day_three_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-three-div').show();
+                  this.numberOfItems = this.num_day_three_items;
+                  this.place_holder_price = this.total_day_three_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = true;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_four:
+                    $('#calender-four').addClass('selected-date-li');
+                  // Day four menu
+                    this.menu_to_be_loaded = this.day_four_books;
+                    // Experiment
+                    $('.sc-ch-mid').hide();
+                    $('#day-four-div').show();
+                    this.numberOfItems = this.num_day_four_items;
+                    this.place_holder_price = this.total_day_four_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = true;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_five:
+                  $('#calender-five').addClass('selected-date-li');
+                  // Day five menu
+                  // this.menu_to_be_loaded = this.day_five_books;
+                   // Experiment
+                   $('.sc-ch-mid').hide();
+                   $('#day-five-div').show();
+                  this.numberOfItems = this.num_day_five_items;
+                  this.place_holder_price = this.total_day_five_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = true;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_six:
+                  // Day six menu
+                  this.menu_to_be_loaded = this.day_six_books;
+                   // Experiment
+                   $('.sc-ch-mid').hide();
+                   $('#day-six-div').show();
+                  this.numberOfItems = this.num_day_six_items;
+                  this.place_holder_price = this.total_day_six_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = true;
+                  break;
+                default:
+                  break;
+              }
+            }
+          } else {
+              const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
+              $('#sch-slot-select option:eq(0)').prop('selected', true);
+              $('.calender-li').removeClass('selected-date-li');
+              switch (this.datePipe.transform(date, 'fullDate')) {
+                case this.p_day_one:
+                  $('#top-calender-li').addClass('selected-date-li');
+                  // Day one menu
+                  this.menu_to_be_loaded = this.day_one_books;
+                  $('.sc-ch-mid').hide();
+                  $('#day-one-div').show();
+                  this.numberOfItems = this.num_day_one_items;
+                  this.place_holder_price = this.total_day_one_price;
+                  // Update active day status
+                  this.day_one_status = true;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_two:
+                  $('#calender-two').addClass('selected-date-li');
+                  // Day two menu
+                  this.menu_to_be_loaded = this.day_two_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-two-div').show();
+                  this.numberOfItems = this.num_day_two_items;
+                  this.place_holder_price = this.total_day_two_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = true;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_three:
+                  $('#calender-three').addClass('selected-date-li');
+                  // Day three menu
+                  this.menu_to_be_loaded = this.day_three_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-three-div').show();
+                  this.numberOfItems = this.num_day_three_items;
+                  this.place_holder_price = this.total_day_three_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = true;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_four:
+                  $('#calender-four').addClass('selected-date-li');
+                  // Day four menu
+                    this.menu_to_be_loaded = this.day_four_books;
+                    // Experiment
+                    $('.sc-ch-mid').hide();
+                    $('#day-four-div').show();
+                    this.numberOfItems = this.num_day_four_items;
+                    this.place_holder_price = this.total_day_four_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = true;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_five:
+                  $('#calender-five').addClass('selected-date-li');
+                  // Day five menu
+                  // this.menu_to_be_loaded = this.day_five_books;
+                   // Experiment
+                   $('.sc-ch-mid').hide();
+                   $('#day-five-div').show();
+                  this.numberOfItems = this.num_day_five_items;
+                  this.place_holder_price = this.total_day_five_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = true;
+                  this.day_six_status = false;
+                  break;
+                default:
+                  break;
+              }
+          }
+          break;
+        case this.day_two_status:
+          if (this.day_two_c_books.length > 1) {
+            if (this.allOrders['day_two'] == null) {
+              $('.sch-err').html('You have\'t added to cart');
+            }else {
+              const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
+              $('#sch-slot-select option:eq(0)').prop('selected', true);
+              $('.calender-li').removeClass('selected-date-li');
+              switch (this.datePipe.transform(date, 'fullDate')) {
+                case this.p_day_one:
+                  $('#top-calender-li').addClass('selected-date-li');
+                  // Day one menu
+                  this.menu_to_be_loaded = this.day_one_books;
+                  $('.sc-ch-mid').hide();
+                  $('#day-one-div').show();
+                  this.numberOfItems = this.num_day_one_items;
+                  this.place_holder_price = this.total_day_one_price;
+                  // Update active day status
+                  this.day_one_status = true;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_two:
+                  $('#calender-two').addClass('selected-date-li');
+                  // Day two menu
+                  this.menu_to_be_loaded = this.day_two_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-two-div').show();
+                  this.numberOfItems = this.num_day_two_items;
+                  this.place_holder_price = this.total_day_two_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = true;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_three:
+                  $('#calender-three').addClass('selected-date-li');
+                  // Day three menu
+                  this.menu_to_be_loaded = this.day_three_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-three-div').show();
+                  this.numberOfItems = this.num_day_three_items;
+                  this.place_holder_price = this.total_day_three_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = true;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_four:
+                    $('#calender-four').addClass('selected-date-li');
+                  // Day four menu
+                    this.menu_to_be_loaded = this.day_four_books;
+                    // Experiment
+                    $('.sc-ch-mid').hide();
+                    $('#day-four-div').show();
+                    this.numberOfItems = this.num_day_four_items;
+                    this.place_holder_price = this.total_day_four_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = true;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_five:
+                  $('#calender-five').addClass('selected-date-li');
+                  // Day five menu
+                  // this.menu_to_be_loaded = this.day_five_books;
+                   // Experiment
+                   $('.sc-ch-mid').hide();
+                   $('#day-five-div').show();
+                  this.numberOfItems = this.num_day_five_items;
+                  this.place_holder_price = this.total_day_five_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = true;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_six:
+                  $('#calender-six').addClass('selected-date-li');
+                  // Day six menu
+                  this.menu_to_be_loaded = this.day_six_books;
+                   // Experiment
+                   $('.sc-ch-mid').hide();
+                   $('#day-six-div').show();
+                  this.numberOfItems = this.num_day_six_items;
+                  this.place_holder_price = this.total_day_six_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = true;
+                  break;
+                default:
+                  break;
+              }
+            }
+          } else {
+              const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
+              $('#sch-slot-select option:eq(0)').prop('selected', true);
+              $('.calender-li').removeClass('selected-date-li');
+              switch (this.datePipe.transform(date, 'fullDate')) {
+                case this.p_day_one:
+                  $('#top-calender-li').addClass('selected-date-li');
+                  // Day one menu
+                  this.menu_to_be_loaded = this.day_one_books;
+                  $('.sc-ch-mid').hide();
+                  $('#day-one-div').show();
+                  this.numberOfItems = this.num_day_one_items;
+                  this.place_holder_price = this.total_day_one_price;
+                  // Update active day status
+                  this.day_one_status = true;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_two:
+                  $('#calender-two').addClass('selected-date-li');
+                  // Day two menu
+                  this.menu_to_be_loaded = this.day_two_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-two-div').show();
+                  this.numberOfItems = this.num_day_two_items;
+                  this.place_holder_price = this.total_day_two_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = true;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_three:
+                  $('#calender-three').addClass('selected-date-li');
+                  // Day three menu
+                  this.menu_to_be_loaded = this.day_three_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-three-div').show();
+                  this.numberOfItems = this.num_day_three_items;
+                  this.place_holder_price = this.total_day_three_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = true;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_four:
+                    $('#calender-four').addClass('selected-date-li');
+                  // Day four menu
+                    this.menu_to_be_loaded = this.day_four_books;
+                    // Experiment
+                    $('.sc-ch-mid').hide();
+                    $('#day-four-div').show();
+                    this.numberOfItems = this.num_day_four_items;
+                    this.place_holder_price = this.total_day_four_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = true;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_five:
+                  $('#calender-five').addClass('selected-date-li');
+                  // Day five menu
+                  // this.menu_to_be_loaded = this.day_five_books;
+                   // Experiment
+                   $('.sc-ch-mid').hide();
+                   $('#day-five-div').show();
+                  this.numberOfItems = this.num_day_five_items;
+                  this.place_holder_price = this.total_day_five_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = true;
+                  this.day_six_status = false;
+                  break;
+                default:
+                  break;
+              }
+          }
+        break;
+        case this.day_three_status:
+          if (this.day_three_c_books.length > 1) {
+            if (this.allOrders['day_three'] == null) {
+              $('.sch-err').html('You have\'t added to cart');
+            }else {
+              const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
+              $('#sch-slot-select option:eq(0)').prop('selected', true);
+              $('.calender-li').removeClass('selected-date-li');
+              switch (this.datePipe.transform(date, 'fullDate')) {
+                case this.p_day_one:
+                  $('#top-calender-li').addClass('selected-date-li');
+                  // Day one menu
+                  this.menu_to_be_loaded = this.day_one_books;
+                  $('.sc-ch-mid').hide();
+                  $('#day-one-div').show();
+                  this.numberOfItems = this.num_day_one_items;
+                  this.place_holder_price = this.total_day_one_price;
+                  // Update active day status
+                  this.day_one_status = true;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_two:
+                  $('#calender-two').addClass('selected-date-li');
+                  // Day two menu
+                  this.menu_to_be_loaded = this.day_two_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-two-div').show();
+                  this.numberOfItems = this.num_day_two_items;
+                  this.place_holder_price = this.total_day_two_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = true;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_three:
+                  $('#calender-three').addClass('selected-date-li');
+                  // Day three menu
+                  this.menu_to_be_loaded = this.day_three_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-three-div').show();
+                  this.numberOfItems = this.num_day_three_items;
+                  this.place_holder_price = this.total_day_three_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = true;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_four:
+                  $('#calender-four').addClass('selected-date-li');
+                  // Day four menu
+                    this.menu_to_be_loaded = this.day_four_books;
+                    // Experiment
+                    $('.sc-ch-mid').hide();
+                    $('#day-four-div').show();
+                    this.numberOfItems = this.num_day_four_items;
+                    this.place_holder_price = this.total_day_four_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = true;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_five:
+                  $('#calender-five').addClass('selected-date-li');
+                  // Day five menu
+                  // this.menu_to_be_loaded = this.day_five_books;
+                   // Experiment
+                   $('.sc-ch-mid').hide();
+                   $('#day-five-div').show();
+                  this.numberOfItems = this.num_day_five_items;
+                  this.place_holder_price = this.total_day_five_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = true;
+                  this.day_six_status = false;
+                  break;
+                default:
+                  break;
+              }
+            }
+          } else {
 
-          this.numberOfItems = this.num_day_four_items;
-          this.place_holder_price = this.total_day_four_price;
-        // Update active day status
-        this.day_one_status = false;
-        this.day_two_status = false;
-        this.day_three_status = false;
-        this.day_four_status = true;
-        this.day_five_status = false;
-        this.day_six_status = false;
+          }
         break;
-      case this.p_day_five:
-        // Day five menu
-        // this.menu_to_be_loaded = this.day_five_books;
-         // Experiment
-         $('.sc-ch-mid').hide();
-         $('#day-five-div').show();
+        case this.day_four_status:
+          if (this.day_four_c_books.length > 1) {
+            if (this.allOrders['day_four'] == null) {
+              $('.sch-err').html('You have\'t added to cart');
+            }else {
+              const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
+              $('#sch-slot-select option:eq(0)').prop('selected', true);
+              $('.calender-li').removeClass('selected-date-li');
+              switch (this.datePipe.transform(date, 'fullDate')) {
+                case this.p_day_one:
+                  $('#top-calender-li').addClass('selected-date-li');
+                  // Day one menu
+                  this.menu_to_be_loaded = this.day_one_books;
+                  $('.sc-ch-mid').hide();
+                  $('#day-one-div').show();
+                  this.numberOfItems = this.num_day_one_items;
+                  this.place_holder_price = this.total_day_one_price;
+                  // Update active day status
+                  this.day_one_status = true;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_two:
+                  $('#calender-two').addClass('selected-date-li');
+                  // Day two menu
+                  this.menu_to_be_loaded = this.day_two_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-two-div').show();
+                  this.numberOfItems = this.num_day_two_items;
+                  this.place_holder_price = this.total_day_two_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = true;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_three:
+                  $('#calender-three').addClass('selected-date-li');
+                  // Day three menu
+                  this.menu_to_be_loaded = this.day_three_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-three-div').show();
+                  this.numberOfItems = this.num_day_three_items;
+                  this.place_holder_price = this.total_day_three_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = true;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_four:
+                  $('#calender-four').addClass('selected-date-li');
+                  // Day four menu
+                    this.menu_to_be_loaded = this.day_four_books;
+                    // Experiment
+                    $('.sc-ch-mid').hide();
+                    $('#day-four-div').show();
+                    this.numberOfItems = this.num_day_four_items;
+                    this.place_holder_price = this.total_day_four_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = true;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_five:
+                $('#calender-five').addClass('selected-date-li');
+                  // Day five menu
+                  // this.menu_to_be_loaded = this.day_five_books;
+                   // Experiment
+                   $('.sc-ch-mid').hide();
+                   $('#day-five-div').show();
+                  this.numberOfItems = this.num_day_five_items;
+                  this.place_holder_price = this.total_day_five_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = true;
+                  this.day_six_status = false;
+                  break;
+                default:
+                  break;
+              }
+            }
+          } else {
+              const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
+              $('#sch-slot-select option:eq(0)').prop('selected', true);
+              $('.calender-li').removeClass('selected-date-li');
+              switch (this.datePipe.transform(date, 'fullDate')) {
+                case this.p_day_one:
+                  $('#top-calender-li').addClass('selected-date-li');
+                  // Day one menu
+                  this.menu_to_be_loaded = this.day_one_books;
+                  $('.sc-ch-mid').hide();
+                  $('#day-one-div').show();
+                  this.numberOfItems = this.num_day_one_items;
+                  this.place_holder_price = this.total_day_one_price;
+                  // Update active day status
+                  this.day_one_status = true;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_two:
+                $('#calender-two').addClass('selected-date-li');
+                  // Day two menu
+                  this.menu_to_be_loaded = this.day_two_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-two-div').show();
+                  this.numberOfItems = this.num_day_two_items;
+                  this.place_holder_price = this.total_day_two_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = true;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_three:
+                $('#calender-three').addClass('selected-date-li');
+                  // Day three menu
+                  this.menu_to_be_loaded = this.day_three_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-three-div').show();
+                  this.numberOfItems = this.num_day_three_items;
+                  this.place_holder_price = this.total_day_three_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = true;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_four:
+                $('#calender-four').addClass('selected-date-li');
+                  // Day four menu
+                    this.menu_to_be_loaded = this.day_four_books;
+                    // Experiment
+                    $('.sc-ch-mid').hide();
+                    $('#day-four-div').show();
+                    this.numberOfItems = this.num_day_four_items;
+                    this.place_holder_price = this.total_day_four_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = true;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_five:
+                $('#calender-five').addClass('selected-date-li');
+                  // Day five menu
+                  // this.menu_to_be_loaded = this.day_five_books;
+                   // Experiment
+                   $('.sc-ch-mid').hide();
+                   $('#day-five-div').show();
+                  this.numberOfItems = this.num_day_five_items;
+                  this.place_holder_price = this.total_day_five_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = true;
+                  this.day_six_status = false;
+                  break;
+                default:
+                  break;
+              }
+          }
+        break;
+        case this.day_five_status:
+          if (this.day_five_c_books.length > 1) {
+            if (this.allOrders['day_five'] == null) {
+              $('.sch-err').html('You have\'t added to cart');
+            }else {
+              const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
+              $('#sch-slot-select option:eq(0)').prop('selected', true);
+              $('.calender-li').removeClass('selected-date-li');
+              switch (this.datePipe.transform(date, 'fullDate')) {
+                case this.p_day_one:
+                  $('#top-calender-li').addClass('selected-date-li');
+                  // Day one menu
+                  this.menu_to_be_loaded = this.day_one_books;
+                  $('.sc-ch-mid').hide();
+                  $('#day-one-div').show();
+                  this.numberOfItems = this.num_day_one_items;
+                  this.place_holder_price = this.total_day_one_price;
+                  // Update active day status
+                  this.day_one_status = true;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_two:
+                  $('#calender-two').addClass('selected-date-li');
+                  // Day two menu
+                  this.menu_to_be_loaded = this.day_two_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-two-div').show();
+                  this.numberOfItems = this.num_day_two_items;
+                  this.place_holder_price = this.total_day_two_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = true;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_three:
+                  $('#calender-three').addClass('selected-date-li');
+                  // Day three menu
+                  this.menu_to_be_loaded = this.day_three_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-three-div').show();
+                  this.numberOfItems = this.num_day_three_items;
+                  this.place_holder_price = this.total_day_three_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = true;
+                  this.day_four_status = false;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_four:
+                    $('#calender-four').addClass('selected-date-li');
+                  // Day four menu
+                    this.menu_to_be_loaded = this.day_four_books;
+                    // Experiment
+                    $('.sc-ch-mid').hide();
+                    $('#day-four-div').show();
+                    this.numberOfItems = this.num_day_four_items;
+                    this.place_holder_price = this.total_day_four_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = true;
+                  this.day_five_status = false;
+                  this.day_six_status = false;
+                  break;
+                case this.p_day_five:
+                  $('#calender-five').addClass('selected-date-li');
+                  // Day five menu
+                  // this.menu_to_be_loaded = this.day_five_books;
+                   // Experiment
+                   $('.sc-ch-mid').hide();
+                   $('#day-five-div').show();
+                  this.numberOfItems = this.num_day_five_items;
+                  this.place_holder_price = this.total_day_five_price;
+                  // Update active day status
+                  this.day_one_status = false;
+                  this.day_two_status = false;
+                  this.day_three_status = false;
+                  this.day_four_status = false;
+                  this.day_five_status = true;
+                  this.day_six_status = false;
+                  break;
+                default:
+                  break;
+              }
+            }
+          } else {
 
-        this.numberOfItems = this.num_day_five_items;
-        this.place_holder_price = this.total_day_five_price;
-        // Update active day status
-        this.day_one_status = false;
-        this.day_two_status = false;
-        this.day_three_status = false;
-        this.day_four_status = false;
-        this.day_five_status = true;
-        this.day_six_status = false;
+            const pdate = this.datePipe.transform(date, 'fullDate');
+            if (pdate.includes('Sunday')) {
+              $('.sc-ch-db').css({'display': 'flex'});
+            }else {
+              $('.sc-ch-db').css({'display': 'none'});
+            }
+            $('#sch-slot-select option:eq(0)').prop('selected', true);
+            $('.calender-li').removeClass('selected-date-li');
+            switch (this.datePipe.transform(date, 'fullDate')) {
+              case this.p_day_one:
+                $('#top-calender-li').addClass('selected-date-li');
+                // Day one menu
+                this.menu_to_be_loaded = this.day_one_books;
+                $('.sc-ch-mid').hide();
+                $('#day-one-div').show();
+                this.numberOfItems = this.num_day_one_items;
+                this.place_holder_price = this.total_day_one_price;
+                // Update active day status
+                this.day_one_status = true;
+                this.day_two_status = false;
+                this.day_three_status = false;
+                this.day_four_status = false;
+                this.day_five_status = false;
+                this.day_six_status = false;
+                break;
+              case this.p_day_two:
+                $('#calender-two').addClass('selected-date-li');
+                // Day two menu
+                this.menu_to_be_loaded = this.day_two_books;
+                // Experiment
+                $('.sc-ch-mid').hide();
+                $('#day-two-div').show();
+                this.numberOfItems = this.num_day_two_items;
+                this.place_holder_price = this.total_day_two_price;
+                // Update active day status
+                this.day_one_status = false;
+                this.day_two_status = true;
+                this.day_three_status = false;
+                this.day_four_status = false;
+                this.day_five_status = false;
+                this.day_six_status = false;
+                break;
+              case this.p_day_three:
+                $('#calender-three').addClass('selected-date-li');
+                // Day three menu
+                this.menu_to_be_loaded = this.day_three_books;
+                // Experiment
+                $('.sc-ch-mid').hide();
+                $('#day-three-div').show();
+                this.numberOfItems = this.num_day_three_items;
+                this.place_holder_price = this.total_day_three_price;
+                // Update active day status
+                this.day_one_status = false;
+                this.day_two_status = false;
+                this.day_three_status = true;
+                this.day_four_status = false;
+                this.day_five_status = false;
+                this.day_six_status = false;
+                break;
+              case this.p_day_four:
+                $('#calender-four').addClass('selected-date-li');
+                // Day four menu
+                  this.menu_to_be_loaded = this.day_four_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-four-div').show();
+                  this.numberOfItems = this.num_day_four_items;
+                  this.place_holder_price = this.total_day_four_price;
+                // Update active day status
+                this.day_one_status = false;
+                this.day_two_status = false;
+                this.day_three_status = false;
+                this.day_four_status = true;
+                this.day_five_status = false;
+                this.day_six_status = false;
+                break;
+              case this.p_day_five:
+                $('#calender-five').addClass('selected-date-li');
+                // Day five menu
+                // this.menu_to_be_loaded = this.day_five_books;
+                 // Experiment
+                 $('.sc-ch-mid').hide();
+                 $('#day-five-div').show();
+                this.numberOfItems = this.num_day_five_items;
+                this.place_holder_price = this.total_day_five_price;
+                // Update active day status
+                this.day_one_status = false;
+                this.day_two_status = false;
+                this.day_three_status = false;
+                this.day_four_status = false;
+                this.day_five_status = true;
+                this.day_six_status = false;
+                break;
+              default:
+                break;
+            }
+
+          }
         break;
-      case this.p_day_six:
-        // Day six menu
-        this.menu_to_be_loaded = this.day_six_books;
-         // Experiment
-         $('.sc-ch-mid').hide();
-         $('#day-six-div').show();
-        this.numberOfItems = this.num_day_six_items;
-        this.place_holder_price = this.total_day_six_price;
-        // Update active day status
-        this.day_one_status = false;
-        this.day_two_status = false;
-        this.day_three_status = false;
-        this.day_four_status = false;
-        this.day_five_status = false;
-        this.day_six_status = true;
-        break;
-      default:
-        break;
+        default:
+          break;
+      }
     }
   }
 
@@ -1597,7 +2557,7 @@ export class MenuComponent implements OnInit {
     switch (true) {
       case this.day_one_status:
         if (this.day_one_c_books.length < 5) {
-          $('.sch-err').html('Please select atleast 4 items');
+          $('.sch-err').html('Please select atleast 5 items');
           setTimeout(() => {
             $('.sch-err').html('');
           }, 5000);
@@ -1825,7 +2785,7 @@ export class MenuComponent implements OnInit {
       break;
       case this.day_two_status:
         if (this.day_two_c_books.length < 5) {
-          $('.sch-err').html('Please select atleast 4 items');
+          $('.sch-err').html('Please select atleast 5 items');
           setTimeout(() => {
             $('.sch-err').html('');
           }, 5000);
@@ -2054,7 +3014,7 @@ export class MenuComponent implements OnInit {
       break;
       case this.day_three_status:
             if (this.day_three_c_books.length < 5) {
-              $('.sch-err').html('Please select atleast 4 items');
+              $('.sch-err').html('Please select atleast 5 items');
               setTimeout(() => {
                 $('.sch-err').html('');
               }, 5000);
@@ -2282,7 +3242,7 @@ export class MenuComponent implements OnInit {
         break;
       case this.day_four_status:
             if (this.day_four_c_books.length < 5) {
-              $('.sch-err').html('Please select atleast 4 items');
+              $('.sch-err').html('Please select atleast 5 items');
               setTimeout(() => {
                 $('.sch-err').html('');
               }, 5000);
@@ -2511,7 +3471,7 @@ export class MenuComponent implements OnInit {
         break;
       case this.day_five_status:
             if (this.day_five_c_books.length < 5) {
-              $('.sch-err').html('Please select atleast 4 items');
+              $('.sch-err').html('Please select atleast 5 items');
               setTimeout(() => {
                 $('.sch-err').html('');
               }, 5000);
@@ -2754,17 +3714,15 @@ export class MenuComponent implements OnInit {
     return false;
   }
   schMenuBtn() {
-    $('.calender-li').removeClass('selected-date-li');
-    $('#top-calender-li').addClass('selected-date-li');
     if (this.authService.loggedIn() === true) {
+      this.place_holder_price = this.total_today_price;
+      this.loadDay(this.day_one, 'btn_clicked');
       this.day_one_status = true;
       this.day_two_status = false;
       this.day_three_status = false;
       this.day_four_status = false;
       this.day_five_status = false;
       this.day_six_status = false;
-      this.place_holder_price = this.total_today_price;
-      this.loadDay(this.day_one);
 
       $('.schedule-menu-back').css({ 'display': 'flex' });
       $('.schedule-choose-core').show();
@@ -2882,7 +3840,7 @@ export class MenuComponent implements OnInit {
     $('#t-menu-select-slot').css({'border-color': 'rgba(0,0,0,.2)'});
     switch (true) {
       case this.tab_one_status:
-        if (this.today_tab_one_slot !== null || this.today_tab_one_slot !== undefined) {
+        if (this.today_tab_one_slot !== null && this.today_tab_one_slot !== undefined) {
           this.tab_one_total_price = this.num_tab_one_items * this.tab_one_cost;
           // Add to orders
           this.today_tab_one_books = {
@@ -2916,7 +3874,7 @@ export class MenuComponent implements OnInit {
         }
         break;
       case this.tab_two_status:
-        if (this.today_tab_two_slot !== null || this.today_tab_two_slot !== undefined) {
+        if (this.today_tab_two_slot !== null && this.today_tab_two_slot !== undefined) {
 
           this.tab_two_total_price = this.num_tab_two_items * this.tab_two_cost;
 
@@ -2951,7 +3909,7 @@ export class MenuComponent implements OnInit {
         }
         break;
       case this.tab_three_status:
-        if (this.today_tab_three_slot !== null || this.today_tab_three_slot !== undefined) {
+        if (this.today_tab_three_slot !== null && this.today_tab_three_slot !== undefined) {
 
           this.tab_three_total_price = this.num_tab_three_items * this.tab_three_cost;
           // Add to orders
@@ -3040,6 +3998,9 @@ export class MenuComponent implements OnInit {
     this.num_tab_one_items = 0;
     this.num_tab_two_items = 0;
     this.num_tab_three_items = 0;
+    this.today_tab_one_slot = null;
+    this.today_tab_two_slot = null;
+    this.today_tab_three_slot = null;
   }
 
   navToChekout() {

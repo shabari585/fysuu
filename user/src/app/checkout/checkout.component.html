@@ -102,7 +102,7 @@
                         <input type="radio" name="check_address" value="{{address}}" (change)="addressChecked($event)">
                       </div>
                       <div class="pull-left address-lines">
-                        <h5 class="address-lines-title">Address {{i+1}}</h5>
+                        <h5 class="address-lines-title">OFFICE ADDRESS {{i+1}}</h5>
                         {{address}}
                       </div>
                       <div class="clearfix"></div>
@@ -284,7 +284,7 @@
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                  <button class="minus-btn" (click)="removeDate('day_one')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_one_per_portion_price}}.00 </span> </h5>
+                  <button class="minus-btn" (click)="removeDate('day_one')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_one_per_portion_price}}.00 </span> x {{ day_one_num_items }} </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
@@ -314,7 +314,7 @@
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                  <button class="minus-btn" (click)="removeDate('day_two')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_two_per_portion_price}}.00 </span> </h5>
+                  <button class="minus-btn" (click)="removeDate('day_two')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_two_per_portion_price}}.00 </span> x {{ day_two_num_items }} </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
@@ -346,7 +346,7 @@
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                  <button class="minus-btn" (click)="removeDate('day_three')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_three_per_portion_price}}.00 </span> </h5>
+                  <button class="minus-btn" (click)="removeDate('day_three')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_three_per_portion_price}}.00 </span> x {{ day_three_num_items }} </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
@@ -375,7 +375,7 @@
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                  <button class="minus-btn" (click)="removeDate('day_four')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_four_per_portion_price}}.00 </span> </h5>
+                  <button class="minus-btn" (click)="removeDate('day_four')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_four_per_portion_price}}.00 </span> x {{ day_four_num_items }} </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">
@@ -404,7 +404,7 @@
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
-                  <button class="minus-btn" (click)="removeDate('day_five')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_five_per_portion_price}}.00 </span> </h5>
+                  <button class="minus-btn" (click)="removeDate('day_five')"> <i class="fa fa-minus" aria-hidden="true"></i> </button><h5 class="delivery-item-price">&#8377;<span class="item-cost-number"> {{day_five_per_portion_price}}.00 </span> x {{ day_five_num_items }} </h5>
                 </div>
                 <!-- Delivery item price -->
                 <div class="price-div">

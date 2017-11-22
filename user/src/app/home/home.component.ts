@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   lat: number;
   long: number;
   address: string;
-  // give_menu_permission= false;
   userEmail: string;
   userName: string;
   fullName: string;
@@ -26,6 +25,8 @@ export class HomeComponent implements OnInit {
   userId: string;
 
   basket_num: number;
+
+  display_error = 'We currently do not deliver in your area. We currently deliver in or around Madhapur.';
 
 
   constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService) { }
@@ -41,7 +42,6 @@ export class HomeComponent implements OnInit {
     // tslint:disable-next-line:radix
     this.basket_num = parseInt(localStorage.getItem('basket_number'));
     if (this.basket_num === undefined || this.basket_num === null || this.basket_num === 0 || isNaN(this.basket_num) === true) {
-      // redirect to menu
       this.basket_num = 0;
     }else {
     }
@@ -59,7 +59,6 @@ export class HomeComponent implements OnInit {
 
       if (fLength.length > 1) {
         this.userName = this.fullName.split(' ').slice(0, -(this.fullName.split(' ').length - 1)).join(' ');
-        // this.userName = this.fullName.split(' ').slice(0, -1);
       }else {
         this.userName = this.fullName;
       }
@@ -89,11 +88,9 @@ export class HomeComponent implements OnInit {
   public gotoHowitWorks() {
     $('html, body').animate({ scrollTop: $('.how-it-works-div').offset().top - 70 }, 1000);
   }
-
   gotoConcept() {
     $('html, body').animate({ scrollTop: $('.concept-div').offset().top - 70 }, 1000);
   }
-
   onLogoutClick() {
     this.authService.logout();
     this.router.navigate(['/']);
@@ -175,6 +172,7 @@ export class HomeComponent implements OnInit {
                 // console.log('not logged in');
               }
               this.locationEntry = this.address;
+              this.display_error = 'We currently do not deliver in your area. We currently deliver in or around Madhapur.';
               $('.location-warning-div').show();
             }
           });
@@ -186,7 +184,6 @@ export class HomeComponent implements OnInit {
 
   seeMenu() {
     // Address in this.locationEntry
-    // alert(this.locationEntry);
     if (this.authService.loggedIn()) {
       this.authService.getUserAddressses(this.userId).subscribe(res => {
         if (res.success) {
@@ -230,12 +227,13 @@ export class HomeComponent implements OnInit {
         }
       } else {
         this.locationEntry = this.address;
+        this.display_error = 'Please enter your delivery location to view menu.';
         $('.location-warning-div').show();
         // Remove later
         this.router.navigate(['/menu']);
       }
     }else {
-      if (this.locationEntry !== undefined) {
+      if (this.locationEntry !== undefined && this.locationEntry !== null && this.locationEntry !== '') {
         // tslint:disable-next-line:max-line-length
         if (this.locationEntry.includes('Madhapur') || this.locationEntry.includes('madhapur') || this.locationEntry === 'Madhapur' || this.locationEntry === 'madhapur' || this.locationEntry === 'Madapur' || this.locationEntry === 'madapur' || this.locationEntry.includes('Madapur') || this.locationEntry.includes('madapur') ) {
           localStorage.setItem('home_address', this.locationEntry);
@@ -269,20 +267,19 @@ export class HomeComponent implements OnInit {
           }
         } else {
           this.locationEntry = this.address;
+          this.display_error = 'We currently do not deliver in your area. We currently deliver in or around Madhapur.';
           $('.location-warning-div').show();
 
           // Remove later
           this.router.navigate(['/menu']);
         }
       }else {
-        if (!this.authService.loggedIn()) {
-          if (this.locationEntry == null || this.locationEntry === undefined || this.locationEntry === '') {
-            // Do nothing
-          }else {
-            this.router.navigate(['/menu']);
+          if (this.locationEntry === null || this.locationEntry === undefined || this.locationEntry === '') {
+            // Show Error
+            this.display_error = 'Please enter your delivery location to view menu.';
+            $('.location-warning-div').show();
           }
           // this.appComponent.loginSignupTrigger();
-        }
       }
     }
 

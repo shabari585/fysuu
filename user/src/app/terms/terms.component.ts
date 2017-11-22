@@ -20,8 +20,6 @@ export class TermsComponent implements OnInit {
   userMobile: string;
   userId: string;
   basket_num: number;
-  today_one = moment();
-  dateForHeader: string;
 
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService, private datePipe: DatePipe) { }
@@ -33,9 +31,6 @@ export class TermsComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
-
-    this.dateForHeader = this.datePipe.transform(this.today_one, 'EEE, MMM d');
-
     this.title.setTitle('Terms - Fysu');
 
     // tslint:disable-next-line:radix

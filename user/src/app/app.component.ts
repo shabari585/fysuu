@@ -50,6 +50,10 @@ export class AppComponent implements OnInit {
   cfpNewPwd: string;
   mobileNumForfp: string;
   signUpResendTime: number;
+  resendotpinterval;
+  fpresendotpInterval;
+  sretryOtp;
+  fpretryOtp;
 
   // tslint:disable-next-line:max-line-length
   constructor(private title: Title, private router: Router, private validate: ValidateService, private authService: AuthService, private http: Http, private datePipe: DatePipe) { }
@@ -62,7 +66,6 @@ export class AppComponent implements OnInit {
 
       // Mobile Menu
       $('.mob-menu-trig-btn').click(function(){
-        // alert('al');
         const mob_menu_offest = $('.mob-menu').offset().left;
         if (mob_menu_offest < 0) {
             // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'50vw' },200);
@@ -73,7 +76,6 @@ export class AppComponent implements OnInit {
         }
       });
       $('.mob-menu').click(function() {
-        alert('g');
         const mob_menu_offest = $('.mob-menu').offset().left;
         if (mob_menu_offest < 0) {
             // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'50vw' },200);
@@ -89,7 +91,6 @@ export class AppComponent implements OnInit {
     if (this.basket_num === undefined || this.basket_num == null || this.basket_num === 0 || isNaN(this.basket_num) === true) {
       // redirect to menu
       this.basket_num = 0;
-      // alert('no');
     }else {
       // this.basket_num;
     }
@@ -255,7 +256,13 @@ export class AppComponent implements OnInit {
             // Mobile number exists
             $('#next-login-fixed-dark-cover').css({ 'display': 'flex' });
             $('#login-password').focus();
-            $('#login-email').keyup(function(){
+            $('#login-password').keyup(function(e){
+              const inp = $(this).val();
+              if (inp.length > 5) {
+                $('#login-btn').css({'background-color': '#6DA942'});
+              }else {
+                $('#login-btn').css({'background-color': '#b2b2b2'});
+              }
             });
           } else {
             this.regMobileInput = this.initialLoginInput;
@@ -359,9 +366,13 @@ export class AppComponent implements OnInit {
         }
       }
     }else {
-      $('.err').html('All fields are required');
-      if (this.validate.validateInput(loginEmailInput)) {
+      if (!this.validate.validateInput(loginEmailInput)) {
         $('#login-email').css({'border-color': '#fa0000'});
+        $('.err').html('Please enter a valid email');
+      }
+      if (!this.validate.validateInput(loginPasswordInput)) {
+        $('#login-password').css({'border-color': '#fa0000'});
+        $('.err').html('Password is required');
       }
     }
   }
@@ -413,15 +424,19 @@ export class AppComponent implements OnInit {
       $('.err').html('All input fields are required');
       if (!this.validate.validateInput(this.regNameInput)) {
         $('#reg-name').css({'border-color': '#fa0000'});
+        $('.err').html('Please enter your name');
       }
       if (!this.validate.validateInput(this.regEmailInput)) {
         $('#reg-email').css({'border-color': '#fa0000'});
+        $('.err').html('Please enter a valid email address');
       }
       if (!this.validate.validateInput(this.regMobileInput)) {
         $('#reg-mobile').css({'border-color': '#fa0000'});
+        $('.err').html('Please enter 10 digit mobile number');
       }
       if (!this.validate.validateInput(this.regPwdInput)) {
         $('#reg-pwd').css({'border-color': '#fa0000'});
+        $('.err').html('Password must have atleast 6 characters');
       }
     }
   }
@@ -468,12 +483,10 @@ export class AppComponent implements OnInit {
                     // Valid email and mobile numbers. register user
                     this.authService.registerUser(this.user).subscribe(res => {
                       if (res.success) {
-                        // window.location.reload();
                         // Log user in
                         this.LoginSubmit(regEmailInput, regPwdInput);
                       }else {
                         // Show Error
-                        // if(res.msg = )
                         if (res.msg.message = 'otp_not_verified') {
                           $('.err').html('Please Enter Valid OTP');
                           $('#reg-otp').css({'border-color': '#fa0000'});
@@ -490,7 +503,7 @@ export class AppComponent implements OnInit {
           });
         }else {
           $('.err').html('Please enter a 10 digit Mobile number');
-          // Hightlight mogile number
+          // Hightlight mobile number
           $('#reg-mobile').css({'border-color': '#fa0000'});
         }
       }else {
@@ -544,9 +557,22 @@ export class AppComponent implements OnInit {
      this.fpNewPwd = null;
      this.cfpNewPwd = null;
      this.mobileNumForfp = null;
+     this.loginEmailInput = null;
+     this.loginPasswordInput = null;
+    //  disabling all buttons
+    // continue-btn,otp-btn,signup-btn,login-btn,continue-btn,#fp-continue-btn
+    $('#continue-btn,#otp-btn,#signup-btn,#login-btn,#continue-btn,#fp-continue-btn').css({'background-color' : '#b2b2b2'});
     $('.fixed-dark-cover').hide();
     $('#next-reg-fixed-dark-cover input').val('');
     $('.fixed-dark-cover input').css({'border-color': '#b2b2b2'});
+    $('.err').html('');
+    // reset resend setintervals
+    clearInterval(this.resendotpinterval);
+    clearInterval(this.fpresendotpInterval);
+    clearInterval(this.sretryOtp);
+    clearInterval(this.fpretryOtp);
+    $('#sign-resend-otp-text').html('');
+    $('#fp-resend-otp-text').html('');
   }
 
   clickedOnTerms() {
@@ -604,9 +630,9 @@ export class AppComponent implements OnInit {
             $('.fixed-dark-cover').hide();
             // Open forgot pwd db
             $('#fp-fixed-dark-cover').css({'display': 'flex'});
-            this.authService.sendOtp(input).subscribe(res => {
-              console.log(res);
-            });
+            // this.authService.sendOtp(input).subscribe(res => {
+            //   // console.log(res);
+            // });
             setTimeout(() => {
               this.resendotptrig('fp');
             }, 10000);
@@ -624,6 +650,15 @@ export class AppComponent implements OnInit {
       $('.err').html('Please enter a valid Email or Mobile');
       $('#email').css({'border-color': '#fa0000'});
     }
+    $('#otp,#fpnewpwd,#cfpnewpwd').keydown(function(){
+      // alert($('#cfpnewpwd').val());
+      const otp = $('#otp').val();
+      const p = $('#fpnewpwd').val();
+      const cp = $('#cfpnewpwd').val();
+      if ((otp.length > 3) && (p.length > 5) && (cp.length > 5)) {
+        $('#fp-continue-btn').css({'background-color' : '#6DA942'});
+      }
+    });
   }
   logNewPwd() {
     const pwdDets = {
@@ -653,7 +688,7 @@ export class AppComponent implements OnInit {
       case 'signup':
         let n = 30;
         $('#sign-resend-otp-text').html('You can resend OTP in 00 : ' + n + ' seconds.').show();
-        const resendotpInterval = setInterval(function() {
+        this.resendotpinterval = setInterval(function() {
           if (n !== 1) {
             n--;
             $('#sign-resend-otp-text').html('You can resend otp in 00 : ' + n + ' seconds.');
@@ -661,14 +696,14 @@ export class AppComponent implements OnInit {
             // Show resend otp
             $('#sign-resend-otp-text').hide();
             $('#sign-resend').show();
-            clearInterval(resendotpInterval);
+            clearInterval(this.resendotpinterval);
           }
         }, 1000);
         break;
       case 'fp':
       n = 30;
       $('#fp-resend-otp-text').html('You can resend otp in 00 ' + n + ' seconds.').show();
-      const fpresendotpInterval = setInterval(function() {
+      this.fpresendotpInterval = setInterval(function() {
         if (n !== 1) {
           n--;
           $('#fp-resend-otp-text').html('You can resend otp in 00 ' + n + ' seconds.');
@@ -676,7 +711,7 @@ export class AppComponent implements OnInit {
           // Show resend otp
           $('#fp-resend-otp-text').hide();
           $('#fp-resend').show();
-          clearInterval(fpresendotpInterval);
+          clearInterval(this.fpresendotpInterval);
         }
       }, 1000);
 
@@ -705,7 +740,7 @@ export class AppComponent implements OnInit {
                         $('.err').html('');
                       }, 1500);
                       $('#sign-resend').hide();
-                      setTimeout(function() {
+                      this.sretryOtp = setTimeout(function() {
                         this.resendotptrig('signup');
                       }, 10000);
                     }else {
@@ -746,7 +781,7 @@ export class AppComponent implements OnInit {
                       $('.err').html('');
                     }, 1500);
                     $('#fp-resend').hide();
-                    setTimeout(function() {
+                    this.fpretryOtp = setTimeout(function() {
                       this.resendotptrig('fp');
                     }, 10000);
                   }else {

@@ -6,7 +6,7 @@
     <div class="location-enter-div">
       <input type="search" class="location-search-input"  [(ngModel)]="locationEntry" placeholder="Ex: Madhapur" (keypress)="locationKeyPress($event)">
       <!-- <button type="button" class="locate-me-btn" (click)="geoLocate()">Locate me</button> -->
-      <div class="locate-me-btn" (click)="geoLocate()"><span> Locate me</span></div>
+      <div class="locate-me-btn" (click)="geoLocate()"><span><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;&nbsp;  Locate me</span></div>
     </div>
     <button type="button" class="see-menu-btn" id="main-see-menu-btn" (click)="seeMenu()">See The Menu</button>
   </div>
@@ -42,11 +42,6 @@
   
   <div class="dark-cover">
     <div class="container">
-
-      <!-- <div class="cdb">
-        <h2>Coming Soon</h2>
-      </div> -->
-
       <!-- Header for tablets and desktops -->
       <header class="m-main-header visible-lg visible-md">
         <div class="main-logo pull-left">
@@ -76,7 +71,6 @@
                     <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings'>My Profile</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/my-orders'>My Orders</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/address'>Saved Address</a></li>
-                    <!-- <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/payments'>Payments</a></li> -->
                     <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/reward-points'>Reward Points</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" routerLink='/settings/change-password'>Change Password</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" (click)="onLogoutClick()">Logout</a></li>
@@ -118,7 +112,6 @@
           <div class="location-input-div location-input-scrolltop-helper">
             <div class="location-enter-div">
               <input type="search" class="location-search-input" placeholder="Ex: Madhapur" [(ngModel)]="locationEntry" (keypress)="locationKeyPress($event)">
-              <!-- <button type="button" class="locate-me-btn" (click)="geoLocate()"><span>Locate me</span></button> -->
               <div class="locate-me-btn" (click)="geoLocate()"><span><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;&nbsp; <h6>Locate me</h6></span></div>
             </div>
             <button type="button" class="see-menu-btn" id="main-see-menu-btn" (click)="seeMenu()">See The Menu</button>
@@ -131,7 +124,7 @@
               </li>
               <li>
                 <p>
-                  We currently do not deliver in your area. We currently deliver in or around Madhapur.
+                  {{ display_error }}
                 </p>
               </li>
             </ul>

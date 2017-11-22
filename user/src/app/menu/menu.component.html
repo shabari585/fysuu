@@ -204,38 +204,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Sch menu hover -->
-            <!-- <div class="sch-hover-menu-back">
-                <div class="sch-hover-core">
-                    <i class="fa fa-times" aria-hidden="true" (click)="schHoverClose()"></i>
-                    <label for="t-menu-select-slot" id="reg-name-label">Select Delivery Slot</label>
-                    <label for="">
-                        <select name="" id="sch-menu-select-slot" (change)='schMenuSlotSelect($event)'>
-                            <option selected disabled>Choose time slot</option>
-                            <option value="slot_one" id="slot_one_option">12:00 PM - 12:45 PM</option>
-                            <option value="slot_two" id="slot_two_option">12:45 PM - 01:30 PM</option>
-                            <option value="slot_three" id="slot_three_option">01:30 PM - 02:15 PM</option>
-                            <option value="slot_four" id="slot_four_option">02:15 PM - 03:00 PM</option>
-                        </select>
-                    </label>
-                    <br>
-                    <label for="t-menu-select-times" id="reg-name-label">Select Quantity</label>
-                    <label for="">
-                        <select name="" id="t-menu-select-times" (change)='todayMenuTimesSelect($event)'>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </label>
-                    <div class="today-btns">
-                        <button type="button" class="sc-ch-add-btn" (click)="addTodayCartClicked()">ADD TO BASKET</button>
-                    </div>
-                </div>
-            </div> -->
-            
             <!-- Schedule menu section -->
             <div class="schedule-menu-back">
                 <button type="button" class="sch-close-btn" (click)="scClose()">x</button>
@@ -245,24 +213,21 @@
                     <div class="calender-core">
                         <!-- Next seven days -->
                         <ul class="list-unstyled">
-                            <li class="selected-date-li calender-li" id="top-calender-li"  (click)="loadDay(day_one)">
+                            <li class="selected-date-li calender-li" id="top-calender-li"  (click)="loadDay(day_one,'day_one_click')">
                                 <h5>{{day_one | date: 'fullDate'}}</h5>
                             </li>
-                            <li class="calender-li" (click)="loadDay(day_two)">
+                            <li class="calender-li" id="calender-two" (click)="loadDay(day_two,'day_two_click')">
                                 <h5>{{day_two | date: 'fullDate'}}</h5>
                             </li>
-                            <li class="calender-li" (click)="loadDay(day_three)">
+                            <li class="calender-li" id="calender-three" (click)="loadDay(day_three,'day_three_click')">
                                 <h5>{{day_three | date: 'fullDate'}}</h5>
                             </li>
-                            <li class="calender-li" (click)="loadDay(day_four)">
+                            <li class="calender-li" id="calender-four" (click)="loadDay(day_four,'day_four_click')">
                                 <h5>{{day_four | date: 'fullDate'}}</h5>
                             </li>
-                            <li class="calender-li" (click)="loadDay(day_five)">
+                            <li class="calender-li" id="calender-five" (click)="loadDay(day_five,'day_five_click')">
                                 <h5>{{day_five | date: 'fullDate'}}</h5>
                             </li>
-                            <!-- <li class="calender-li" (click)="loadDay(day_six)">
-                                <h5>{{day_six | date: 'fullDate'}}</h5>
-                            </li> -->
                         </ul>
                     </div>
 

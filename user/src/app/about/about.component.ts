@@ -20,12 +20,7 @@ export class AboutComponent implements OnInit {
   companyName: string;
   userMobile: string;
   userId: string;
-
   basket_num: number;
-
-  today_one = moment();
-  dateForHeader: string;
-
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService, private datePipe: DatePipe) { }
 
@@ -38,7 +33,6 @@ export class AboutComponent implements OnInit {
       window.scrollTo(0, 0);
     });
 
-    this.dateForHeader = this.datePipe.transform(this.today_one, 'EEE, MMM d');
     // tslint:disable-next-line:radix
     this.basket_num = parseInt(localStorage.getItem('basket_number'));
     if (this.basket_num === undefined || this.basket_num === null || this.basket_num === 0 || isNaN(this.basket_num) === true) {
