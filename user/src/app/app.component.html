@@ -118,11 +118,21 @@
 <div *ngIf="!authService.loggedIn()">    
 <div class="mob-menu visible-sm visible-xs">
   <ul class="list-unstyled">
-    <a routerLink='/rewards'>
-    <li class="reward-pts-trig-btn" (click)='closeMobMenu()'>
-      REWARDS
-    </li>
-    </a>
+      <a routerLink='/home'>
+      <li class="reward-pts-trig-btn" (click)='closeMobMenu()'>
+        HOME
+      </li>
+      </a>
+      <!-- <a routerLink=''>
+      <li class="reward-pts-trig-btn" (click)='closeMobMenu()'>
+        OUR CONCEPT
+      </li>
+      </a> -->
+      <a routerLink='/rewards'>
+      <li class="reward-pts-trig-btn" (click)='closeMobMenu()'>
+        REWARD POINTS
+      </li>
+      </a>
     <li *ngIf="!authService.loggedIn()" (click)="loginSignupTrigger()">
       LOGIN / SIGNUP
     </li>
@@ -133,15 +143,26 @@
 <div *ngIf="authService.loggedIn()">    
     <div class="mob-menu visible-sm visible-xs">
       <ul class="list-unstyled">
-        <li class="reward-pts-trig-btn">
-          REWARDS
-        </li>
-        <li>
-            <a style="color:white;text-align:center;font-size:11px;width:100%;margin:0;" routerLink='/menu' id="our-menu-btn">Today, {{dateForHeader}}</a>
-        </li>
-        <li class="" (click)="navToChekout()">
-                Basket &nbsp; <span class="head-basket-num">{{basket_num}}</span> 
-        </li>
+        <a routerLink="/settings">
+          <li (click)='closeMobMenu()'>
+            ACCOUNT
+          </li>
+        </a>
+        <a routerLink="/checkout">
+          <li (click)='closeMobMenu()'>
+            BASKET
+          </li>
+        </a>
+        <a routerLink="/menu">
+          <li (click)='closeMobMenu()'>
+            OUR MENU
+          </li>
+        </a>
+        <!-- <a routerLink="/">
+          <li>
+            OUR CONCEPT
+          </li>
+        </a> -->
         <li  *ngIf="authService.loggedIn()" (click)="onLogoutClick()" class="">
           LOGOUT
         </li>

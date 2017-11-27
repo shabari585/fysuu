@@ -421,20 +421,20 @@ router.get('/get-all-dates', (req, res, next) => {
 
 router.delete('/delete-date/:date_id', (req, res, next) => {
     id = req.params.date_id;
-    // dates.deleteOne({ _id: id }, (err, status) => {
-    //     if (status) {
-    //         res.json({ success: true, msg: status });
-    //     } else {
-    //         res.json({ success: false, msg: err });
-    //     }
-    // });
-    dates.remove((err,status)=>{
-        if(err){
-            res.json({ success: false, msg: err });
-        }else{
+    dates.deleteOne({ _id: id }, (err, status) => {
+        if (status) {
             res.json({ success: true, msg: status });
+        } else {
+            res.json({ success: false, msg: err });
         }
     });
+    // dates.remove((err,status)=>{
+    //     if(err){
+    //         res.json({ success: false, msg: err });
+    //     }else{
+    //         res.json({ success: true, msg: status });
+    //     }
+    // });
 });
 
 // Add schdule

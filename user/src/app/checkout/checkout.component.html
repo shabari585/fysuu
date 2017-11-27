@@ -171,7 +171,7 @@
         <div *ngIf="today_orders !=null">
           <div *ngIf="tab_one !=null">
             
-            <h6 class="delivery-on-statement" (click)="changeDets('tab_one')">Delivery today &nbsp; {{tab_one_time_slot}}  <button type="button" class="d-edit-address" (click)="changeDets('tab_one')">Edit</button></h6>
+            <h6 class="delivery-on-statement" (click)="changeDets('tab_one')">Delivery today {{tab_one_time_slot}}  <button type="button" class="d-edit-address" (click)="changeDets('tab_one')">Edit</button></h6>
             <!-- Today exists -->
               <div class="delivery-item">
   
@@ -270,7 +270,7 @@
         </div>
         <!-- Day one -->
         <div *ngIf="day_one_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_one_date}} &nbsp; {{day_one_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_one')">Edit</button></h6>
+          <h6 class="delivery-on-statement"> <span>Delivery on {{day_one_date}} </span> &nbsp; <span>{{day_one_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_one')">Edit</button></span></h6>
             <div class="delivery-item">
               <div class="delivery-item-left">
                 <div class="delivery-item-dets">
@@ -299,7 +299,7 @@
         </div>
         <!-- Day two -->
         <div *ngIf="day_two_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_two_date}} &nbsp; {{day_two_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_two')">Edit</button></h6>
+          <h6 class="delivery-on-statement"><span>Delivery on {{day_two_date}}</span>  &nbsp; <span>{{day_two_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_two')">Edit</button></span> </h6>
           
             <div class="delivery-item">
               <div class="delivery-item-left">
@@ -330,19 +330,15 @@
         </div>
         <!-- Day three -->
         <div *ngIf="day_three_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_three_date}} &nbsp; {{day_three_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_three')">Edit</button></h6>
-
-          
+          <h6 class="delivery-on-statement"><span>Delivery on {{day_three_date}}</span>  &nbsp; <span>{{day_three_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_three')">Edit</button></span> </h6>
             <div class="delivery-item">
               <div class="delivery-item-left">
                 <div class="delivery-item-dets">
                   <span *ngFor="let menu of day_three_menu">
                   <span class="delivery-item-name">{{menu.item_name}}</span>
                   </span>
-                  
                 </div>
               </div>
-
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
@@ -360,18 +356,15 @@
         </div>
         <!-- Day Four -->
         <div *ngIf="day_four_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_four_date}} &nbsp; {{day_four_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_four')">Edit</button></h6>
-
+          <h6 class="delivery-on-statement"><span>Delivery on {{day_four_date}}</span>  &nbsp; <span>{{day_four_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_four')">Edit</button></span></h6>
             <div class="delivery-item">
               <div class="delivery-item-left">
                 <div class="delivery-item-dets">
                   <span *ngFor="let menu of day_four_menu">
                     <span class="delivery-item-name">{{menu.item_name}}</span>
                   </span>
-                  
                 </div>
               </div>
-
               <div class="delivery-dets">
                 <!-- Number of items -->
                 <div class="delivery-number-div">
@@ -389,7 +382,7 @@
         </div>
         <!-- Day five -->
         <div *ngIf="day_five_date !=null">
-          <h6 class="delivery-on-statement">Delivery on {{day_five_date}} &nbsp; {{day_five_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_five')">Edit</button></h6>
+          <h6 class="delivery-on-statement"><span>Delivery on {{day_five_date}}</span>  &nbsp; <span>{{day_five_slot}} <button type="button" class="d-edit-address" (click)="changeDets('day_five')">Edit</button></span></h6>
 
             <div class="delivery-item">
               <div class="delivery-item-left">

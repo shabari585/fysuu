@@ -12,51 +12,53 @@
     <h5>You have no orders yet.</h5>
   </div>
   <div *ngIf='orders_exist == true'>
-    <table class="table table-striped">
-      <tr>
-        <th>
-          Order id
-        </th>
-        <th>
-          Order Time
-        </th>
-        <th>
-          Ordered Items
-        </th>
-        <th>
-          Payment Type
-        </th>
-        <th>
-          Price
-        </th>
-      </tr>
-      <tr *ngFor='let order of orders'>
-        <td>
-          {{order.order_id}}
-        </td>
-        <td>
-          {{order.time}}
-        </td>
-        <td>
-          <!-- Order items here -->
-          <span *ngFor='let item of order.items'>
-            <p>
-                {{ item }}
-            </p>
-            <!-- <span *ngFor='let item of items'>
-              {{item}}
-            </span> -->
-          </span>
-
-        </td>
-        <td>
-          {{order.payment_method}}
-        </td>
-        <td>
-          {{order.price}}
-        </td>
-      </tr>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <tr>
+          <th>
+            Order id
+          </th>
+          <th>
+            Order Time
+          </th>
+          <th>
+            Ordered Items
+          </th>
+          <th>
+            Payment Type
+          </th>
+          <th>
+            Price
+          </th>
+        </tr>
+        <tr *ngFor='let order of orders'>
+          <td>
+            {{order.order_id}}
+          </td>
+          <td>
+            {{order.time}}
+          </td>
+          <td>
+            <!-- Order items here -->
+            <span *ngFor='let item of order.items'>
+              <p>
+                  {{ item }}
+              </p>
+              <!-- <span *ngFor='let item of items'>
+                {{item}}
+              </span> -->
+            </span>
+  
+          </td>
+          <td>
+            {{order.payment_method}}
+          </td>
+          <td>
+            {{order.price}}
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 
 </div>

@@ -174,11 +174,7 @@ export class CheckoutComponent implements OnInit {
     if (this.basket_num === undefined || this.basket_num === null || this.basket_num === 0 || isNaN(this.basket_num) === true) {
       // redirect to menu
       this.router.navigate(['/menu']);
-      // alert('no');
-    }else {
-      // alert('yes');
     }
-
     const user = this.authService.getUserFromLocal();
     const user_parsed = JSON.parse(user);
     this.userEmail = user_parsed.email;
@@ -316,6 +312,9 @@ export class CheckoutComponent implements OnInit {
           case 'slot_three':
             this.day_one_slot = this.slot_three;
             break;
+          case 'slot_four':
+            this.day_one_slot = this.slot_four;
+            break;
           default:
             break;
         }
@@ -340,6 +339,9 @@ export class CheckoutComponent implements OnInit {
             break;
           case 'slot_three':
             this.day_two_slot = this.slot_three;
+            break;
+          case 'slot_four':
+            this.day_two_slot = this.slot_four;
             break;
           default:
             break;
@@ -368,6 +370,9 @@ export class CheckoutComponent implements OnInit {
           case 'slot_three':
             this.day_three_slot = this.slot_three;
             break;
+          case 'slot_four':
+            this.day_three_slot = this.slot_four;
+            break;
           default:
             break;
         }
@@ -393,6 +398,9 @@ export class CheckoutComponent implements OnInit {
             break;
           case 'slot_three':
             this.day_four_slot = this.slot_three;
+            break;
+          case 'slot_four':
+            this.day_four_slot = this.slot_four;
             break;
           default:
             break;
@@ -420,6 +428,9 @@ export class CheckoutComponent implements OnInit {
           case 'slot_three':
             this.day_five_slot = this.slot_three;
             break;
+          case 'slot_four':
+            this.day_five_slot = this.slot_four;
+            break;
           default:
             break;
         }
@@ -427,34 +438,11 @@ export class CheckoutComponent implements OnInit {
         this.day_five_menu = null;
       }
 
-      if (this.orders['day_six'] != null) {
-        this.day_six_date = this.orders['day_six'].date;
-        this.day_six_per_portion_price = this.orders['day_six'].perPortionPrice;
-        this.day_six_total_price = this.orders['day_six'].totalPrice;
-        this.day_six_num_items = this.orders['day_six'].numOfTimes;
-        this.day_six_menu = this.orders['day_six'].menu;
-        // Time slots
-        switch (this.orders['day_six'].timeSlot) {
-          case 'slot_one':
-            this.day_six_slot = this.slot_one;
-            break;
-          case 'slot_two':
-            this.day_six_slot = this.slot_two;
-            break;
-          case 'slot_three':
-            this.day_six_slot = this.slot_three;
-            break;
-          default:
-            break;
-        }
-      }else {
-        this.day_six_menu = null;
-      }
 
     }
     // Get location from local storage
     // tslint:disable-next-line:max-line-length
-    this.total_price = this.delivery_fee + this.today_total_price + this.day_one_total_price + this.day_two_total_price + this.day_three_total_price + this.day_four_total_price + this.day_five_total_price + this.day_six_total_price + this.tab_one_total_price + this.tab_two_total_price + this.tab_three_total_price + this.letter_price;
+    this.total_price = this.delivery_fee + this.today_total_price + this.day_one_total_price + this.day_two_total_price + this.day_three_total_price + this.day_four_total_price + this.day_five_total_price + this.tab_one_total_price + this.tab_two_total_price + this.tab_three_total_price + this.letter_price;
 
     this.total_to_pay = this.total_price;
 
@@ -512,7 +500,10 @@ export class CheckoutComponent implements OnInit {
         // Show error
         $('.err').html('Please select a payment method');
       }else {
-        const pay_method = this.payment_method;
+        let pay_method = this.payment_method;
+        if (this.payment_method === 'cod') {
+          pay_method = 'Cash On Delivery';
+        }
         // Generate Order Id
         // delivery notes
         let delivery_notes;
@@ -532,37 +523,6 @@ export class CheckoutComponent implements OnInit {
           next_days: this.orders
 
         };
-        // insert this.today_orders into this.date_and_item_array
-        // console.log();
-        // insert this.orders into this.date_and_item_array
-        // this.orders
-        // day_one
-        // console.log(this.orders['day_one']);
-        // this.orders['day_one'].menu.forEach(donem => {
-        //   const dyone = { date: donem.date, item_id: donem._id };
-        //   this.date_and_item_array.push(dyone);
-        // });
-
-        // // day_two
-        // this.orders['day_two'].menu.forEach(dtwom => {
-        //   const dytwo = { date: dtwom.date, item_id: dtwom._id };
-        //   this.date_and_item_array.push(dytwo);
-        // });
-        // // day_three
-        // this.orders['day_three'].menu.forEach(dthreem => {
-        //   const dythree = { date: dthreem.date, item_id: dthreem._id };
-        //   this.date_and_item_array.push(dythree);
-        // });
-        // // day_four
-        // this.orders['day_four'].menu.forEach(dfourm => {
-        //   const dyfour = { date: dfourm.date, item_id: dfourm._id };
-        //   this.date_and_item_array.push(dyfour);
-        // });
-        // // day_five
-        // this.orders['day_five'].menu.forEach(dfivem => {
-        //   const dyfive = { date: dfivem.date, item_id: dfivem._id };
-        //   this.date_and_item_array.push(dyfive);
-        // });
         // Whole order in one place
         const main_order = {
           user_id: this.userId,

@@ -240,11 +240,11 @@
                         <!-- Top div -->
                         <div class="sc-ch-top">
                             <div class="pull-left">
-                                <div class="sc-ch-num-btns-div">
+                                <!-- <div class="sc-ch-num-btns-div">
                                     <button type="button" class="sc-ch-num-btn" (click)="decNumberOfItems()">-</button>
                                     <span class="sc-ch-num">{{numberOfItems}}</span>
                                     <button type="button" class="sc-ch-num-btn" (click)="incNumberOfItems()">+</button>
-                                </div>
+                                </div> -->
                                 <!-- <h5 class="slot">Select Delivery Slot : </h5>  -->
                                 <div class="sch-slot-select-div">
                                     
@@ -1196,41 +1196,18 @@
                 <h6>Basket</h6><i class="fa fa-arrow-right" aria-hidden="true"></i>
             </span>
         </div>
-
-        
     </div>
 </div>
 <!-- Basket for mobiles -->
 <div class="mob-basket-div visible-xs visible-sm" (click)='navToChekout()'>
-    <span class="span">
-        <div class="row">
-            <div class="col-xs-4 mob1" style="margin-left:5%;margin-top:4%;">
-                    <i   class="fa fa-shopping-basket" aria-hidden="true"></i>
-            </div>
-            <div class="col-xs-4 mob2">
-                <h3>BASKET <span  class="mob-hover-basket-number">0</span></h3>
-            </div>
-            <div class="col-xs-4 mob3" style="margin-left:-15%;margin-top:7%;">
-                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
-            </div>
-        </div>
-                        
-    </span>
+    <div class="mob-basket-ico">
+        <i class="fa fa-shopping-basket" aria-hidden="true"></i><span  class="mob-hover-basket-number">{{basketNumber}}</span>
+    </div>
+    <h3>Basket</h3>
 </div>
 
 <div class="added-db">
     <div class="added-wb">
-        <h3>Added !</h3>
+        <h3>{{ hover_alert }}</h3>
     </div>
 </div>
-
-<!-- <div class="time-up-db">
-    <div class="timeup-core">
-        <p>
-            We serve till 2:15 PM (Monday to Saturday). You can pre-order for next 5 days.
-        </p>
-        <button type="button" class="schedule-rep-btn" (click)="schMenuBtn()">
-            SCHEDULE MENU
-        </button>
-    </div>
-</div> -->

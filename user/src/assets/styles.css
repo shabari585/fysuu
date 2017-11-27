@@ -25,7 +25,8 @@ a:hover{
   position: relative;
   display: block;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
 }
 
 .dark-cover {
@@ -49,12 +50,9 @@ input:focus,
 input:active {
   outline: none !important;
 }
-
-
 /* Login/Signup sections*/
-
 .fixed-dark-cover {
-  z-index: 10;
+  z-index: 14;
   position: fixed;
   display: flex;
   display: none;
@@ -140,8 +138,6 @@ input:active {
   top:3%;
   left: 94%;
 }
-
-
 .next-inputs {
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 3px;
@@ -230,8 +226,6 @@ input:active {
 #reg-terms-agree {
     margin-bottom: 20px;
 }
-  
-
 #country-code {
   width: 10%;
   height: 100%;
@@ -246,10 +240,7 @@ input:active {
 .otp-span {
   display: none;
 }
-
-
 /* Location search div */
-
 .location-input-div {
   position: relative;
   display: inline-flex;
@@ -369,8 +360,6 @@ input:active {
 .main-header .det-ul {
   margin-left: 50px;
 }
-
-
 .main-logo {
   outline: none !important;
   display: inline-flex;
@@ -387,7 +376,6 @@ input:active {
   height: 60%;
   width: auto;
 }
-
 .det-ul {
   display: flex;
   display: -webkit-flex;
@@ -482,10 +470,7 @@ input:active {
 #schedule-menu-btn {
   cursor: pointer;
 }
-
-
 /* Account Drop down button */
-
 .btn-default {
   border: none;
   background-color: transparent;
@@ -497,16 +482,12 @@ input:active {
   background-color: transparent !important;
   box-shadow: none;
 }
-
 .open>.dropdown-toggle.btn-default:focus,
 .open>.dropdown-toggle.btn-default:hover {
   background-color: transparent;
   border: none;
 }
-
-
 /* Account dropdown menu */
-
 .dropdown {
   margin-right: 20px;
 }
@@ -578,10 +559,7 @@ input:active {
   /* margin: 10px auto; */
   padding: 15px 20px;
 }
-
-
 /* Basket button */
-
 .basket-btn {
   position: relative;
   display: block;
@@ -598,8 +576,6 @@ input:active {
   border-radius: 50%;
   font-size: 80%;
 }
-
-
 /* Footer */
 
 .main-footer {
@@ -649,18 +625,15 @@ input:active {
   content: '';
   display: none;
 }
-
 .footer-nav a,
 .footer-social-div a {
   color: #666;
   text-decoration: none;
 }
-
 .footer-nav a:hover,
 .footer-social-div a:hover {
   color: #333;
 }
-
 .footer-social-div {
   margin-top: 10px;
   font-size: 150%;
@@ -668,14 +641,8 @@ input:active {
 .footer-social-div ul{
   margin-bottom: 0;
 }
-
-
-
 /* Mobile */
-
-
 /* Mobile main header */
-
 .mob-main-header {
   z-index: 13;
   position: fixed;
@@ -684,11 +651,10 @@ input:active {
   top: 0;
   margin: 0;
   padding: 0;
-  height: 60px;
+  height: 70px;
   background-color: rgba(0, 0, 0, 1);
   box-shadow: 0 10px 10px 1px rgba(0, 0, 0, .15);
 }
-
 .mob-main-logo {
   outline: none !important;
   position: absolute;
@@ -705,14 +671,12 @@ input:active {
   -webkit-align-items: center;
   margin: 0 auto;
 }
-
 .mob-main-logo img {
   position: relative;
   display: block;
   height: 60%;
   width: auto;
 }
-
 .mob-menu-trig-btn {
   position: absolute;
   top: 50%;
@@ -725,7 +689,6 @@ input:active {
   border: none;
   font-size: 140%;
 }
-
 .mob-menu {
   z-index: 12;
   position: fixed;
@@ -740,7 +703,6 @@ input:active {
   color: #fff;
   box-shadow: 0 10px 10px 1px rgba(0, 0, 0, .1);
 }
-
 .mob-menu li {
   display: flex;
   display: -webkit-flex;
@@ -753,12 +715,10 @@ input:active {
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
-
 .mob-menu .reward-pts-trig-btn {
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
-
 /* For about, terms and privacy sections */
 .con-section{
  min-height: 80vh;
@@ -802,9 +762,6 @@ input:active {
 .con-section ul ul{
   width: 80%;
 }
-
-
-
 /* Title images */
 .title-img-div{
   position: relative;
@@ -824,8 +781,6 @@ input:active {
   color: #fff;
   font-weight: bold;
 }
-
-
 #menu1{
   background-color: transparent;
   border:none;
@@ -848,9 +803,7 @@ input:active {
 #menu1 .fa{
   font-size: 80%;
 }
-
 /* Extra Small Devices, .visible-xs-* */
-
 @media (max-width: 480px) {}
 
 @media (max-width: 767px) {
@@ -859,26 +812,26 @@ input:active {
     text-align: center;
   }
   .footer-nav ul li::after{
-    display: none;
+    /* display: none; */
+  }
+  .email-input-div {
+    position: relative;
+    display: block;
+    background-color: #e5e5e5;
+    padding: 20px 40px;
+    border-radius: 4px;
+    color: #555;
+    width: 90vw;
   }
 
 }
-
-
 /* Small Devices, .visible-sm-* */
-
 @media (min-width: 768px) and (max-width: 991px) {
   .footer-nav ul li::after {
     display: none;
   }
 }
-
-
 /* Medium Devices, .visible-md-* */
-
 @media (min-width: 992px) and (max-width: 1199px) {}
-
-
 /* Large Devices, .visible-lg-* */
-
 @media (min-width: 1200px) {}

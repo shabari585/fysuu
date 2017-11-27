@@ -164,14 +164,10 @@ h6 {
 .order-summary-section{
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
 }
-
-
 /* Left dets */
-
 .left-dets-section {
   width: 30%;
 }
-
 .warning-div {
   padding: 15px 15px;
   background-color: #F04F60;
@@ -185,9 +181,10 @@ h6 {
   justify-content: space-around
 }
 .warning-div p{
-  line-height: 0;
+  line-height: 1;
   margin: 0;
   padding: 0;
+  margin-left: 10px;
 }
 
 .user-address-div {
@@ -402,13 +399,6 @@ h6 {
   height: 100%;
   padding: 0px;
 }
-
-/* .delivery-item-dets h5 {
-  width: 100%;
-  text-align: left;
-  margin: 0;
-  margin-bottom: 7px;
-} */
 .delivery-item-dets>span {
   display:inline-block;
   text-align: left;
@@ -421,7 +411,6 @@ h6 {
   justify-content: flex-start;
 }
 .delivery-item-name {
-  /* display:inline-block; */
   text-align: left;
   float: left;
   font-size: 105%;
@@ -473,8 +462,6 @@ h6 {
   justify-content: center;
   flex-direction: row;
 }
-
-
 .number-btns {
   border: none;
   background: transparent;
@@ -482,20 +469,16 @@ h6 {
   margin: 0 7px;
   font-size: 130%;
 }
-
 .price-core {
   font-size: 110%;
   color: #515151;
 }
-
 .order-summary-body h6 {
   margin: 0px auto 10px auto;
 }
-
 .charges-div h6 {
   font-size: 100%;
 }
-
 .cost-core {
   font-size: 110%;
   color: #515151;
@@ -525,19 +508,16 @@ h6 {
 .total-pay,.rewards-div {
   margin-top: 6px;
 }
-
 .total-fee {
   padding: 10px 20px;
   border-bottom: 2px solid #F2F5F6;
 }
-
 .place-order-btn-div {
   padding: 20px;
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
 }
-
 .place-order-notif {
   position: relative;
   display: block;
@@ -547,7 +527,6 @@ h6 {
   width: 98%;
   margin: 5px 20px 10px 20px;
 }
-
 #place-order-button {
   position: relative;
   display: block;
@@ -563,26 +542,29 @@ h6 {
 #place-order-button:hover{
   background-color: #588835;
 }
-
-
 /* Extra Small Devices, .visible-xs-* */
-
-
 /* @media (max-width: 480px) {} */
-
 @media (max-width: 767px) {
-  .checkout-main-container {
-    padding-top: 100px;
-  }
   .left-dets-section,
   .right-dets-section {
     position: relative;
     display: block;
-    width: 90%;
-    margin: 10px 5%;
+    width: 100%;
+    margin: 10px 0%;
   }
   .delivery-item {
-    max-height: 200px;
+    max-height: auto;
+    flex-direction: column;
+  }
+  .delivery-item-left,.delivery-dets{
+    width: 100%;
+  }
+  .delivery-on-statement{
+    white-space: normal;
+    /* word-wrap: break-word; */
+  }
+  .delivery-on-statement span{
+    display: block;
   }
 }
 

@@ -4,35 +4,25 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AdminServicesService {
-
     constructor(private http: Http) { }
-
-    // Add Category Page
-
-    // Adding a category
     addCategory(newData: any) {
         const headers = new Headers();
         headers.append('Content-type', 'application/json');
         // return this.http.post('http://localhost:3700/admin/add-category', newData, { headers: headers }).map(res => res.json());
         return this.http.post('admin/add-category', newData, { headers: headers }).map(res => res.json());
     }
-    // Delete cateogry
     deleteCategory(id: string) {
         // return this.http.delete('http://localhost:3700/admin/delete-category/' + id).map(res => res.json());
         return this.http.delete('admin/delete-category/' + id).map(res => res.json());
     }
-    // Get Categories
     getCategories() {
         // return this.http.get('http://localhost:3700/admin/get-categories').map(res => res.json());
         return this.http.get('admin/get-categories').map(res => res.json());
     }
-    // Get Orders
     getOrders() {
         // return this.http.get('http://localhost:3700/admin/get-orders').map(res => res.json());
         return this.http.get('admin/get-orders').map(res => res.json());
     }
-    // Add Items Page
-    // Add Item
     addItem(cat_id, sub_name, item_name, item_price, item_img) {
         const headers = new Headers();
         headers.append('Content-type', 'application/json');
@@ -46,43 +36,32 @@ export class AdminServicesService {
         // return this.http.post('http://localhost:3700/admin/add-item', Data, { headers: headers }).map(res => res.json());
         return this.http.post('admin/add-item', Data, { headers: headers }).map(res => res.json());
     }
-    // Get all items
     getItems(cat_id: string, sub_name: string) {
         // return this.http.get('http://localhost:3700/admin/get-items/' + cat_id + '/' + sub_name).map(res => res.json());
         return this.http.get('admin/get-items/' + cat_id + '/' + sub_name).map(res => res.json());
     }
-
     // Delete Items
     deleteItem(item_id: string) {
         // return this.http.delete('http://localhost:3700/admin/delete-item/' + item_id).map(res => res.json());
         return this.http.delete('admin/delete-item/' + item_id).map(res => res.json());
     }
-
-
-    // Add Sub Categories Page
     // Add subcategory
     addSub(subData: any) {
         const headers = new Headers();
-
         headers.append('Content-type', 'application/json');
-
         // return this.http.post('http://localhost:3700/admin/add-sub-category', subData, { headers: headers }).map(res => res.json());
         return this.http.post('admin/add-sub-category', subData, { headers: headers }).map(res => res.json());
     }
-
     // Get subs in a category
     getSubs(catId: any) {
         // return this.http.get('http://localhost:3700/admin/get-subs/' + catId).map(res => res.json());
         return this.http.get('admin/get-subs/' + catId).map(res => res.json());
     }
-
     // Delet Sub from category
     deleteSubFromCategory(subName: string, cat_id: string) {
         // return this.http.delete('http://localhost:3700/admin/delete-sub-category/' + subName + '/' + cat_id).map(res => res.json());
         return this.http.delete('admin/delete-sub-category/' + subName + '/' + cat_id).map(res => res.json());
     }
-
-    // Add Menu Page
     // Getting items by sub category
     getDateItems(cat_id: string, sub_name: string, date: string) {
         // tslint:disable-next-line:max-line-length
@@ -102,20 +81,15 @@ export class AdminServicesService {
         // return this.http.get('http://localhost:3700/admin/get-all-dates').map(res => res.json());
         return this.http.get('admin/get-all-dates').map(res => res.json());
     }
-
     deleteDate(date_id) {
         // return this.http.delete('http://localhost:3700/admin/delete-date/' + date_id).map(res => res.json());
         return this.http.delete('admin/delete-date/' + date_id).map(res => res.json());
     }
-
-    // View Orders Page
-    // Reward Page
     // Get all users
     getUsers() {
         // return this.http.get('http://localhost:3700/admin/get-users').map(res => res.json());
         return this.http.get('admin/get-users').map(res => res.json());
     }
-
     // Get User from userId
     getUserFromId(user_id) {
         // return this.http.get('http://localhost:3700/admin/get-user-from-id/' + user_id).map(res => res.json());
@@ -129,5 +103,4 @@ export class AdminServicesService {
         // return this.http.get('http://localhost:3700/admin/post-rewards/' + email + '/' + points ).map(res => res.json());
         return this.http.get('admin/post-rewards/' + email + '/' + points ).map(res => res.json());
     }
-
 }

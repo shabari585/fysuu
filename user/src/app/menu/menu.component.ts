@@ -164,8 +164,6 @@ export class MenuComponent implements OnInit {
     day_three: null,
     day_four: null,
     day_five: null,
-    day_six: null,
-    // notes: this.notesToChef
   };
   roti_img = '../assets/menu-icons/roti_b.png';
   roti_r_img = '../assets/menu-icons/roti_r.png';
@@ -227,6 +225,8 @@ export class MenuComponent implements OnInit {
   day_three_sweets = [];
   day_four_sweets = [];
   day_five_sweets = [];
+
+  hover_alert: string;
 
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService, private getMenuItems: GetMenuService, private datePipe: DatePipe) {}
@@ -795,11 +795,6 @@ export class MenuComponent implements OnInit {
   loadDay(date, origin) {
     if (origin === 'btn_clicked') {
       const pdate = this.datePipe.transform(date, 'fullDate');
-      if (pdate.includes('Sunday')) {
-        $('.sc-ch-db').css({'display': 'flex'});
-      }else {
-        $('.sc-ch-db').css({'display': 'none'});
-      }
       $('#sch-slot-select option:eq(0)').prop('selected', true);
       $('.calender-li').removeClass('selected-date-li');
       switch (this.datePipe.transform(date, 'fullDate')) {
@@ -911,19 +906,17 @@ export class MenuComponent implements OnInit {
         case this.day_one_status:
           if (this.day_one_c_books.length > 1) {
             if (this.allOrders['day_one'] == null) {
-              $('.sch-err').html('You have\'t added to cart');
+              this.hover_alert = 'You have\'t added to cart';
+              $('.added-db').css({'display': 'flex'});
+              setTimeout(function() {
+                $('.added-db').css({'display': 'none'});
+              }, 1500);
             }else {
               const pdate = this.datePipe.transform(date, 'fullDate');
-              if (pdate.includes('Sunday')) {
-                $('.sc-ch-db').css({'display': 'flex'});
-              }else {
-                $('.sc-ch-db').css({'display': 'none'});
-              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
                 case this.p_day_one:
-                  alert('p_day_one');
                   $('#top-calender-li').addClass('selected-date-li');
                   // Day one menu
                   this.menu_to_be_loaded = this.day_one_books;
@@ -1029,11 +1022,6 @@ export class MenuComponent implements OnInit {
             }
           } else {
               const pdate = this.datePipe.transform(date, 'fullDate');
-              if (pdate.includes('Sunday')) {
-                $('.sc-ch-db').css({'display': 'flex'});
-              }else {
-                $('.sc-ch-db').css({'display': 'none'});
-              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1129,14 +1117,13 @@ export class MenuComponent implements OnInit {
         case this.day_two_status:
           if (this.day_two_c_books.length > 1) {
             if (this.allOrders['day_two'] == null) {
-              $('.sch-err').html('You have\'t added to cart');
+              this.hover_alert = 'You have\'t added to cart';
+              $('.added-db').css({'display': 'flex'});
+              setTimeout(function() {
+                $('.added-db').css({'display': 'none'});
+              }, 1500);
             }else {
               const pdate = this.datePipe.transform(date, 'fullDate');
-              if (pdate.includes('Sunday')) {
-                $('.sc-ch-db').css({'display': 'flex'});
-              }else {
-                $('.sc-ch-db').css({'display': 'none'});
-              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1247,11 +1234,6 @@ export class MenuComponent implements OnInit {
             }
           } else {
               const pdate = this.datePipe.transform(date, 'fullDate');
-              if (pdate.includes('Sunday')) {
-                $('.sc-ch-db').css({'display': 'flex'});
-              }else {
-                $('.sc-ch-db').css({'display': 'none'});
-              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1347,14 +1329,13 @@ export class MenuComponent implements OnInit {
         case this.day_three_status:
           if (this.day_three_c_books.length > 1) {
             if (this.allOrders['day_three'] == null) {
-              $('.sch-err').html('You have\'t added to cart');
+              this.hover_alert = 'You have\'t added to cart';
+              $('.added-db').css({'display': 'flex'});
+              setTimeout(function() {
+                $('.added-db').css({'display': 'none'});
+              }, 1500);
             }else {
               const pdate = this.datePipe.transform(date, 'fullDate');
-              if (pdate.includes('Sunday')) {
-                $('.sc-ch-db').css({'display': 'flex'});
-              }else {
-                $('.sc-ch-db').css({'display': 'none'});
-              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1447,20 +1428,109 @@ export class MenuComponent implements OnInit {
               }
             }
           } else {
-
+            const pdate = this.datePipe.transform(date, 'fullDate');
+            $('#sch-slot-select option:eq(0)').prop('selected', true);
+            $('.calender-li').removeClass('selected-date-li');
+            switch (this.datePipe.transform(date, 'fullDate')) {
+              case this.p_day_one:
+                $('#top-calender-li').addClass('selected-date-li');
+                // Day one menu
+                this.menu_to_be_loaded = this.day_one_books;
+                $('.sc-ch-mid').hide();
+                $('#day-one-div').show();
+                this.numberOfItems = this.num_day_one_items;
+                this.place_holder_price = this.total_day_one_price;
+                // Update active day status
+                this.day_one_status = true;
+                this.day_two_status = false;
+                this.day_three_status = false;
+                this.day_four_status = false;
+                this.day_five_status = false;
+                this.day_six_status = false;
+                break;
+              case this.p_day_two:
+              $('#calender-two').addClass('selected-date-li');
+                // Day two menu
+                this.menu_to_be_loaded = this.day_two_books;
+                // Experiment
+                $('.sc-ch-mid').hide();
+                $('#day-two-div').show();
+                this.numberOfItems = this.num_day_two_items;
+                this.place_holder_price = this.total_day_two_price;
+                // Update active day status
+                this.day_one_status = false;
+                this.day_two_status = true;
+                this.day_three_status = false;
+                this.day_four_status = false;
+                this.day_five_status = false;
+                this.day_six_status = false;
+                break;
+              case this.p_day_three:
+              $('#calender-three').addClass('selected-date-li');
+                // Day three menu
+                this.menu_to_be_loaded = this.day_three_books;
+                // Experiment
+                $('.sc-ch-mid').hide();
+                $('#day-three-div').show();
+                this.numberOfItems = this.num_day_three_items;
+                this.place_holder_price = this.total_day_three_price;
+                // Update active day status
+                this.day_one_status = false;
+                this.day_two_status = false;
+                this.day_three_status = true;
+                this.day_four_status = false;
+                this.day_five_status = false;
+                this.day_six_status = false;
+                break;
+              case this.p_day_four:
+              $('#calender-four').addClass('selected-date-li');
+                // Day four menu
+                  this.menu_to_be_loaded = this.day_four_books;
+                  // Experiment
+                  $('.sc-ch-mid').hide();
+                  $('#day-four-div').show();
+                  this.numberOfItems = this.num_day_four_items;
+                  this.place_holder_price = this.total_day_four_price;
+                // Update active day status
+                this.day_one_status = false;
+                this.day_two_status = false;
+                this.day_three_status = false;
+                this.day_four_status = true;
+                this.day_five_status = false;
+                this.day_six_status = false;
+                break;
+              case this.p_day_five:
+              $('#calender-five').addClass('selected-date-li');
+                // Day five menu
+                // this.menu_to_be_loaded = this.day_five_books;
+                 // Experiment
+                 $('.sc-ch-mid').hide();
+                 $('#day-five-div').show();
+                this.numberOfItems = this.num_day_five_items;
+                this.place_holder_price = this.total_day_five_price;
+                // Update active day status
+                this.day_one_status = false;
+                this.day_two_status = false;
+                this.day_three_status = false;
+                this.day_four_status = false;
+                this.day_five_status = true;
+                this.day_six_status = false;
+                break;
+              default:
+                break;
+            }
           }
         break;
         case this.day_four_status:
           if (this.day_four_c_books.length > 1) {
             if (this.allOrders['day_four'] == null) {
-              $('.sch-err').html('You have\'t added to cart');
+              this.hover_alert = 'You have\'t added to cart';
+              $('.added-db').css({'display': 'flex'});
+              setTimeout(function() {
+                $('.added-db').css({'display': 'none'});
+              }, 1500);
             }else {
               const pdate = this.datePipe.transform(date, 'fullDate');
-              if (pdate.includes('Sunday')) {
-                $('.sc-ch-db').css({'display': 'flex'});
-              }else {
-                $('.sc-ch-db').css({'display': 'none'});
-              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1554,11 +1624,6 @@ export class MenuComponent implements OnInit {
             }
           } else {
               const pdate = this.datePipe.transform(date, 'fullDate');
-              if (pdate.includes('Sunday')) {
-                $('.sc-ch-db').css({'display': 'flex'});
-              }else {
-                $('.sc-ch-db').css({'display': 'none'});
-              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1654,14 +1719,13 @@ export class MenuComponent implements OnInit {
         case this.day_five_status:
           if (this.day_five_c_books.length > 1) {
             if (this.allOrders['day_five'] == null) {
-              $('.sch-err').html('You have\'t added to cart');
+              this.hover_alert = 'You have\'t added to cart';
+              $('.added-db').css({'display': 'flex'});
+              setTimeout(function() {
+                $('.added-db').css({'display': 'none'});
+              }, 1500);
             }else {
               const pdate = this.datePipe.transform(date, 'fullDate');
-              if (pdate.includes('Sunday')) {
-                $('.sc-ch-db').css({'display': 'flex'});
-              }else {
-                $('.sc-ch-db').css({'display': 'none'});
-              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1756,11 +1820,6 @@ export class MenuComponent implements OnInit {
           } else {
 
             const pdate = this.datePipe.transform(date, 'fullDate');
-            if (pdate.includes('Sunday')) {
-              $('.sc-ch-db').css({'display': 'flex'});
-            }else {
-              $('.sc-ch-db').css({'display': 'none'});
-            }
             $('#sch-slot-select option:eq(0)').prop('selected', true);
             $('.calender-li').removeClass('selected-date-li');
             switch (this.datePipe.transform(date, 'fullDate')) {
@@ -2552,23 +2611,23 @@ export class MenuComponent implements OnInit {
 
   // Add to cart button clicked
   addCartClicked() {
-
-    // $('.sch-hover-menu-back').css('display','flex');
     switch (true) {
       case this.day_one_status:
         if (this.day_one_c_books.length < 5) {
-          $('.sch-err').html('Please select atleast 5 items');
-          setTimeout(() => {
-            $('.sch-err').html('');
-          }, 5000);
+          this.hover_alert = 'Please select atleast 5 items';
+          $('.added-db').css({'display': 'flex'});
+          setTimeout(function() {
+            $('.added-db').css({'display': 'none'});
+          }, 1500);
         }else {
           if (this.day_one_slot === undefined || this.day_one_slot === null) {
             //  Show error
             $('.slot-select').css({'border-color': '#fa0000'});
-            $('.sch-err').html('Please select a Delivery Slot');
-            setTimeout(() => {
-              $('.sch-err').html('');
-            }, 5000);
+            this.hover_alert = 'Please select a Delivery Slot';
+            $('.added-db').css({'display': 'flex'});
+            setTimeout(function() {
+              $('.added-db').css({'display': 'none'});
+            }, 1500);
           }else {
             let day_one_check = false;
             this.day_one_c_books.forEach(element => {
@@ -2579,161 +2638,171 @@ export class MenuComponent implements OnInit {
             if (day_one_check) {
             $('.slot-select').selectedIndex = 1;
             $('.slot-select').css({'border-color': '#666'});
-            $('.sch-err').html('');
-            let today: object, day_one: object, day_two: object, day_three: object, day_four: object, day_five: object, day_six: object;
-                    // Today's items are active
-                    if (this.num_today_items > 0) {
-                      // let date, menu, numOfTimes, totalPrice;
-                      today = {
-                        // Get Date
-                        date: this.p_today_one,
-                        // Raw date for reports
-                        rawDate: this.today_one,
-                        // Get the booked menu
-                        menu: this.today_c_books,
-                        // Get the number of times menu has been booked
-                        numOfTimes: this.num_today_items,
-                        // Price per portion
-                        perPortionPrice: this.today_price,
-                        // Time slot
-                        timeSlot: this.today_slot,
-                        // Total price
-                        totalPrice: this.total_today_price
-                      };
-                    } else {
-                      today = null;
-                    }
+            let day_one: object, day_two: object, day_three: object, day_four: object, day_five: object;
                     // If day one's items are active
                     if (this.num_day_one_items > 0) {
-                      // let date, menu, numOfTimes, totalPrice;
-                      day_one = {
-                        // Get Date
-                        date: this.p_day_one,
-                        // Raw date for reports
-                        rawDate : this.day_one,
-                        // Get the booked menu
-                        menu: this.day_one_c_books,
-                        // Get the number of times menu has been booked
-                        numOfTimes: this.num_day_one_items,
-                        // Price per portion
-                        perPortionPrice: this.day_one_price,
-                        // Time slot
-                        timeSlot: this.day_one_slot,
-                        // Total price
-                        totalPrice: this.total_day_one_price
-                      };
+                      if (this.day_one_c_books.length > 4) {
+                        day_one = {
+                          // Get Date
+                          date: this.p_day_one,
+                          // Raw date for reports
+                          rawDate : this.day_one,
+                          // Get the booked menu
+                          menu: this.day_one_c_books,
+                          // Get the number of times menu has been booked
+                          numOfTimes: this.num_day_one_items,
+                          // Price per portion
+                          perPortionPrice: this.day_one_price,
+                          // Time slot
+                          timeSlot: this.day_one_slot,
+                          // Total price
+                          totalPrice: this.total_day_one_price
+                        };
+                      }else {
+                        if ((this.allOrders['day_one'] != null)) {
+                          day_one = this.allOrders['day_one'];
+                        }else {
+                          day_one = null;
+                        }
+                      }
                     } else {
-                      day_one = null;
+                      if ((this.allOrders['day_one'] != null)) {
+                        day_one = this.allOrders['day_one'];
+                      }else {
+                        day_one = null;
+                      }
                     }
                     // If day two's items are active
                     if (this.num_day_two_items > 0) {
-                      // let date, menu, numOfTimes, totalPrice;
-                      day_two = {
-                        // Get Date
-                        date: this.p_day_two,
-                        // Raw date for reports
-                        rawDate: this.day_two,
-                        // Get the booked menu
-                        menu: this.day_two_c_books,
-                        // Get the number of times menu has been booked
-                        numOfTimes: this.num_day_two_items,
-                        // Price per portion
-                        perPortionPrice: this.day_two_price,
-                        // Time slot
-                        timeSlot: this.day_two_slot,
-                        // Total price
-                        totalPrice: this.total_day_two_price
-                      };
+                      if (this.day_two_c_books.length > 4) {
+                        day_two = {
+                          // Get Date
+                          date: this.p_day_two,
+                          // Raw date for reports
+                          rawDate: this.day_two,
+                          // Get the booked menu
+                          menu: this.day_two_c_books,
+                          // Get the number of times menu has been booked
+                          numOfTimes: this.num_day_two_items,
+                          // Price per portion
+                          perPortionPrice: this.day_two_price,
+                          // Time slot
+                          timeSlot: this.day_two_slot,
+                          // Total price
+                          totalPrice: this.total_day_two_price
+                        };
+                      }else {
+                        if ((this.allOrders['day_two'] != null)) {
+                          day_two = this.allOrders['day_two'];
+                        }else {
+                          day_two = null;
+                        }
+                      }
                     } else {
-                      day_two = null;
+                      if ((this.allOrders['day_two'] != null)) {
+                        day_two = this.allOrders['day_two'];
+                      }else {
+                        day_two = null;
+                      }
                     }
                     // If day three's items are active
                     if (this.num_day_three_items > 0) {
-                      // let date, menu, numOfTimes, totalPrice;
-                      day_three = {
-                        // Get Date
-                        date: this.p_day_three,
-                        // Raw date for reports
-                        rawDate: this.day_three,
-                        // Get the booked menu
-                        menu: this.day_three_c_books,
-                        // Get the number of times menu has been booked
-                        numOfTimes: this.num_day_three_items,
-                        // Price per portion
-                        perPortionPrice: this.day_three_price,
-                        // Time slot
-                        timeSlot: this.day_three_slot,
-                        // Total price
-                        totalPrice: this.total_day_three_price
-                      };
+                      if (this.day_three_c_books.length > 4) {
+                        day_three = {
+                          // Get Date
+                          date: this.p_day_three,
+                          // Raw date for reports
+                          rawDate: this.day_three,
+                          // Get the booked menu
+                          menu: this.day_three_c_books,
+                          // Get the number of times menu has been booked
+                          numOfTimes: this.num_day_three_items,
+                          // Price per portion
+                          perPortionPrice: this.day_three_price,
+                          // Time slot
+                          timeSlot: this.day_three_slot,
+                          // Total price
+                          totalPrice: this.total_day_three_price
+                        };
+                      } else {
+                        if ((this.allOrders['day_three'] != null)) {
+                          day_three = this.allOrders['day_three'];
+                        }else {
+                          day_three = null;
+                        }
+                      }
                     } else {
-                      day_three = null;
+                      if ((this.allOrders['day_three'] != null)) {
+                        day_three = this.allOrders['day_three'];
+                      }else {
+                        day_three = null;
+                      }
                     }
                     // If day four's items are active
                     if (this.num_day_four_items > 0) {
-                      // let date, menu, numOfTimes, totalPrice;
-                      day_four = {
-                        // Get Date
-                        date: this.p_day_four,
-                        // Raw date for reports
-                        rawDate: this.day_four,
-                        // Get the booked menu
-                        menu: this.day_four_c_books,
-                        // Get the number of times menu has been booked
-                        numOfTimes: this.num_day_four_items,
-                        // Price per portion
-                        perPortionPrice: this.day_four_price,
-                        // Time slot
-                        timeSlot: this.day_four_slot,
-                        // Total price
-                        totalPrice: this.total_day_four_price
-                      };
+                      if (this.day_four_c_books.length > 4) {
+                        day_four = {
+                          // Get Date
+                          date: this.p_day_four,
+                          // Raw date for reports
+                          rawDate: this.day_four,
+                          // Get the booked menu
+                          menu: this.day_four_c_books,
+                          // Get the number of times menu has been booked
+                          numOfTimes: this.num_day_four_items,
+                          // Price per portion
+                          perPortionPrice: this.day_four_price,
+                          // Time slot
+                          timeSlot: this.day_four_slot,
+                          // Total price
+                          totalPrice: this.total_day_four_price
+                        };
+                      }else {
+                        if ((this.allOrders['day_four'] != null)) {
+                          day_four = this.allOrders['day_four'];
+                        }else {
+                          day_four = null;
+                        }
+                      }
                     } else {
-                      day_four = null;
+                      if ((this.allOrders['day_four'] != null)) {
+                        day_four = null;
+                      }else {
+                        day_four = this.allOrders['day_four'];
+                      }
                     }
                     // If day five's items are active
                     if (this.num_day_five_items > 0) {
-                      // let date, menu, numOfTimes, totalPrice;
-                      day_five = {
-                        // Get Date
-                        date: this.p_day_five,
-                        // Raw date for reports
-                        rawDate : this.day_five,
-                        // Get the booked menu
-                        menu: this.day_five_c_books,
-                        // Get the number of times menu has been booked
-                        numOfTimes: this.num_day_five_items,
-                        // Price per portion
-                        perPortionPrice: this.day_five_price,
-                        // Time slot
-                        timeSlot: this.day_five_slot,
-                        // Total price
-                        totalPrice: this.total_day_five_price
-                      };
+                      if (this.day_five_c_books.length > 4) {
+                        day_five = {
+                          // Get Date
+                          date: this.p_day_five,
+                          // Raw date for reports
+                          rawDate : this.day_five,
+                          // Get the booked menu
+                          menu: this.day_five_c_books,
+                          // Get the number of times menu has been booked
+                          numOfTimes: this.num_day_five_items,
+                          // Price per portion
+                          perPortionPrice: this.day_five_price,
+                          // Time slot
+                          timeSlot: this.day_five_slot,
+                          // Total price
+                          totalPrice: this.total_day_five_price
+                        };
+                      }else {
+                        if ((this.allOrders['day_five'] != null)) {
+                          day_five = this.allOrders['day_five'];
+                        }else {
+                          day_five = null;
+                        }
+                      }
                     } else {
-                      day_five = null;
-                    }
-                    // If day six's items are active
-                    if (this.num_day_six_items) {
-                      // let date, menu, numOfTimes, totalPrice;
-                      day_six = {
-                        // Get Date
-                        date: this.p_day_six,
-                        // Raw date for reports
-                        rawDate: this.day_six,
-                        // Get the booked menu
-                        menu: this.day_six_c_books,
-                        // Get the number of times menu has been booked
-                        numOfTimes: this.num_day_six_items,
-                        // Price per portion
-                        perPortionPrice: this.day_six_price,
-                        // Time slot
-                        timeSlot: this.day_six_slot,
-                        // Total price
-                        totalPrice: this.total_day_six_price
-                      };
-                    } else {
-                      day_six = null;
+                      if ((this.allOrders['day_five'] != null)) {
+                        day_five = this.allOrders['day_five'];
+                      }else {
+                        day_five = null;
+                      }
                     }
                     switch (true) {
                       case this.today_status:
@@ -2754,9 +2823,6 @@ export class MenuComponent implements OnInit {
                       case this.day_five_status:
                         this.basketNumber++;
                         break;
-                      case this.day_six_status:
-                        this.basketNumber++;
-                        break;
                       default:
                         break;
                     }
@@ -2766,39 +2832,40 @@ export class MenuComponent implements OnInit {
                       day_three: day_three,
                       day_four: day_four,
                       day_five: day_five,
-                      day_six: day_six,
-                      // notes: this.notesToChef
                     };
                     localStorage.setItem('all_orders', JSON.stringify(this.allOrders));
+                    this.hover_alert = 'Added !';
                     $('.added-db').css({'display': 'flex'});
                     setTimeout(function() {
                       $('.added-db').css({'display': 'none'});
                     }, 1000);
               }else {
-                $('.sch-err').html('Please select one Combo item');
-                setTimeout(() => {
-                  $('.sch-err').html('');
-                }, 5000);
+                this.hover_alert = 'Please select one Combo item';
+                $('.added-db').css({'display': 'flex'});
+                setTimeout(function() {
+                  $('.added-db').css({'display': 'none'});
+                }, 2000);
               }
           }
         }
       break;
       case this.day_two_status:
         if (this.day_two_c_books.length < 5) {
-          $('.sch-err').html('Please select atleast 5 items');
-          setTimeout(() => {
-            $('.sch-err').html('');
-          }, 5000);
+          this.hover_alert = 'Please select atleast 5 items';
+          $('.added-db').css({'display': 'flex'});
+          setTimeout(function() {
+            $('.added-db').css({'display': 'none'});
+          }, 1500);
         }else {
         if (this.day_two_slot === undefined || this.day_two_slot === null) {
           //  Show error
           $('.slot-select').css({'border-color': '#fa0000'});
-          $('.sch-err').html('Please select a Delivery Slot');
-          setTimeout(() => {
-            $('.sch-err').html('');
-          }, 5000);
+          this.hover_alert = 'Please select a Delivery Slot';
+          $('.added-db').css({'display': 'flex'});
+          setTimeout(function() {
+            $('.added-db').css({'display': 'none'});
+          }, 1500);
         }else {
-          // console.log(this.day_two_c_books);
           let day_two_check = false;
           this.day_two_c_books.forEach(element => {
             if (element.sub_name === 'Combo') {
@@ -2808,161 +2875,173 @@ export class MenuComponent implements OnInit {
           if (day_two_check) {
             $('.slot-select').selectedIndex = 1;
             $('.slot-select').css({'border-color': '#666'});
-            $('.sch-err').html('');
-          let today: object, day_one: object, day_two: object, day_three: object, day_four: object, day_five: object, day_six: object;
-                // Today's items are active
-                if (this.num_today_items > 0) {
-                  // let date, menu, numOfTimes, totalPrice;
-                  today = {
-                    // Get Date
-                    date: this.p_today_one,
-                    // Raw date for reports
-                    rawDate: this.today_one,
-                    // Get the booked menu
-                    menu: this.today_c_books,
-                    // Get the number of times menu has been booked
-                    numOfTimes: this.num_today_items,
-                    // Price per portion
-                    perPortionPrice: this.today_price,
-                    // Time slot
-                    timeSlot: this.today_slot,
-                    // Total price
-                    totalPrice: this.total_today_price
-                  };
-                } else {
-                  today = null;
-                }
+          let day_one: object, day_two: object, day_three: object, day_four: object, day_five: object;
                 // If day one's items are active
                 if (this.num_day_one_items > 0) {
                   // let date, menu, numOfTimes, totalPrice;
-                  day_one = {
-                    // Get Date
-                    date: this.p_day_one,
-                    // Raw date for reports
-                    rawDate : this.day_one,
-                    // Get the booked menu
-                    menu: this.day_one_c_books,
-                    // Get the number of times menu has been booked
-                    numOfTimes: this.num_day_one_items,
-                    // Price per portion
-                    perPortionPrice: this.day_one_price,
-                    // Time slot
-                    timeSlot: this.day_one_slot,
-                    // Total price
-                    totalPrice: this.total_day_one_price
-                  };
+                  if (this.day_one_c_books.length > 4) {
+                    day_one = {
+                      // Get Date
+                      date: this.p_day_one,
+                      // Raw date for reports
+                      rawDate : this.day_one,
+                      // Get the booked menu
+                      menu: this.day_one_c_books,
+                      // Get the number of times menu has been booked
+                      numOfTimes: this.num_day_one_items,
+                      // Price per portion
+                      perPortionPrice: this.day_one_price,
+                      // Time slot
+                      timeSlot: this.day_one_slot,
+                      // Total price
+                      totalPrice: this.total_day_one_price
+                    };
+                  }else {
+                    if ((this.allOrders['day_one'] != null)) {
+                      day_one = this.allOrders['day_one'];
+                    }else {
+                      day_one = null;
+                    }
+                  }
                 } else {
-                  day_one = null;
+                  if ((this.allOrders['day_one'] != null)) {
+                    day_one = null;
+                  }else {
+                    day_one = this.allOrders['day_one'];
+                  }
                 }
                 // If day two's items are active
                 if (this.num_day_two_items > 0) {
                   // let date, menu, numOfTimes, totalPrice;
-                  day_two = {
-                    // Get Date
-                    date: this.p_day_two,
-                    // Raw date for reports
-                    rawDate: this.day_two,
-                    // Get the booked menu
-                    menu: this.day_two_c_books,
-                    // Get the number of times menu has been booked
-                    numOfTimes: this.num_day_two_items,
-                    // Price per portion
-                    perPortionPrice: this.day_two_price,
-                     // Time slot
-                    timeSlot: this.day_two_slot,
-                    // Total price
-                    totalPrice: this.total_day_two_price
-                  };
+                  if (this.day_two_c_books.length > 4) {
+                    day_two = {
+                      // Get Date
+                      date: this.p_day_two,
+                      // Raw date for reports
+                      rawDate: this.day_two,
+                      // Get the booked menu
+                      menu: this.day_two_c_books,
+                      // Get the number of times menu has been booked
+                      numOfTimes: this.num_day_two_items,
+                      // Price per portion
+                      perPortionPrice: this.day_two_price,
+                      // Time slot
+                      timeSlot: this.day_two_slot,
+                      // Total price
+                      totalPrice: this.total_day_two_price
+                    };
+                  }else {
+                    if ((this.allOrders['day_two'] != null)) {
+                      day_two = this.allOrders['day_two'];
+                    }else {
+                      day_two = null;
+                    }
+                  }
                 } else {
-                  day_two = null;
+                  if ((this.allOrders['day_two'] != null)) {
+                    day_two = this.allOrders['day_two'];
+                  }else {
+                    day_two = null;
+                  }
                 }
                 // If day three's items are active
                 if (this.num_day_three_items > 0) {
-                  // let date, menu, numOfTimes, totalPrice;
-                  day_three = {
-                    // Get Date
-                    date: this.p_day_three,
-                    // Raw date for reports
-                    rawDate: this.day_three,
-                    // Get the booked menu
-                    menu: this.day_three_c_books,
-                    // Get the number of times menu has been booked
-                    numOfTimes: this.num_day_three_items,
-                    // Price per portion
-                    perPortionPrice: this.day_three_price,
-                     // Time slot
-                    timeSlot: this.day_three_slot,
-                    // Total price
-                    totalPrice: this.total_day_three_price
-                  };
+                  if (this.day_three_c_books.length > 4) {
+                    day_three = {
+                      // Get Date
+                      date: this.p_day_three,
+                      // Raw date for reports
+                      rawDate: this.day_three,
+                      // Get the booked menu
+                      menu: this.day_three_c_books,
+                      // Get the number of times menu has been booked
+                      numOfTimes: this.num_day_three_items,
+                      // Price per portion
+                      perPortionPrice: this.day_three_price,
+                      // Time slot
+                      timeSlot: this.day_three_slot,
+                      // Total price
+                      totalPrice: this.total_day_three_price
+                    };
+                  } else {
+                    if ((this.allOrders['day_three'] != null)) {
+                      day_three = this.allOrders['day_three'];
+                    }else {
+                      day_three = null;
+                    }
+                  }
                 } else {
-                  day_three = null;
+                  if ((this.allOrders['day_three'] != null)) {
+                    day_three = this.allOrders['day_three'];
+                  }else {
+                    day_three = null;
+                  }
                 }
                 // If day four's items are active
                 if (this.num_day_four_items > 0) {
-                  // let date, menu, numOfTimes, totalPrice;
-                  day_four = {
-                    // Get Date
-                    date: this.p_day_four,
-                    // Raw date for reports
-                    rawDate: this.day_four,
-                    // Get the booked menu
-                    menu: this.day_four_c_books,
-                    // Get the number of times menu has been booked
-                    numOfTimes: this.num_day_four_items,
-                    // Price per portion
-                    perPortionPrice: this.day_four_price,
-                    // Time slot
-                    timeSlot: this.day_four_slot,
-                    // Total price
-                    totalPrice: this.total_day_four_price
-                  };
+                  if (this.day_four_c_books.length > 4) {
+                    day_four = {
+                      // Get Date
+                      date: this.p_day_four,
+                      // Raw date for reports
+                      rawDate: this.day_four,
+                      // Get the booked menu
+                      menu: this.day_four_c_books,
+                      // Get the number of times menu has been booked
+                      numOfTimes: this.num_day_four_items,
+                      // Price per portion
+                      perPortionPrice: this.day_four_price,
+                      // Time slot
+                      timeSlot: this.day_four_slot,
+                      // Total price
+                      totalPrice: this.total_day_four_price
+                    };
+                  }else {
+                    if ((this.allOrders['day_four'] != null)) {
+                      day_four = this.allOrders['day_four'];
+                    }else {
+                      day_four = null;
+                    }
+                  }
                 } else {
-                  day_four = null;
+                  if ((this.allOrders['day_four'] != null)) {
+                    day_four = this.allOrders['day_four'];
+                  }else {
+                    day_four = null;
+                  }
                 }
                 // If day five's items are active
                 if (this.num_day_five_items > 0) {
-                  // let date, menu, numOfTimes, totalPrice;
-                  day_five = {
-                    // Get Date
-                    date: this.p_day_five,
-                    // Raw date for reports
-                    rawDate : this.day_five,
-                    // Get the booked menu
-                    menu: this.day_five_c_books,
-                    // Get the number of times menu has been booked
-                    numOfTimes: this.num_day_five_items,
-                    // Price per portion
-                    perPortionPrice: this.day_five_price,
-                    // Time slot
-                    timeSlot: this.day_five_slot,
-                    // Total price
-                    totalPrice: this.total_day_five_price
-                  };
+                  if (this.day_five_c_books.length > 4) {
+                    day_five = {
+                      // Get Date
+                      date: this.p_day_five,
+                      // Raw date for reports
+                      rawDate : this.day_five,
+                      // Get the booked menu
+                      menu: this.day_five_c_books,
+                      // Get the number of times menu has been booked
+                      numOfTimes: this.num_day_five_items,
+                      // Price per portion
+                      perPortionPrice: this.day_five_price,
+                      // Time slot
+                      timeSlot: this.day_five_slot,
+                      // Total price
+                      totalPrice: this.total_day_five_price
+                    };
+                  }else {
+                    if ((this.allOrders['day_five'] != null)) {
+                      day_five = this.allOrders['day_five'];
+                    }else {
+                      day_five = null;
+                    }
+                  }
                 } else {
-                  day_five = null;
-                }
-                // If day six's items are active
-                if (this.num_day_six_items) {
-                  // let date, menu, numOfTimes, totalPrice;
-                  day_six = {
-                    // Get Date
-                    date: this.p_day_six,
-                    // Raw date for reports
-                    rawDate: this.day_six,
-                    // Get the booked menu
-                    menu: this.day_six_c_books,
-                    // Get the number of times menu has been booked
-                    numOfTimes: this.num_day_six_items,
-                    // Price per portion
-                    perPortionPrice: this.day_six_price,
-                    // Time slot
-                    timeSlot: this.day_six_slot,
-                    // Total price
-                    totalPrice: this.total_day_six_price
-                  };
-                } else {
-                  day_six = null;
+                  if ((this.allOrders['day_five'] != null)) {
+                    day_five = this.allOrders['day_five'];
+                  }else {
+                    day_five = null;
+                  }
                 }
                 switch (true) {
                   case this.today_status:
@@ -2983,9 +3062,6 @@ export class MenuComponent implements OnInit {
                   case this.day_five_status:
                     this.basketNumber++;
                     break;
-                  case this.day_six_status:
-                    this.basketNumber++;
-                    break;
                   default:
                     break;
                 }
@@ -2995,37 +3071,39 @@ export class MenuComponent implements OnInit {
                   day_three: day_three,
                   day_four: day_four,
                   day_five: day_five,
-                  day_six: day_six,
-                  // notes: this.notesToChef
                 };
                 localStorage.setItem('all_orders', JSON.stringify(this.allOrders));
+                this.hover_alert = 'Added !';
                 $('.added-db').css({'display': 'flex'});
                 setTimeout(function() {
                   $('.added-db').css({'display': 'none'});
                 }, 1000);
               }else {
-                $('.sch-err').html('Please select one Combo item');
-                setTimeout(() => {
-                  $('.sch-err').html('');
-                }, 5000);
+                this.hover_alert = 'Please select one Combo Item';
+                $('.added-db').css({'display': 'flex'});
+                setTimeout(function() {
+                  $('.added-db').css({'display': 'none'});
+                }, 1500);
               }
             }
           }
       break;
       case this.day_three_status:
             if (this.day_three_c_books.length < 5) {
-              $('.sch-err').html('Please select atleast 5 items');
-              setTimeout(() => {
-                $('.sch-err').html('');
-              }, 5000);
+              this.hover_alert = 'Please select atleast 5 items';
+              $('.added-db').css({'display': 'flex'});
+              setTimeout(function() {
+                $('.added-db').css({'display': 'none'});
+              }, 1500);
             }else {
               if (this.day_three_slot === undefined || this.day_three_slot === null) {
                 //  Show error
                 $('.slot-select').css({'border-color': '#fa0000'});
-                $('.sch-err').html('Please select a Delivery Slot');
-                setTimeout(() => {
-                  $('.sch-err').html('');
-                }, 5000);
+                this.hover_alert = 'Please select a Delivery Slot';
+                $('.added-db').css({'display': 'flex'});
+                setTimeout(function() {
+                  $('.added-db').css({'display': 'none'});
+                }, 1500);
               }else {
                 let day_three_check = false;
                 this.day_three_c_books.forEach(element => {
@@ -3036,161 +3114,171 @@ export class MenuComponent implements OnInit {
                 if (day_three_check) {
                 $('.slot-select').selectedIndex = 1;
                 $('.slot-select').css({'border-color': '#666'});
-                $('.sch-err').html('');
-              let today: object, day_one: object, day_two: object, day_three: object, day_four: object, day_five: object, day_six: object;
-                      // Today's items are active
-                      if (this.num_today_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        today = {
-                          // Get Date
-                          date: this.p_today_one,
-                          // Raw date for reports
-                          rawDate: this.today_one,
-                          // Get the booked menu
-                          menu: this.today_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_today_items,
-                          // Price per portion
-                          perPortionPrice: this.today_price,
-                          // Time slot
-                          timeSlot: this.today_slot,
-                          // Total price
-                          totalPrice: this.total_today_price
-                        };
-                      } else {
-                        today = null;
-                      }
+              let day_one: object, day_two: object, day_three: object, day_four: object, day_five: object;
                       // If day one's items are active
                       if (this.num_day_one_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_one = {
-                          // Get Date
-                          date: this.p_day_one,
-                          // Raw date for reports
-                          rawDate : this.day_one,
-                          // Get the booked menu
-                          menu: this.day_one_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_one_items,
-                          // Price per portion
-                          perPortionPrice: this.day_one_price,
-                          // Time slot
-                          timeSlot: this.day_one_slot,
-                          // Total price
-                          totalPrice: this.total_day_one_price
-                        };
+                        if (this.day_one_c_books.length > 4) {
+                          day_one = {
+                            // Get Date
+                            date: this.p_day_one,
+                            // Raw date for reports
+                            rawDate : this.day_one,
+                            // Get the booked menu
+                            menu: this.day_one_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_one_items,
+                            // Price per portion
+                            perPortionPrice: this.day_one_price,
+                            // Time slot
+                            timeSlot: this.day_one_slot,
+                            // Total price
+                            totalPrice: this.total_day_one_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_one'] != null)) {
+                            day_one = this.allOrders['day_one'];
+                          }else {
+                            day_one = null;
+                          }
+                        }
                       } else {
-                        day_one = null;
+                        if ((this.allOrders['day_one'] != null)) {
+                          day_one = this.allOrders['day_one'];
+                        }else {
+                          day_one = null;
+                        }
                       }
                       // If day two's items are active
                       if (this.num_day_two_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_two = {
-                          // Get Date
-                          date: this.p_day_two,
-                          // Raw date for reports
-                          rawDate: this.day_two,
-                          // Get the booked menu
-                          menu: this.day_two_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_two_items,
-                          // Price per portion
-                          perPortionPrice: this.day_two_price,
-                           // Time slot
-                          timeSlot: this.day_two_slot,
-                          // Total price
-                          totalPrice: this.total_day_two_price
-                        };
+                        if (this.day_two_c_books.length > 4) {
+                          day_two = {
+                            // Get Date
+                            date: this.p_day_two,
+                            // Raw date for reports
+                            rawDate: this.day_two,
+                            // Get the booked menu
+                            menu: this.day_two_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_two_items,
+                            // Price per portion
+                            perPortionPrice: this.day_two_price,
+                            // Time slot
+                            timeSlot: this.day_two_slot,
+                            // Total price
+                            totalPrice: this.total_day_two_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_two'] != null)) {
+                            day_two = this.allOrders['day_two'];
+                          }else {
+                            day_two = null;
+                          }
+                        }
                       } else {
-                        day_two = null;
+                        if ((this.allOrders['day_two'] != null)) {
+                          day_two = this.allOrders['day_two'];
+                        }else {
+                          day_two = null;
+                        }
                       }
                       // If day three's items are active
                       if (this.num_day_three_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_three = {
-                          // Get Date
-                          date: this.p_day_three,
-                          // Raw date for reports
-                          rawDate: this.day_three,
-                          // Get the booked menu
-                          menu: this.day_three_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_three_items,
-                          // Price per portion
-                          perPortionPrice: this.day_three_price,
-                           // Time slot
-                          timeSlot: this.day_three_slot,
-                          // Total price
-                          totalPrice: this.total_day_three_price
-                        };
+                        if (this.day_three_c_books.length > 4) {
+                          day_three = {
+                            // Get Date
+                            date: this.p_day_three,
+                            // Raw date for reports
+                            rawDate: this.day_three,
+                            // Get the booked menu
+                            menu: this.day_three_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_three_items,
+                            // Price per portion
+                            perPortionPrice: this.day_three_price,
+                            // Time slot
+                            timeSlot: this.day_three_slot,
+                            // Total price
+                            totalPrice: this.total_day_three_price
+                          };
+                        } else {
+                          if ((this.allOrders['day_three'] != null)) {
+                            day_three = this.allOrders['day_three'];
+                          }else {
+                            day_three = null;
+                          }
+                        }
                       } else {
-                        day_three = null;
+                        if ((this.allOrders['day_three'] != null)) {
+                          day_three = this.allOrders['day_three'];
+                        }else {
+                          day_three = null;
+                        }
                       }
                       // If day four's items are active
                       if (this.num_day_four_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_four = {
-                          // Get Date
-                          date: this.p_day_four,
-                          // Raw date for reports
-                          rawDate: this.day_four,
-                          // Get the booked menu
-                          menu: this.day_four_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_four_items,
-                          // Price per portion
-                          perPortionPrice: this.day_four_price,
-                          // Time slot
-                          timeSlot: this.day_four_slot,
-                          // Total price
-                          totalPrice: this.total_day_four_price
-                        };
+                        if (this.day_four_c_books.length > 4) {
+                          day_four = {
+                            // Get Date
+                            date: this.p_day_four,
+                            // Raw date for reports
+                            rawDate: this.day_four,
+                            // Get the booked menu
+                            menu: this.day_four_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_four_items,
+                            // Price per portion
+                            perPortionPrice: this.day_four_price,
+                            // Time slot
+                            timeSlot: this.day_four_slot,
+                            // Total price
+                            totalPrice: this.total_day_four_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_four'] != null)) {
+                            day_four = this.allOrders['day_four'];
+                          }else {
+                            day_four = null;
+                          }
+                        }
                       } else {
-                        day_four = null;
+                        if ((this.allOrders['day_four'] != null)) {
+                          day_four = this.allOrders['day_four'];
+                        }else {
+                          day_four = null;
+                        }
                       }
                       // If day five's items are active
                       if (this.num_day_five_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_five = {
-                          // Get Date
-                          date: this.p_day_five,
-                          // Raw date for reports
-                          rawDate : this.day_five,
-                          // Get the booked menu
-                          menu: this.day_five_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_five_items,
-                          // Price per portion
-                          perPortionPrice: this.day_five_price,
-                          // Time slot
-                          timeSlot: this.day_five_slot,
-                          // Total price
-                          totalPrice: this.total_day_five_price
-                        };
+                        if (this.day_five_c_books.length > 4) {
+                          day_five = {
+                            // Get Date
+                            date: this.p_day_five,
+                            // Raw date for reports
+                            rawDate : this.day_five,
+                            // Get the booked menu
+                            menu: this.day_five_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_five_items,
+                            // Price per portion
+                            perPortionPrice: this.day_five_price,
+                            // Time slot
+                            timeSlot: this.day_five_slot,
+                            // Total price
+                            totalPrice: this.total_day_five_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_five'] != null)) {
+                            day_five = this.allOrders['day_five'];
+                          }else {
+                            day_five = null;
+                          }
+                        }
                       } else {
-                        day_five = null;
-                      }
-                      // If day six's items are active
-                      if (this.num_day_six_items) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_six = {
-                          // Get Date
-                          date: this.p_day_six,
-                          // Raw date for reports
-                          rawDate: this.day_six,
-                          // Get the booked menu
-                          menu: this.day_six_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_six_items,
-                          // Price per portion
-                          perPortionPrice: this.day_six_price,
-                          // Time slot
-                          timeSlot: this.day_six_slot,
-                          // Total price
-                          totalPrice: this.total_day_six_price
-                        };
-                      } else {
-                        day_six = null;
+                        if ((this.allOrders['day_five'] != null)) {
+                          day_five = this.allOrders['day_five'];
+                        }else {
+                          day_five = null;
+                        }
                       }
                       switch (true) {
                         case this.today_status:
@@ -3211,9 +3299,6 @@ export class MenuComponent implements OnInit {
                         case this.day_five_status:
                           this.basketNumber++;
                           break;
-                        case this.day_six_status:
-                          this.basketNumber++;
-                          break;
                         default:
                           break;
                       }
@@ -3223,37 +3308,39 @@ export class MenuComponent implements OnInit {
                         day_three: day_three,
                         day_four: day_four,
                         day_five: day_five,
-                        day_six: day_six,
-                        // notes: this.notesToChef
                       };
                       localStorage.setItem('all_orders', JSON.stringify(this.allOrders));
+                      this.hover_alert = 'Added !';
                       $('.added-db').css({'display': 'flex'});
                       setTimeout(function() {
                         $('.added-db').css({'display': 'none'});
                       }, 1000);
                     }else {
-                      $('.sch-err').html('Please select one Combo item');
-                      setTimeout(() => {
-                        $('.sch-err').html('');
-                      }, 5000);
+                      this.hover_alert = 'Please select one Combo item';
+                      $('.added-db').css({'display': 'flex'});
+                      setTimeout(function() {
+                        $('.added-db').css({'display': 'none'});
+                      }, 1500);
                     }
             }
           }
         break;
       case this.day_four_status:
             if (this.day_four_c_books.length < 5) {
-              $('.sch-err').html('Please select atleast 5 items');
-              setTimeout(() => {
-                $('.sch-err').html('');
-              }, 5000);
+              this.hover_alert = 'Please select atleast 5 items';
+              $('.added-db').css({'display': 'flex'});
+              setTimeout(function() {
+                $('.added-db').css({'display': 'none'});
+              }, 1500);
             }else {
               if (this.day_four_slot === undefined || this.day_four_slot === null) {
                 //  Show error
                 $('.slot-select').css({'border-color': '#fa0000'});
-                $('.sch-err').html('Please select a Delivery Slot');
-                setTimeout(() => {
-                  $('.sch-err').html('');
-                }, 5000);
+                this.hover_alert = 'Please select a Delivery Slot';
+                $('.added-db').css({'display': 'flex'});
+                setTimeout(function() {
+                  $('.added-db').css({'display': 'none'});
+                }, 1500);
               }else {
               let day_four_check = false;
               this.day_four_c_books.forEach(element => {
@@ -3264,161 +3351,171 @@ export class MenuComponent implements OnInit {
               if (day_four_check) {
               $('.slot-select').selectedIndex = 1;
               $('.slot-select').css({'border-color': '#666'});
-              $('.sch-err').html('');
-              let today: object, day_one: object, day_two: object, day_three: object, day_four: object, day_five: object, day_six: object;
-                      // Today's items are active
-                      if (this.num_today_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        today = {
-                          // Get Date
-                          date: this.p_today_one,
-                          // Raw date for reports
-                          rawDate: this.today_one,
-                          // Get the booked menu
-                          menu: this.today_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_today_items,
-                          // Price per portion
-                          perPortionPrice: this.today_price,
-                          // Time slot
-                          timeSlot: this.today_slot,
-                          // Total price
-                          totalPrice: this.total_today_price
-                        };
-                      } else {
-                        today = null;
-                      }
+              let day_one: object, day_two: object, day_three: object, day_four: object, day_five: object;
                       // If day one's items are active
                       if (this.num_day_one_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_one = {
-                          // Get Date
-                          date: this.p_day_one,
-                          // Raw date for reports
-                          rawDate : this.day_one,
-                          // Get the booked menu
-                          menu: this.day_one_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_one_items,
-                          // Price per portion
-                          perPortionPrice: this.day_one_price,
-                          // Time slot
-                          timeSlot: this.day_one_slot,
-                          // Total price
-                          totalPrice: this.total_day_one_price
-                        };
+                        if (this.day_one_c_books.length > 4) {
+                          day_one = {
+                            // Get Date
+                            date: this.p_day_one,
+                            // Raw date for reports
+                            rawDate : this.day_one,
+                            // Get the booked menu
+                            menu: this.day_one_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_one_items,
+                            // Price per portion
+                            perPortionPrice: this.day_one_price,
+                            // Time slot
+                            timeSlot: this.day_one_slot,
+                            // Total price
+                            totalPrice: this.total_day_one_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_one'] != null)) {
+                            day_one = this.allOrders['day_one'];
+                          }else {
+                            day_one = null;
+                          }
+                        }
                       } else {
-                        day_one = null;
+                        if ((this.allOrders['day_one'] != null)) {
+                          day_one = this.allOrders['day_one'];
+                        }else {
+                          day_one = null;
+                        }
                       }
                       // If day two's items are active
                       if (this.num_day_two_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_two = {
-                          // Get Date
-                          date: this.p_day_two,
-                          // Raw date for reports
-                          rawDate: this.day_two,
-                          // Get the booked menu
-                          menu: this.day_two_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_two_items,
-                          // Price per portion
-                          perPortionPrice: this.day_two_price,
-                           // Time slot
-                          timeSlot: this.day_two_slot,
-                          // Total price
-                          totalPrice: this.total_day_two_price
-                        };
+                        if (this.day_two_c_books.length > 4) {
+                          day_two = {
+                            // Get Date
+                            date: this.p_day_two,
+                            // Raw date for reports
+                            rawDate: this.day_two,
+                            // Get the booked menu
+                            menu: this.day_two_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_two_items,
+                            // Price per portion
+                            perPortionPrice: this.day_two_price,
+                            // Time slot
+                            timeSlot: this.day_two_slot,
+                            // Total price
+                            totalPrice: this.total_day_two_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_two'] != null)) {
+                            day_two = this.allOrders['day_two'];
+                          }else {
+                            day_two = null;
+                          }
+                        }
                       } else {
-                        day_two = null;
+                        if ((this.allOrders['day_two'] != null)) {
+                          day_two = this.allOrders['day_two'];
+                        }else {
+                          day_two = null;
+                        }
                       }
                       // If day three's items are active
                       if (this.num_day_three_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_three = {
-                          // Get Date
-                          date: this.p_day_three,
-                          // Raw date for reports
-                          rawDate: this.day_three,
-                          // Get the booked menu
-                          menu: this.day_three_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_three_items,
-                          // Price per portion
-                          perPortionPrice: this.day_three_price,
-                           // Time slot
-                          timeSlot: this.day_three_slot,
-                          // Total price
-                          totalPrice: this.total_day_three_price
-                        };
+                        if (this.day_three_c_books.length > 4) {
+                          day_three = {
+                            // Get Date
+                            date: this.p_day_three,
+                            // Raw date for reports
+                            rawDate: this.day_three,
+                            // Get the booked menu
+                            menu: this.day_three_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_three_items,
+                            // Price per portion
+                            perPortionPrice: this.day_three_price,
+                            // Time slot
+                            timeSlot: this.day_three_slot,
+                            // Total price
+                            totalPrice: this.total_day_three_price
+                          };
+                        } else {
+                          if ((this.allOrders['day_three'] != null)) {
+                            day_three = this.allOrders['day_three'];
+                          }else {
+                            day_three = null;
+                          }
+                        }
                       } else {
-                        day_three = null;
+                        if ((this.allOrders['day_three'] != null)) {
+                          day_three = this.allOrders['day_three'];
+                        }else {
+                          day_three = null;
+                        }
                       }
                       // If day four's items are active
                       if (this.num_day_four_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_four = {
-                          // Get Date
-                          date: this.p_day_four,
-                          // Raw date for reports
-                          rawDate: this.day_four,
-                          // Get the booked menu
-                          menu: this.day_four_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_four_items,
-                          // Price per portion
-                          perPortionPrice: this.day_four_price,
-                          // Time slot
-                          timeSlot: this.day_four_slot,
-                          // Total price
-                          totalPrice: this.total_day_four_price
-                        };
+                        if (this.day_four_c_books.length > 4) {
+                          day_four = {
+                            // Get Date
+                            date: this.p_day_four,
+                            // Raw date for reports
+                            rawDate: this.day_four,
+                            // Get the booked menu
+                            menu: this.day_four_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_four_items,
+                            // Price per portion
+                            perPortionPrice: this.day_four_price,
+                            // Time slot
+                            timeSlot: this.day_four_slot,
+                            // Total price
+                            totalPrice: this.total_day_four_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_four'] != null)) {
+                            day_four = null;
+                          }else {
+                            day_four = this.allOrders['day_four'];
+                          }
+                        }
                       } else {
-                        day_four = null;
+                        if ((this.allOrders['day_four'] != null)) {
+                          day_four = null;
+                        }else {
+                          day_four = this.allOrders['day_four'];
+                        }
                       }
                       // If day five's items are active
                       if (this.num_day_five_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_five = {
-                          // Get Date
-                          date: this.p_day_five,
-                          // Raw date for reports
-                          rawDate : this.day_five,
-                          // Get the booked menu
-                          menu: this.day_five_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_five_items,
-                          // Price per portion
-                          perPortionPrice: this.day_five_price,
-                          // Time slot
-                          timeSlot: this.day_five_slot,
-                          // Total price
-                          totalPrice: this.total_day_five_price
-                        };
+                        if (this.day_five_c_books.length > 4) {
+                          day_five = {
+                            // Get Date
+                            date: this.p_day_five,
+                            // Raw date for reports
+                            rawDate : this.day_five,
+                            // Get the booked menu
+                            menu: this.day_five_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_five_items,
+                            // Price per portion
+                            perPortionPrice: this.day_five_price,
+                            // Time slot
+                            timeSlot: this.day_five_slot,
+                            // Total price
+                            totalPrice: this.total_day_five_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_five'] != null)) {
+                            day_five = this.allOrders['day_five'];
+                          }else {
+                            day_five = null;
+                          }
+                        }
                       } else {
-                        day_five = null;
-                      }
-                      // If day six's items are active
-                      if (this.num_day_six_items) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_six = {
-                          // Get Date
-                          date: this.p_day_six,
-                          // Raw date for reports
-                          rawDate: this.day_six,
-                          // Get the booked menu
-                          menu: this.day_six_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_six_items,
-                          // Price per portion
-                          perPortionPrice: this.day_six_price,
-                          // Time slot
-                          timeSlot: this.day_six_slot,
-                          // Total price
-                          totalPrice: this.total_day_six_price
-                        };
-                      } else {
-                        day_six = null;
+                        if ((this.allOrders['day_five'] != null)) {
+                          day_five = this.allOrders['day_five'];
+                        }else {
+                          day_five = null;
+                        }
                       }
                       switch (true) {
                         case this.today_status:
@@ -3451,38 +3548,40 @@ export class MenuComponent implements OnInit {
                         day_three: day_three,
                         day_four: day_four,
                         day_five: day_five,
-                        day_six: day_six,
-                        // notes: this.notesToChef
                       };
                       localStorage.setItem('all_orders', JSON.stringify(this.allOrders));
+                      this.hover_alert = 'Added !';
                       $('.added-db').css({'display': 'flex'});
                       setTimeout(function() {
                         $('.added-db').css({'display': 'none'});
                       }, 1000);
 
                     } else {
-                      $('.sch-err').html('Please select one Combo item');
-                      setTimeout(() => {
-                        $('.sch-err').html('');
-                      }, 5000);
+                      this.hover_alert = 'Please select one Combo Item';
+                      $('.added-db').css({'display': 'flex'});
+                      setTimeout(function() {
+                        $('.added-db').css({'display': 'none'});
+                      }, 1500);
                   }
             }
           }
         break;
       case this.day_five_status:
             if (this.day_five_c_books.length < 5) {
-              $('.sch-err').html('Please select atleast 5 items');
-              setTimeout(() => {
-                $('.sch-err').html('');
-              }, 5000);
+              this.hover_alert = 'Please select atleast 5 items';
+              $('.added-db').css({'display': 'flex'});
+              setTimeout(function() {
+                $('.added-db').css({'display': 'none'});
+              }, 1500);
             }else {
               if (this.day_five_slot === undefined || this.day_five_slot === null) {
                 //  Show error
                 $('.slot-select').css({'border-color': '#fa0000'});
-                $('.sch-err').html('Please select a Delivery Slot');
-                setTimeout(() => {
-                  $('.sch-err').html('');
-                }, 5000);
+                this.hover_alert = 'Please select a Delivery Slot';
+                $('.added-db').css({'display': 'flex'});
+                setTimeout(function() {
+                  $('.added-db').css({'display': 'none'});
+                }, 1500);
               }else {
                 let day_five_check = false;
                 this.day_five_c_books.forEach(element => {
@@ -3493,161 +3592,172 @@ export class MenuComponent implements OnInit {
                 if (day_five_check) {
                 $('.slot-select').selectedIndex = 1;
                 $('.slot-select').css({'border-color': '#666'});
-                $('.sch-err').html('');
-                let today: object, day_one: object, day_two: object, day_three: object, day_four: object, day_five: object, day_six: object;
-                      // Today's items are active
-                      if (this.num_today_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        today = {
-                          // Get Date
-                          date: this.p_today_one,
-                          // Raw date for reports
-                          rawDate: this.today_one,
-                          // Get the booked menu
-                          menu: this.today_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_today_items,
-                          // Price per portion
-                          perPortionPrice: this.today_price,
-                          // Time slot
-                          timeSlot: this.today_slot,
-                          // Total price
-                          totalPrice: this.total_today_price
-                        };
-                      } else {
-                        today = null;
-                      }
+                let day_one: object, day_two: object, day_three: object, day_four: object, day_five: object;
                       // If day one's items are active
                       if (this.num_day_one_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_one = {
-                          // Get Date
-                          date: this.p_day_one,
-                          // Raw date for reports
-                          rawDate : this.day_one,
-                          // Get the booked menu
-                          menu: this.day_one_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_one_items,
-                          // Price per portion
-                          perPortionPrice: this.day_one_price,
-                          // Time slot
-                          timeSlot: this.day_one_slot,
-                          // Total price
-                          totalPrice: this.total_day_one_price
-                        };
+                        if (this.day_one_c_books.length > 4) {
+                          day_one = {
+                            // Get Date
+                            date: this.p_day_one,
+                            // Raw date for reports
+                            rawDate : this.day_one,
+                            // Get the booked menu
+                            menu: this.day_one_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_one_items,
+                            // Price per portion
+                            perPortionPrice: this.day_one_price,
+                            // Time slot
+                            timeSlot: this.day_one_slot,
+                            // Total price
+                            totalPrice: this.total_day_one_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_one'] != null)) {
+                            day_one = this.allOrders['day_one'];
+                          }else {
+                            day_one = null;
+                          }
+                        }
                       } else {
-                        day_one = null;
+                        if ((this.allOrders['day_one'] != null)) {
+                          day_one = this.allOrders['day_one'];
+                        }else {
+                          day_one = null;
+                        }
                       }
                       // If day two's items are active
                       if (this.num_day_two_items > 0) {
                         // let date, menu, numOfTimes, totalPrice;
-                        day_two = {
-                          // Get Date
-                          date: this.p_day_two,
-                          // Raw date for reports
-                          rawDate: this.day_two,
-                          // Get the booked menu
-                          menu: this.day_two_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_two_items,
-                          // Price per portion
-                          perPortionPrice: this.day_two_price,
-                           // Time slot
-                          timeSlot: this.day_two_slot,
-                          // Total price
-                          totalPrice: this.total_day_two_price
-                        };
+                        if (this.day_two_c_books.length > 4) {
+                          day_two = {
+                            // Get Date
+                            date: this.p_day_two,
+                            // Raw date for reports
+                            rawDate: this.day_two,
+                            // Get the booked menu
+                            menu: this.day_two_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_two_items,
+                            // Price per portion
+                            perPortionPrice: this.day_two_price,
+                            // Time slot
+                            timeSlot: this.day_two_slot,
+                            // Total price
+                            totalPrice: this.total_day_two_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_two'] != null)) {
+                            day_two = this.allOrders['day_two'];
+                          }else {
+                            day_two = null;
+                          }
+                        }
                       } else {
-                        day_two = null;
+                        if ((this.allOrders['day_two'] != null)) {
+                          day_two = this.allOrders['day_two'];
+                        }else {
+                          day_two = null;
+                        }
                       }
                       // If day three's items are active
                       if (this.num_day_three_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_three = {
-                          // Get Date
-                          date: this.p_day_three,
-                          // Raw date for reports
-                          rawDate: this.day_three,
-                          // Get the booked menu
-                          menu: this.day_three_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_three_items,
-                          // Price per portion
-                          perPortionPrice: this.day_three_price,
-                           // Time slot
-                          timeSlot: this.day_three_slot,
-                          // Total price
-                          totalPrice: this.total_day_three_price
-                        };
+                        if (this.day_three_c_books.length > 4) {
+                          day_three = {
+                            // Get Date
+                            date: this.p_day_three,
+                            // Raw date for reports
+                            rawDate: this.day_three,
+                            // Get the booked menu
+                            menu: this.day_three_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_three_items,
+                            // Price per portion
+                            perPortionPrice: this.day_three_price,
+                            // Time slot
+                            timeSlot: this.day_three_slot,
+                            // Total price
+                            totalPrice: this.total_day_three_price
+                          };
+                        } else {
+                          if ((this.allOrders['day_three'] != null)) {
+                            day_three = this.allOrders['day_three'];
+                          }else {
+                            day_three = null;
+                          }
+                        }
                       } else {
-                        day_three = null;
+                        if ((this.allOrders['day_three'] != null)) {
+                          day_three = this.allOrders['day_three'];
+                        }else {
+                          day_three = null;
+                        }
                       }
                       // If day four's items are active
                       if (this.num_day_four_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_four = {
-                          // Get Date
-                          date: this.p_day_four,
-                          // Raw date for reports
-                          rawDate: this.day_four,
-                          // Get the booked menu
-                          menu: this.day_four_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_four_items,
-                          // Price per portion
-                          perPortionPrice: this.day_four_price,
-                          // Time slot
-                          timeSlot: this.day_four_slot,
-                          // Total price
-                          totalPrice: this.total_day_four_price
-                        };
+                        if (this.day_four_c_books.length > 4) {
+                          day_four = {
+                            // Get Date
+                            date: this.p_day_four,
+                            // Raw date for reports
+                            rawDate: this.day_four,
+                            // Get the booked menu
+                            menu: this.day_four_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_four_items,
+                            // Price per portion
+                            perPortionPrice: this.day_four_price,
+                            // Time slot
+                            timeSlot: this.day_four_slot,
+                            // Total price
+                            totalPrice: this.total_day_four_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_four'] != null)) {
+                            day_four = this.allOrders['day_four'];
+                          }else {
+                            day_four = null;
+                          }
+                        }
                       } else {
-                        day_four = null;
+                        if ((this.allOrders['day_four'] != null)) {
+                          day_four = this.allOrders['day_four'];
+                        }else {
+                          day_four = null;
+                        }
                       }
                       // If day five's items are active
                       if (this.num_day_five_items > 0) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_five = {
-                          // Get Date
-                          date: this.p_day_five,
-                          // Raw date for reports
-                          rawDate : this.day_five,
-                          // Get the booked menu
-                          menu: this.day_five_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_five_items,
-                          // Price per portion
-                          perPortionPrice: this.day_five_price,
-                          // Time slot
-                          timeSlot: this.day_five_slot,
-                          // Total price
-                          totalPrice: this.total_day_five_price
-                        };
+                        if (this.day_five_c_books.length > 4) {
+                          day_five = {
+                            // Get Date
+                            date: this.p_day_five,
+                            // Raw date for reports
+                            rawDate : this.day_five,
+                            // Get the booked menu
+                            menu: this.day_five_c_books,
+                            // Get the number of times menu has been booked
+                            numOfTimes: this.num_day_five_items,
+                            // Price per portion
+                            perPortionPrice: this.day_five_price,
+                            // Time slot
+                            timeSlot: this.day_five_slot,
+                            // Total price
+                            totalPrice: this.total_day_five_price
+                          };
+                        }else {
+                          if ((this.allOrders['day_five'] != null)) {
+                            day_five = this.allOrders['day_five'];
+                          }else {
+                            day_five = null;
+                          }
+                        }
                       } else {
-                        day_five = null;
-                      }
-                      // If day six's items are active
-                      if (this.num_day_six_items) {
-                        // let date, menu, numOfTimes, totalPrice;
-                        day_six = {
-                          // Get Date
-                          date: this.p_day_six,
-                          // Raw date for reports
-                          rawDate: this.day_six,
-                          // Get the booked menu
-                          menu: this.day_six_c_books,
-                          // Get the number of times menu has been booked
-                          numOfTimes: this.num_day_six_items,
-                          // Price per portion
-                          perPortionPrice: this.day_six_price,
-                          // Time slot
-                          timeSlot: this.day_six_slot,
-                          // Total price
-                          totalPrice: this.total_day_six_price
-                        };
-                      } else {
-                        day_six = null;
+                        if ((this.allOrders['day_five'] != null)) {
+                          day_five = this.allOrders['day_five'];
+                        }else {
+                          day_five = null;
+                        }
                       }
                       switch (true) {
                         case this.today_status:
@@ -3668,9 +3778,6 @@ export class MenuComponent implements OnInit {
                         case this.day_five_status:
                           this.basketNumber++;
                           break;
-                        case this.day_six_status:
-                          this.basketNumber++;
-                          break;
                         default:
                           break;
                       }
@@ -3680,20 +3787,20 @@ export class MenuComponent implements OnInit {
                         day_three: day_three,
                         day_four: day_four,
                         day_five: day_five,
-                        day_six: day_six,
-                        // notes: this.notesToChef
                       };
                       localStorage.setItem('all_orders', JSON.stringify(this.allOrders));
+                      this.hover_alert = 'Added !';
                       $('.added-db').css({'display': 'flex'});
                       setTimeout(function() {
                         $('.added-db').css({'display': 'none'});
                       }, 1000);
 
                     }else {
-                      $('.sch-err').html('Please select one Combo item');
-                      setTimeout(() => {
-                        $('.sch-err').html('');
-                      }, 5000);
+                      this.hover_alert = 'Please select one Combo Item';
+                      $('.added-db').css({'display': 'flex'});
+                      setTimeout(function() {
+                        $('.added-db').css({'display': 'none'});
+                      }, 1500);
                   }
             }
           }

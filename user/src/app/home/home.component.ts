@@ -84,6 +84,9 @@ export class HomeComponent implements OnInit {
         }
       });
     });
+    $('.location-search-input').focus(function() {
+      $('.location-warning-div').hide();
+    });
   }
   public gotoHowitWorks() {
     $('html, body').animate({ scrollTop: $('.how-it-works-div').offset().top - 70 }, 1000);

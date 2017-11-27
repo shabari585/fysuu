@@ -1,22 +1,3 @@
-.mob-basket-div row,.mob-basket-div span{
-  height: 100%;
-  width: 100%;
-}
-.mob2{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  /* background: #000; */
-}
-.mob2 h3{
-  margin: 0 auto;
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-}
 #sch-menu-btn{
   font-weight: normal !important;
 }
@@ -61,6 +42,7 @@
   display: none;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-weight: bold;
   color: #fff;
   top: 0;
@@ -140,10 +122,7 @@
 .det-ul{
   margin-left: 50px;
 }
-
 /* Sch select */
-
-
 /* Today select */
 .today-menu-back,.sch-hover-menu-back{
    z-index: 100;
@@ -171,6 +150,7 @@
   background-color: #fff;
   height: 270px;
   width: 500px;
+  max-width: 90vw;
   padding: 30px 0px;
   border-radius: 4px;
 }
@@ -285,17 +265,15 @@
 .slot-select{
   outline: none;
   height: 30px;
-  width: 200px;
+  width: auto;
+  left: 0;
 }
 button{
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-
 /* Filters section */
-
 .filter-div {
   position: relative;
   display: flex;
@@ -383,9 +361,7 @@ button{
 label{
   cursor: pointer;
 }
-
 /* Menu item */
-
 .menu-item {
   flex: 1;
   position: relative;
@@ -402,7 +378,6 @@ label{
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
 }
-
 .item-image {
   position: relative;
   display: block;
@@ -449,7 +424,6 @@ label{
 .item-announcement h5{
   font-weight: bold;
 }
-
 .item-dets-div {
   position: relative;
   display: flex;
@@ -464,13 +438,11 @@ label{
   width: 100%;
   background-color: #fff;
 }
-
 .item-name-div {
   position: relative;
   display: block;
   width: 90%;
 }
-
 .item-name {
   text-align: left;
   font-size: 120%;
@@ -486,10 +458,6 @@ label{
   font-size: 90%;
   text-align: left;
 }
-
-
-
-
 .item-dets {
   position: relative;
   display: flex;
@@ -564,23 +532,16 @@ label{
   -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
 } 
-
 .schedule-rep-btn:hover {
   /* background-color: #D84656; */
   /* background-color: #494a4b; */
   background-color: #588835;
 }
-
-
 .sc-ch-item img{
   height: 50px;
   width: 50px;
 }
-
-
-
 /* Hover Basket */
-
 .hover-basket-div {
   z-index: 7;
   position: fixed;
@@ -648,10 +609,7 @@ label{
   left: 90%;
   transform: translate(-50%, -50%);
 }
-
-
 /* Schedule menu styles */
-
 .schedule-menu-back {
   z-index: 100;
   position: fixed;
@@ -669,7 +627,6 @@ label{
   -webkit-align-items: center;
   flex-direction: row;
 }
-
 .sch-close-btn {
   z-index: 100;
   position: absolute;
@@ -683,10 +640,7 @@ label{
   outline: none;
   cursor: pointer;
 }
-
-
 /* Schedule menu left */
-
 .schedule-menu-left {
   position: relative;
   display: flex;
@@ -695,7 +649,6 @@ label{
   height: 100%;
   width: 30%;
 }
-
 .calender-core {
   position: relative;
   display: block;
@@ -705,7 +658,6 @@ label{
   width: 300px;
   overflow: hidden;
 }
-
 .calender-core ul {
   position: relative;
   display: flex;
@@ -715,7 +667,6 @@ label{
   height: 100%;
   width: 100%;
 }
-
 .calender-core ul li {
   position: relative;
   display: flex;
@@ -726,10 +677,7 @@ label{
   border-bottom: 1px solid #666;
   cursor: pointer;
 }
-
-
 /* Schedule menu right */
-
 .schedule-menu-right {
   position: relative;
   display: flex;
@@ -741,7 +689,6 @@ label{
   height: 100%;
   width: 80%;
 }
-
 .schedule-choose-core {
   position: relative;
   height: 95%;
@@ -749,16 +696,12 @@ label{
   background-color: #fff;
   border-radius: 4px;
 }
-
-
 /* Top div */
-
 .sc-ch-item-name {
   font-size: 100%;
   font-weight: normal;
   color: #444;
 }
-
 .sc-ch-top {
   position: relative;
   display: flex;
@@ -771,7 +714,6 @@ label{
   width:100%;
   padding: 0 40px;
 }
-
 .sc-ch-top .pull-left {
   position: relative;
   display: flex;
@@ -779,7 +721,6 @@ label{
   justify-content: space-between;
   width: 65%;
 }
-
 .sc-ch-top .pull-right {
   position: relative;
   display: flex;
@@ -790,21 +731,17 @@ label{
   flex-direction: row;
   padding-left: 30px;
 }
-
 .sc-ch-price {
   color: #888;
   font-size: 120%;
   line-height: 0;
 }
-
 .sc-ch-price-num {
   font-size: 170%;
 }
-
 .sc-ch-num {
   margin: 0 10px;
 }
-
 .sc-ch-num-btns-div {
   position: relative;
   display: flex;
@@ -815,19 +752,15 @@ label{
   -webkit-align-items: center;
   flex-direction: row;
 }
-
 .sc-ch-num-btn {
   border: 1px solid #323232;
   background: transparent;
   border-radius: 2px;
   width: 30px;
 }
-
-
 .sc-ch-mid{
   display: none;
 }
-
 .sc-ch-ul {
   position: relative;
   display: flex;
@@ -841,7 +774,6 @@ label{
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-
 .sc-ch-ul>li {
   margin: 0;
   padding: 0;
@@ -849,16 +781,12 @@ label{
   height: 100%;
   overflow-y: scroll;
 }
-
 .roti-div,
 .mini-meals-div,
 .large-div {
   display: none;
 }
-
-
 /* Middle div */
-
 .sc-ch-mid-heads {
   font-weight: bold;
   margin: 5px auto;
@@ -871,7 +799,6 @@ label{
   font-size: 100%;
   text-align: center;
 }
-
 .sc-ch-menu-divs {
   position: relative;
   display: block;
@@ -894,7 +821,6 @@ label{
   color: #666;
   padding: 0 10px;
 }
-
 .sc-ch-menu-divs li .sc-ch-item {
   position: relative;
   display: flex;
@@ -906,18 +832,15 @@ label{
   flex-direction: column;
   cursor: pointer;
 }
-
 .sc-ch-menu-divs li .sc-ch-item img {
   margin-bottom: 5px;
 }
-
 .sch-note-div {
   margin: 10px 0;
   padding: 5px 10px;
   height: 15%;
   overflow: hidden;
 }
-
 .sc-ch-textarea {
   position: relative;
   display: block;
@@ -930,7 +853,6 @@ label{
   color: #666;
   padding: 10px 10px;
 }
-
 /* Bottom div */
 .sc-ch-btm {
   position: relative;
@@ -959,7 +881,6 @@ label{
   border: none;
   padding: 0 30px;
 }
-
 .sc-ch-cancel-btn {
   background-color: #fff;
   height: 40px;
@@ -967,7 +888,6 @@ label{
   margin-right: 20px;
   border: 1px solid #444;
 }
-
 .sc-ch-add-btn {
   color: #fff;
   background-color: #6DA942;
@@ -977,7 +897,6 @@ label{
   -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
 }
-
 .sc-ch-add-btn:hover {
   background-color: #588835;
 }
@@ -1012,12 +931,10 @@ label{
   color: #fff;
   text-decoration: none;
 }
-
 .sc-hover-basket-div h6 {
   position: relative;
   font-size: 105%;
 }
-
 .sc-hover-basket-div .hover-basket-number {
   position: absolute;
   display: flex;
@@ -1032,52 +949,47 @@ label{
   padding: 0;
   border-radius: 50%;
 }
-
 /* Basket button for mobiles */
-
 .mob-basket-div {
   z-index: 10;
   position: fixed;
-  display: block;
+  display: flex;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   bottom: 0;
   height: 50px;
   width: 100vw;
   background-color: #F04F60;
   color: #fff;
   box-shadow: 0 -4px 20px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
-
-.mob-basket-div a {
-  position: relative;
-  display: flex;
-  display: -webkit-flex;
-  height: 100%;
-  width: 100%;
-  color: #fff;
-  justify-content: center;
-  -webkit-justify-content: center;
-  align-items: center;
-  -webkit-align-items: center;
-  text-decoration: none;
+.mob-basket-div .fa-shopping-basket {
+  margin-right: 0px;
+  font-size: 160%;
 }
-
-.mob-basket-div a .fa-shopping-basket {
-  margin-right: 10px;
-  font-size: 130%;
+.mob-basket-ico{
+  margin-right: 20px;
 }
-
-.mob-basket-div a h6 {
+.mob-basket-div h3{
+  margin: 0;
+  padding: 0;
   font-size: 120%;
-  font-weight: normal;
+  font-weight: 200;
 }
-
 .mob-hover-basket-number {
   position: relative;
-  display: inline-block;
-  margin-left: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0px;
   background-color: #fa0000;
   color: #fff;
-  padding: 5px 10px;
+  height: 26px;
+  width: 26px;
+  border-radius: 50px;
 }
 .selected-date-li{
   background-color: rgba(0, 0, 0, 0.4);
@@ -1092,23 +1004,19 @@ label{
   position: absolute;
   left: 5%;
 }
-
-
 /* Extra Small Devices, .visible-xs-* */
-
-
 /* @media (max-width: 480px) {} */
-
 @media (max-width: 767px) {
   .menu-title {
     font-size: 120%;
   }
   .col-md-4 {
-    margin-bottom: 20px;
+    padding: 0;
+    margin: 0 0 20px 0;
   }
   .menu-item {
     margin: 0 auto;
-    max-width: 70vw;
+    max-width: 90vw;
   }
   .main-footer {
     margin-bottom: 40px;
@@ -1134,12 +1042,21 @@ label{
   .main-container {
     padding-top: 40px;
   }
+  .mob-basket-div{
+    display: flex !important;
+  }
+  body{
+    padding-bottom: 50px !important;
+  }
 }
 
 
 /* Small Devices, .visible-sm-* */
 
 @media (min-width: 768px) and (max-width: 991px) {
+  body{
+    padding-bottom: 50px !important;
+  }
   .menu-title {
     font-size: 120%;
   }
@@ -1148,15 +1065,12 @@ label{
   }
   .menu-item {
     margin: 0 auto;
-    max-width: 70vw;
+    max-width: 90vw;
   }
   .main-footer {
     margin-bottom: 40px;
   }
 }
-
-
-
 /* Medium Devices, .visible-md-* */
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -1164,45 +1078,9 @@ label{
     width: 300px;
   }
 }
-
-
 /* Large Devices, .visible-lg-* */
-
 @media (min-width: 1200px) {}
-
-@media screen and (min-width:240px) and (max-width:740px){
-  .sch-main-back{
-    flex-direction: column;
-    
-    display: inline-flex;
-    
-    box-sizing: border-box;
-    width: 100%;
-    height: 120px;
-    background-color: #fff;
-    /* border: 1px solid #000; */
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-   
-  }
-  .sch-main-back p{
-    line-height: 1.5;
-    font-size: 90%;
-
-    
-  }
-  
-  
-  .sch-main-back .schedule-rep-btn{
-    margin: 0;
-    padding: 0;
-    height: 30%;
-    width: 120px;
-    
-  }
-}
-
-
-@media screen and (min-width:220px) and (max-width:740px) {
+@media (max-width:740px) {
   .schedule-menu-back {
     z-index: 100;
     position: fixed;
@@ -1220,6 +1098,29 @@ label{
     -webkit-align-items: center;
     flex-direction: column;
   }
+  .sch-main-back{
+    display: inline-flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    box-sizing: border-box;
+    width: 100%;
+    height: 120px;
+    background-color: #fff;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  .sch-main-back p{
+    line-height: 1.5;
+    font-size: 90%;
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
+  .sch-main-back .schedule-rep-btn{
+    margin: 0;
+    padding: 0;
+    height: 30%;
+    width: 120px;
+    
+  }
   .schedule-menu-left{
     position: relative;
     display: flex;
@@ -1230,7 +1131,6 @@ label{
     
     
   }
-
   .calender-core {
     position: relative;
     display: block;
@@ -1240,7 +1140,6 @@ label{
     width: 250px;
     overflow: hidden;
   }
-  
   .calender-core ul {
     position: relative;
     display: flex;
@@ -1250,7 +1149,6 @@ label{
     height: 100%;
     width: 100%;
   }
-  
   .calender-core ul li {
     position: relative;
     display: flex;
@@ -1269,18 +1167,18 @@ label{
   .slot-select{
     outline: none;
     height: 30px;
-    width: 110px;
-    left: -100%;
-    transform: translate(-50%)
-     
+    width: auto;
+    left: 0;
+    /* left: -100%; */
+    /* transform: translate(-50%); */
     }
-    .slot{
-      visibility: hidden;
-    }
+  .slot{
+    visibility: hidden;
+  }
 
-    .sc-ch-top .pull-left select {
-      margin-left: 35%;
-    }
+  .sc-ch-top .pull-left select {
+    /* margin-left: 35%; */
+  }
   
   
   .sc-ch-add-btn{
@@ -1300,15 +1198,12 @@ label{
   .sc-ch-btm .sc-ch-add-btn{
     padding: 0px 6px 0px 0px;
   }
-
-  
   .sc-ch-num-btn {
     border: 1px solid #323232;
     background: transparent;
     border-radius: 2px;
     width: 30px;
   }
-
   .sc-ch-top {
     position: relative;
     display: flex;
@@ -1335,17 +1230,9 @@ label{
     background-color: #fff;
     color: #777;
   }
-
-  
-  
 }
 @media screen and (min-width:768px) and (max-width:1024px){
-  .mob-basket-div .mob1{
-    top:-20px;
-  }
-  .mob-basket-div .mob3{
-    top:-30px;
-  }
+  
 }
 
 
