@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, HttpModule } from '@angular/http';
 import 'rxjs/add/operator/map';
-
 @Injectable()
 export class AdminServicesService {
     constructor(private http: Http) { }
@@ -52,23 +51,19 @@ export class AdminServicesService {
         // return this.http.post('http://localhost:3700/admin/add-sub-category', subData, { headers: headers }).map(res => res.json());
         return this.http.post('admin/add-sub-category', subData, { headers: headers }).map(res => res.json());
     }
-    // Get subs in a category
     getSubs(catId: any) {
         // return this.http.get('http://localhost:3700/admin/get-subs/' + catId).map(res => res.json());
         return this.http.get('admin/get-subs/' + catId).map(res => res.json());
     }
-    // Delet Sub from category
     deleteSubFromCategory(subName: string, cat_id: string) {
         // return this.http.delete('http://localhost:3700/admin/delete-sub-category/' + subName + '/' + cat_id).map(res => res.json());
         return this.http.delete('admin/delete-sub-category/' + subName + '/' + cat_id).map(res => res.json());
     }
-    // Getting items by sub category
     getDateItems(cat_id: string, sub_name: string, date: string) {
         // tslint:disable-next-line:max-line-length
         // return this.http.get('http://localhost:3700/admin/get-date-items/' + cat_id + '/' + sub_name + '/' + date).map(res => res.json());
         return this.http.get('admin/get-date-items/' + cat_id + '/' + sub_name + '/' + date).map(res => res.json());
     }
-    // post schedule
     postSchedule(schArray: any, remArray: any) {
         const headers = new Headers();
         headers.append('Content-type', 'application/json');
@@ -85,12 +80,10 @@ export class AdminServicesService {
         // return this.http.delete('http://localhost:3700/admin/delete-date/' + date_id).map(res => res.json());
         return this.http.delete('admin/delete-date/' + date_id).map(res => res.json());
     }
-    // Get all users
     getUsers() {
         // return this.http.get('http://localhost:3700/admin/get-users').map(res => res.json());
         return this.http.get('admin/get-users').map(res => res.json());
     }
-    // Get User from userId
     getUserFromId(user_id) {
         // return this.http.get('http://localhost:3700/admin/get-user-from-id/' + user_id).map(res => res.json());
         return this.http.get('admin/get-user-from-id/' + user_id).map(res => res.json());

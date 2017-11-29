@@ -8,7 +8,6 @@ export class GetMenuService {
         // return this.http.get('http://localhost:3700/admin/get-categories').map(res => res.json());
         return this.http.get('admin/get-categories').map(res => res.json());
     }
-    // Getting roti items
     getRotiItems() {
         // return this.http.get('http://localhost:3700/admin/get-roti-items').map(res => res.json());
         return this.http.get('admin/get-roti-items').map(res => res.json());
@@ -21,7 +20,6 @@ export class GetMenuService {
         // return this.http.get('http://localhost:3700/admin/get-item-details/' + item_id).map(res => res.json());
         return this.http.get('admin/get-item-details/' + item_id).map(res => res.json());
     }
-
     getTabStatus(tab) {
         // return this.http.get('http://localhost:3700/admin/get-tab-status/' + tab).map(res => res.json());
         return this.http.get('admin/get-tab-status/' + tab).map(res => res.json());

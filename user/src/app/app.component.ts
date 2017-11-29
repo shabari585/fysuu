@@ -70,9 +70,11 @@ export class AppComponent implements OnInit {
         if (mob_menu_offest < 0) {
             // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'50vw' },200);
             $('.mob-menu').animate({'left': '0vw'}, 200);
+            $('.mob-db').show();
         }else {
             // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'0vw' },200);
             $('.mob-menu').animate({'left': '-50vw' }, 200);
+            $('.mob-db').hide();
         }
       });
       $('.mob-menu').click(function() {
@@ -80,10 +82,16 @@ export class AppComponent implements OnInit {
         if (mob_menu_offest < 0) {
             // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'50vw' },200);
             $('.mob-menu').animate({'left': '0vw'}, 200);
+            $('.mob-db').show();
         }else {
             // $('.fvp, .svp, .main-footer,.checkout-main-container').animate({'margin-left':'0vw' },200);
             $('.mob-menu').animate({'left': '-50vw' }, 200);
+            $('.mob-db').hide();
         }
+      });
+      $('.mob-db').click(function() {
+        $('.mob-menu').animate({'left': '-50vw' }, 200);
+        $('.mob-db').hide();
       });
 
     // tslint:disable-next-line:radix
@@ -424,19 +432,43 @@ export class AppComponent implements OnInit {
       $('.err').html('All input fields are required');
       if (!this.validate.validateInput(this.regNameInput)) {
         $('#reg-name').css({'border-color': '#fa0000'});
-        $('.err').html('Please enter your name');
       }
       if (!this.validate.validateInput(this.regEmailInput)) {
         $('#reg-email').css({'border-color': '#fa0000'});
-        $('.err').html('Please enter a valid email address');
       }
       if (!this.validate.validateInput(this.regMobileInput)) {
         $('#reg-mobile').css({'border-color': '#fa0000'});
-        $('.err').html('Please enter 10 digit mobile number');
       }
       if (!this.validate.validateInput(this.regPwdInput)) {
         $('#reg-pwd').css({'border-color': '#fa0000'});
-        $('.err').html('Password must have atleast 6 characters');
+      }
+      if (!this.validate.validateInput(this.regNameInput) && this.validate.validateInput(this.regEmailInput) &&
+      this.validate.validateInput(this.regMobileInput) &&
+      this.validate.validateInput(this.regPwdInput)) {
+        $('#reg-name').css({'border-color': '#fa0000'});
+        $('.err').html('Please enter your name');
+      }
+      // tslint:disable-next-line:max-line-length
+      if (!this.validate.validateInput(this.regEmailInput) &&
+      this.validate.validateInput(this.regNameInput) &&
+      this.validate.validateInput(this.regMobileInput) &&
+      this.validate.validateInput(this.regPwdInput)) {
+        $('#reg-email').css({'border-color': '#fa0000'});
+        $('.err').html('Please enter a valid email address');
+      }
+      if (!this.validate.validateInput(this.regMobileInput) &&
+      this.validate.validateInput(this.regNameInput) &&
+      this.validate.validateInput(this.regEmailInput) &&
+      this.validate.validateInput(this.regPwdInput)) {
+        $('#reg-mobile').css({'border-color': '#fa0000'});
+        $('.err').html('Please enter 10 digit mobile number');
+      }
+      if (!this.validate.validateInput(this.regPwdInput) &&
+      this.validate.validateInput(this.regMobileInput) &&
+      this.validate.validateInput(this.regNameInput) &&
+      this.validate.validateInput(this.regEmailInput)) {
+        $('#reg-pwd').css({'border-color': '#fa0000'});
+        $('.err').html('Password must have at least 6 characters');
       }
     }
   }
@@ -487,7 +519,7 @@ export class AppComponent implements OnInit {
                         this.LoginSubmit(regEmailInput, regPwdInput);
                       }else {
                         // Show Error
-                        if (res.msg.message = 'otp_not_verified') {
+                        if (res.msg.message === 'otp_not_verified') {
                           $('.err').html('Please Enter Valid OTP');
                           $('#reg-otp').css({'border-color': '#fa0000'});
                         }
@@ -514,17 +546,41 @@ export class AppComponent implements OnInit {
       $('.err').html('All input fields are required');
       if (!this.validate.validateInput(this.regNameInput)) {
         $('#reg-name').css({'border-color': '#fa0000'});
-        $('.err').html('Please enter your name');
       }
       if (!this.validate.validateInput(this.regEmailInput)) {
         $('#reg-email').css({'border-color': '#fa0000'});
-        $('.err').html('Please enter a valid email address');
       }
       if (!this.validate.validateInput(this.regMobileInput)) {
         $('#reg-mobile').css({'border-color': '#fa0000'});
-        $('.err').html('Please enter 10 digit mobile number');
       }
       if (!this.validate.validateInput(this.regPwdInput)) {
+        $('#reg-pwd').css({'border-color': '#fa0000'});
+      }
+      if (!this.validate.validateInput(this.regNameInput) && this.validate.validateInput(this.regEmailInput) &&
+      this.validate.validateInput(this.regMobileInput) &&
+      this.validate.validateInput(this.regPwdInput)) {
+        $('#reg-name').css({'border-color': '#fa0000'});
+        $('.err').html('Please enter your name');
+      }
+      // tslint:disable-next-line:max-line-length
+      if (!this.validate.validateInput(this.regEmailInput) &&
+      this.validate.validateInput(this.regNameInput) &&
+      this.validate.validateInput(this.regMobileInput) &&
+      this.validate.validateInput(this.regPwdInput)) {
+        $('#reg-email').css({'border-color': '#fa0000'});
+        $('.err').html('Please enter a valid email address');
+      }
+      if (!this.validate.validateInput(this.regMobileInput) &&
+      this.validate.validateInput(this.regNameInput) &&
+      this.validate.validateInput(this.regEmailInput) &&
+      this.validate.validateInput(this.regPwdInput)) {
+        $('#reg-mobile').css({'border-color': '#fa0000'});
+        $('.err').html('Please enter 10 digit mobile number');
+      }
+      if (!this.validate.validateInput(this.regPwdInput) &&
+      this.validate.validateInput(this.regMobileInput) &&
+      this.validate.validateInput(this.regNameInput) &&
+      this.validate.validateInput(this.regEmailInput)) {
         $('#reg-pwd').css({'border-color': '#fa0000'});
         $('.err').html('Password must have at least 6 characters');
       }

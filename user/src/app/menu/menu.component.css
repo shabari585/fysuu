@@ -961,10 +961,13 @@ label{
   bottom: 0;
   height: 50px;
   width: 100vw;
-  background-color: #F04F60;
+  background-color: #6DA942;
   color: #fff;
   box-shadow: 0 -4px 20px 1px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+}
+.mob-basket-div:hover{
+  background-color: #588835;
 }
 .mob-basket-div .fa-shopping-basket {
   margin-right: 0px;
@@ -1003,6 +1006,15 @@ label{
 .sch-err{
   position: absolute;
   left: 5%;
+}
+.sch-mob-basket-div{
+  position: absolute;
+  right: 5%;
+}
+.sch-mob-basket-div .mob-basket-num{
+  height: 20px;
+  width: 20px;
+  left: 100%;
 }
 /* Extra Small Devices, .visible-xs-* */
 /* @media (max-width: 480px) {} */
@@ -1169,31 +1181,14 @@ label{
     height: 30px;
     width: auto;
     left: 0;
-    /* left: -100%; */
-    /* transform: translate(-50%); */
     }
   .slot{
     visibility: hidden;
   }
-
-  .sc-ch-top .pull-left select {
-    /* margin-left: 35%; */
-  }
-  
-  
   .sc-ch-add-btn{
     height: 30px;
     width: 170px;
     font-size: 13px;
-    
-    
-  }
-  .sc-ch-btm .sc-ch-add-btn{
-    position: relative;
-    display: block;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%,-50%);
   }
   .sc-ch-btm .sc-ch-add-btn{
     padding: 0px 6px 0px 0px;

@@ -26,6 +26,7 @@ export class OrdersComponent implements OnInit {
   // user_items= [];
   user_day= [];
   orders = [];
+  rorders = [];
 
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private adminAuth: AdminAuthService , private title: Title, private getadMenu: AdminServicesService, private authService: AuthService) { }
@@ -88,11 +89,6 @@ export class OrdersComponent implements OnInit {
                 });
               }
             }
-            // console.log(element.order.order_id);
-            // console.log(element.order.order_time);
-            // console.log(element.order.payment_method);
-            // console.log(element.order.total_price);
-            // console.log(user_items);
             const obj = {
               order_id: element.order.order_id,
               time: element.order.order_time,
@@ -102,9 +98,9 @@ export class OrdersComponent implements OnInit {
             };
             this.orders.push(obj);
           });
+          this.orders.reverse();
         }
       }
-      console.log(this.orders[5].items);
     });
   }
 }

@@ -9,6 +9,11 @@
 <span *ngIf="!authService.loggedIn()" (click)='loginSignupTrigger()'>
   <i style="color:white;font-size:20px;float:right;padding:20px;" class="fa fa-user-o" aria-hidden="true"></i>
 </span>
+<span *ngIf="authService.loggedIn()" routerLink='/checkout'>
+  <span class="mob-basket-div" style="color:white;font-size:20px;float:right;padding:20px;">
+    <i class="fa fa-shopping-basket" aria-hidden="true"></i> <span class="mob-basket-num">{{ basket_num }}</span>
+  </span>
+</span>
 </header>
 
 
@@ -115,6 +120,10 @@
 
 </div>
 
+<div class="mob-db">
+
+</div>
+
 <div *ngIf="!authService.loggedIn()">    
 <div class="mob-menu visible-sm visible-xs">
   <ul class="list-unstyled">
@@ -133,7 +142,7 @@
         REWARD POINTS
       </li>
       </a>
-    <li *ngIf="!authService.loggedIn()" (click)="loginSignupTrigger()">
+    <li (click)="loginSignupTrigger()">
       LOGIN / SIGNUP
     </li>
   </ul>

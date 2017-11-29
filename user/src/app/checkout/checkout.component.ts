@@ -25,6 +25,8 @@ export class CheckoutComponent implements OnInit {
   // Razorpay variables
   rzp1: any;
   options: any;
+  p_key = 'rzp_live_qNI6V5maLBak44';
+  p_secret = 'lM0HT7rLLHAIguyJIFv0jQ8y';
 
   addresses= [];
   userId: string;
@@ -538,13 +540,16 @@ export class CheckoutComponent implements OnInit {
         if (this.payment_method !== 'cod') {
           if (this.payment_method === 'wallet') {
             this.options = {
-              'key': 'rzp_test_hJMKKQwECWfY82',
+              'key': this.p_key,
               'amount': this.total_to_pay * 100, // 2000 paise = INR 20
               'name': 'Fysu',
               'description': 'Purchase Description',
               'image': '../../assets/logo/logo_black.png',
               'handler': function (response){
-                  alert(response.razorpay_payment_id);
+                  const obj = {payment_id: response.razorpay_payment_id};
+                  this.authService.capturePayment(obj).subscribe(res => {
+
+                });
               },
               'prefill': {
                   'name': this.userName,
@@ -561,13 +566,15 @@ export class CheckoutComponent implements OnInit {
             };
           }else {
             this.options = {
-              'key': 'rzp_test_hJMKKQwECWfY82',
+              'key': this.p_key,
               'amount': this.total_to_pay * 100, // 2000 paise = INR 20
               'name': 'Fysu',
               'description': 'Purchase Description',
               'image': '../../assets/logo/logo_black.png',
               'handler': function (response){
-                  alert(response.razorpay_payment_id);
+                  const obj = {payment_id: response.razorpay_payment_id};
+                  this.authService.capturePayment(obj).subscribe(res => {
+                  });
               },
               'prefill': {
                   'name': this.userName,
@@ -603,18 +610,11 @@ export class CheckoutComponent implements OnInit {
             }
           });
         }
-
-
-
       }
     }
-
-
-
     // Get payment type
     // alert(this.payment_method+' AND '+this.deliveryInst+ ' AND ' +order_id);
     // Make order
-
   }
 
   getSlotValue(slot) {

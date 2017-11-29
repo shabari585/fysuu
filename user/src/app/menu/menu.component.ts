@@ -2805,9 +2805,6 @@ export class MenuComponent implements OnInit {
                       }
                     }
                     switch (true) {
-                      case this.today_status:
-                        this.basketNumber++;
-                        break;
                       case this.day_one_status:
                         this.basketNumber++;
                         break;
@@ -3949,6 +3946,7 @@ export class MenuComponent implements OnInit {
       case this.tab_one_status:
         if (this.today_tab_one_slot !== null && this.today_tab_one_slot !== undefined) {
           this.tab_one_total_price = this.num_tab_one_items * this.tab_one_cost;
+          const previous_tab_status = this.today_tab_one_books;
           // Add to orders
           this.today_tab_one_books = {
             name: this.tab_one,
@@ -3957,7 +3955,9 @@ export class MenuComponent implements OnInit {
             base_price: this.tab_one_cost,
             total_price: this.tab_one_total_price
           };
-          this.basketNumber++;
+          if (previous_tab_status === undefined) {
+            this.basketNumber++;
+          }
           // add announcement
           // Update tab_one_text and display
           this.num_tab_one = this.num_tab_one_items;
@@ -3973,7 +3973,9 @@ export class MenuComponent implements OnInit {
           };
           localStorage.setItem('today_orders', JSON.stringify(today_orders));
           $('.today-menu-back').hide();
-
+          this.today_tab_one_slot = null;
+          this.today_tab_two_slot = null;
+          this.today_tab_three_slot = null;
         }else {
           // Do nothing
           this.today_tab_one_books = null;
@@ -3984,6 +3986,7 @@ export class MenuComponent implements OnInit {
         if (this.today_tab_two_slot !== null && this.today_tab_two_slot !== undefined) {
 
           this.tab_two_total_price = this.num_tab_two_items * this.tab_two_cost;
+          const previous_tab_status = this.today_tab_two_books;
 
           // Add to orders
           this.today_tab_two_books = {
@@ -3993,7 +3996,9 @@ export class MenuComponent implements OnInit {
             base_price: this.tab_two_cost,
             total_price: this.tab_two_total_price
           };
-          this.basketNumber++;
+          if (previous_tab_status === undefined) {
+            this.basketNumber++;
+          }
           // Update tab_two_text and display
           this.num_tab_two = this.num_tab_two_items;
           $('#tab-two-band').show();
@@ -4008,6 +4013,9 @@ export class MenuComponent implements OnInit {
           };
           localStorage.setItem('today_orders', JSON.stringify(today_orders));
           $('.today-menu-back').hide();
+          this.today_tab_one_slot = null;
+          this.today_tab_two_slot = null;
+          this.today_tab_three_slot = null;
 
         }else {
           // Do nothing
@@ -4019,6 +4027,7 @@ export class MenuComponent implements OnInit {
         if (this.today_tab_three_slot !== null && this.today_tab_three_slot !== undefined) {
 
           this.tab_three_total_price = this.num_tab_three_items * this.tab_three_cost;
+          const previous_tab_status = this.today_tab_three_books;
           // Add to orders
           this.today_tab_three_books = {
             name: this.tab_three,
@@ -4027,7 +4036,9 @@ export class MenuComponent implements OnInit {
             base_price: this.tab_three_cost,
             total_price: this.tab_three_total_price
           };
-          this.basketNumber++;
+          if (previous_tab_status === undefined) {
+            this.basketNumber++;
+          }
           // Update tab three text and display band
           this.num_tab_three = this.num_tab_three_items;
           $('#tab-three-band').show();
@@ -4042,7 +4053,9 @@ export class MenuComponent implements OnInit {
           };
           localStorage.setItem('today_orders', JSON.stringify(today_orders));
           $('.today-menu-back').hide();
-
+          this.today_tab_one_slot = null;
+          this.today_tab_two_slot = null;
+          this.today_tab_three_slot = null;
         }else {
           // Do nothing
           this.today_tab_three_books = null;

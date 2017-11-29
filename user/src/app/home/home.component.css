@@ -758,16 +758,6 @@ a {
     font-size: 120%;
     margin: 10px auto 0px auto;
   }
-  .location-enter-div {
-    width: 200px;
-  }
-  /* .locate-me-btn {
-    padding-left: 5px;
-    padding-right: 5px;
-  } */
-  .see-menu-btn {
-    width: 90px;
-  }
   /* svp */
   /* How it works */
   .col-one-div::after,
@@ -885,9 +875,6 @@ a {
   .locate-me-btn{
     width: 30%;
   }
-  .location-enter-div{
-    width: 140px;
-  }
   .locate-me-btn span{
     width: 100%;
     text-align: center;
@@ -904,7 +891,5 @@ a {
     text-align: center;
     font-size: 15px;
   }
-  
-  
 }
 

@@ -9,10 +9,34 @@ const Order = require('../models/order');
 const dateItem = require('../models/dateItem');
 const bcrypt = require('bcryptjs');
 const SendOtp = require('sendotp');
+const Razorpay = require('razorpay');
+
+// Key : rzp_test_w2CGfBqrpGcF5o
+// Secret: r8bFH3nKa0z058fIWo8pbxtC
+let rzp = new Razorpay({
+    key_id: ' rzp_live_qNI6V5maLBak44', // your `KEY_ID`
+    key_secret: 'lM0HT7rLLHAIguyJIFv0jQ8y' // your `KEY_SECRET`
+});
+
+// Capture payment
+router.post('/capture-payment', (req, res, next) => {
+    console.log('reached');
+    payment_id = req.body.payment_id;
+    rzp.payments.capture(payment_id, 1000).then((data) => {
+        // success
+        res.json({success: true, msg: data});
+    }).catch((error) => {
+        // error
+        res.json({success: false, msg: error});
+    });
+});
+
+
 
 const sendOtp = new SendOtp('169485AwtkPnUOqshf598d9ce4');
 // sendOtp.setOtpExpiry('1');
 // resend after 1 minute
+
 
 
 // Send otp
@@ -64,7 +88,7 @@ router.post('/register', (req, res, next) => {
 
     User.addUser(newUser, (er, user) => {
         if (er) {
-            res.json({ success: false, msg: 'Failed to Register' })
+            res.json({ success: false, msg: er });
         } else {
             res.json({ success: true, msg: user });
 

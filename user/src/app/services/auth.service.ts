@@ -34,7 +34,6 @@ export class AuthService {
         // return this.http.get('http://localhost:3700/users/send-otp/' + mobile).map(res => res.json());
         return this.http.get('users/send-otp/' + mobile).map(res => res.json());
     }
-
     registerUser(user) {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
@@ -50,7 +49,6 @@ export class AuthService {
         // return this.http.get('http://localhost:3700/users/find-email/' + email).map(res => res.json());
         return this.http.get('users/find-email/' + email).map(res => res.json());
     }
-
     authenticateUser(user) {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
@@ -124,6 +122,12 @@ export class AuthService {
     getUserRewards(user_id) {
         // return this.http.get('http://localhost:3700/users/get-user-rewards/' + user_id).map(res => res.json());
         return this.http.get('users/get-user-rewards/' + user_id).map(res => res.json());
+    }
+    capturePayment(payment) {
+        const header = new Headers();
+        header.append('Content-Type', 'application/json');
+        // return this.http.post('http://localhost:3700/users/capture-payment', payment, { headers: header }).map(res => res.json());
+        return this.http.post('users/capture-payment', payment , { headers: header }).map(res => res.json());
     }
 }
 
