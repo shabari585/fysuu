@@ -503,7 +503,7 @@ export class CheckoutComponent implements OnInit {
         $('.err').html('Please select a payment method');
       }else {
         let pay_method = this.payment_method;
-        if (this.payment_method === 'cod') {
+        if (this.payment_method === 'Cash On Delivery') {
           pay_method = 'Cash On Delivery';
         }
         // Generate Order Id
@@ -537,8 +537,8 @@ export class CheckoutComponent implements OnInit {
         };
         // Send order to backend
         const json = {'order_dets': main_order};
-        if (this.payment_method !== 'cod') {
-          if (this.payment_method === 'wallet') {
+        if (this.payment_method !== 'Cash On Delivery') {
+          if (this.payment_method === 'Wallet') {
             this.options = {
               'key': this.p_key,
               'amount': this.total_to_pay * 100, // 2000 paise = INR 20

@@ -189,12 +189,12 @@ export class MenuComponent implements OnInit {
   letter_added = false;
   letter_price = 0;
 
-  // Combo
-  day_one_combo_items= [];
-  day_two_combo_items= [];
-  day_three_combo_items= [];
-  day_four_combo_items= [];
-  day_five_combo_items= [];
+  // Base
+  day_one_base_items= [];
+  day_two_base_items= [];
+  day_three_base_items= [];
+  day_four_base_items= [];
+  day_five_base_items= [];
   // Dry curry
   day_one_dry_curries = [];
   day_two_dry_curries = [];
@@ -456,9 +456,9 @@ export class MenuComponent implements OnInit {
                   this.day_one_item_dets.push(idets.msg);
                   // console.log(idets.msg[0].sub_name);
                   switch (idets.msg[0].sub_name) {
-                    // Combo
-                    case 'Combo' || 'combo':
-                      this.day_one_combo_items.push(idets.msg[0]);
+                    // Base
+                    case 'Base' || 'base':
+                      this.day_one_base_items.push(idets.msg[0]);
                       break;
                     // Dry curry
                     case 'Dry Curry' || 'dry curry' || 'Dry curries' || 'Dry curry':
@@ -522,9 +522,9 @@ export class MenuComponent implements OnInit {
                   idets.msg[0].date = this.p_day_two;
                   this.day_two_item_dets.push(idets.msg);
                   switch (idets.msg[0].sub_name) {
-                    // Combo
-                    case 'Combo' || 'combo':
-                      this.day_two_combo_items.push(idets.msg[0]);
+                    // Base
+                    case 'Base' || 'base':
+                      this.day_two_base_items.push(idets.msg[0]);
                       break;
                     // Dry curry
                     case 'Dry Curry' || 'dry curry' || 'Dry curries' || 'Dry curry':
@@ -589,9 +589,9 @@ export class MenuComponent implements OnInit {
                   idets.msg[0].date = this.p_day_three;
                   this.day_three_item_dets.push(idets.msg);
                   switch (idets.msg[0].sub_name) {
-                    // Combo
-                    case 'Combo' || 'combo':
-                      this.day_three_combo_items.push(idets.msg[0]);
+                    // Base
+                    case 'Base' || 'base':
+                      this.day_three_base_items.push(idets.msg[0]);
                       break;
                     // Dry curry
                     case 'Dry Curry' || 'dry curry' || 'Dry curries' || 'Dry curry':
@@ -657,9 +657,9 @@ export class MenuComponent implements OnInit {
                     idets.msg[0].date = this.p_day_four;
                     this.day_four_item_dets.push(idets.msg);
                     switch (idets.msg[0].sub_name) {
-                      // Combo
-                      case 'Combo' || 'combo':
-                        this.day_four_combo_items.push(idets.msg[0]);
+                      // Base
+                      case 'Base' || 'base':
+                        this.day_four_base_items.push(idets.msg[0]);
                         break;
                       // Dry curry
                       case 'Dry Curry' || 'dry curry' || 'Dry curries' || 'Dry curry':
@@ -724,9 +724,9 @@ export class MenuComponent implements OnInit {
                   idets.msg[0].date = this.p_day_five;
                   this.day_five_item_dets.push(idets.msg);
                   switch (idets.msg[0].sub_name) {
-                    // Combo
-                    case 'Combo' || 'combo':
-                      this.day_five_combo_items.push(idets.msg[0]);
+                    // Base
+                    case 'Base' || 'base':
+                      this.day_five_base_items.push(idets.msg[0]);
                       break;
                     // Dry curry
                     case 'Dry Curry' || 'dry curry' || 'Dry curries' || 'Dry curry':
@@ -795,6 +795,11 @@ export class MenuComponent implements OnInit {
   loadDay(date, origin) {
     if (origin === 'btn_clicked') {
       const pdate = this.datePipe.transform(date, 'fullDate');
+      if (pdate.includes('Sunday')) {
+        $('.sc-ch-db').css({'display': 'flex'});
+      }else {
+        $('.sc-ch-db').css({'display': 'none'});
+      }
       $('#sch-slot-select option:eq(0)').prop('selected', true);
       $('.calender-li').removeClass('selected-date-li');
       switch (this.datePipe.transform(date, 'fullDate')) {
@@ -913,6 +918,11 @@ export class MenuComponent implements OnInit {
               }, 1500);
             }else {
               const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1022,6 +1032,11 @@ export class MenuComponent implements OnInit {
             }
           } else {
               const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1124,6 +1139,11 @@ export class MenuComponent implements OnInit {
               }, 1500);
             }else {
               const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1234,6 +1254,11 @@ export class MenuComponent implements OnInit {
             }
           } else {
               const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1336,6 +1361,11 @@ export class MenuComponent implements OnInit {
               }, 1500);
             }else {
               const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1429,6 +1459,11 @@ export class MenuComponent implements OnInit {
             }
           } else {
             const pdate = this.datePipe.transform(date, 'fullDate');
+            if (pdate.includes('Sunday')) {
+              $('.sc-ch-db').css({'display': 'flex'});
+            }else {
+              $('.sc-ch-db').css({'display': 'none'});
+            }
             $('#sch-slot-select option:eq(0)').prop('selected', true);
             $('.calender-li').removeClass('selected-date-li');
             switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1531,6 +1566,11 @@ export class MenuComponent implements OnInit {
               }, 1500);
             }else {
               const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1624,6 +1664,11 @@ export class MenuComponent implements OnInit {
             }
           } else {
               const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1726,6 +1771,11 @@ export class MenuComponent implements OnInit {
               }, 1500);
             }else {
               const pdate = this.datePipe.transform(date, 'fullDate');
+              if (pdate.includes('Sunday')) {
+                $('.sc-ch-db').css({'display': 'flex'});
+              }else {
+                $('.sc-ch-db').css({'display': 'none'});
+              }
               $('#sch-slot-select option:eq(0)').prop('selected', true);
               $('.calender-li').removeClass('selected-date-li');
               switch (this.datePipe.transform(date, 'fullDate')) {
@@ -1818,8 +1868,12 @@ export class MenuComponent implements OnInit {
               }
             }
           } else {
-
             const pdate = this.datePipe.transform(date, 'fullDate');
+            if (pdate.includes('Sunday')) {
+              $('.sc-ch-db').css({'display': 'flex'});
+            }else {
+              $('.sc-ch-db').css({'display': 'none'});
+            }
             $('#sch-slot-select option:eq(0)').prop('selected', true);
             $('.calender-li').removeClass('selected-date-li');
             switch (this.datePipe.transform(date, 'fullDate')) {
@@ -2181,7 +2235,7 @@ export class MenuComponent implements OnInit {
     const tar = mevent.target;
     if (event === true) {
       // b_img
-      // Handling Combo images
+      // Handling Base images
 
       if ($(tar).parent().find('img').hasClass('roti-cl')) {
         $(tar).parent().find('img').attr('src', this.roti_r_img);
@@ -2258,7 +2312,7 @@ export class MenuComponent implements OnInit {
       case this.day_one_status:
         // this.day_one_books = this.menu_to_be_loaded;
 
-        if (menu.sub_name === 'Combo') {
+        if (menu.sub_name === 'Base') {
           this.day_one_c_books.forEach(element => {
             if (element.sub_name === menu.sub_name && element.date === menu.date) {
               const ind = this.day_one_c_books.indexOf(element, 0);
@@ -2326,8 +2380,8 @@ export class MenuComponent implements OnInit {
         break;
       case this.day_two_status:
         // this.day_two_books = this.menu_to_be_loaded;
-        if (menu.sub_name === 'Combo') {
-          // Removing other combo items from basket
+        if (menu.sub_name === 'Base') {
+          // Removing other base items from basket
           this.day_two_c_books.forEach(element => {
             if (element.sub_name === menu.sub_name && element.date === menu.date) {
               const ind = this.day_two_c_books.indexOf(element, 0);
@@ -2396,8 +2450,8 @@ export class MenuComponent implements OnInit {
       case this.day_three_status:
         this.day_three_books = this.menu_to_be_loaded;
 
-        if (menu.sub_name === 'Combo') {
-          // Removing other combo items from basket
+        if (menu.sub_name === 'Base') {
+          // Removing other base items from basket
           this.day_three_c_books.forEach(element => {
             if (element.sub_name === menu.sub_name && element.date === menu.date) {
               const ind = this.day_three_c_books.indexOf(element, 0);
@@ -2467,8 +2521,8 @@ export class MenuComponent implements OnInit {
         break;
       case this.day_four_status:
         // this.day_four_books = this.menu_to_be_loaded;
-        if (menu.sub_name === 'Combo') {
-          // Removing other combo items from basket
+        if (menu.sub_name === 'Base') {
+          // Removing other base items from basket
           this.day_four_c_books.forEach(element => {
             if (element.sub_name === menu.sub_name && element.date === menu.date) {
               const ind = this.day_four_c_books.indexOf(element, 0);
@@ -2536,8 +2590,8 @@ export class MenuComponent implements OnInit {
         break;
       case this.day_five_status:
 
-      if (menu.sub_name === 'Combo') {
-        // Removing other combo items from basket
+      if (menu.sub_name === 'Base') {
+        // Removing other base items from basket
         this.day_five_c_books.forEach(element => {
           if (element.sub_name === menu.sub_name && element.date === menu.date) {
             const ind = this.day_five_c_books.indexOf(element, 0);
@@ -2631,7 +2685,7 @@ export class MenuComponent implements OnInit {
           }else {
             let day_one_check = false;
             this.day_one_c_books.forEach(element => {
-              if (element.sub_name === 'Combo') {
+              if (element.sub_name === 'Base') {
                 day_one_check = true;
               }
             });
@@ -2807,18 +2861,23 @@ export class MenuComponent implements OnInit {
                     switch (true) {
                       case this.day_one_status:
                         this.basketNumber++;
+                        this.appComponent.basket_num = this.basketNumber;
                         break;
                       case this.day_two_status:
                         this.basketNumber++;
+                        this.appComponent.basket_num = this.basketNumber;
                         break;
                       case this.day_three_status:
                         this.basketNumber++;
+                        this.appComponent.basket_num = this.basketNumber;
                         break;
                       case this.day_four_status:
                         this.basketNumber++;
+                        this.appComponent.basket_num = this.basketNumber;
                         break;
                       case this.day_five_status:
                         this.basketNumber++;
+                        this.appComponent.basket_num = this.basketNumber;
                         break;
                       default:
                         break;
@@ -2837,7 +2896,7 @@ export class MenuComponent implements OnInit {
                       $('.added-db').css({'display': 'none'});
                     }, 1000);
               }else {
-                this.hover_alert = 'Please select one Combo item';
+                this.hover_alert = 'Please select one Base item';
                 $('.added-db').css({'display': 'flex'});
                 setTimeout(function() {
                   $('.added-db').css({'display': 'none'});
@@ -2865,7 +2924,7 @@ export class MenuComponent implements OnInit {
         }else {
           let day_two_check = false;
           this.day_two_c_books.forEach(element => {
-            if (element.sub_name === 'Combo') {
+            if (element.sub_name === 'Base') {
               day_two_check = true;
             }
           });
@@ -3043,21 +3102,27 @@ export class MenuComponent implements OnInit {
                 switch (true) {
                   case this.today_status:
                     this.basketNumber++;
+                    this.appComponent.basket_num = this.basketNumber;
                     break;
                   case this.day_one_status:
                     this.basketNumber++;
+                    this.appComponent.basket_num = this.basketNumber;
                     break;
                   case this.day_two_status:
                     this.basketNumber++;
+                    this.appComponent.basket_num = this.basketNumber;
                     break;
                   case this.day_three_status:
                     this.basketNumber++;
+                    this.appComponent.basket_num = this.basketNumber;
                     break;
                   case this.day_four_status:
                     this.basketNumber++;
+                    this.appComponent.basket_num = this.basketNumber;
                     break;
                   case this.day_five_status:
                     this.basketNumber++;
+                    this.appComponent.basket_num = this.basketNumber;
                     break;
                   default:
                     break;
@@ -3076,7 +3141,7 @@ export class MenuComponent implements OnInit {
                   $('.added-db').css({'display': 'none'});
                 }, 1000);
               }else {
-                this.hover_alert = 'Please select one Combo Item';
+                this.hover_alert = 'Please select one Base Item';
                 $('.added-db').css({'display': 'flex'});
                 setTimeout(function() {
                   $('.added-db').css({'display': 'none'});
@@ -3104,7 +3169,7 @@ export class MenuComponent implements OnInit {
               }else {
                 let day_three_check = false;
                 this.day_three_c_books.forEach(element => {
-                  if (element.sub_name === 'Combo') {
+                  if (element.sub_name === 'Base') {
                     day_three_check = true;
                   }
                 });
@@ -3280,21 +3345,27 @@ export class MenuComponent implements OnInit {
                       switch (true) {
                         case this.today_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_one_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_two_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_three_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_four_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_five_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         default:
                           break;
@@ -3313,7 +3384,7 @@ export class MenuComponent implements OnInit {
                         $('.added-db').css({'display': 'none'});
                       }, 1000);
                     }else {
-                      this.hover_alert = 'Please select one Combo item';
+                      this.hover_alert = 'Please select one Base item';
                       $('.added-db').css({'display': 'flex'});
                       setTimeout(function() {
                         $('.added-db').css({'display': 'none'});
@@ -3341,7 +3412,7 @@ export class MenuComponent implements OnInit {
               }else {
               let day_four_check = false;
               this.day_four_c_books.forEach(element => {
-                if (element.sub_name === 'Combo') {
+                if (element.sub_name === 'Base') {
                   day_four_check = true;
                 }
               });
@@ -3517,24 +3588,31 @@ export class MenuComponent implements OnInit {
                       switch (true) {
                         case this.today_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_one_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_two_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_three_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_four_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_five_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_six_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         default:
                           break;
@@ -3554,7 +3632,7 @@ export class MenuComponent implements OnInit {
                       }, 1000);
 
                     } else {
-                      this.hover_alert = 'Please select one Combo Item';
+                      this.hover_alert = 'Please select one Base Item';
                       $('.added-db').css({'display': 'flex'});
                       setTimeout(function() {
                         $('.added-db').css({'display': 'none'});
@@ -3582,7 +3660,7 @@ export class MenuComponent implements OnInit {
               }else {
                 let day_five_check = false;
                 this.day_five_c_books.forEach(element => {
-                  if (element.sub_name === 'Combo') {
+                  if (element.sub_name === 'Base') {
                     day_five_check = true;
                   }
                 });
@@ -3759,21 +3837,27 @@ export class MenuComponent implements OnInit {
                       switch (true) {
                         case this.today_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_one_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_two_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_three_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_four_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         case this.day_five_status:
                           this.basketNumber++;
+                          this.appComponent.basket_num = this.basketNumber;
                           break;
                         default:
                           break;
@@ -3793,7 +3877,7 @@ export class MenuComponent implements OnInit {
                       }, 1000);
 
                     }else {
-                      this.hover_alert = 'Please select one Combo Item';
+                      this.hover_alert = 'Please select one Base Item';
                       $('.added-db').css({'display': 'flex'});
                       setTimeout(function() {
                         $('.added-db').css({'display': 'none'});
@@ -3957,6 +4041,7 @@ export class MenuComponent implements OnInit {
           };
           if (previous_tab_status === undefined) {
             this.basketNumber++;
+            this.appComponent.basket_num = this.basketNumber;
           }
           // add announcement
           // Update tab_one_text and display
@@ -3998,6 +4083,7 @@ export class MenuComponent implements OnInit {
           };
           if (previous_tab_status === undefined) {
             this.basketNumber++;
+            this.appComponent.basket_num = this.basketNumber;
           }
           // Update tab_two_text and display
           this.num_tab_two = this.num_tab_two_items;
@@ -4038,6 +4124,7 @@ export class MenuComponent implements OnInit {
           };
           if (previous_tab_status === undefined) {
             this.basketNumber++;
+            this.appComponent.basket_num = this.basketNumber;
           }
           // Update tab three text and display band
           this.num_tab_three = this.num_tab_three_items;
@@ -4078,6 +4165,7 @@ export class MenuComponent implements OnInit {
         $('#rem-t-tab_one').hide();
         // basket number decrement
         this.basketNumber--;
+        this.appComponent.basket_num = this.basketNumber;
         break;
       case 'tab_two':
         // Remove from today_orders
@@ -4089,6 +4177,7 @@ export class MenuComponent implements OnInit {
 
          // basket number decrement
         this.basketNumber--;
+        this.appComponent.basket_num = this.basketNumber;
         break;
       case 'tab_three':
         // Remove from today_orders
@@ -4099,6 +4188,7 @@ export class MenuComponent implements OnInit {
         $('#rem-t-tab_three').hide();
         // basket number decrement
         this.basketNumber--;
+        this.appComponent.basket_num = this.basketNumber;
         break;
 
       default:

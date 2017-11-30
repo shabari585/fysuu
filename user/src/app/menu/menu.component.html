@@ -268,23 +268,23 @@
                         <ul class="list-inline sc-ch-ul">
                             <li class="sch-col-one">
                                 <div class="sc-ch-mid day-divs" id="day-one-div">
-                                    <!-- Combo -->
+                                    <!-- Base -->
                                     <div *ngFor="let cat of categories">
                                     <div *ngIf="cat.name == 'Vegetarian'">
                                     <div *ngFor="let sub of cat.subs">
-                                    <div *ngIf="sub == 'Combo'">
-                                        <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                    <div *ngIf="sub == 'Base'">
+                                        <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                         <div class="sc-ch-menu-divs">
                                             <ul class="list-inline">
                                                 <li *ngFor="let menu of day_one_books">
                                                     <div *ngIf="menu[0].sub_name == sub">
                                                         <div class="sc-ch-item">
                                                             <label>
-                                                                <input type="radio" class= "checks" name="done-combo" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
-                                                                <div *ngIf="menu[0].item_name == 'Roti'">
+                                                                <input type="radio" class= "checks" name="done-base" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                                <div *ngIf="menu[0].item_name == 'Roti' || menu[0].item_name == '3 Roti'">
                                                                     <img [src]="roti_img" class="roti-cl" alt="">
                                                                 </div>
-                                                                <div *ngIf="menu[0].item_name == 'Roti + Rice' || menu[0].item_name == 'Roti + Half Rice'|| menu[0].item_name == 'Roti and Half Rice' || menu[0].item_name == 'Roti + Full Rice' ||menu[0].item_name == 'Roti and Full Rice' || menu[0].item_name == 'Roti + Full rice' || menu[0].item_name == 'Roti + Half rice' || menu[0].item_name == '1 Roti and Full Rice' || menu[0].item_name == '2 Roti and Full Rice' || menu[0].item_name == '3 Roti and Full Rice' || menu[0].item_name == '4 Roti and Full Rice'">
+                                                                <div *ngIf="menu[0].item_name == 'Roti + Rice' || menu[0].item_name == 'Roti + Half Rice'|| menu[0].item_name == 'Roti and Half Rice' || menu[0].item_name == 'Roti + Full Rice' ||menu[0].item_name == 'Roti and Full Rice' || menu[0].item_name == 'Roti + Full rice' || menu[0].item_name == '2 Roti + Half rice' || menu[0].item_name == '1 Roti and Full Rice' || menu[0].item_name == '2 Roti + Full Rice' || menu[0].item_name == '3 Roti and Full Rice' || menu[0].item_name == '4 Roti and Full Rice'">
                                                                     <img [src]="rice_roti_img" class="rice-roti-cl" alt="">
                                                                 </div>
                                                                 <div *ngIf="menu[0].item_name == 'Rice' || menu[0].item_name == 'Full Rice'">
@@ -309,7 +309,7 @@
                                     <div *ngIf="cat.name == 'Vegetarian'">
                                     <div *ngFor="let sub of cat.subs">
                                     <div *ngIf="sub == 'Dry Curry' || sub == 'dry curry' || sub == 'dry curries' || sub == 'Dry Curries'">
-                                        <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                        <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                         <div class="sc-ch-menu-divs">
                                             <ul class="list-inline">
                                                 
@@ -338,7 +338,7 @@
                                     <div *ngIf="cat.name == 'Vegetarian'">
                                     <div *ngFor="let sub of cat.subs">
                                     <div *ngIf="sub == 'Wet Curry' || sub == 'wet curry' || sub == 'wet curries' || sub == 'Wet Curries' || sub == 'Wet curry'">
-                                        <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                        <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                         <div class="sc-ch-menu-divs">
                                             <ul class="list-inline">
                                                 
@@ -368,7 +368,7 @@
                                     <div *ngIf="cat.name == 'Vegetarian'">
                                     <div *ngFor="let sub of cat.subs">
                                     <div *ngIf="sub == 'Dal' || sub == 'dal'">
-                                        <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                        <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                         <div class="sc-ch-menu-divs">
                                             <ul class="list-inline">
                                                 <li *ngFor="let menu of day_one_books">
@@ -394,7 +394,7 @@
                                     <div *ngIf="cat.name == 'Vegetarian'">
                                     <div *ngFor="let sub of cat.subs">
                                     <div *ngIf="sub == 'Curd' || sub == 'curd'">
-                                        <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                        <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                         <div class="sc-ch-menu-divs">
                                             <ul class="list-inline">
                                                 <li *ngFor="let menu of day_one_books">
@@ -420,7 +420,7 @@
                                     <div *ngIf="cat.name == 'Vegetarian'">
                                     <div *ngFor="let sub of cat.subs">
                                     <div *ngIf="sub == 'Sweets' || sub == 'sweet' || sub == 'sweets' || sub == 'Sweet'">
-                                        <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                        <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                         <div class="sc-ch-menu-divs">
                                             <ul class="list-inline">
                                                 <li *ngFor="let menu of day_one_books">
@@ -448,12 +448,12 @@
                                 <div class="sc-ch-mid day-divs" id="day-two-div">
                                     
                                     
-                                     <!-- Combo -->
+                                     <!-- Base -->
                                      <div *ngFor="let cat of categories">
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
-                                            <div *ngIf="sub == 'Combo'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                            <div *ngIf="sub == 'Base'">
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -461,7 +461,7 @@
                                                             <div *ngIf="menu[0].sub_name == sub">
                                                                 <div class="sc-ch-item">
                                                                     <label>
-                                                                        <input type="radio" class= "checks" name="dtwo-combo" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                                        <input type="radio" class= "checks" name="dtwo-base" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
                                                                         <div *ngIf="menu[0].item_name == 'Roti'">
                                                                             <img [src]="roti_img" class="roti-cl" alt="">
                                                                         </div>
@@ -491,7 +491,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Dry Curry' || sub == 'dry curry' || sub == 'dry curries' || sub == 'Dry Curries'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -520,7 +520,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Wet Curry' || sub == 'wet curry' || sub == 'wet curries' || sub == 'Wet Curries' || sub == 'Wet curry'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -550,7 +550,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Dal' || sub == 'dal'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_two_books">
@@ -576,7 +576,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Curd' || sub == 'curd'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_two_books">
@@ -602,7 +602,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Sweets' || sub == 'sweet' || sub == 'sweets' || sub == 'Sweet'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_two_books">
@@ -629,12 +629,12 @@
                                 <!-- Day three div -->
                                 <div class="sc-ch-mid day-divs" id="day-three-div">
                                     
-                                     <!-- Combo -->
+                                     <!-- Base -->
                                      <div *ngFor="let cat of categories">
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
-                                            <div *ngIf="sub == 'Combo'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                            <div *ngIf="sub == 'Base'">
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -642,11 +642,11 @@
                                                             <div *ngIf="menu[0].sub_name == sub">
                                                                 <div class="sc-ch-item">
                                                                     <label>
-                                                                        <input type="radio" class= "checks" name="dthree-combo" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
-                                                                        <div *ngIf="menu[0].item_name == 'Roti'">
+                                                                        <input type="radio" class= "checks" name="dthree-base" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                                        <div *ngIf="menu[0].item_name == 'Roti' || menu[0].item_name == '3 Roti'">
                                                                                 <img [src]="roti_img" class="roti-cl" alt="">
                                                                             </div>
-                                                                            <div *ngIf="menu[0].item_name == 'Roti + Rice' || menu[0].item_name == 'Roti + Half Rice'|| menu[0].item_name == 'Roti and Half Rice' || menu[0].item_name == 'Roti + Full Rice' ||menu[0].item_name == 'Roti and Full Rice' || menu[0].item_name == 'Roti + Full rice' || menu[0].item_name == 'Roti + Half rice' || menu[0].item_name == '1 Roti and Full Rice' || menu[0].item_name == '2 Roti and Full Rice' || menu[0].item_name == '3 Roti and Full Rice' || menu[0].item_name == '4 Roti and Full Rice'">
+                                                                            <div *ngIf="menu[0].item_name == 'Roti + Rice' || menu[0].item_name == 'Roti + Half Rice'|| menu[0].item_name == 'Roti and Half Rice' || menu[0].item_name == 'Roti + Full Rice' ||menu[0].item_name == 'Roti and Full Rice' || menu[0].item_name == '2 Roti + Full rice' || menu[0].item_name == '2 Roti + Half rice' || menu[0].item_name == '1 Roti and Full Rice' || menu[0].item_name == '2 Roti and Full Rice' || menu[0].item_name == '3 Roti and Full Rice' || menu[0].item_name == '4 Roti and Full Rice'">
                                                                                 <img [src]="rice_roti_img" class="rice-roti-cl" alt="">
                                                                             </div>
                                                                             <div *ngIf="menu[0].item_name == 'Rice' || menu[0].item_name == 'Full Rice'">
@@ -672,7 +672,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Dry Curry' || sub == 'dry curry' || sub == 'dry curries' || sub == 'Dry Curries'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -701,7 +701,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Wet Curry' || sub == 'wet curry' || sub == 'wet curries' || sub == 'Wet Curries' || sub == 'Wet curry'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -731,7 +731,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Dal' || sub == 'dal'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_three_books">
@@ -757,7 +757,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Curd' || sub == 'curd'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_three_books">
@@ -783,7 +783,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Sweets' || sub == 'sweet' || sub == 'sweets' || sub == 'Sweet'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_three_books">
@@ -810,12 +810,12 @@
                                 <div class="sc-ch-mid day-divs" id="day-four-div">
                                     
 
-                                    <!-- Combo -->
+                                    <!-- Base -->
                                     <div *ngFor="let cat of categories">
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
-                                            <div *ngIf="sub == 'Combo'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                            <div *ngIf="sub == 'Base'">
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -823,11 +823,11 @@
                                                             <div *ngIf="menu[0].sub_name == sub">
                                                                 <div class="sc-ch-item">
                                                                     <label>
-                                                                        <input type="radio" class= "checks" name="dfour-combo" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
-                                                                        <div *ngIf="menu[0].item_name == 'Roti'">
+                                                                        <input type="radio" class= "checks" name="dfour-base" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                                        <div *ngIf="menu[0].item_name == 'Roti' || menu[0].item_name == '3 Roti'">
                                                                                 <img [src]="roti_img" class="roti-cl" alt="">
                                                                             </div>
-                                                                            <div *ngIf="menu[0].item_name == 'Roti + Rice' || menu[0].item_name == 'Roti + Half Rice'|| menu[0].item_name == 'Roti and Half Rice' || menu[0].item_name == 'Roti + Full Rice' ||menu[0].item_name == 'Roti and Full Rice' || menu[0].item_name == 'Roti + Full rice' || menu[0].item_name == 'Roti + Half rice' || menu[0].item_name == '1 Roti and Full Rice' || menu[0].item_name == '2 Roti and Full Rice' || menu[0].item_name == '3 Roti and Full Rice' || menu[0].item_name == '4 Roti and Full Rice'">
+                                                                            <div *ngIf="menu[0].item_name == 'Roti + Rice' || menu[0].item_name == 'Roti + Half Rice'|| menu[0].item_name == 'Roti and Half Rice' || menu[0].item_name == 'Roti + Full Rice' ||menu[0].item_name == 'Roti and Full Rice' || menu[0].item_name == '2 Roti + Full rice' || menu[0].item_name == '2 Roti + Half rice' || menu[0].item_name == '1 Roti and Full Rice' || menu[0].item_name == '2 Roti and Full Rice' || menu[0].item_name == '3 Roti and Full Rice' || menu[0].item_name == '4 Roti and Full Rice'">
                                                                                 <img [src]="rice_roti_img" class="rice-roti-cl" alt="">
                                                                             </div>
                                                                             <div *ngIf="menu[0].item_name == 'Rice' || menu[0].item_name == 'Full Rice'">
@@ -853,7 +853,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Dry Curry' || sub == 'dry curry' || sub == 'dry curries' || sub == 'Dry Curries'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -882,7 +882,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Wet Curry' || sub == 'wet curry' || sub == 'wet curries' || sub == 'Wet Curries' || sub == 'Wet curry'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -912,7 +912,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Dal' || sub == 'dal'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_four_books">
@@ -938,7 +938,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Curd' || sub == 'curd'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_four_books">
@@ -964,7 +964,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Sweets' || sub == 'sweet' || sub == 'sweets' || sub == 'Sweet'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_four_books">
@@ -992,12 +992,12 @@
                                 <!-- Day five div -->
                                 <div class="sc-ch-mid day-divs" id="day-five-div">
                                     
-                                    <!-- Combo -->
+                                    <!-- Base -->
                                     <div *ngFor="let cat of categories">
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
-                                            <div *ngIf="sub == 'Combo'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                            <div *ngIf="sub == 'Base'">
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -1005,11 +1005,11 @@
                                                             <div *ngIf="menu[0].sub_name == sub">
                                                                 <div class="sc-ch-item">
                                                                     <label>
-                                                                        <input type="radio" class= "checks" name="dfive-combo" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
-                                                                        <div *ngIf="menu[0].item_name == 'Roti'">
+                                                                        <input type="radio" class= "checks" name="dfive-base" id="{{menu[0].item_name}}" [checked]="menu[0].checked" (change)="onCheckChange(menu[0],$event.target.checked,$event)">
+                                                                        <div *ngIf="menu[0].item_name == 'Roti' || menu[0].item_name == '3 Roti'">
                                                                                 <img [src]="roti_img" class="roti-cl" alt="">
                                                                             </div>
-                                                                            <div *ngIf="menu[0].item_name == 'Roti + Rice' || menu[0].item_name == 'Roti + Half Rice'|| menu[0].item_name == 'Roti and Half Rice' || menu[0].item_name == 'Roti + Full Rice' ||menu[0].item_name == 'Roti and Full Rice' || menu[0].item_name == 'Roti + Full rice' || menu[0].item_name == 'Roti + Half rice' || menu[0].item_name == '1 Roti and Full Rice' || menu[0].item_name == '2 Roti and Full Rice' || menu[0].item_name == '3 Roti and Full Rice' || menu[0].item_name == '4 Roti and Full Rice'">
+                                                                            <div *ngIf="menu[0].item_name == 'Roti + Rice' || menu[0].item_name == 'Roti + Half Rice'|| menu[0].item_name == 'Roti and Half Rice' || menu[0].item_name == 'Roti + Full Rice' ||menu[0].item_name == 'Roti and Full Rice' || menu[0].item_name == '2 Roti + Full rice' || menu[0].item_name == '2 Roti + Half rice' || menu[0].item_name == '1 Roti and Full Rice' || menu[0].item_name == '2 Roti and Full Rice' || menu[0].item_name == '3 Roti and Full Rice' || menu[0].item_name == '4 Roti and Full Rice'">
                                                                                 <img [src]="rice_roti_img" class="rice-roti-cl" alt="">
                                                                             </div>
                                                                             <div *ngIf="menu[0].item_name == 'Rice' || menu[0].item_name == 'Full Rice'">
@@ -1035,7 +1035,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Dry Curry' || sub == 'dry curry' || sub == 'dry curries' || sub == 'Dry Curries'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -1064,7 +1064,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Wet Curry' || sub == 'wet curry' || sub == 'wet curries' || sub == 'Wet Curries' || sub == 'Wet curry'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         
@@ -1094,7 +1094,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Dal' || sub == 'dal'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_five_books">
@@ -1120,7 +1120,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Curd' || sub == 'curd'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_five_books">
@@ -1146,7 +1146,7 @@
                                             <div *ngIf="cat.name == 'Vegetarian'">
                                             <div *ngFor="let sub of cat.subs">
                                             <div *ngIf="sub == 'Sweets' || sub == 'sweet' || sub == 'sweets' || sub == 'Sweet'">
-                                                <h5 class="sc-ch-mid-heads">{{sub}}</h5>
+                                                <h5 class="sc-ch-mid-heads">{{sub | uppercase}}</h5>
                                                 <div class="sc-ch-menu-divs">
                                                     <ul class="list-inline">
                                                         <li *ngFor="let menu of day_five_books">
