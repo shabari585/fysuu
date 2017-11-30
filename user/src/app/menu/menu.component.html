@@ -52,10 +52,10 @@
         <div>
             <div class="sch-main-back">
                 <p>
-                    Order until 2:15PM for today. Plan your own meal for next 4 days.
+                    Order until 2:15PM for Today's Menu or Schedule and customize your own meal for next 4 days.
                 </p>
                 <button type="button" class="schedule-rep-btn" (click)="schMenuBtn()">
-                        PLAN NOW
+                    SCHEDULE NOW
                 </button>
             </div>
             <div class="menu-title-div">
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="pull-right">
                                     <button type="button" class="remove-t-item-btn" id="rem-t-tab_one" (click)='removeTodayTab("tab_one")'> - </button>
-                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_one")' id="tab-one-add-btn"> + Add</button>
+                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_one")' id="tab-one-add-btn"> + ADD</button>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="pull-right">
                                         <button type="button" class="remove-t-item-btn" id="rem-t-tab_two" (click)='removeTodayTab("tab_two")'> - </button>
-                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_two")' id="tab-two-add-btn"> + Add</button>
+                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_two")' id="tab-two-add-btn"> + ADD</button>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="pull-right">
                                         <button type="button" class="remove-t-item-btn" id="rem-t-tab_three" (click)='removeTodayTab("tab_three")'> - </button>
-                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_three")' id="tab-three-add-btn"> + Add</button>
+                                    <button type="button" class="item-add-btn" (click)='todayAdd("tab_three")' id="tab-three-add-btn"> + ADD</button>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +179,7 @@
                     <label for="t-menu-select-slot" id="reg-name-label">Select Delivery Slot</label>
                     <label for="">
                         <select name="" id="t-menu-select-slot" (change)='todayMenuSlotSelect($event)'>
-                            <option selected disabled>Choose time slot</option>
+                            <option selected disabled>Choose Time Slot</option>
                             <option value="slot_one" id="slot_one_option">12:00 PM - 12:45 PM</option>
                             <option value="slot_two" id="slot_two_option">12:45 PM - 01:30 PM</option>
                             <option value="slot_three" id="slot_three_option">01:30 PM - 02:15 PM</option>
@@ -249,7 +249,7 @@
                                 <div class="sch-slot-select-div">
                                     
                                     <select (change)=slotSelected($event) class="slot-select" id="sch-slot-select">
-                                    <option default selected disabled>Choose time slot</option>
+                                    <option default selected disabled>Choose Time Slot</option>
                                     <option value="slot_one">12:00 PM - 12:45 PM</option>
                                     <option value="slot_two">12:45 PM - 01:30 PM</option>
                                     <option value="slot_three">01:30 PM - 02:15 PM</option>
@@ -257,6 +257,7 @@
                                 </select>
                                 </div>
                             </div>
+                            <!-- Customize Your Meal -->
                             <div class="sc-ch-price-div pull-right">
                                 <span class="sc-ch-price">&#8377; <span class="sc-ch-price-num">{{place_holder_price}}</span></span>
                             </div>

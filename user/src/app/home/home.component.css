@@ -448,7 +448,7 @@ a {
 #main-see-menu-btn {
   background-color: #000;
   color: #fff;
-  font-size: 90%;
+  font-size: 100%;
   margin-left: 5px;
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
@@ -795,6 +795,17 @@ a {
   .location-search-input{
     padding-right: 50px;
     padding-left: 3px;
+  }
+  .see-menu-btn{
+    font-size: 100% !important;
+  }
+  .concept-div .img img{
+    width: 100%;
+  }
+  .concept-div .img{
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.13);
   }
 }
 

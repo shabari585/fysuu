@@ -195,6 +195,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   font-weight: normal;
+  color: #000;
 }
 .today-core .today-btns,.sch-hover-core .today-btns{
   display: flex;
@@ -448,6 +449,8 @@ label{
   font-size: 120%;
   margin-bottom: 10px;
   margin-top: 25px;
+  font-weight: 400;
+  color: #000;
 }
 .item-conts-div{
   position: relative;
@@ -995,7 +998,7 @@ label{
   border-radius: 50px;
 }
 .selected-date-li{
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #6DA942;
   color: #fff;
 }
 .added-date-li{

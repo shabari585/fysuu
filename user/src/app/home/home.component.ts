@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   basket_num: number;
 
-  display_error = 'We currently do not deliver in your area. We currently deliver in or around Madhapur.';
+  display_error = 'We are currently delivering to companies in and around Madhapur, Hyderabad';
 
 
   constructor(private router: Router, private title: Title, private appComponent: AppComponent, private authService: AuthService) { }
@@ -74,12 +74,12 @@ export class HomeComponent implements OnInit {
       const scrollTop = $(this).scrollTop();
       $('.location-input-scrolltop-helper').each(function () {
         const topDistance = $(this).offset().top;
-        if ((topDistance + 100) < scrollTop) {
+        if ((topDistance + 80) < scrollTop) {
           $('.scroll-header').css({ 'top': '0' });
           $('.mob-main-header').css({ 'background-color': 'rgba(0,0,0,1)' });
         } else {
           $('.scroll-header').css({ 'top': '-100px' });
-          $('.mob-main-header').css({ 'background-color': 'rgba(0,0,0,.5)'});
+          $('.mob-main-header').css({ 'background-color': 'rgba(0,0,0,1)'});
           $('.scroll-header .dropdown').removeClass('open');
         }
       });
@@ -175,7 +175,7 @@ export class HomeComponent implements OnInit {
                 // console.log('not logged in');
               }
               this.locationEntry = this.address;
-              this.display_error = 'We currently do not deliver in your area. We currently deliver in or around Madhapur.';
+              this.display_error = 'We are currently delivering to companies in and around Madhapur, Hyderabad';
               $('.location-warning-div').show();
             }
           });
@@ -270,7 +270,7 @@ export class HomeComponent implements OnInit {
           }
         } else {
           this.locationEntry = this.address;
-          this.display_error = 'We currently do not deliver in your area. We currently deliver in or around Madhapur.';
+          this.display_error = 'We are currently delivering to companies in and around Madhapur, Hyderabad';
           $('.location-warning-div').show();
 
           // Remove later

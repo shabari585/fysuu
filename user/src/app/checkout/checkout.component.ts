@@ -546,10 +546,25 @@ export class CheckoutComponent implements OnInit {
               'description': 'Purchase Description',
               'image': '../../assets/logo/logo_black.png',
               'handler': function (response){
-                  const obj = {payment_id: response.razorpay_payment_id};
-                  this.authService.capturePayment(obj).subscribe(res => {
-
-                });
+                if (response.razorpay_payment_id) {
+                  // Place order
+                  this.authService.postOrder(json).subscribe(res => {
+                    if (res.success) {
+                      // post date and item array
+                      const dIjson = { dateItem: this.date_and_item_array };
+                        // console.log(res.msg);
+                        // Save order id to local storage
+                        localStorage.setItem('order_id', order_id);
+                        localStorage.removeItem('all_orders');
+                        localStorage.removeItem('today_orders');
+                        localStorage.removeItem('basket_number');
+                        // redirect to thanks page
+                        this.router.navigate(['/thanks']);
+                    }else {
+                      $('.err').html('Something went wrong. please try again later');
+                    }
+                  });
+                }
               },
               'prefill': {
                   'name': this.userName,
@@ -572,9 +587,25 @@ export class CheckoutComponent implements OnInit {
               'description': 'Purchase Description',
               'image': '../../assets/logo/logo_black.png',
               'handler': function (response){
-                  const obj = {payment_id: response.razorpay_payment_id};
-                  this.authService.capturePayment(obj).subscribe(res => {
+                if (response.razorpay_payment_id) {
+                  // Place order
+                  this.authService.postOrder(json).subscribe(res => {
+                    if (res.success) {
+                      // post date and item array
+                      const dIjson = { dateItem: this.date_and_item_array };
+                        // console.log(res.msg);
+                        // Save order id to local storage
+                        localStorage.setItem('order_id', order_id);
+                        localStorage.removeItem('all_orders');
+                        localStorage.removeItem('today_orders');
+                        localStorage.removeItem('basket_number');
+                        // redirect to thanks page
+                        this.router.navigate(['/thanks']);
+                    }else {
+                      $('.err').html('Something went wrong. please try again later');
+                    }
                   });
+                }
               },
               'prefill': {
                   'name': this.userName,
