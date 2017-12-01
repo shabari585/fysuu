@@ -538,7 +538,8 @@
 @media (max-width: 767px) {
   .container .in-container {
     width: 95%;
-  }
+   }
+  
   .main-text {
     top: 50%;
     font-size: 70%;
@@ -670,3 +671,6 @@
 /* Large Devices, .visible-lg-* */
 
 @media (min-width: 1200px) {}
+
+
+

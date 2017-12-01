@@ -742,7 +742,7 @@ a {
 @media (max-width: 767px) {
   .container .in-container {
     width: 95%;
-  }
+   }
   .main-text {
     top: 50%;
     font-size: 70%;
@@ -886,6 +886,9 @@ a {
   .locate-me-btn{
     width: 30%;
   }
+
+  
+  
   .locate-me-btn span{
     width: 100%;
     text-align: center;
@@ -902,5 +905,21 @@ a {
     text-align: center;
     font-size: 15px;
   }
+
+  .container .in-container {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    overflow: auto;
+  }
+  .vp {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 110vh;
+    height: auto;
+  }
+  
 }
 

@@ -7,6 +7,13 @@
   left: 0;
   background-color: rgba(0, 0, 0, .5);
 }
+.h2{
+  position: relative;
+  display: inline-block;
+  font-size: 180%;
+  margin: 0px auto 25px auto;
+
+}
 .main-container {
   padding: 0 !important;
   margin-top: 70px;
@@ -63,6 +70,7 @@
 }
 .right-rew-section ul li{
   margin: 0;
+  
 }
 .left-rew-section {
   display: flex;
@@ -371,6 +379,11 @@
 @media screen and (min-width:220px) and (max-width:740px){
   .right-rew-section{width: 100%;}
   .left-rew-section{width: 100%;}
+  .right-rew-section ul li{
+    margin: 0;
+    left: -10%;
+    transform: translate(-6%,0)
+  }
 }
 
 
